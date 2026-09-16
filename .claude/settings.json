@@ -1,0 +1,137 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git *)",
+      "Bash(ls *)", "Bash(find *)", "Bash(grep *)",
+      "Bash(cat *)", "Bash(head *)", "Bash(tail *)", "Bash(wc *)",
+      "Bash(mkdir *)", "Bash(cp *)", "Bash(mv *)", "Bash(chmod *)",
+      "Bash(echo *)", "Bash(jq *)", "Bash(which *)", "Bash(pwd)", "Bash(date)",
+      "Read(*)", "Glob(*)", "Grep(*)"
+      // AGREGAR según stack del proyecto:
+      // Node.js: "Bash(npm *)", "Bash(npx *)", "Bash(node *)"
+      // Python:  "Bash(pip *)", "Bash(python *)", "Bash(uv *)"
+      // Docker:  "Bash(docker *)", "Bash(docker-compose *)"
+      // DB:      "Bash(psql *)", "Bash(mysql *)"
+    ],
+    "ask": [
+      "Bash(git push*)",
+      "Bash(rm *)"
+    ],
+    "deny": [
+      "Read(./.env)", "Read(./.env.*)", "Read(./secrets/**)",
+      "Read(./**/*.pem)", "Read(./**/*.key)", "Read(./**/*.pfx)",
+      "Read(~/.ssh/**)", "Read(~/.aws/credentials)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|fork",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PROJECT_DIR}/.claude/hooks/session-start-startup.sh",
+            "statusMessage": "Cargando estado operativo...",
+            "timeout": 8
+          }
+        ]
+      },
+      {
+        "matcher": "compact|clear",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PROJECT_DIR}/.claude/hooks/session-start-compact.sh",
+            "statusMessage": "Recuperando contexto post-compactación...",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PROJECT_DIR}/.claude/hooks/bash-firewall.sh",
+            "statusMessage": "Verificando seguridad del comando...",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PROJECT_DIR}/.claude/hooks/secret-guard.sh",
+            "statusMessage": "Verificando ausencia de secretos...",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "SubagentStart": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PROJECT_DIR}/.claude/hooks/subagent-context.sh",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PROJECT_DIR}/.claude/hooks/subagent-stop-logger.sh",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PROJECT_DIR}/.claude/hooks/stop-logger.sh",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "matcher": "manual|auto",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PROJECT_DIR}/.claude/hooks/pre-compact-snapshot.sh",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "ConfigChange": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PROJECT_DIR}/.claude/hooks/config-change-logger.sh",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  },
+  "skillOverrides": {}
+}
