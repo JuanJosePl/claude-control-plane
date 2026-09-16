@@ -22,19 +22,19 @@ Verifica si una acción o propuesta viola los anti-patrones permanentes del proy
 
 ## Anti-patrones verificados
 
+Los universales (siempre aplicables):
 - Secrets en código/docs/git
-- Cross-tenant access (sin tenant_id)
-- Review gating (invitar a reseña selectivamente)
-- Mensajería sin opt-in documentado (Ley 1581)
-- Bots WhatsApp genéricos (Meta ene-2026)
+- Cross-tenant access sin tenant_id verificado en cada query
+- Review gating (invitar a reseña selectivamente — Google abr-2026)
+- Mensajería o captación sin opt-in documentado
 - Migrations sin rollback
-- Deploy a producción sin verificación
+- Deploy a producción sin verificación previa
 - Decisiones sin evidencia trazable
 - Hardcoded provider dependency
-- Fabricar fuentes o métricas
-- Convertir a Juan en cuello de botella operativo
-- Proyectar ingresos sin fórmula/supuestos declarados
-- Construir los 15 módulos sin validación comercial previa
+- Fabricar fuentes, métricas o evidencia
+- Convertir a una sola persona en cuello de botella operativo
+
+Los específicos del proyecto se cargan desde `.claude/context/NO_GO.md` y `.claude/rules/no-go.md`.
 
 ## Formato de salida
 
