@@ -1,4 +1,4 @@
-<!--
+<!-- INSTRUCCIONES
 BUSINESS.md — Contexto comercial y estratégico
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 QUIÉN LO LEE : researcher, architect

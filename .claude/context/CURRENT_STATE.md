@@ -1,4 +1,4 @@
-<!--
+<!-- INSTRUCCIONES
 CURRENT_STATE.md — Mirror compacto del estado operativo
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 QUIÉN LO LEE : architect, implementer

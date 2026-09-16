@@ -1,4 +1,4 @@
-<!--
+<!-- INSTRUCCIONES
 SECURITY_RULES.md — Restricciones de seguridad no negociables
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 QUIÉN LO LEE : architect, implementer, security-auditor

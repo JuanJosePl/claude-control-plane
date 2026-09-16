@@ -1,4 +1,4 @@
-<!--
+<!-- INSTRUCCIONES
 DECISIONS.md — Mirror compacto de decisiones activas
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 QUIÉN LO LEE : researcher, architect, security-auditor

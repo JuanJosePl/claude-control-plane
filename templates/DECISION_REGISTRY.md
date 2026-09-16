@@ -1,4 +1,4 @@
-<!--
+<!-- INSTRUCCIONES
 DECISION REGISTRY — Fuente única de decisiones estructuradas
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 UBICAR EN: raíz del proyecto (no en .claude/)

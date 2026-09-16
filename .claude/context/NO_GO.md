@@ -1,4 +1,4 @@
-<!--
+<!-- INSTRUCCIONES
 NO_GO.md — Anti-patrones permanentes de este proyecto
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 QUIÉN LO LEE : TODOS los agentes (vía context-no-go skill)

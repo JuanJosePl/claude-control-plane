@@ -1,4 +1,4 @@
-<!--
+<!-- INSTRUCCIONES
 CORE.md — Identidad técnica del proyecto
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 QUIÉN LO LEE : researcher, architect, implementer, security-auditor

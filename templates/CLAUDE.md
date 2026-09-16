@@ -1,4 +1,4 @@
-<!--
+<!-- INSTRUCCIONES
 CLAUDE.md — Instrucciones del proyecto para Claude Code
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ESTE ARCHIVO SE LEE EN CADA SESIÓN — mantenerlo ≤ 150 líneas.

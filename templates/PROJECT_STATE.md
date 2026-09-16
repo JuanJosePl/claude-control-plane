@@ -1,4 +1,4 @@
-<!--
+<!-- INSTRUCCIONES
 PROJECT_STATE.md — Fuente única del estado operativo
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 UBICAR EN: raíz del proyecto (no en .claude/)

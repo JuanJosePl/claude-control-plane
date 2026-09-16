@@ -1,4 +1,4 @@
-<!--
+<!-- INSTRUCCIONES
 ARTIFACT MANIFEST — Entregables esperados por fase
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 UBICAR EN: raíz del proyecto (no en .claude/)
