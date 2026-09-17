@@ -4,6 +4,33 @@ Este documento explica el sistema completo desde la perspectiva de una persona q
 instalarlo en un proyecto. El README resume el producto; este manual explica la mecanica interna,
 el orden de uso, la razon de cada pieza y varios casos reales.
 
+## Como Carga Claude El Contexto
+
+Claude Code carga `CLAUDE.md` como bootstrap del proyecto. No lee automaticamente todos los
+archivos de `docs/`; por eso el `CLAUDE.md` raiz solo contiene el mapa y el orden de lectura.
+
+El orden recomendado es:
+
+```text
+CLAUDE.md
+    ↓
+MASTER_IMPLEMENTATION_PLAN.md
+    ↓
+PROJECT_STATE.md
+    ↓
+ARTIFACT_MANIFEST.md
+    ↓
+DESIGN.md + CONTROL_PLANE_HANDBOOK.md
+    ↓
+EVIDENCE_REGISTRY.md
+    ↓
+git status / git log
+```
+
+Durante el arranque de un subagente, `SubagentStart` inyecta los context packs correspondientes al
+rol. El agente no debe inferir el estado desde una conversacion anterior ni confiar en el campo
+`skills:` del frontmatter como mecanismo runtime.
+
 ## 1. La Idea En Una Frase
 
 Claude Code puede escribir codigo, leer archivos, ejecutar comandos y coordinar subagentes. El

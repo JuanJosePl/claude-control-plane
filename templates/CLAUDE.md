@@ -23,6 +23,22 @@ BORRAR ESTE BLOQUE AL INSTALAR
 
 # {{PROJECT_NAME}} — Claude Code Workspace
 
+## Control Plane — Bootstrap obligatorio
+
+Antes de modificar archivos, leer en este orden:
+
+1. `docs/MASTER_IMPLEMENTATION_PLAN.md`
+2. `PROJECT_STATE.md`
+3. `ARTIFACT_MANIFEST.md`
+4. `docs/DESIGN.md`
+5. `docs/CONTROL_PLANE_HANDBOOK.md`
+6. `docs/00_SYSTEM/EVIDENCE_REGISTRY.md`
+7. `git status` y `git log --oneline -5`
+
+No asumir que una capacidad existe porque aparece documentada. Ejecutar:
+`AUDIT → IMPLEMENT → TEST → VERIFY → EVIDENCE → GATE`.
+No iniciar una fase sin PASS explícito de la anterior.
+
 ## Proyecto
 **{{PROJECT_NAME}}** — {{descripción en una línea}}
 **Equipo:** {{nombres y roles}}
@@ -60,6 +76,8 @@ FASE 1: {{nombre}} → {{directorio/}}
 - `/evidence` · `/adr` · `/no-go` · `/recovery E-{N}`
 
 Fuentes de verdad: `PROJECT_STATE.md` · `DECISION_REGISTRY.md` · `ARTIFACT_MANIFEST.md`
+
+Evidencia canonica: `docs/00_SYSTEM/EVIDENCE_REGISTRY.md`
 
 ## Skills disponibles
 - *(agregar las domain skills de tu proyecto aquí)*

@@ -28,6 +28,7 @@ test "$entries" -eq "$artifact_hashes"
 target=$(mktemp -d /tmp/claude-control-plane-maintenance-XXXXXX)
 printf 'maintenance-test\nother\n' | bash install.sh "$target" >/tmp/claude-control-plane-install.out
 jq empty "$target/.claude/settings.json"
+test -f "$target/CLAUDE.md"
 test -f "$target/docs/00_SYSTEM/EVIDENCE_REGISTRY.md"
 test -f "$target/CONTROL_REGISTRY.md"
 test -f "$target/REGRESSION_REGISTRY.md"

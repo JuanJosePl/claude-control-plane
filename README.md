@@ -196,12 +196,14 @@ El mismo check se ejecuta en GitHub Actions mediante
 │   ├── rules/               guidance de politicas permanentes
 │   └── skills/              workflows de proceso y verificacion
 ├── docs/
+│   ├── CONTROL_PLANE_HANDBOOK.md
 │   ├── MASTER_IMPLEMENTATION_PLAN.md
 │   ├── DESIGN.md
 │   └── 00_SYSTEM/           estado, session log y evidencia
 ├── evals/                   fixtures deterministas y gates de mantenimiento
 ├── templates/               archivos instalados en proyectos destino
 ├── install.sh
+├── CLAUDE.md                bootstrap siempre cargado
 ├── PROJECT_STATE.md
 ├── ARTIFACT_MANIFEST.md
 ├── DECISION_REGISTRY.md
