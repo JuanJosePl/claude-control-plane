@@ -2,205 +2,205 @@
 
 # Claude Control Plane
 
-### An evidence-gated engineering harness for Claude Code
+### Harness de ingenieria con evidencia para Claude Code
 
 <p>
-  <strong>Context</strong> · <strong>State</strong> · <strong>Memory</strong> · <strong>Control</strong> · <strong>Execution</strong>
+  <strong>Contexto</strong> · <strong>Estado</strong> · <strong>Memoria</strong> · <strong>Control</strong> · <strong>Ejecucion</strong>
 </p>
 
 <p>
-  <a href="https://github.com/JuanJosePl/claude-control-plane/actions/workflows/control-plane.yml"><img src="https://github.com/JuanJosePl/claude-control-plane/actions/workflows/control-plane.yml/badge.svg" alt="Maintenance checks"></a>
-  <a href="https://github.com/JuanJosePl/claude-control-plane"><img src="https://img.shields.io/github/commit-activity/m/JuanJosePl/claude-control-plane" alt="Commit activity"></a>
+  <a href="https://github.com/JuanJosePl/claude-control-plane/actions/workflows/control-plane.yml"><img src="https://github.com/JuanJosePl/claude-control-plane/actions/workflows/control-plane.yml/badge.svg" alt="Checks de mantenimiento"></a>
+  <a href="https://github.com/JuanJosePl/claude-control-plane"><img src="https://img.shields.io/github/commit-activity/m/JuanJosePl/claude-control-plane" alt="Actividad de commits"></a>
   <a href="https://github.com/JuanJosePl/claude-control-plane/issues"><img src="https://img.shields.io/github/issues/JuanJosePl/claude-control-plane" alt="Issues"></a>
 </p>
 
 <p>
-  <em>Agents produce artifacts. The control plane decides whether those artifacts are done.</em>
+  <em>El agente produce artefactos. El control plane decide si esos artefactos estan terminados.</em>
 </p>
 
 </div>
 
-## Why This Exists
+## Por Que Existe
 
-Coding agents are good at producing plausible output. They are not, by themselves, a definition of
-done.
+Los agentes de codigo son buenos produciendo resultados plausibles. Pero no definen por si solos
+cuando algo esta terminado.
 
-Claude Control Plane wraps Claude Code with project-scoped context, state, permissions, workflows,
-evidence gates and regression learning. It is designed to make engineering work:
+Claude Control Plane envuelve Claude Code con contexto por proyecto, estado, permisos, workflows,
+gates de evidencia y aprendizaje de regresiones. El objetivo es que el trabajo de ingenieria sea:
 
-- **Observable** — every phase has state, artifacts and evidence.
-- **Reversible** — checkpoints, rollback references and explicit trust boundaries.
-- **Verifiable** — deterministic checks run before claims are accepted.
-- **Predictable** — risk determines which verification lane is required.
+- **Observable** — cada fase tiene estado, artefactos y evidencia.
+- **Reversible** — checkpoints, referencias de rollback y limites de confianza explicitos.
+- **Verificable** — los checks deterministas se ejecutan antes de aceptar claims.
+- **Predecible** — el riesgo determina la lane de verificacion necesaria.
 
-This is not a second agent, a prompt collection or a plugin manager. It is a small harness around
-the agent you already use.
+No es un segundo agente, una coleccion de prompts ni un plugin manager. Es un harness pequeno
+alrededor del agente que ya utilizas.
 
-## Quick Start
+## Inicio Rapido
 
 ```bash
 git clone git@github.com:JuanJosePl/claude-control-plane.git
 cd claude-control-plane
-bash install.sh /path/to/your-project
+bash install.sh /ruta/a/tu-proyecto
 ```
 
-The installer creates a project-scoped `.claude/` control plane without modifying production code.
-It validates and reserializes `settings.json`, installs hooks and skills, creates canonical state
-registries, and makes the incident regression fixtures available.
+El instalador crea un control plane `.claude/` a nivel de proyecto sin modificar el codigo de
+produccion. Valida y reserializa `settings.json`, instala hooks y skills, crea los registros
+canonicos de estado y deja disponibles los fixtures de regresion de incidentes.
 
-Then run Claude Code in the target project and execute:
+Despues ejecuta Claude Code en el proyecto destino y escribe:
 
 ```text
 /doctor
 ```
 
-Complete the generated context packs before delegating project work.
+Completa los context packs generados antes de delegar trabajo del proyecto.
 
-## The Core Contract
+## Contrato Central
 
 ```text
-HUMAN INTENT
-     ↓
-SPEC / CONTRACT
-     ↓
-EXECUTION
-     ↓
-DETERMINISTIC CHECKS
-     ↓
-INDEPENDENT REVIEW (when risk requires it)
-     ↓
-EVIDENCE
-     ↓
-TaskCompleted GATE
-     ├── BLOCK → recovery / incident
-     └── PASS  → ship / learn
+INTENCION HUMANA
+       ↓
+SPEC / CONTRATO
+       ↓
+EJECUCION
+       ↓
+CHECKS DETERMINISTAS
+       ↓
+REVISION INDEPENDIENTE (si el riesgo lo exige)
+       ↓
+EVIDENCIA
+       ↓
+GATE TaskCompleted
+       ├── BLOCK → recovery / incidente
+       └── PASS  → entregar / aprender
 ```
 
-The hard rule is simple:
+La regla dura es simple:
 
-> A task is not complete because an agent says so. It is complete when the evidence contract passes.
+> Una tarea no esta completa porque un agente lo diga. Esta completa cuando pasa el contrato de evidencia.
 
-## What Ships
+## Que Incluye
 
-| Layer | Components | Purpose |
+| Capa | Componentes | Proposito |
 |---|---|---|
-| Context | `CLAUDE.md`, rules, six context packs | Permanent project identity and constraints |
-| State | `PROJECT_STATE.md`, decision/artifact registries | One source of operational truth |
-| Control | `settings.json`, firewall, secret guard, evidence gate | Permission and blocking enforcement |
-| Execution | Process skills and role agents | Repeatable engineering workflows |
-| Verification | TDD, code review, doubt and constraints lanes | Independent and deterministic checks |
-| Learning | Incident, control and regression registries | Turn failures into permanent controls |
+| Contexto | `CLAUDE.md`, rules, seis context packs | Identidad y restricciones permanentes del proyecto |
+| Estado | `PROJECT_STATE.md`, registros de decisiones y artefactos | Una fuente operativa de verdad |
+| Control | `settings.json`, firewall, secret guard, evidence gate | Enforcement de permisos y bloqueos |
+| Ejecucion | Skills de proceso y agentes por rol | Workflows de ingenieria repetibles |
+| Verificacion | TDD, code review, doubt y constraints | Checks deterministas e independientes |
+| Aprendizaje | Registros de incidentes, controles y regresiones | Convertir fallos en controles permanentes |
 
-## Enforcement Model
+## Modelo De Enforcement
 
-| Level | Mechanism | Example |
+| Nivel | Mecanismo | Ejemplo |
 |---|---|---|
-| L0 | Instruction | `CLAUDE.md`, rules |
-| L1 | Context | `.claude/context/*` |
+| L0 | Instruccion | `CLAUDE.md`, rules |
+| L1 | Contexto | `.claude/context/*` |
 | L2 | Workflow | TDD, code review, doubt, constraints |
-| L3 | Permission | `allow`, `ask`, `deny` in `settings.json` |
-| L4 | Deterministic validation | shell checks, schema checks, regression fixtures |
-| L5 | Blocking hook | `bash-firewall`, `secret-guard`, `TaskCompleted` |
-| L6 | Independent review | `code-reviewer` with fresh context |
-| L8 | Human gate | security, permission and irreversible changes |
+| L3 | Permisos | `allow`, `ask`, `deny` en `settings.json` |
+| L4 | Validacion determinista | checks shell, schema, fixtures de regresion |
+| L5 | Hook bloqueante | `bash-firewall`, `secret-guard`, `TaskCompleted` |
+| L6 | Revision independiente | `code-reviewer` con contexto fresco |
+| L8 | Gate humano | seguridad, permisos y cambios irreversibles |
 
-The system does not force every task through every level. Low-risk changes stay light; high-risk
-changes earn stronger verification.
+El sistema no obliga a cada tarea a pasar por todos los niveles. Los cambios de bajo riesgo se
+mantienen ligeros; los de alto riesgo ganan verificacion mas fuerte.
 
 ## Evidence Gate
 
-`TaskCompleted` reads the canonical registry at:
+`TaskCompleted` lee el registro canonico ubicado en:
 
 ```text
 docs/00_SYSTEM/EVIDENCE_REGISTRY.md
 ```
 
-For medium-risk and above, completion evidence requires:
+Para riesgo medio o superior, la evidencia de cierre requiere:
 
-- task-specific `task_id`;
-- `VERIFIED` status;
-- artifact and contract SHA-256 hashes;
-- tests, static and security checks;
-- reviewer status;
-- explicit exceptions;
-- timestamp and provenance.
+- `task_id` especifico de la tarea;
+- estado `VERIFIED`;
+- hashes SHA-256 del artefacto y del contrato;
+- checks de tests, estaticos y seguridad;
+- estado del reviewer;
+- excepciones explicitas;
+- timestamp y provenance.
 
-Missing or incomplete evidence blocks completion with exit code `2`.
+La evidencia ausente o incompleta bloquea el cierre con codigo `2`.
 
-## Available Workflows
+## Workflows Disponibles
 
-| Skill | Use it when |
+| Skill | Usala cuando |
 |---|---|
-| `/test-driven-development` | Behavior changes, features and bug fixes |
-| `/code-review-and-quality` | A diff needs a contract-based review |
-| `/doubt-driven-development` | A claim or decision needs adversarial verification |
-| `/constraint-driven-development` | A task has non-negotiable constraints or anti-gaming risk |
-| `/incident` | A failure must become a control and regression |
-| `/evidence` | A verified claim needs durable traceability |
-| `/doctor` | The control plane needs a health check |
-| `/gate` | A phase needs an objective exit check |
+| `/test-driven-development` | Cambian comportamientos, features o bugs |
+| `/code-review-and-quality` | Un diff necesita revision contra un contrato |
+| `/doubt-driven-development` | Un claim o decision necesita verificacion adversarial |
+| `/constraint-driven-development` | Una tarea tiene restricciones no negociables o riesgo de gaming |
+| `/incident` | Un fallo debe convertirse en control y regresion |
+| `/evidence` | Un claim verificado necesita trazabilidad durable |
+| `/doctor` | El control plane necesita un health check |
+| `/gate` | Una fase necesita un check objetivo de salida |
 
-## Incident Learning
+## Aprendizaje De Incidentes
 
 ```text
-INCIDENT
-   ↓
-ROOT CAUSE
-   ↓
-MISSING CONTROL
-   ↓
-REGRESSION
-   ↓
-VERIFY
-   ↓
-CONTROL REGISTRY
+INCIDENTE
+     ↓
+CAUSA RAIZ
+     ↓
+CONTROL AUSENTE
+     ↓
+REGRESION
+     ↓
+VERIFICACION
+     ↓
+REGISTRO DE CONTROLES
 ```
 
-Every closed P0/P1 incident must link:
+Todo incidente P0/P1 cerrado debe enlazar:
 
-- `INCIDENT_REGISTRY.md` — symptom, reproducer and root cause;
-- `CONTROL_REGISTRY.md` — the active prevention mechanism;
-- `REGRESSION_REGISTRY.md` — the test proving the control still works;
-- `EVIDENCE_REGISTRY.md` — hashes and verification result.
+- `INCIDENT_REGISTRY.md` — sintoma, reproducer y causa raiz;
+- `CONTROL_REGISTRY.md` — mecanismo activo de prevencion;
+- `REGRESSION_REGISTRY.md` — test que demuestra que el control sigue funcionando;
+- `EVIDENCE_REGISTRY.md` — hashes y resultado de verificacion.
 
-## Maintenance
+## Mantenimiento
 
-Run the deterministic maintenance suite locally:
+Ejecuta la suite determinista de mantenimiento:
 
 ```bash
 evals/maintenance.sh
 ```
 
-It checks:
+Comprueba:
 
-- settings schema and installer output;
-- hook and shell syntax;
-- skill structure and routing fixtures;
-- incident regression behavior;
-- state snapshot and drift detection;
-- evidence provenance and hashes;
-- documentation references;
+- schema de settings y salida del instalador;
+- sintaxis de hooks y shell;
+- estructura de skills y fixtures de routing;
+- comportamiento de regresiones de incidentes;
+- snapshot de estado y deteccion de drift;
+- provenance y hashes de evidencia;
+- referencias de documentacion;
 - regression budget.
 
-The same check runs in GitHub Actions through
+El mismo check se ejecuta en GitHub Actions mediante
 `.github/workflows/control-plane.yml`.
 
-## Repository Map
+## Mapa Del Repositorio
 
 ```text
 .
 ├── .claude/
-│   ├── agents/              role boundaries and independent reviewer
-│   ├── context/             project context packs
-│   ├── hooks/               enforcement and state lifecycle
-│   ├── rules/               permanent policy guidance
-│   └── skills/              process and verification workflows
+│   ├── agents/              limites de roles y reviewer independiente
+│   ├── context/             context packs del proyecto
+│   ├── hooks/               enforcement y ciclo de vida del estado
+│   ├── rules/               guidance de politicas permanentes
+│   └── skills/              workflows de proceso y verificacion
 ├── docs/
 │   ├── MASTER_IMPLEMENTATION_PLAN.md
 │   ├── DESIGN.md
-│   └── 00_SYSTEM/           state, session log and evidence
-├── evals/                   deterministic fixtures and maintenance gates
-├── templates/               files installed into target projects
+│   └── 00_SYSTEM/           estado, session log y evidencia
+├── evals/                   fixtures deterministas y gates de mantenimiento
+├── templates/               archivos instalados en proyectos destino
 ├── install.sh
 ├── PROJECT_STATE.md
 ├── ARTIFACT_MANIFEST.md
@@ -210,44 +210,44 @@ The same check runs in GitHub Actions through
 └── REGRESSION_REGISTRY.md
 ```
 
-## Implementation Status
+## Estado De Implementacion
 
-The initial implementation plan is complete:
+El plan inicial esta completo:
 
-| Phase | Result | Evidence |
+| Fase | Resultado | Evidencia |
 |---|---|---|
-| F1 — Installable foundation | PASS | `EV-001` |
+| F1 — Fundacion instalable | PASS | `EV-001` |
 | F2 — Evidence Contract | PASS | `EV-002` |
-| F3 — SDLC lanes and review | PASS | `EV-005` |
-| F4 — Incident learning | PASS | `EV-006` |
-| F5 — State integrity and provenance | PASS | `EV-007` |
-| F6 — Evals and maintenance | PASS | `EV-008` |
+| F3 — Lanes SDLC y review | PASS | `EV-005` |
+| F4 — Aprendizaje de incidentes | PASS | `EV-006` |
+| F5 — Integridad y provenance | PASS | `EV-007` |
+| F6 — Evals y mantenimiento | PASS | `EV-008` |
 
-Full implementation contract: [`docs/MASTER_IMPLEMENTATION_PLAN.md`](docs/MASTER_IMPLEMENTATION_PLAN.md).
+Contrato completo de implementacion: [`docs/MASTER_IMPLEMENTATION_PLAN.md`](docs/MASTER_IMPLEMENTATION_PLAN.md).
 
-## Scope Boundaries
+## Limites De Alcance
 
-The initial plan deliberately does **not** build:
+El plan inicial deliberadamente no construye:
 
-- Agent Teams as a core dependency;
-- cross-provider fallback;
-- a plugin manager;
-- a dashboard;
-- global mutation testing;
-- hooks added only to fill an event catalog.
+- Agent Teams como dependencia del core;
+- fallback entre proveedores;
+- un plugin manager;
+- un dashboard;
+- mutation testing global;
+- hooks agregados solo para llenar un catalogo de eventos.
 
-Complexity is a budget. New infrastructure must remove a demonstrated risk.
+La complejidad es un presupuesto. La nueva infraestructura debe eliminar un riesgo demostrado.
 
-## Contributing
+## Contribuir
 
-Before proposing a change:
+Antes de proponer un cambio:
 
-1. Read the Master Implementation Plan.
-2. Identify the phase and contract affected.
-3. Run `evals/maintenance.sh`.
-4. Add evidence with a task ID and provenance.
-5. Update the relevant registry when state, controls or regressions change.
+1. Lee el Master Implementation Plan.
+2. Identifica la fase y el contrato afectados.
+3. Ejecuta `evals/maintenance.sh`.
+4. Anade evidencia con task ID y provenance.
+5. Actualiza el registro correspondiente si cambian estado, controles o regresiones.
 
-## License
+## Licencia
 
-See the repository license and project ownership terms before redistributing the control plane.
+Revisa los terminos de licencia y propiedad del repositorio antes de redistribuir el control plane.
