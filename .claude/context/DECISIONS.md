@@ -21,8 +21,8 @@ CUÁNDO AGREGAR UNA DECISIÓN AQUÍ:
 > Registro compacto. Detalle completo en `DECISION_REGISTRY.md`.
 
 ## Producto
-- **P01:** {{decisión}} — {{implicación para el trabajo}}
-- **P02:** {{decisión}} — {{implicación}}
+- **ARCH-001:** Instalacion a nivel de proyecto — no tocar configuracion global.
+- **ARCH-003:** Evidence canonica en `docs/00_SYSTEM/EVIDENCE_REGISTRY.md`.
 
 ## Arquitectura / Control Plane
-- **ARCH-001:** {{decisión}} — {{implicación}}
+- **ARCH-002:** `SubagentStart` inyecta context packs por rol — no depender de `skills:` no verificado.

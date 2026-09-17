@@ -19,7 +19,7 @@ CLAUDE CODE — Engineering Control Plane
 │   ├── PROJECT_STATE.md     → estado OPERATIVO (fase, objetivo, bloqueadores)
 │   ├── DECISION_REGISTRY.md → decisiones estructuradas
 │   ├── ARTIFACT_MANIFEST.md → entregables esperados por fase
-│   └── EVIDENCE_REGISTRY.md → investigaciones con trazabilidad
+│   └── docs/00_SYSTEM/EVIDENCE_REGISTRY.md → evidencia de cambios con trazabilidad
 │
 ├── MEMORY LAYER         (conocimiento persistente entre sesiones)
 │   └── memory/*.md          → NO duplica context packs ni PROJECT_STATE
@@ -68,8 +68,9 @@ Regla: **si dos lugares describen el mismo estado, uno está mal.**
 
 Reglas de diseño:
 - Cada pack **≤150 líneas**.
-- Cada pack **existe también como skill** `context-<pack>` (`user-invocable: false`), para
-  listarse en el campo `skills:` de los agentes. Contenido idéntico.
+- Cada pack **existe también como skill** `context-<pack>` (`user-invocable: false`) para carga
+  manual y auditoria. `SubagentStart` inyecta el pack por rol; no se depende de `skills:` en agent
+  frontmatter porque ese campo no tiene contrato runtime verificado.
 - `CURRENT_STATE.md` es un **espejo derivado** de `PROJECT_STATE.md` (lo actualiza `/cerrar-fase`),
   no una segunda fuente: PROJECT_STATE manda; si divergen, `/audit-context` marca CONFLICT.
 
@@ -115,7 +116,10 @@ RIESGOS / REVERSIBILIDAD: FÁCIL|DIFÍCIL|IRREVERSIBLE / CONSECUENCIAS:
 
 ## 5. EVIDENCE_REGISTRY.md
 
-`ID | PREGUNTA | FUENTE | FECHA | HALLAZGO | CONFIANZA | IMPACTO | DECISIÓN | ESTADO`
+`docs/00_SYSTEM/EVIDENCE_REGISTRY.md`: `EV-ID | TASK_ID | CLAIM | SOURCE | DATE | STATUS | AFFECTS |
+ARTIFACT_HASH | CONTRACT_HASH | CHECKS | REVIEWER | EXCEPTIONS | TIMESTAMP`.
+TaskCompleted acepta solo `VERIFIED` con hashes `sha256`, tests/static PASS, reviewer valido,
+exceptions NONE o APPROVED, timestamp ISO-8601 y `Provenance` explicita.
 
 ---
 
@@ -136,7 +140,7 @@ Precedencia settings (mayor→menor): Managed → CLI `--settings` → local →
 | CLAUDE.md | ✔ | ✔ | ✔ | — | — | — | global=todos; project=repo |
 | rules/ | — | — | ✔ | — | — | — | repo (o path-scoped) |
 | agents/ | (no existe) | — | ✔ | — | ✔ | — | repo |
-| skills/ | ✔ | — | ✔ | — | ref por `skills:` | — | repo / global |
+| skills/ | ✔ | — | ✔ | — | carga por hook/uso explicito | — | repo / global |
 | hooks/ | ✔ (via settings) | ✔ | ✔ | ✔ | — | — | según scope de settings |
 
 Reglas: `deny`/`ask` aplican inmediato; `allow` esperan trust. Las listas se combinan entre scopes.
@@ -197,7 +201,7 @@ a POLICY. security-auditor sólo lectura. implementer puede Bash pero bash-firew
 | ID propuesto | Decisión |
 |---|---|
 | ARCH-001 | `PROJECT_STATE.md` como fuente única de estado operativo |
-| ARCH-002 | Context packs = skills `user-invocable:false`, bootstrap de subagentes vía `skills:` |
+| ARCH-002 | Context packs = skills `user-invocable:false`, bootstrap por `SubagentStart.additionalContext` |
 | ARCH-003 | Enforcement crítico en hooks P0 (no sólo CLAUDE.md) |
 | ARCH-004 | SessionStart con matchers separados startup/resume vs compact |
 | ARCH-005 | Todo a nivel proyecto salvo corrección puntual de configuración global (con backup) |

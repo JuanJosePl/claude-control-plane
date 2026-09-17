@@ -1,138 +1,253 @@
+<div align="center">
+
 # Claude Control Plane
 
-Engineering Control Plane para Claude Code. Convierte cualquier proyecto en un sistema
-observable, reversible, seguro y predecible al trabajar con agentes de IA.
+### An evidence-gated engineering harness for Claude Code
 
-En lugar de depender de prompts sueltos o memoria volátil, este repo instala una infraestructura
-de 5 capas (Context, State, Memory, Control, Execution) que guía a Claude Code desde el arranque
-hasta el cierre de cada sesión. El principio de diseño es simple: **BENEFICIO > COMPLEJIDAD** en
-cada componente. Si algo no aporta control real, no va aquí.
+<p>
+  <strong>Context</strong> · <strong>State</strong> · <strong>Memory</strong> · <strong>Control</strong> · <strong>Execution</strong>
+</p>
 
-## Instalación rápida
+<p>
+  <a href="https://github.com/JuanJosePl/claude-control-plane/actions/workflows/control-plane.yml"><img src="https://github.com/JuanJosePl/claude-control-plane/actions/workflows/control-plane.yml/badge.svg" alt="Maintenance checks"></a>
+  <a href="https://github.com/JuanJosePl/claude-control-plane"><img src="https://img.shields.io/github/commit-activity/m/JuanJosePl/claude-control-plane" alt="Commit activity"></a>
+  <a href="https://github.com/JuanJosePl/claude-control-plane/issues"><img src="https://img.shields.io/github/issues/JuanJosePl/claude-control-plane" alt="Issues"></a>
+</p>
+
+<p>
+  <em>Agents produce artifacts. The control plane decides whether those artifacts are done.</em>
+</p>
+
+</div>
+
+## Why This Exists
+
+Coding agents are good at producing plausible output. They are not, by themselves, a definition of
+done.
+
+Claude Control Plane wraps Claude Code with project-scoped context, state, permissions, workflows,
+evidence gates and regression learning. It is designed to make engineering work:
+
+- **Observable** — every phase has state, artifacts and evidence.
+- **Reversible** — checkpoints, rollback references and explicit trust boundaries.
+- **Verifiable** — deterministic checks run before claims are accepted.
+- **Predictable** — risk determines which verification lane is required.
+
+This is not a second agent, a prompt collection or a plugin manager. It is a small harness around
+the agent you already use.
+
+## Quick Start
 
 ```bash
-git clone https://github.com/tu-usuario/claude-control-plane.git
+git clone git@github.com:JuanJosePl/claude-control-plane.git
 cd claude-control-plane
-bash install.sh /ruta/a/mi-proyecto
+bash install.sh /path/to/your-project
 ```
 
-El instalador copia hooks, skills, agentes, reglas, context packs y templates de estado a tu
-proyecto. No modifica tu código de producción.
+The installer creates a project-scoped `.claude/` control plane without modifying production code.
+It validates and reserializes `settings.json`, installs hooks and skills, creates canonical state
+registries, and makes the incident regression fixtures available.
 
-## Qué incluye
+Then run Claude Code in the target project and execute:
 
-| Componente | Cantidad | Para qué sirve |
+```text
+/doctor
+```
+
+Complete the generated context packs before delegating project work.
+
+## The Core Contract
+
+```text
+HUMAN INTENT
+     ↓
+SPEC / CONTRACT
+     ↓
+EXECUTION
+     ↓
+DETERMINISTIC CHECKS
+     ↓
+INDEPENDENT REVIEW (when risk requires it)
+     ↓
+EVIDENCE
+     ↓
+TaskCompleted GATE
+     ├── BLOCK → recovery / incident
+     └── PASS  → ship / learn
+```
+
+The hard rule is simple:
+
+> A task is not complete because an agent says so. It is complete when the evidence contract passes.
+
+## What Ships
+
+| Layer | Components | Purpose |
 |---|---|---|
-| Hooks | 9 | Automatización, seguridad (P0), logging y recuperación de contexto |
-| Skills de proceso/verificación | 11 | Comandos operativos como `/estado`, `/gate`, `/doctor`, `/recovery` |
-| Agent templates | 4 | Roles parametrizados: researcher, architect, implementer, security-auditor |
-| Rules | 4 | Reglas globales de seguridad, git, no-go y compliance |
-| Context packs | 6 | Templates auto-documentados: CORE, BUSINESS, NO_GO, SECURITY_RULES, CURRENT_STATE, DECISIONS |
-| Templates raíz | 4 | `CLAUDE.md`, `PROJECT_STATE.md`, `DECISION_REGISTRY.md`, `ARTIFACT_MANIFEST.md` |
-| `settings.json` | 1 | Permisos, hooks y configuración de seguridad lista para adaptar |
+| Context | `CLAUDE.md`, rules, six context packs | Permanent project identity and constraints |
+| State | `PROJECT_STATE.md`, decision/artifact registries | One source of operational truth |
+| Control | `settings.json`, firewall, secret guard, evidence gate | Permission and blocking enforcement |
+| Execution | Process skills and role agents | Repeatable engineering workflows |
+| Verification | TDD, code review, doubt and constraints lanes | Independent and deterministic checks |
+| Learning | Incident, control and regression registries | Turn failures into permanent controls |
 
-## Setup en 8 pasos
+## Enforcement Model
 
-Después de correr `install.sh`:
+| Level | Mechanism | Example |
+|---|---|---|
+| L0 | Instruction | `CLAUDE.md`, rules |
+| L1 | Context | `.claude/context/*` |
+| L2 | Workflow | TDD, code review, doubt, constraints |
+| L3 | Permission | `allow`, `ask`, `deny` in `settings.json` |
+| L4 | Deterministic validation | shell checks, schema checks, regression fixtures |
+| L5 | Blocking hook | `bash-firewall`, `secret-guard`, `TaskCompleted` |
+| L6 | Independent review | `code-reviewer` with fresh context |
+| L8 | Human gate | security, permission and irreversible changes |
 
-1. Edita `CLAUDE.md` en la raíz del proyecto y completa las secciones marcadas con `{{}}`.
-2. Edita `.claude/context/CORE.md` con la identidad técnica real del proyecto.
-3. Edita `.claude/context/BUSINESS.md` con la apuesta comercial y restricciones.
-4. Edita `.claude/context/NO_GO.md` con los anti-patrones específicos del proyecto.
-5. Edita `.claude/context/SECURITY_RULES.md` con los controles de seguridad reales.
-6. Ajusta el allow-list de Bash en `.claude/settings.json` según tu stack.
-7. Borra los bloques `<!-- INSTRUCCIONES -->` de cada archivo.
-8. Ejecuta `/doctor` en Claude Code para verificar que todo está conectado.
+The system does not force every task through every level. Low-risk changes stay light; high-risk
+changes earn stronger verification.
 
-## Comandos del control plane
+## Evidence Gate
 
-| Comando | Cuándo usarlo |
+`TaskCompleted` reads the canonical registry at:
+
+```text
+docs/00_SYSTEM/EVIDENCE_REGISTRY.md
+```
+
+For medium-risk and above, completion evidence requires:
+
+- task-specific `task_id`;
+- `VERIFIED` status;
+- artifact and contract SHA-256 hashes;
+- tests, static and security checks;
+- reviewer status;
+- explicit exceptions;
+- timestamp and provenance.
+
+Missing or incomplete evidence blocks completion with exit code `2`.
+
+## Available Workflows
+
+| Skill | Use it when |
 |---|---|
-| `/estado` | Ver fase actual, bloqueantes, decisiones activas y últimas actividades |
-| `/gate` | Verificar que la fase actual puede cerrarse |
-| `/cerrar-fase` | Cerrar fase, actualizar estado y crear commit estructurado |
-| `/checkpoint` | Crear un commit de seguridad manual en cualquier momento |
-| `/doctor` | Health check completo del control plane |
-| `/audit-config` | Verificar que `settings.json` cumple el esquema esperado |
-| `/audit-context` | Detectar divergencias entre fuentes de verdad |
-| `/evidence` | Registrar evidencia con trazabilidad |
-| `/adr` | Registrar una decisión arquitectónica |
-| `/no-go` | Verificar si una acción viola anti-patrones |
-| `/recovery E-{N}` | Ejecutar protocolo de recuperación para errores conocidos |
+| `/test-driven-development` | Behavior changes, features and bug fixes |
+| `/code-review-and-quality` | A diff needs a contract-based review |
+| `/doubt-driven-development` | A claim or decision needs adversarial verification |
+| `/constraint-driven-development` | A task has non-negotiable constraints or anti-gaming risk |
+| `/incident` | A failure must become a control and regression |
+| `/evidence` | A verified claim needs durable traceability |
+| `/doctor` | The control plane needs a health check |
+| `/gate` | A phase needs an objective exit check |
 
-## Arquitectura
+## Incident Learning
 
-```
-CLAUDE CODE — Engineering Control Plane
-│
-├── CONTEXT LAYER        (qué sabe Claude)
-│   ├── CLAUDE.md            → instrucciones permanentes del proyecto
-│   ├── .claude/rules/       → reglas modulares globales
-│   └── .claude/context/     → context packs curados por rol
-│
-├── STATE LAYER          (dónde está el proyecto)
-│   ├── PROJECT_STATE.md     → estado operativo (fuente única)
-│   ├── DECISION_REGISTRY.md → decisiones estructuradas
-│   ├── ARTIFACT_MANIFEST.md → entregables por fase
-│   └── EVIDENCE_REGISTRY.md → investigaciones con trazabilidad
-│
-├── MEMORY LAYER         (conocimiento persistente)
-│   └── memory/*.md          → NO duplica state ni context packs
-│
-├── CONTROL LAYER        (enforcement)
-│   ├── .claude/hooks/       → P0 FAIL_CLOSED + P1/P2 FAIL_OPEN
-│   └── .claude/settings.json→ permisos, hooks, skill overrides
-│
-├── EXECUTION LAYER      (quién ejecuta)
-│   ├── .claude/agents/      → roles especializados
-│   ├── .claude/skills/      → context skills + process skills
-│   └── slash commands       → skills user-invocable
-│
-└── VERIFICATION LAYER   (garantías)
-    ├── Phase gates (/gate, /cerrar-fase)
-    ├── Quality/Security gates (hooks P0, security-auditor)
-    └── Recovery (/doctor, /recovery, SessionStart compact)
+```text
+INCIDENT
+   ↓
+ROOT CAUSE
+   ↓
+MISSING CONTROL
+   ↓
+REGRESSION
+   ↓
+VERIFY
+   ↓
+CONTROL REGISTRY
 ```
 
-## Archivos a personalizar
+Every closed P0/P1 incident must link:
 
-| Archivo | Qué contiene | Tiempo estimado |
+- `INCIDENT_REGISTRY.md` — symptom, reproducer and root cause;
+- `CONTROL_REGISTRY.md` — the active prevention mechanism;
+- `REGRESSION_REGISTRY.md` — the test proving the control still works;
+- `EVIDENCE_REGISTRY.md` — hashes and verification result.
+
+## Maintenance
+
+Run the deterministic maintenance suite locally:
+
+```bash
+evals/maintenance.sh
+```
+
+It checks:
+
+- settings schema and installer output;
+- hook and shell syntax;
+- skill structure and routing fixtures;
+- incident regression behavior;
+- state snapshot and drift detection;
+- evidence provenance and hashes;
+- documentation references;
+- regression budget.
+
+The same check runs in GitHub Actions through
+`.github/workflows/control-plane.yml`.
+
+## Repository Map
+
+```text
+.
+├── .claude/
+│   ├── agents/              role boundaries and independent reviewer
+│   ├── context/             project context packs
+│   ├── hooks/               enforcement and state lifecycle
+│   ├── rules/               permanent policy guidance
+│   └── skills/              process and verification workflows
+├── docs/
+│   ├── MASTER_IMPLEMENTATION_PLAN.md
+│   ├── DESIGN.md
+│   └── 00_SYSTEM/           state, session log and evidence
+├── evals/                   deterministic fixtures and maintenance gates
+├── templates/               files installed into target projects
+├── install.sh
+├── PROJECT_STATE.md
+├── ARTIFACT_MANIFEST.md
+├── DECISION_REGISTRY.md
+├── INCIDENT_REGISTRY.md
+├── CONTROL_REGISTRY.md
+└── REGRESSION_REGISTRY.md
+```
+
+## Implementation Status
+
+The initial implementation plan is complete:
+
+| Phase | Result | Evidence |
 |---|---|---|
-| `CLAUDE.md` | Instrucciones raíz del proyecto para Claude Code | 10 min |
-| `.claude/context/CORE.md` | Stack, módulos, convenciones, fuentes de verdad | 15 min |
-| `.claude/context/BUSINESS.md` | Apuesta comercial, prioridades, restricciones legales | 15 min |
-| `.claude/context/NO_GO.md` | Anti-patrones permanentes del proyecto | 10 min |
-| `.claude/context/SECURITY_RULES.md` | Controles de acceso, auth, validación de inputs | 15 min |
-| `.claude/settings.json` | Permisos de Bash y wiring de hooks | 10 min |
-| `DECISION_REGISTRY.md` | Decisiones tomadas con evidencia y reversibilidad | ongoing |
-| `ARTIFACT_MANIFEST.md` | Entregables esperados por fase | ongoing |
+| F1 — Installable foundation | PASS | `EV-001` |
+| F2 — Evidence Contract | PASS | `EV-002` |
+| F3 — SDLC lanes and review | PASS | `EV-005` |
+| F4 — Incident learning | PASS | `EV-006` |
+| F5 — State integrity and provenance | PASS | `EV-007` |
+| F6 — Evals and maintenance | PASS | `EV-008` |
 
-## Cómo funciona el engranaje
+Full implementation contract: [`docs/MASTER_IMPLEMENTATION_PLAN.md`](docs/MASTER_IMPLEMENTATION_PLAN.md).
 
-1. **Arranque de sesión**: `SessionStart` dispara `session-start-startup.sh` (o `session-start-compact.sh`
-   si la sesión se recupera de una compactación). El hook lee `PROJECT_STATE.md` y lo inyecta como
-   contexto adicional.
-2. **Cada comando Bash o Write/Edit**: `PreToolUse` ejecuta `bash-firewall.sh` y `secret-guard.sh`
-   para bloquear comandos destructivos o escritura de secretos.
-3. **Subagentes**: `SubagentStart` inyecta el estado actual; el frontmatter de cada agente carga las
-   context skills apropiadas (`context-core`, `context-security`, etc.).
-4. **Cierre de sesión**: `Stop` y `SubagentStop` registran actividad en `CLAUDE_SESSION_LOG.md`.
-5. **Compactación**: `PreCompact` hace snapshot de `PROJECT_STATE.md` antes de comprimir contexto.
-6. **Comandos operativos**: `/estado`, `/gate`, `/cerrar-fase`, `/doctor`, etc., son skills que leen
-   y actualizan las fuentes de verdad.
+## Scope Boundaries
 
-## Limitaciones conocidas
+The initial plan deliberately does **not** build:
 
-Este control plane asume ciertos comportamientos de Claude Code que debes verificar en tu versión:
+- Agent Teams as a core dependency;
+- cross-provider fallback;
+- a plugin manager;
+- a dashboard;
+- global mutation testing;
+- hooks added only to fill an event catalog.
 
-1. `SubagentStart.additionalContext` llega efectivamente al subagente (CP-004).
-2. El campo `skills:` en el frontmatter de un agente carga las skills indicadas.
-3. Los hooks `PreToolUse` reciben suficiente información para bloquear con `exit 2`.
-4. Los matchers separados de `SessionStart` (`startup|resume|fork` vs `compact|clear`) se disparan correctamente.
-5. El hook `ConfigChange` se activa al modificar `.claude/settings.json` o configuración de proyecto.
+Complexity is a budget. New infrastructure must remove a demonstrated risk.
 
-Si alguna no se cumple, ajusta el wiring en `settings.json` o elimina el componente dependiente.
+## Contributing
 
----
+Before proposing a change:
 
-*Claude Control Plane v1.0 — Engineering infrastructure for Claude Code*
+1. Read the Master Implementation Plan.
+2. Identify the phase and contract affected.
+3. Run `evals/maintenance.sh`.
+4. Add evidence with a task ID and provenance.
+5. Update the relevant registry when state, controls or regressions change.
+
+## License
+
+See the repository license and project ownership terms before redistributing the control plane.

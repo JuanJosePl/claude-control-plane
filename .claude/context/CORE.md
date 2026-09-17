@@ -2,7 +2,7 @@
 CORE.md — Identidad técnica del proyecto
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 QUIÉN LO LEE : researcher, architect, implementer, security-auditor
-               (vía skill context-core, en su campo skills: del frontmatter)
+               (inyectado por SubagentStart.additionalContext)
 CUÁNDO       : al arrancar cualquier subagente
 TAMAÑO MAX   : 100 líneas — si crece más, mover detalles a domain skills
 

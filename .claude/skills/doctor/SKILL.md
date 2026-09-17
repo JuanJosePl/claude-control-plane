@@ -26,6 +26,7 @@ Verificar que cada hook existe y tiene `chmod +x`:
 .claude/hooks/stop-logger.sh
 .claude/hooks/pre-compact-snapshot.sh
 .claude/hooks/config-change-logger.sh
+.claude/hooks/task-completed-evidence.sh
 ```
 
 ### 3. Settings.json — wiring
@@ -45,14 +46,19 @@ Verificar que existen:
 ### 5. Context skills — existencia
 Verificar `.claude/skills/context-{core,current-state,decisions,security,business,no-go}/SKILL.md`.
 
-### 6. Agentes — frontmatter
-Leer cada agente y verificar que tiene `skills:` field (no contexto embebido en el body).
+### 6. Agentes — contexto
+Leer cada agente y verificar que no depende de un campo `skills:` no verificado; comprobar que
+`SubagentStart` inyecta los packs esperados por rol.
 
 ### 7. CLAUDE_SESSION_LOG.md
 Verificar que existe `docs/00_SYSTEM/CLAUDE_SESSION_LOG.md`.
 
 ### 8. jq disponible
 `which jq` — los hooks P0/P1 lo requieren.
+
+### 9. State integrity smoke test
+Ejecutar `evals/state/state-integrity.sh` y exigir `unchanged=PASS` y `drift=DETECTED`.
+Si falla, no declarar HEALTHY: registrar `UNKNOWN` o `ERROR` y revisar `PROJECT_STATE`.
 
 ## Formato de salida
 
@@ -63,12 +69,14 @@ Verificar que existe `docs/00_SYSTEM/CLAUDE_SESSION_LOG.md`.
 ✔/✗ Hook bash-firewall    — {+x / missing}
 ✔/✗ Hook secret-guard     — {+x / missing}
 ... (todos los hooks)
-✔/✗ settings.json wiring  — {N/9 hooks conectados}
+✔/✗ settings.json wiring  — {N/10 hooks conectados}
 ✔/✗ Context packs (6/6)   — {lista faltantes}
 ✔/✗ Context skills (6/6)  — {lista faltantes}
-✔/✗ Agents skills:field   — {lista sin skills:}
+✔/✗ Agents context injection — {roles y packs verificados}
 ✔/✗ SESSION_LOG           — {exists/missing}
 ✔/✗ jq                    — {path / not found}
+✔/✗ EVIDENCE_REGISTRY     — {canonical path / missing}
+✔/✗ State integrity       — {unchanged PASS / drift DETECTED}
 
 RESUMEN: {N} checks ✔ · {M} checks ✗
 ```

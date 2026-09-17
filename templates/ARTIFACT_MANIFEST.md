@@ -29,4 +29,4 @@ BORRAR ESTE BLOQUE AL INSTALAR
 - ✔ CLAUDE.md · ✔ PROJECT_STATE.md · ✔ DECISION_REGISTRY.md
 - ✔ .claude/context/* · ✔ .claude/rules/* · ✔ .claude/agents/*
 - ✔ hooks · ✔ process skills
-- ⏳ EVIDENCE_REGISTRY.md · ⏳ CLAUDE_SESSION_LOG.md
+- ✔ `docs/00_SYSTEM/EVIDENCE_REGISTRY.md` · ✔ `docs/00_SYSTEM/CLAUDE_SESSION_LOG.md`

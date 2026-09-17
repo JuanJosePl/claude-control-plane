@@ -19,22 +19,26 @@ Si difiere de PROJECT_STATE.md → PROJECT_STATE manda, este se actualiza.
 
 # CONTEXT PACK — CURRENT STATE
 
-**Actualizado:** {{YYYY-MM-DD}}
+**Actualizado:** 2026-09-16
 
 ## Estado de fases
 ```
-FASE 0: {{descripción}} → {{COMPLETA / EN PROGRESO / PENDIENTE}}
-FASE 1: {{descripción}} → {{estado}}
-...
+FASE 0: Plan y auditoria → COMPLETA
+FASE 1: Fundacion instalable y estado coherente → COMPLETA (PASS)
+FASE 2: Evidence Contract y TaskCompleted → COMPLETA (PASS)
+FASE 3: SDLC lanes y verificacion independiente → COMPLETA (PASS)
+FASE 4: Incident learning cerrado → COMPLETA (PASS)
+FASE 5: Integridad de estado y provenance → COMPLETA (PASS)
+FASE 6: Evals y mantenimiento → COMPLETA (PASS)
 ```
 
-## Fase actual: {{N}} — {{nombre}}
-**Objetivo:** {{qué produce esta fase}}
-**Bloqueantes:** {{NONE | lista}}
+## Fase actual: 6 — Evals y mantenimiento
+**Objetivo:** Evitar regresiones del propio control plane.
+**Bloqueantes:** NONE
 
 ## Control Plane
-**Versión:** 1.0 — {{IMPLEMENTADO / EN PROGRESO}}
+**Version:** 1.0 — F6 PASS
 
 ## Próximos pasos
-1. {{acción inmediata}}
-2. {{siguiente}}
+1. Mantener `evals/maintenance.sh` como gate previo a cambios.
+2. No ampliar el alcance sin actualizar el Master Plan.

@@ -1,0 +1,14 @@
+{
+  "task_id": "F3-sdlc-evals-2026-09-16",
+  "fixture_sha256": "bd42f239bad85f3f30dc3a9cabbeeefd649953a9651c12699edb14009d2b32c7",
+  "contract_sha256": "e09dc63b99606f4964837c97d5b7beb3b4284cb893ff98b20584c0904065865d",
+  "execution": "claude --no-session-persistence --tools \"\" --permission-prompts none --max-budget-usd 1 --output-format json -p <same EV-003 prompt>",
+  "session_id": "ae8b67c0-7912-437a-81c7-516a3733dfb4",
+  "total_cost_usd": 0.1062597,
+  "result": {
+    "tdd": {"positive_pass": true, "negative_pass": true, "collision_pass": true},
+    "review": {"positive_pass": true, "negative_pass": true, "collision_pass": true},
+    "doubt": {"positive_pass": true, "negative_pass": true, "collision_pass": true},
+    "constraints": {"positive_pass": true, "negative_pass": true, "collision_pass": true}
+  }
+}

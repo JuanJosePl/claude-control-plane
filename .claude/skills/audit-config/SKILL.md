@@ -12,21 +12,21 @@ Audita `.claude/settings.json` contra el esquema esperado del Control Plane.
 
 ### 1. Permisos — allow
 Verificar presencia de patrones críticos:
-- `Bash(git *)`, `Bash(npm *)`, `Read(*)`, `Glob(*)`, `Grep(*)`
+- `Bash(git *)`, `Read(*)`, `Glob(*)`, `Grep(*)`, `Bash(jq *)`
 
 ### 2. Permisos — ask
 Verificar que `Bash(git push*)` y `Bash(rm *)` están en `ask` (no en `allow`).
 
 ### 3. Permisos — deny
-Verificar protección de secretos:
-- `Read(./.env)`, `Read(./.env.*)`, `Read(./secrets/**)`, `Read(./**/*.pem)`, `Read(./**/*.key)`, `Read(~/.ssh/**)`, `Read(~/.aws/credentials)`
+Verificar protección de secretos: 8 patrones de `.env`, `secrets`, claves privadas, SSH y AWS.
 
 ### 4. Hooks — eventos presentes
-Verificar que existen entradas para: SessionStart, PreToolUse, PostToolUse, SubagentStart, SubagentStop, Stop, PreCompact, ConfigChange.
+Verificar que existen entradas para: SessionStart, PreToolUse, SubagentStart, SubagentStop, Stop, PreCompact, ConfigChange y TaskCompleted.
 
 ### 5. Hooks — matchers correctos
 - SessionStart: matchers `startup|resume|fork` y `compact|clear` (separados).
 - PreToolUse: matchers `Bash` (→ bash-firewall) y `Write|Edit` (→ secret-guard).
+- TaskCompleted: sin matcher y conectado al evidence gate.
 - P0 hooks (bash-firewall, secret-guard): timeout ≤ 5s.
 
 ### 6. skillOverrides
@@ -39,7 +39,7 @@ Debe existir (aunque vacío `{}`).
 
 permissions.allow:  {N críticos presentes}  ✔/⚠
 permissions.ask:    git push + rm  ✔/✗
-permissions.deny:   {N/7 secretos protegidos}  ✔/✗
+permissions.deny:   {N/8 secretos protegidos}  ✔/✗
 hooks.SessionStart: {matchers}  ✔/✗
 hooks.PreToolUse:   Bash+Write|Edit  ✔/✗
 hooks.P0 timeout:   {bash-firewall Xs · secret-guard Xs}  ✔/⚠

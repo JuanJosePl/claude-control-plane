@@ -48,7 +48,7 @@ DRY_RUN=true .claude/hooks/bash-firewall.sh  # ver qué patrón matchea
 
 **E-4 (subagente sin contexto):**
 - Verificar que `subagent-context.sh` tiene `+x` y que settings.json lo referencia en SubagentStart.
-- Verificar que el agente tiene campo `skills:` en su frontmatter.
+- Verificar que el payload del hook identifica el rol y que el contexto inyectado contiene los packs esperados.
 
 **E-5 (session log):**
 ```bash

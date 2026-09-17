@@ -1,0 +1,58 @@
+{
+  "test-driven-development": {
+    "positive": [
+      "Implementa esta feature con test RED antes del código",
+      "Corrige este bug usando RED GREEN y regresión",
+      "Verifica el contrato con un test que falle primero"
+    ],
+    "negative": [
+      "Cambia solo el README sin alterar comportamiento",
+      "Renombra esta variable sin cambiar la lógica"
+    ],
+    "collision": ["Escribe un test y revisa también el diff de seguridad"],
+    "behavioral": ["Debe exigir RED antes de GREEN", "Debe registrar evidencia VERIFIED"],
+    "markers": ["RED", "GREEN", "Status: VERIFIED"]
+  },
+  "code-review-and-quality": {
+    "positive": [
+      "Revisa este diff contra el contrato",
+      "Haz code review con severidad y evidencia",
+      "Audita regresiones y seguridad de este cambio"
+    ],
+    "negative": [
+      "Implementa esta feature desde cero",
+      "Investiga el mercado sin revisar código"
+    ],
+    "collision": ["Revisa el diff y valida el contrato con contexto fresco"],
+    "behavioral": ["Debe emitir PASS o BLOCKED", "Debe incluir path y line en findings"],
+    "markers": ["BLOCKER", "HIGH", "RESULTADO: PASS | BLOCKED"]
+  },
+  "doubt-driven-development": {
+    "positive": [
+      "Desafía este claim con contexto fresco",
+      "Busca dudas falsables en esta decisión irreversible",
+      "Haz una revisión adversarial del artifact"
+    ],
+    "negative": [
+      "Formatea este archivo",
+      "Explica este concepto sin revisar un artifact"
+    ],
+    "collision": ["Revisa este claim y reconciliaré los findings"],
+    "behavioral": ["Debe ocultar el razonamiento del implementer", "Debe detenerse sin dudas críticas"],
+    "markers": ["CLAIM", "EXTRACT", "DOUBT", "RECONCILE", "STOP"]
+  },
+  "constraint-driven-development": {
+    "positive": [
+      "Define restricciones antes de implementar",
+      "Busca checks silenciados y bypasses",
+      "Verifica CONSTRAINTS.md contra el diff"
+    ],
+    "negative": [
+      "Escribe una nota de reunión",
+      "Corrige un typo en documentación"
+    ],
+    "collision": ["Define constraints y escribe tests RED para ellas"],
+    "behavioral": ["Debe detectar skips e ignores", "Debe exigir aprobación para cambiar hooks P0"],
+    "markers": ["MUST", "MUST NOT", "Anti-gaming", "trust boundaries"]
+  }
+}

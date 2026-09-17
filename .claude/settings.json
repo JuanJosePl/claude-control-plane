@@ -7,11 +7,6 @@
       "Bash(mkdir *)", "Bash(cp *)", "Bash(mv *)", "Bash(chmod *)",
       "Bash(echo *)", "Bash(jq *)", "Bash(which *)", "Bash(pwd)", "Bash(date)",
       "Read(*)", "Glob(*)", "Grep(*)"
-      // AGREGAR según stack del proyecto:
-      // Node.js: "Bash(npm *)", "Bash(npx *)", "Bash(node *)"
-      // Python:  "Bash(pip *)", "Bash(python *)", "Bash(uv *)"
-      // Docker:  "Bash(docker *)", "Bash(docker-compose *)"
-      // DB:      "Bash(psql *)", "Bash(mysql *)"
     ],
     "ask": [
       "Bash(git push*)",
@@ -127,6 +122,18 @@
           {
             "type": "command",
             "command": "${CLAUDE_PROJECT_DIR}/.claude/hooks/config-change-logger.sh",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "TaskCompleted": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PROJECT_DIR}/.claude/hooks/task-completed-evidence.sh",
+            "statusMessage": "Verificando evidencia de finalización...",
             "timeout": 5
           }
         ]

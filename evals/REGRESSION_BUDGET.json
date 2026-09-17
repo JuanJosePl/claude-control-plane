@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "max_failed_suites": 0,
+  "max_missing_evidence": 0,
+  "required_suites": [
+    "skills",
+    "incidents",
+    "state",
+    "installer"
+  ]
+}
