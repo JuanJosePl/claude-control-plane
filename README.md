@@ -225,6 +225,8 @@ El plan inicial esta completo:
 
 Contrato completo de implementacion: [`docs/MASTER_IMPLEMENTATION_PLAN.md`](docs/MASTER_IMPLEMENTATION_PLAN.md).
 
+Manual operativo completo: [`docs/CONTROL_PLANE_HANDBOOK.md`](docs/CONTROL_PLANE_HANDBOOK.md).
+
 ## Limites De Alcance
 
 El plan inicial deliberadamente no construye:
