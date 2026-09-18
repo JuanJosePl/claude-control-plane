@@ -22,14 +22,22 @@ block() {
   exit 2
 }
 
-# --- Patrones literales (grep -F) ---
-LITERAL=(
-  "rm -rf /" "rm -rf /*" "rm -rf ~" "rm -rf \$HOME"
-  "dd if=/dev/zero" "mkfs" ":(){:|:&};:" "chmod -R 777 /" "chown -R"
-  "> /dev/sda" "DROP TABLE" "DROP DATABASE" "TRUNCATE TABLE"
+# --- Patrones destructivos (regex tolerante a espacios y case SQL) ---
+declare -A DESTRUCTIVE_REGEX=(
+  ["rm -rf root"]='rm[[:space:]]+-rf[[:space:]]+/'
+  ["rm -rf home"]='rm[[:space:]]+-rf[[:space:]]+(~|\$HOME)'
+  ["dd zero device"]='dd[[:space:]]+if=/dev/zero'
+  ["mkfs"]='mkfs'
+  ["fork bomb"]=':\(\)\{:\|:&\};:'
+  ["chmod root"]='chmod[[:space:]]+-R[[:space:]]+777[[:space:]]+/'
+  ["chown recursive"]='chown[[:space:]]+-R'
+  ["write system disk"]='>[[:space:]]*/dev/sda'
+  ["DROP TABLE"]='[Dd][Rr][Oo][Pp][[:space:]]+[Tt][Aa][Bb][Ll][Ee]'
+  ["DROP DATABASE"]='[Dd][Rr][Oo][Pp][[:space:]]+[Dd][Aa][Tt][Aa][Bb][Aa][Ss][Ee]'
+  ["TRUNCATE TABLE"]='[Tt][Rr][Uu][Nn][Cc][Aa][Tt][Ee][[:space:]]+[Tt][Aa][Bb][Ll][Ee]'
 )
-for p in "${LITERAL[@]}"; do
-  printf '%s' "$COMMAND" | grep -qF -- "$p" && block "patrón destructivo/DB: '$p'"
+for reason in "${!DESTRUCTIVE_REGEX[@]}"; do
+  printf '%s' "$COMMAND" | grep -qE -- "${DESTRUCTIVE_REGEX[$reason]}" && block "patrón destructivo/DB: '$reason'"
 done
 
 # --- Patrones regex (grep -E) ---
@@ -39,7 +47,7 @@ declare -A REGEX=(
   ["API key estilo sk-"]='sk-[A-Za-z0-9]{20,}'
   ["token Bearer"]='Bearer +[A-Za-z0-9._-]{20,}'
   ["AWS access key id"]='AKIA[0-9A-Z]{16}'
-  ["lectura de .env"]='(cat|less|more|head|tail|bat) +[^|;&]*\.env([^A-Za-z0-9]|$)'
+  ["lectura de .env"]='(cat|less|more|head|tail|bat|source|exec) +[^|;&]*\.env([^A-Za-z0-9]|$)|(^|[[:space:];&|])\.[[:space:]]+[^|;&]*\.env([^A-Za-z0-9]|$)|read[[:space:]]+[^|;&]*<[[:space:]]*\.env|exec[[:space:]]*<[[:space:]]*\.env'
   ["lectura de clave privada"]='(cat|less|more|head|tail|bat) +[^|;&]*\.(pem|key|pfx)([^A-Za-z0-9]|$)'
   ["lectura de secretos ssh/aws"]='(cat|less|more|head|tail) +[^|;&]*(\.ssh/|\.aws/credentials)'
   ["git add de secretos"]='git +add +[^|;&]*(\.env|\.pem|\.key|\.pfx|secrets/|credentials/)'
