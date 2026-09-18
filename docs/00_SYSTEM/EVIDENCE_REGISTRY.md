@@ -207,7 +207,7 @@
 - **Notes:** Independent fresh review PASS. SCRIPT VERIFIED; native Claude runtime NOT_VERIFIED.
 
 ## EV-012 — F7 evidence coupling and ARCH-004 are verified
-- **Task ID:** F7-evidence-coupling-2026-09-18-e267b3d9
+- **Task ID:** F7-evidence-coupling-2026-09-18-5879aa8f
 - **Date:** 2026-09-18
 - **Claim:** TaskCompleted accepts matching contract evidence, blocks mismatched or empty/null hashes, exact task/status mismatches, nonexistent tasks, malformed payloads and invalid evidence, with the documented one-phase warning only when the hash field is absent.
 - **Source:** `evals/hooks/task-completed-coupling.sh`; `bash evals/incidents/INC-001-task-completed-evidence.sh`; `DECISION_REGISTRY.md` ARCH-004; independent fresh review.
