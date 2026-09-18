@@ -215,7 +215,7 @@
 - **Confidence:** HIGH
 - **Status:** VERIFIED
 - **Affects:** `.claude/hooks/task-completed-evidence.sh`, ARCH-004, REG-001, REG-007.
-- **Artifact Hash:** sha256:e267b3d9ffcc0fd73de5d6699262601f654067b0e9ee5eacac26f31f762bf650
+- **Artifact Hash:** sha256:5879aa8ff25ffdf2686b25ef3581f7d008c307eacf853c464fa1145ea4fe218f
 - **Contract Hash:** sha256:2fdac1ffe1322a2e47179bf3ebf8d55e4c680632a46363913a070fa12451d6e5
 - **Checks:** tests=PASS; static=PASS; security=PASS
 - **Reviewer:** PASS
