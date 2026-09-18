@@ -39,6 +39,7 @@ test -f "$target/docs/00_SYSTEM/EVIDENCE_REGISTRY.md"
 test -f "$target/CONTROL_REGISTRY.md"
 test -f "$target/REGRESSION_REGISTRY.md"
 test -x "$target/evals/incidents/INC-001-task-completed-evidence.sh"
+evals/install/idempotency.sh >/tmp/claude-control-plane-install-idempotency.out
 
 printf '%s\n' 'schema=PASS' 'installer=PASS' 'hooks=PASS' 'skills=PASS' 'incidents=PASS' 'state=PASS' 'evidence=PASS' 'docs=PASS' 'regression_budget=PASS'
 printf '%s\n' 'evidence_freshness=PASS' 'firewall_positive=PASS' 'secret_guard_positive=PASS'

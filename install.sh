@@ -4,7 +4,18 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-TARGET="${1:-$(pwd)}"
+FORCE=false
+TARGET=""
+for argument in "$@"; do
+  case "$argument" in
+    --force) FORCE=true ;;
+    *)
+      [ -z "$TARGET" ] || { echo "✖ Error: solo se admite un destino." >&2; exit 2; }
+      TARGET="$argument"
+      ;;
+  esac
+done
+TARGET="${TARGET:-$(pwd)}"
 
 echo "=== Claude Control Plane — Instalador ==="
 echo "Destino: $TARGET"
@@ -60,7 +71,28 @@ if ! jq empty "$SETTINGS_SOURCE" >/dev/null 2>&1; then
   exit 1
 fi
 
-jq . "$SETTINGS_SOURCE" > "$SETTINGS_TARGET"
+if [ ! -f "$SETTINGS_TARGET" ]; then
+  jq . "$SETTINGS_SOURCE" > "$SETTINGS_TARGET"
+elif cmp -s <(jq -S . "$SETTINGS_SOURCE") <(jq -S . "$SETTINGS_TARGET" 2>/dev/null); then
+  echo "✔ settings.json existente sin cambios; se preserva."
+else
+  OVERWRITE=false
+  if [ "$FORCE" = true ]; then
+    OVERWRITE=true
+  elif [ -t 0 ]; then
+    read -r -p "⚠ $SETTINGS_TARGET difiere del template. ¿Sobrescribir? [y/N] " ANSWER
+    case "$ANSWER" in
+      y|Y|s|S) OVERWRITE=true ;;
+    esac
+  else
+    echo "⚠ $SETTINGS_TARGET difiere del template; se preserva. Usa --force para sobrescribir." >&2
+  fi
+
+  if [ "$OVERWRITE" = true ]; then
+    jq . "$SETTINGS_SOURCE" > "$SETTINGS_TARGET"
+    echo "✔ settings.json reemplazado."
+  fi
+fi
 
 # Copiar templates de raíz (sólo si no existen)
 for f in CLAUDE.md PROJECT_STATE.md DECISION_REGISTRY.md ARTIFACT_MANIFEST.md INCIDENT_REGISTRY.md CONTROL_REGISTRY.md REGRESSION_REGISTRY.md; do
