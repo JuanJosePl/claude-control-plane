@@ -16,6 +16,7 @@ done
 
 evals/skills/validate.sh >/tmp/claude-control-plane-skills.out
 evals/incidents/INC-001-task-completed-evidence.sh >/tmp/claude-control-plane-incidents.out
+evals/hooks/task-completed-coupling.sh >/tmp/claude-control-plane-task-coupling.out
 evals/state/state-integrity.sh >/tmp/claude-control-plane-state.out
 evals/skills/evidence-freshness.sh >/tmp/claude-control-plane-evidence-freshness.out
 evals/hooks/firewall-positive.sh >/tmp/claude-control-plane-firewall-positive.out

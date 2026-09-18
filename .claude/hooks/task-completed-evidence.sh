@@ -19,6 +19,11 @@ jq -e . >/dev/null 2>&1 <<<"$INPUT" || block "el payload recibido no es JSON vá
 TASK_ID="$(jq -r '.task_id // empty' <<<"$INPUT")"
 [ -n "$TASK_ID" ] || block "el payload no contiene task_id."
 
+PAYLOAD_CONTRACT_HASH="$(jq -r '.contract_hash // empty' <<<"$INPUT")"
+if [ -n "$PAYLOAD_CONTRACT_HASH" ] && [[ "$PAYLOAD_CONTRACT_HASH" != sha256:* ]]; then
+  PAYLOAD_CONTRACT_HASH="sha256:$PAYLOAD_CONTRACT_HASH"
+fi
+
 RISK_LEVEL="$(jq -r '.risk_level // .risk // "medium"' <<<"$INPUT")"
 case "$RISK_LEVEL" in
   low) REQUIRE_REVIEW=0 ;;
@@ -26,10 +31,12 @@ case "$RISK_LEVEL" in
   *) block "risk_level invalido: $RISK_LEVEL. Usa low, medium, high o critical." ;;
 esac
 
-if ! awk -v task_id="$TASK_ID" -v require_review="$REQUIRE_REVIEW" '
+if ! awk -v task_id="$TASK_ID" -v payload_contract_hash="$PAYLOAD_CONTRACT_HASH" -v require_review="$REQUIRE_REVIEW" '
   /^## EV-[0-9]+[[:space:]]/ {
     in_entry = 1
     matches_task = 0
+    entry_task_id = ""
+    entry_contract_hash = ""
     is_verified = 0
     has_artifact_hash = 0
     has_contract_hash = 0
@@ -39,19 +46,34 @@ if ! awk -v task_id="$TASK_ID" -v require_review="$REQUIRE_REVIEW" '
     has_exceptions = 0
     has_timestamp = 0
   }
-  in_entry && index($0, "- **Task ID:** " task_id) { matches_task = 1 }
+  in_entry && $0 ~ /^- \*\*Task ID:\*\* / {
+    entry_task_id = $0
+    sub(/^- \*\*Task ID:\*\* /, "", entry_task_id)
+    matches_task = (entry_task_id == task_id)
+  }
   in_entry && index($0, "- **Status:** VERIFIED") { is_verified = 1 }
   in_entry && $0 ~ /^- \*\*Artifact Hash:\*\* sha256:[0-9a-fA-F]{64}$/ && $0 !~ /sha256:0{64}$/ { has_artifact_hash = 1 }
-  in_entry && $0 ~ /^- \*\*Contract Hash:\*\* sha256:[0-9a-fA-F]{64}$/ && $0 !~ /sha256:0{64}$/ { has_contract_hash = 1 }
+  in_entry && $0 ~ /^- \*\*Contract Hash:\*\* sha256:[0-9a-fA-F]{64}$/ && $0 !~ /sha256:0{64}$/ {
+    has_contract_hash = 1
+    entry_contract_hash = $0
+    sub(/^- \*\*Contract Hash:\*\* /, "", entry_contract_hash)
+  }
   in_entry && $0 ~ /^- \*\*Checks:\*\* / && $0 ~ /tests=PASS/ && $0 ~ /static=PASS/ && $0 ~ /security=(PASS|NOT_REQUIRED)$/ { has_checks = 1 }
   in_entry && $0 ~ /^- \*\*Reviewer:\*\* (PASS|NOT_REQUIRED)$/ { has_reviewer = 1 }
   in_entry && $0 ~ /^- \*\*Reviewer:\*\* PASS$/ { has_reviewer_pass = 1 }
   in_entry && ($0 ~ /^- \*\*Exceptions:\*\* NONE$/ || $0 ~ /^- \*\*Exceptions:\*\* APPROVED:/) { has_exceptions = 1 }
   in_entry && $0 ~ /^- \*\*Timestamp:\*\* [0-9]{4}-[0-9]{2}-[0-9]{2}T/ { has_timestamp = 1 }
-  in_entry && matches_task && is_verified && has_artifact_hash && has_contract_hash && has_checks && has_reviewer && (require_review == 0 || has_reviewer_pass) && has_exceptions && has_timestamp { found = 1 }
+  in_entry && matches_task && is_verified && has_artifact_hash && has_contract_hash && has_checks && has_reviewer && (require_review == 0 || has_reviewer_pass) && has_exceptions && has_timestamp && (payload_contract_hash == "" || entry_contract_hash == payload_contract_hash) { found = 1 }
   END { exit(found ? 0 : 1) }
 ' "$REGISTRY"; then
+  if [ -n "$PAYLOAD_CONTRACT_HASH" ]; then
+    block "Evidence Contract invalid for task_id=$TASK_ID: contract_hash does not match VERIFIED evidence."
+  fi
   block "Evidence Contract invalid for task_id=$TASK_ID: no matching VERIFIED evidence or required fields."
+fi
+
+if [ -z "$PAYLOAD_CONTRACT_HASH" ]; then
+  printf '%s\n' 'ADVERTENCIA (ARCH-004): TaskCompleted sin contract_hash; fail-open transicional durante F7.' >&2
 fi
 
 printf '%s\n' "TaskCompleted permitido: Evidence Contract VERIFIED para task_id=$TASK_ID (risk=$RISK_LEVEL)."
