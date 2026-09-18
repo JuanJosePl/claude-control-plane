@@ -6,6 +6,8 @@ LOG="$PROJ/docs/00_SYSTEM/CLAUDE_SESSION_LOG.md"
 STATE="$PROJ/PROJECT_STATE.md"
 command -v jq >/dev/null 2>&1 || exit 0
 INPUT="$(cat)"
+STOP_HOOK_ACTIVE="$(printf '%s' "$INPUT" | jq -r '(.stop_hook_active // false) == true' 2>/dev/null || printf '%s' false)"
+[ "$STOP_HOOK_ACTIVE" = "true" ] && exit 0
 MSG=$(printf '%s' "$INPUT" | jq -r '.last_assistant_message // ""' 2>/dev/null | head -c 200 | tr '\n' ' ')
 
 # Recordatorio suave si PROJECT_STATE no se tocó hoy
