@@ -116,4 +116,5 @@ the approved five-bundle scope and side-effect budget did not expand.
 - **PROJECT_STATE:** CURRENT_PHASE 7, PHASE_STATUS COMPLETE
 - **NEXT_ALLOWED_PHASE:** F8 RESEARCH REQUIRED
 - **CHECKPOINT:** implementation commits through `b659dfb`; documentation/evidence checkpoints are
-  `3ed9609` and evidence correction `69b2c23`; historical evidence was not rewritten.
+  `3ed9609`, `69b2c23` and evidence identity correction `ec8b76e`; historical evidence was not
+  rewritten.
