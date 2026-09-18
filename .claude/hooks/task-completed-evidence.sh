@@ -19,9 +19,13 @@ jq -e . >/dev/null 2>&1 <<<"$INPUT" || block "el payload recibido no es JSON vá
 TASK_ID="$(jq -r '.task_id // empty' <<<"$INPUT")"
 [ -n "$TASK_ID" ] || block "el payload no contiene task_id."
 
+CONTRACT_HASH_PRESENT="$(jq -r 'has("contract_hash")' <<<"$INPUT")"
 PAYLOAD_CONTRACT_HASH="$(jq -r '.contract_hash // empty' <<<"$INPUT")"
-if [ -n "$PAYLOAD_CONTRACT_HASH" ] && [[ "$PAYLOAD_CONTRACT_HASH" != sha256:* ]]; then
-  PAYLOAD_CONTRACT_HASH="sha256:$PAYLOAD_CONTRACT_HASH"
+if [ "$CONTRACT_HASH_PRESENT" = "true" ]; then
+  [ -n "$PAYLOAD_CONTRACT_HASH" ] || block "el payload contiene contract_hash vacio."
+  if [[ "$PAYLOAD_CONTRACT_HASH" != sha256:* ]]; then
+    PAYLOAD_CONTRACT_HASH="sha256:$PAYLOAD_CONTRACT_HASH"
+  fi
 fi
 
 RISK_LEVEL="$(jq -r '.risk_level // .risk // "medium"' <<<"$INPUT")"
@@ -51,7 +55,7 @@ if ! awk -v task_id="$TASK_ID" -v payload_contract_hash="$PAYLOAD_CONTRACT_HASH"
     sub(/^- \*\*Task ID:\*\* /, "", entry_task_id)
     matches_task = (entry_task_id == task_id)
   }
-  in_entry && index($0, "- **Status:** VERIFIED") { is_verified = 1 }
+  in_entry && $0 ~ /^- \*\*Status:\*\* VERIFIED$/ { is_verified = 1 }
   in_entry && $0 ~ /^- \*\*Artifact Hash:\*\* sha256:[0-9a-fA-F]{64}$/ && $0 !~ /sha256:0{64}$/ { has_artifact_hash = 1 }
   in_entry && $0 ~ /^- \*\*Contract Hash:\*\* sha256:[0-9a-fA-F]{64}$/ && $0 !~ /sha256:0{64}$/ {
     has_contract_hash = 1
@@ -72,7 +76,7 @@ if ! awk -v task_id="$TASK_ID" -v payload_contract_hash="$PAYLOAD_CONTRACT_HASH"
   block "Evidence Contract invalid for task_id=$TASK_ID: no matching VERIFIED evidence or required fields."
 fi
 
-if [ -z "$PAYLOAD_CONTRACT_HASH" ]; then
+if [ "$CONTRACT_HASH_PRESENT" != "true" ]; then
   printf '%s\n' 'ADVERTENCIA (ARCH-004): TaskCompleted sin contract_hash; fail-open transicional durante F7.' >&2
 fi
 
