@@ -826,6 +826,37 @@ Exceptions
 Timestamp
 ```
 
+#### ARCH-004 — TASK TRACKING SEMANTICS
+
+El hook `TaskCompleted` puede dispararse para cualquier `TaskUpdate → completed`, incluidas
+subtareas internas del tracker. ARCH-004 establece la distincion operativa antes de cerrar una
+tarea:
+
+```text
+USER INTENT
+    ↓
+CONTRACTUAL TASK          ← unica que debe pasar por Evidence Gate
+    ↓
+INTERNAL TODO / CHECKLIST ← scaffolding; no requiere EV-NNN individual
+    ↓
+SUBTASK                   ← hereda la evidencia de su CONTRACTUAL TASK
+    ↓
+ARTIFACT
+    ↓
+EVIDENCE
+    ↓
+GATE
+```
+
+Una `RESEARCH NOTE` es una salida de investigacion que se registra en documentacion y no pasa por
+el gate. Solo una CONTRACTUAL TASK obtiene evidencia `VERIFIED` y un `task_id` con la convencion
+`<fase>-<slug>-YYYY-MM-DD-<hash>`. Los TODOs internos y SUBTASKs se marcan como `deleted`, no como
+`completed`, cuando el contrato que los contiene se cierra. El payload puede incluir `contract_hash`;
+si lo incluye, debe coincidir con el registro VERIFIED. Durante F7 la ausencia se permite con un
+warning transicional para no romper payloads existentes; la siguiente fase debe hacerla fail-closed.
+
+La decision completa vive en `DECISION_REGISTRY.md` como ARCH-004.
+
 ### `/doctor` falla
 
 Ejecuta:
