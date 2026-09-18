@@ -978,7 +978,23 @@ La suite cubre:
 - hash y drift de estado;
 - provenance y hashes de evidencia;
 - referencias obsoletas;
-- regression budget.
+- regression budget;
+- freshness y unicidad de resultados Tier 3;
+- fixtures positivos de firewall y secret-guard;
+- regresiones F7 de Stop, firewall, TaskCompleted, rotacion e instalacion.
+
+F7 Extended agrega tres comprobaciones visibles al resultado de mantenimiento:
+`evidence_freshness=PASS`, `firewall_positive=PASS` y `secret_guard_positive=PASS`, por lo que la
+salida esperada actual es 12/12. Los fixtures adicionales se ejecutan dentro de sus suites
+correspondientes aunque no agregan nuevos hooks ni nuevos registries.
+
+La verificacion local distingue `SCRIPT VERIFIED` de `CLAUDE RUNTIME VERIFIED`. En OpenCode solo
+se ejecutan scripts, fixtures y mantenimiento; la ejecucion nativa de los eventos Claude Code es
+`NOT_VERIFIED`.
+
+Rollback por bundle: `git revert <bundle-commit>`, volver a ejecutar `bash evals/maintenance.sh` y
+confirmar que EV-001 a EV-008 e INC-001/CTRL-001/REG-001 permanecen intactos. No se ejecuta rollback
+destructivo durante el cierre normal.
 
 ## 16. Resumen Mental
 

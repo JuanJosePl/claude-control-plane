@@ -53,3 +53,21 @@
 - ✔ Regression budget y benchmark baseline
 - ✔ Workflow CI
 - ✔ Evidencia EV-008 y gate
+
+### FASE 7 — Evidence Integrity + Behavioral Reliability [✔ VERIFIED]
+
+- ✔ Stop anti-loop con fixture de idempotencia
+- ✔ Firewall endurecido con tolerancia de espacios/case y fixture positivo
+- ✔ Freshness Tier 3 y `evidence_freshness_days=30`
+- ✔ Fixture positivo de `secret-guard`
+- ✔ Coupling de `task_id` + `contract_hash` y ARCH-004
+- ✔ Rotacion diaria reversible de session log
+- ✔ Instalador idempotente con prompt y `--force`
+- ✔ EV-009 a EV-014 y REG-002 a REG-009
+- ✔ Fresh independent review PASS
+- ✔ Scripts verificados; runtime nativo de Claude Code NOT_VERIFIED
+
+### FASES 8-12 — Estado [UNKNOWN / RESEARCH REQUIRED]
+
+- ⏳ No existen definicion, evidencia ni implementacion historica en este repositorio
+- ⏳ No iniciar sin research adicional y aprobacion del owner

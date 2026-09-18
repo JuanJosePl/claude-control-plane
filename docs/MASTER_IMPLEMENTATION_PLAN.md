@@ -302,6 +302,36 @@ checks requeridos del nivel de riesgo pasan y no hay excepciones sin aprobacion.
 **Evidence:** reporte CI y baseline comparable entre commits.
 **Dependencias:** todas las fases anteriores.
 
+### Fase 7 — F7 Extended: Evidence Integrity + Behavioral Reliability
+
+**Resultado actual:** IMPLEMENTED / VERIFIED — EV-009 a EV-014; REG-002 a REG-009; fresh review PASS.
+
+**Objetivo:** cerrar los defectos comportamentales y de integridad de evidencia demostrados en el
+handoff F7-F12 sin crear una arquitectura nueva.
+
+**Trabajo implementado:**
+
+- Bundle A: `stop-logger.sh` respeta `stop_hook_active=true` sin reemitir recordatorios.
+- Bundle B: `bash-firewall.sh` tolera espacios/case y cubre las formas demostradas de lectura de
+  `.env`, con fixture positivo y variantes adversariales.
+- Evidence Integrity: `evidence-freshness.sh`, `evidence_freshness_days=30` y fixtures positivos
+  de firewall y secret-guard ejecutados por `maintenance.sh`.
+- Bundle C: `task-completed-evidence.sh` exige coincidencia de `contract_hash` cuando el payload
+  lo envia, con coincidencia exacta de `task_id` y `Status: VERIFIED`.
+- Bundle D: rotacion reversible diaria de `CLAUDE_SESSION_LOG` sin overwrite intra-dia.
+- Bundle E: reinstalacion idempotente de `settings.json`, prompt interactivo y `--force` explicito.
+- ARCH-004 documenta CONTRACTUAL TASK, INTERNAL TODO / CHECKLIST, SUBTASK y RESEARCH NOTE.
+
+**Evidence:** `docs/00_SYSTEM/EVIDENCE_REGISTRY.md` EV-009 a EV-014.
+**Regressions:** `REGRESSION_REGISTRY.md` REG-002 a REG-009; EV-001 a EV-008 permanecen intactas.
+**Verification:** `bash evals/maintenance.sh` 12/12 PASS; INC-001, state integrity, Tier 1/2/3,
+fixtures adversariales y `bash -n` PASS. Esto verifica scripts y controles del repositorio, no el
+runtime nativo de Claude Code, que queda UNKNOWN / NOT_VERIFIED en este entorno OpenCode.
+**Rollback:** `git revert` por commit de bundle; la evidencia historica F1-F6 no se reescribe.
+**Out of scope:** G-B6, G-B10, G-B11, G-M1, G-L1, G-N3/N4/N5 y F8-F12.
+**Budget variance:** el owner acepto la expansion evidence-driven: 591 adiciones y 17 eliminaciones,
+7 fixtures, cero nuevos componentes de runtime y cero dependencias externas.
+
 ## 6. Matriz de dependencias
 
 ```text
@@ -311,7 +341,9 @@ F0 Plan validado
           -> F3 skills + risk routing + independent review
               -> F4 incident -> control -> regression
                   -> F5 state integrity + provenance
-                      -> F6 evals + CI + maintenance
+                       -> F6 evals + CI + maintenance
+                           -> F7 Extended hardening + evidence
+                               -> F8+ UNKNOWN / RESEARCH REQUIRED
 ```
 
 Bloqueos duros:
@@ -345,3 +377,69 @@ El plan se considera materializado solo cuando:
 - Cross-provider fallback.
 - Mutation testing global sin baseline de coste y riesgo.
 - Nuevos hooks solo por completar el catalogo de eventos.
+
+## 9. Documentation Definition of Done (transversal)
+
+Ninguna fase se declara COMPLETA si una capacidad introducida o modificada durante ella no tiene
+documentacion coherente con el runtime real. Reglas:
+
+- La documentacion se actualiza dentro de la misma fase que introduce o modifica la capacidad.
+- `README.md` mantiene el estado real como entrada principal; `docs/` contiene la profundidad.
+- Ninguna capacidad puede afirmarse en documentacion si no existe en el runtime auditado.
+- `README`, `docs/`, `ARTIFACT_MANIFEST.md`, `PROJECT_STATE.md`, hooks, skills y agents no deben
+  contradecirse; cualquier divergencia detectada por `/audit-context` o `evals/maintenance.sh`
+  bloquea el cierre.
+- Instalacion, configuracion, uso, verificacion, recovery y mantenimiento deben estar documentados
+  cuando existan realmente. Referencias a archivos ausentes se corrigen o se retiran.
+
+**F6 Documentation Gate:** el cierre de F6 requiere que `evals/maintenance.sh` incluya el check
+`docs=PASS` (referencias documentales sin contadores obsoletos) y que ninguna skill referencie un
+archivo ausente en `docs/00_SYSTEM/`. Verificado en 2026-09-17 tras la auditoria final.
+
+## 10. Post-F6 Consolidated Gap Register
+
+Registro de hallazgos derivados de la auditoria final (2026-09-17). Estas propuestas NO estan
+implementadas; se listan para trazabilidad y priorizacion futura. `BENEFIT > COMPLEXITY` aplica a
+cada una: ninguna se convierte en fase sin justificacion adicional.
+
+> **Informe completo persistido:** `docs/00_SYSTEM/POST_F6_AUDIT_REPORT.md` (secciones A-G:
+> /doctor · Baseline · Consolidated gaps · Rejected/deferred · Proxima fase · Changes · Integrity).
+>
+> **Roadmap de evolucion (post-F6):** `docs/MASTER_EVOLUTION_ROADMAP.md` (secciones 1-39: research
+> externo, capability matrix, reuse/integration matrix, true gap register, F7 propuesta con
+> acceptance/rollback/evidence, ADR-004 propuesto, what-not-to-build, phase dependency graph y
+> final go/no-go). Todo en estado `PROPOSED`; owner decide.
+
+| ID | Gap | Evidencia | Riesgo real | Cobertura existente | Prioridad | Accion |
+|---|---|---|---|---|---|---|
+| G-V1 | Tier 3 behavioral es snapshot editable | `evals/skills/results/F3-tier3-run-*.json` sin verificacion de freshness | Reeditar los JSON hace pasar `maintenance` sin invocar CLI real | `contract_hash` sha256 en cada run; comparacion de firmas | P1 | Bundle con G-Bob-2 |
+| G-Bob-2 | Sin politica de rerun/expiracion para Tier 3 | Master Plan §5 F3 no define expiracion | Igual que G-V1 | Ninguna | P1 | Bundle con G-V1 |
+| G-T1 | `bash-firewall` y `secret-guard` sin fixture positivo dedicado | Solo `INC-001-*.sh` cubre TaskCompleted | Degradacion silenciosa de regex solo se detectaria por incidente | `bash -n` (solo sintaxis) | P1 | Extender `evals/` con pattern INC-001 |
+| G-D3 | TASK TRACKING SEMANTICS: TaskCompleted trata subtareas internas como contractuales | Sesion de auditoria: 11 subtareas quedaron sin poder marcarse | Fricción operativa + tentacion de crear evidence theater | Documentado como gap en Handbook §12 | P1 | Requiere ADR antes que codigo |
+| G-S1 | Rollback documentado sin smoke test | `CONTROL_REGISTRY.md:29` | Un rollback nunca ejecutado puede fallar cuando importa | Comandos documentados | P2 | Dry-run opcional en `/incident close` |
+| G-S2 | Escape ambiguo en rollback CTRL-001 (`sed '/^[[:space:]]*\\/\\//d'`) | `CONTROL_REGISTRY.md:29` | Copy-paste del rollback puede fallar | Ninguna | P2 | Reformatear como heredoc |
+| G-Bob-1 | `fixtures.json` no etiquetado como acceptance criteria | `evals/skills/fixtures.json` sin cabecera semantica | Ambiguedad conceptual, no operacional | Handbook describe uso | P2 | Comentario 1-liner |
+| G-A1 | Context packs del propio repo con placeholders `{{}}` | `.claude/context/{CORE,BUSINESS,SECURITY_RULES,NO_GO}.md` | Nadie confunde el repo con un proyecto instalado hoy | Master Plan es explicito | P2 | Nota en README |
+| G-T2 | Solo 1 regresion en el registro | `REGRESSION_REGISTRY.md` | Framework validado con 1 sample | `/incident` skill existe y funciona | DEFER | Esperar 2do incidente real; no fabricar |
+| G-M1 | No hay mutation testing narrow para regex del firewall | Ninguna suite muta patrones | Debilitamiento silencioso; parcialmente cubierto si G-T1 se implementa | `bash -n` + revision manual | DEFER | Reconsiderar si un incidente demuestra bypass |
+| G-L1 | Apertura de incidentes es manual, sin hook `PostToolUseFailure` | Master Plan §5 F4 lo justifica | Fallos pueden pasar sin registrar | `/incident open` + disciplina humana | DEFER | Master Plan §5 ya cierra la decision |
+
+**Resumen:** 4 P1 · 4 P2 · 3 DEFER · 0 P0 · 0 REMOVE. Ningun gap justifica accion inmediata; el
+sistema esta en estado sostenible. La consolidacion es la entrega; la decision sobre F7 se toma
+despues, no como consecuencia mecanica de este registro.
+
+### F7 candidato (NO iniciado)
+
+Si se decide abrir F7, el candidato natural es **Evidence Integrity Hardening**:
+
+- **Objetivo:** cerrar la ventana G-V1/G-Bob-2 sin agregar infraestructura pesada.
+- **Alcance propuesto:** extender `evals/maintenance.sh` con verificacion de freshness/`session_id`
+  de resultados Tier 3; bundle con G-T1 (fixtures positivos para firewall/secret-guard).
+- **Fuera de alcance:** mutation testing global (G-M1), hooks reactivos (G-L1), ADR de task
+  semantics (G-D3 — requiere decision, no ejecucion).
+- **Acceptance criteria:** `maintenance` rechaza un Tier 3 con `session_id` reutilizado o timestamp
+  obsoleto; fixtures positivos rechazan un firewall/secret-guard debilitado.
+- **Evidence criteria:** EV-009 con hashes + reviewer PASS.
+- **Rollback:** `git revert` del commit F7.
+- **Go/no-go:** requiere aprobacion explicita del owner; no se inicia por consecuencia mecanica de
+  este registro.

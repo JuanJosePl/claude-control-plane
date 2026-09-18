@@ -154,3 +154,105 @@
 - **Exceptions:** NONE
 - **Timestamp:** 2026-09-17T00:00:00Z
 - **Notes:** CI is deterministic and does not require LLM authentication; mutation testing global, dashboards, plugins and cross-provider remain out of scope.
+
+## EV-009 — F7 freshness and positive control checks pass
+- **Task ID:** F7-freshness-2026-09-18-dcc7ef25
+- **Date:** 2026-09-18
+- **Claim:** Tier 3 results reject reused session_id and stale timestamps, while the firewall and secret-guard positive fixtures execute through maintenance and pass their control assertions.
+- **Source:** `bash evals/maintenance.sh`; `evals/skills/evidence-freshness.sh`; duplicate-session and stale-timestamp negative fixtures; `evals/hooks/firewall-positive.sh`; `evals/hooks/secret-guard-positive.sh`.
+- **Provenance:** GENERATED
+- **Confidence:** HIGH
+- **Status:** VERIFIED
+- **Affects:** `evals/maintenance.sh`, `evals/skills/evidence-freshness.sh`, `evals/REGRESSION_BUDGET.json`, firewall and secret-guard positive controls.
+- **Artifact Hash:** sha256:dcc7ef255b8a4fd86490feb82239113c03c6f0aa97256c0eaef47a3ddbb58183
+- **Contract Hash:** sha256:2fdac1ffe1322a2e47179bf3ebf8d55e4c680632a46363913a070fa12451d6e5
+- **Checks:** tests=PASS; static=PASS; security=PASS
+- **Reviewer:** PASS
+- **Exceptions:** NONE
+- **Timestamp:** 2026-09-18T19:11:13Z
+- **Notes:** Freshness uses `evidence_freshness_days=30`; files without a JSON timestamp use their mtime. SCRIPT VERIFIED; native Claude runtime NOT_VERIFIED.
+
+## EV-010 — F7 Stop anti-loop is verified
+- **Task ID:** F7-anti-loop-2026-09-18-ef8dfba0
+- **Date:** 2026-09-18
+- **Claim:** Stop returns safely without emitting repeated additionalContext when `stop_hook_active=true`, while the normal stale-state reminder and malformed-input fail-open behavior remain intact.
+- **Source:** `evals/hooks/stop-hook-idempotency.sh`; `bash -n .claude/hooks/stop-logger.sh`; maintenance hook regression.
+- **Provenance:** GENERATED
+- **Confidence:** HIGH
+- **Status:** VERIFIED
+- **Affects:** `.claude/hooks/stop-logger.sh`, REG-005.
+- **Artifact Hash:** sha256:ef8dfba08e31defb437cf164858b0a98ce4965a721282f0f72a0d7e35b14f69a
+- **Contract Hash:** sha256:2fdac1ffe1322a2e47179bf3ebf8d55e4c680632a46363913a070fa12451d6e5
+- **Checks:** tests=PASS; static=PASS; security=PASS
+- **Reviewer:** PASS
+- **Exceptions:** NONE
+- **Timestamp:** 2026-09-18T19:11:13Z
+- **Notes:** SCRIPT VERIFIED; native Claude runtime NOT_VERIFIED.
+
+## EV-011 — F7 firewall hardening blocks demonstrated bypasses
+- **Task ID:** F7-firewall-2026-09-18-ef2daafe
+- **Date:** 2026-09-18
+- **Claim:** The existing bash firewall blocks whitespace and case mutations of destructive patterns, spaced fork-bomb variants, demonstrated `.env` read families, and nearby quoted/process-substitution variants while allowing tested legitimate commands.
+- **Source:** `evals/hooks/firewall-positive.sh`; adversarial firewall variant probe; `bash evals/incidents/INC-001-task-completed-evidence.sh`; `bash -n .claude/hooks/bash-firewall.sh`.
+- **Provenance:** GENERATED
+- **Confidence:** HIGH
+- **Status:** VERIFIED
+- **Affects:** `.claude/hooks/bash-firewall.sh`, REG-002, REG-006.
+- **Artifact Hash:** sha256:ef2daafe37bdbe117f82280f0d747e57bfcbee2a5b008d66f7675c6ec4c11afd
+- **Contract Hash:** sha256:2fdac1ffe1322a2e47179bf3ebf8d55e4c680632a46363913a070fa12451d6e5
+- **Checks:** tests=PASS; static=PASS; security=PASS
+- **Reviewer:** PASS
+- **Exceptions:** NONE
+- **Timestamp:** 2026-09-18T19:11:13Z
+- **Notes:** Independent fresh review PASS. SCRIPT VERIFIED; native Claude runtime NOT_VERIFIED.
+
+## EV-012 — F7 evidence coupling and ARCH-004 are verified
+- **Task ID:** F7-evidence-coupling-2026-09-18-e267b3d9
+- **Date:** 2026-09-18
+- **Claim:** TaskCompleted accepts matching contract evidence, blocks mismatched or empty/null hashes, exact task/status mismatches, nonexistent tasks, malformed payloads and invalid evidence, with the documented one-phase warning only when the hash field is absent.
+- **Source:** `evals/hooks/task-completed-coupling.sh`; `bash evals/incidents/INC-001-task-completed-evidence.sh`; `DECISION_REGISTRY.md` ARCH-004; independent fresh review.
+- **Provenance:** GENERATED
+- **Confidence:** HIGH
+- **Status:** VERIFIED
+- **Affects:** `.claude/hooks/task-completed-evidence.sh`, ARCH-004, REG-001, REG-007.
+- **Artifact Hash:** sha256:e267b3d9ffcc0fd73de5d6699262601f654067b0e9ee5eacac26f31f762bf650
+- **Contract Hash:** sha256:2fdac1ffe1322a2e47179bf3ebf8d55e4c680632a46363913a070fa12451d6e5
+- **Checks:** tests=PASS; static=PASS; security=PASS
+- **Reviewer:** PASS
+- **Exceptions:** NONE
+- **Timestamp:** 2026-09-18T19:11:13Z
+- **Notes:** The absent-field warning is transitional per the handoff and ARCH-004; supplied invalid values fail closed. SCRIPT VERIFIED; native Claude runtime NOT_VERIFIED.
+
+## EV-013 — F7 session log rotation is verified
+- **Task ID:** F7-session-rotation-2026-09-18-5b93a591
+- **Date:** 2026-09-18
+- **Claim:** Session logs below threshold remain in place; threshold rotation moves the active log to a daily archive, preserves same-day archives with suffixes, and avoids unbounded duplicate copies.
+- **Source:** `evals/hooks/session-log-rotation.sh`; `bash -n .claude/hooks/subagent-stop-logger.sh`; maintenance hook regression.
+- **Provenance:** GENERATED
+- **Confidence:** HIGH
+- **Status:** VERIFIED
+- **Affects:** `.claude/hooks/subagent-stop-logger.sh`, REG-008.
+- **Artifact Hash:** sha256:5b93a5915c20d0a1bd2c256a2dc3db452439ec5501fcc7b823572ca4254f737a
+- **Contract Hash:** sha256:2fdac1ffe1322a2e47179bf3ebf8d55e4c680632a46363913a070fa12451d6e5
+- **Checks:** tests=PASS; static=PASS; security=NOT_REQUIRED
+- **Reviewer:** PASS
+- **Exceptions:** NONE
+- **Timestamp:** 2026-09-18T19:11:13Z
+- **Notes:** SCRIPT VERIFIED; native Claude runtime NOT_VERIFIED.
+
+## EV-014 — F7 installer idempotency is verified
+- **Task ID:** F7-install-idempotency-2026-09-18-e81ec7ae
+- **Date:** 2026-09-18
+- **Claim:** Clean install, repeated install, partial recovery, interactive decline, non-interactive preservation and explicit `--force` replacement all behave without silently overwriting user settings.
+- **Source:** `evals/install/idempotency.sh`; `bash -n install.sh`; maintenance installer regression.
+- **Provenance:** GENERATED
+- **Confidence:** HIGH
+- **Status:** VERIFIED
+- **Affects:** `install.sh`, REG-009.
+- **Artifact Hash:** sha256:e81ec7aeb4736e9063c8820a32a5ce4f039b5886ad57bc85f75f8c5874094971
+- **Contract Hash:** sha256:2fdac1ffe1322a2e47179bf3ebf8d55e4c680632a46363913a070fa12451d6e5
+- **Checks:** tests=PASS; static=PASS; security=NOT_REQUIRED
+- **Reviewer:** PASS
+- **Exceptions:** NONE
+- **Timestamp:** 2026-09-18T19:11:13Z
+- **Notes:** SCRIPT VERIFIED; native Claude runtime NOT_VERIFIED.
