@@ -235,6 +235,8 @@ Roadmap de evolucion post-F6 (research + gap register + F7 propuesta + what-not-
 
 Behavioral reliability audit (adversarial testing · bugs de loop, bypass, false pass): [`docs/00_SYSTEM/BEHAVIORAL_RELIABILITY_AUDIT.md`](docs/00_SYSTEM/BEHAVIORAL_RELIABILITY_AUDIT.md).
 
+F8 research handoff (cierre de gaps diferidos F7 · contrato de implementacion propuesto · no autorizada): [`docs/00_SYSTEM/F8_RESEARCH.md`](docs/00_SYSTEM/F8_RESEARCH.md).
+
 ## Limites De Alcance
 
 El plan inicial deliberadamente no construye:
