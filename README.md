@@ -229,6 +229,12 @@ Contrato completo de implementacion: [`docs/MASTER_IMPLEMENTATION_PLAN.md`](docs
 
 Manual operativo completo: [`docs/CONTROL_PLANE_HANDBOOK.md`](docs/CONTROL_PLANE_HANDBOOK.md).
 
+Consolidacion post-auditoria (gaps, F7 candidato, integridad): [`docs/00_SYSTEM/POST_F6_AUDIT_REPORT.md`](docs/00_SYSTEM/POST_F6_AUDIT_REPORT.md).
+
+Roadmap de evolucion post-F6 (research + gap register + F7 propuesta + what-not-to-build): [`docs/MASTER_EVOLUTION_ROADMAP.md`](docs/MASTER_EVOLUTION_ROADMAP.md).
+
+Behavioral reliability audit (adversarial testing · bugs de loop, bypass, false pass): [`docs/00_SYSTEM/BEHAVIORAL_RELIABILITY_AUDIT.md`](docs/00_SYSTEM/BEHAVIORAL_RELIABILITY_AUDIT.md).
+
 ## Limites De Alcance
 
 El plan inicial deliberadamente no construye:

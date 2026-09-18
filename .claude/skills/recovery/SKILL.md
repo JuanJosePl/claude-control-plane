@@ -6,7 +6,8 @@ user-invocable: true
 
 # /recovery — Protocolos de Recuperación
 
-Referencia completa en `docs/00_SYSTEM/10_RECOVERY_PROTOCOLS.md`.
+Los protocolos operativos completos están incluidos en esta skill. Para el mapa de escenarios,
+`docs/CONTROL_PLANE_HANDBOOK.md` (sección 12) documenta el comportamiento esperado ante bloqueos.
 
 ## Uso
 
@@ -83,4 +84,5 @@ git log --oneline -10  # identificar el commit más reciente relevante
 # O desde context/CURRENT_STATE.md si está actualizado
 ```
 
-Para detalles completos de cada protocolo: `docs/00_SYSTEM/10_RECOVERY_PROTOCOLS.md`.
+Cada escenario debe cerrar con evidencia en `docs/00_SYSTEM/EVIDENCE_REGISTRY.md` cuando el
+protocolo produzca un cambio observable.
