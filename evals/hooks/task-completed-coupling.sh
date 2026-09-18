@@ -44,13 +44,18 @@ cat > "$FIXTURE/docs/00_SYSTEM/EVIDENCE_REGISTRY.md" <<'EOF'
 - **Timestamp:** 2026-09-16T23:59:00Z
 EOF
 
-run_gate() {
-  local payload="$1"
+run_gate_at() {
+  local project="$1"
+  local payload="$2"
   printf '%s\n' "$payload" > "$FIXTURE/input.json"
-  CLAUDE_PROJECT_DIR="$FIXTURE" "$HOOK" < "$FIXTURE/input.json" > "$FIXTURE/stdout" 2> "$FIXTURE/stderr"
+  CLAUDE_PROJECT_DIR="$project" "$HOOK" < "$FIXTURE/input.json" > "$FIXTURE/stdout" 2> "$FIXTURE/stderr"
   GATE_RC=$?
   GATE_OUT="$(<"$FIXTURE/stdout")"
   GATE_ERR="$(<"$FIXTURE/stderr")"
+}
+
+run_gate() {
+  run_gate_at "$FIXTURE" "$1"
 }
 
 fail() {
@@ -79,6 +84,14 @@ expect_malformed() {
   printf '%s' "$GATE_ERR" | grep -F 'JSON' >/dev/null || fail 'malformed payload reason was not reported'
 }
 
+expect_invalid_evidence() {
+  local invalid_project="$FIXTURE/invalid"
+  mkdir -p "$invalid_project/docs/00_SYSTEM"
+  printf '%s\n' '# EVIDENCE_REGISTRY' '## EV-902 — invalid evidence' '- **Task ID:** F7-invalid-2026-09-18-ijkl' '- **Status:** PROPOSED' > "$invalid_project/docs/00_SYSTEM/EVIDENCE_REGISTRY.md"
+  run_gate_at "$invalid_project" '{"task_id":"F7-invalid-2026-09-18-ijkl","contract_hash":"sha256:2222222222222222222222222222222222222222222222222222222222222222","risk_level":"low"}'
+  test "$GATE_RC" -eq 2 || fail "invalid evidence was not blocked (rc=$GATE_RC)"
+}
+
 CURRENT_HASH='sha256:2222222222222222222222222222222222222222222222222222222222222222'
 expect_allow 'matching contract hash' "{\"task_id\":\"F7-current-2026-09-18-abcd\",\"contract_hash\":\"$CURRENT_HASH\",\"risk_level\":\"low\"}"
 expect_allow 'matching bare contract hash' '{"task_id":"F7-current-2026-09-18-abcd","contract_hash":"2222222222222222222222222222222222222222222222222222222222222222","risk_level":"low"}'
@@ -86,6 +99,7 @@ expect_block 'mismatched contract hash' '{"task_id":"F7-current-2026-09-18-abcd"
 expect_block 'historical task with current contract' '{"task_id":"F1-historical-2026-09-16-efgh","contract_hash":"sha256:2222222222222222222222222222222222222222222222222222222222222222","risk_level":"low"}'
 expect_block 'nonexistent task' '{"task_id":"F7-missing-2026-09-18-zzzz","contract_hash":"sha256:2222222222222222222222222222222222222222222222222222222222222222","risk_level":"low"}'
 expect_malformed
+expect_invalid_evidence
 
 run_gate '{"task_id":"F7-current-2026-09-18-abcd","risk_level":"low"}'
 test "$GATE_RC" -eq 0 || fail 'transitional payload without contract_hash was blocked'
