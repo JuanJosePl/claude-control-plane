@@ -13,6 +13,8 @@ bash -n install.sh
 for file in .claude/hooks/*.sh evals/**/*.sh; do
   bash -n "$file"
 done
+evals/hooks/stop-hook-idempotency.sh >/tmp/claude-control-plane-stop-hook.out
+evals/hooks/session-log-rotation.sh >/tmp/claude-control-plane-session-rotation.out
 
 evals/skills/validate.sh >/tmp/claude-control-plane-skills.out
 evals/incidents/INC-001-task-completed-evidence.sh >/tmp/claude-control-plane-incidents.out

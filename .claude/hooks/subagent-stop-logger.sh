@@ -27,7 +27,15 @@ mkdir -p "$(dirname "$LOG")"
 # Rotación a 30 entradas
 COUNT=$(grep -c '^## ' "$LOG" 2>/dev/null || echo 0)
 if [ "${COUNT:-0}" -gt 30 ]; then
-  ARCH="$PROJ/docs/00_SYSTEM/archive/CLAUDE_SESSION_LOG.$(date +%Y-%m).md"
-  mkdir -p "$(dirname "$ARCH")"; cp "$LOG" "$ARCH" 2>/dev/null || true
+  ARCH_DIR="$PROJ/docs/00_SYSTEM/archive"
+  ARCH_BASE="$ARCH_DIR/CLAUDE_SESSION_LOG.$(date +%Y-%m-%d)"
+  ARCH="$ARCH_BASE.md"
+  SUFFIX=2
+  while [ -e "$ARCH" ]; do
+    ARCH="$ARCH_BASE.$SUFFIX.md"
+    SUFFIX=$((SUFFIX + 1))
+  done
+  mkdir -p "$ARCH_DIR"
+  mv "$LOG" "$ARCH" 2>/dev/null || true
 fi
 exit 0
