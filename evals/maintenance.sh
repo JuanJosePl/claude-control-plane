@@ -17,6 +17,9 @@ done
 evals/skills/validate.sh >/tmp/claude-control-plane-skills.out
 evals/incidents/INC-001-task-completed-evidence.sh >/tmp/claude-control-plane-incidents.out
 evals/state/state-integrity.sh >/tmp/claude-control-plane-state.out
+evals/skills/evidence-freshness.sh >/tmp/claude-control-plane-evidence-freshness.out
+evals/hooks/firewall-positive.sh >/tmp/claude-control-plane-firewall-positive.out
+evals/hooks/secret-guard-positive.sh >/tmp/claude-control-plane-secret-guard-positive.out
 
 entries=$(rg '^## EV-' docs/00_SYSTEM/EVIDENCE_REGISTRY.md | rg -v '\{claim' | wc -l)
 provenance=$(rg --count --regexp '^-[[:space:]]\*\*Provenance:\*\* (EXTRACTED|INFERRED|ASSUMED|EXTERNAL|GENERATED)$' docs/00_SYSTEM/EVIDENCE_REGISTRY.md)
@@ -35,3 +38,4 @@ test -f "$target/REGRESSION_REGISTRY.md"
 test -x "$target/evals/incidents/INC-001-task-completed-evidence.sh"
 
 printf '%s\n' 'schema=PASS' 'installer=PASS' 'hooks=PASS' 'skills=PASS' 'incidents=PASS' 'state=PASS' 'evidence=PASS' 'docs=PASS' 'regression_budget=PASS'
+printf '%s\n' 'evidence_freshness=PASS' 'firewall_positive=PASS' 'secret_guard_positive=PASS'

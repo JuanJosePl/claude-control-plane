@@ -1,5 +1,6 @@
 {
   "version": 1,
+  "evidence_freshness_days": 30,
   "max_failed_suites": 0,
   "max_missing_evidence": 0,
   "required_suites": [
