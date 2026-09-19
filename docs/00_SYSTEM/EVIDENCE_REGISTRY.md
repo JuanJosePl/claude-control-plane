@@ -256,3 +256,37 @@
 - **Exceptions:** NONE
 - **Timestamp:** 2026-09-18T19:11:13Z
 - **Notes:** SCRIPT VERIFIED; native Claude runtime NOT_VERIFIED.
+
+## EV-015 — F8-A contract_hash is fail-closed
+- **Task ID:** F8-contract-hash-fail-closed-2026-09-19-93ac4964
+- **Date:** 2026-09-19
+- **Claim:** TaskCompleted blocks a valid completed-task payload that omits `contract_hash`, while preserving matching, bare, mismatch, empty, null, historical-task, nonexistent-task, malformed-input, risk and reviewer behavior.
+- **Source:** `evals/hooks/task-completed-coupling.sh`; direct absent-hash probe against EV-001; `evals/incidents/INC-001-task-completed-evidence.sh`; `bash -n .claude/hooks/task-completed-evidence.sh`; independent F8 review round 3.
+- **Provenance:** GENERATED
+- **Confidence:** HIGH
+- **Status:** VERIFIED
+- **Affects:** `.claude/hooks/task-completed-evidence.sh`, `evals/hooks/task-completed-coupling.sh`, ARCH-004, REG-010.
+- **Artifact Hash:** sha256:93ac496409c13c0b2f4f67c62eeea1a2dc55c86c13a2bd211e2b12c8183d8a4d
+- **Contract Hash:** sha256:a0bbbd9f01d99110aa9674316d30b7525fbfb8f4b0a7e3d2c3829a4c0579a7e7
+- **Checks:** tests=PASS; static=PASS; security=PASS
+- **Reviewer:** PASS
+- **Exceptions:** NONE
+- **Timestamp:** 2026-09-19T22:04:06+00:00
+- **Notes:** SCRIPT VERIFIED. Reviewer identity: `PASS (code-reviewer@fresh-context)`, independent fresh review round 3. Native Claude Code lifecycle NOT VERIFIED. Artifact hash is the SHA-256 of the committed coupling fixture; contract hash is the SHA-256 of `docs/00_SYSTEM/F8_RESEARCH.md`.
+
+## EV-016 — F8-B malformed firewall payloads are fail-closed
+- **Task ID:** F8-firewall-json-fail-closed-2026-09-19-758ecc27
+- **Date:** 2026-09-19
+- **Claim:** The Bash firewall blocks malformed, empty, whitespace-only, truncated, invalid, multi-document and raw-NUL payloads, while valid single JSON with no command, an empty command or an innocuous command remains allowed and the F7 firewall matrix remains intact.
+- **Source:** `evals/hooks/firewall-positive.sh`; direct malformed/empty/whitespace/multi-document/raw-NUL boundary probes; `bash evals/maintenance.sh`; `bash -n .claude/hooks/bash-firewall.sh`; independent F8 review round 3.
+- **Provenance:** GENERATED
+- **Confidence:** HIGH
+- **Status:** VERIFIED
+- **Affects:** `.claude/hooks/bash-firewall.sh`, `evals/hooks/firewall-positive.sh`, REG-011.
+- **Artifact Hash:** sha256:758ecc2734e4376d8d942710eddee9c84cd4d2bc973cb1cf7d998687b3ddbc84
+- **Contract Hash:** sha256:a0bbbd9f01d99110aa9674316d30b7525fbfb8f4b0a7e3d2c3829a4c0579a7e7
+- **Checks:** tests=PASS; static=PASS; security=PASS
+- **Reviewer:** PASS
+- **Exceptions:** NONE
+- **Timestamp:** 2026-09-19T22:04:06+00:00
+- **Notes:** SCRIPT VERIFIED. Reviewer identity: `PASS (code-reviewer@fresh-context)`, independent fresh review round 3. Native Claude Code lifecycle NOT VERIFIED. Artifact hash is the SHA-256 of the committed firewall fixture; contract hash is the SHA-256 of `docs/00_SYSTEM/F8_RESEARCH.md`.

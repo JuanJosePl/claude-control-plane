@@ -97,3 +97,21 @@
 - **Last Verified:** 2026-09-18
 - **Evidence:** EV-014
 - **Status:** ACTIVE
+
+## REG-010 — TaskCompleted blocks absent contract_hash
+- **Incident:** NONE (preventive; A-03)
+- **Test/Eval:** `evals/hooks/task-completed-coupling.sh`; direct valid-evidence payload without `contract_hash`
+- **Baseline Outcome:** ACCEPTED (pre-F8 transitional warning)
+- **Control Outcome:** BLOCKED
+- **Last Verified:** 2026-09-19
+- **Evidence:** EV-015
+- **Status:** ACTIVE
+
+## REG-011 — Firewall blocks malformed JSON payloads
+- **Incident:** NONE (preventive; A-04)
+- **Test/Eval:** `evals/hooks/firewall-positive.sh`; malformed, empty, whitespace-only, multi-document and raw-NUL boundary probes
+- **Baseline Outcome:** ACCEPTED (pre-F8 empty-command extraction)
+- **Control Outcome:** BLOCKED
+- **Last Verified:** 2026-09-19
+- **Evidence:** EV-016
+- **Status:** ACTIVE
