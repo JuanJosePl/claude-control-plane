@@ -12,7 +12,7 @@ if ! command -v jq >/dev/null 2>&1; then
   exit 2
 fi
 
-if [ -z "$INPUT" ] || ! printf '%s' "$INPUT" | jq empty >/dev/null 2>&1; then
+if [ -z "$INPUT" ] || ! printf '%s' "$INPUT" | jq -e -s 'length == 1' >/dev/null 2>&1; then
   echo "BLOQUEADO por bash-firewall (fail-closed): payload JSON inválido o vacío." >&2
   exit 2
 fi
