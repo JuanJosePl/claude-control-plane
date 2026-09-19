@@ -12,6 +12,11 @@ if ! command -v jq >/dev/null 2>&1; then
   exit 2
 fi
 
+if [ -z "$INPUT" ] || ! printf '%s' "$INPUT" | jq empty >/dev/null 2>&1; then
+  echo "BLOQUEADO por bash-firewall (fail-closed): payload JSON inválido o vacío." >&2
+  exit 2
+fi
+
 COMMAND="$(printf '%s' "$INPUT" | jq -r '.tool_input.command // ""' 2>/dev/null || echo "")"
 [ -z "$COMMAND" ] && exit 0
 

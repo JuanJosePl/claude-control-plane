@@ -59,4 +59,11 @@ expect_allow 'local dependency cleanup' 'rm -rf ./node_modules'
 expect_allow 'normal file read' 'cat README.md'
 expect_allow 'dot source of non-secret script' '. ./scripts/setup.sh'
 
+printf '%s\n' 'not-json-at-all' > "$FIXTURE/input.json"
+"$FIREWALL" < "$FIXTURE/input.json" > "$FIXTURE/stdout" 2> "$FIXTURE/stderr"
+FIREWALL_RC=$?
+FIREWALL_ERR="$(<"$FIXTURE/stderr")"
+test "$FIREWALL_RC" -eq 2 || fail "expected BLOCK for malformed JSON (rc=$FIREWALL_RC)"
+printf '%s' "$FIREWALL_ERR" | grep -F 'JSON' >/dev/null || fail 'malformed JSON reason was not reported'
+
 printf '%s\n' 'firewall_positive=PASS'
