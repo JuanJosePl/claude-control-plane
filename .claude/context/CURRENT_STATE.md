@@ -19,7 +19,7 @@ Si difiere de PROJECT_STATE.md → PROJECT_STATE manda, este se actualiza.
 
 # CONTEXT PACK — CURRENT STATE
 
-**Actualizado:** 2026-09-16
+**Actualizado:** 2026-09-19
 
 ## Estado de fases
 ```
@@ -30,15 +30,17 @@ FASE 3: SDLC lanes y verificacion independiente → COMPLETA (PASS)
 FASE 4: Incident learning cerrado → COMPLETA (PASS)
 FASE 5: Integridad de estado y provenance → COMPLETA (PASS)
 FASE 6: Evals y mantenimiento → COMPLETA (PASS)
+FASE 7: Evidence Integrity + Behavioral Reliability → COMPLETA (VERIFIED)
+FASE 8: Cierre fail-closed de gaps F7 → COMPLETA (VERIFIED)
 ```
 
-## Fase actual: 6 — Evals y mantenimiento
-**Objetivo:** Evitar regresiones del propio control plane.
+## Fase actual: 8 — Cierre fail-closed de gaps F7
+**Objetivo:** Cerrar A-03 y A-04, documentar A-06 y preservar la evidencia historica.
 **Bloqueantes:** NONE
 
 ## Control Plane
-**Version:** 1.0 — F6 PASS
+**Version:** 1.0 — F8 COMPLETE / VERIFIED; native Claude Code NOT_VERIFIED
 
 ## Próximos pasos
 1. Mantener `evals/maintenance.sh` como gate previo a cambios.
-2. No ampliar el alcance sin actualizar el Master Plan.
+2. Investigar F9 antes de cualquier implementacion; no iniciar F9 automaticamente.

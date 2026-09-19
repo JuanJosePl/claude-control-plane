@@ -67,13 +67,15 @@
 - ✔ Fresh independent review PASS
 - ✔ Scripts verificados; runtime nativo de Claude Code NOT_VERIFIED
 
-### FASE 8 — Cierre de gaps diferidos de F7 [⏳ RESEARCH COMPLETE · IMPLEMENTATION NOT AUTHORIZED]
+### FASE 8 — Cierre de gaps diferidos de F7 [✔ COMPLETE / VERIFIED]
 
 - ✔ Research completo: `docs/00_SYSTEM/F8_RESEARCH.md` (2026-09-18)
-- ⏳ Bundle F8-A (contract_hash fail-closed; cierra A-03) — propuesto, no implementado
-- ⏳ Bundle F8-B (firewall fail-closed sobre JSON malformed; cierra A-04) — propuesto, no implementado
-- ⏳ A-06 convencion de reviewer identity en Handbook — propuesto, no implementado
-- ⏳ Owner debe aprobar explicitamente antes de cualquier implementacion F8
+- ✔ Bundle F8-A: `contract_hash` fail-closed; cierra A-03
+- ✔ Bundle F8-B: firewall fail-closed para payloads JSON invalidos; cierra A-04
+- ✔ A-06: convencion de reviewer identity en Handbook §12
+- ✔ ARCH-004 amended in place; warning transicional superseded
+- ✔ EV-015 y EV-016; REG-010 y REG-011
+- ✔ Fresh independent review PASS; scripts verificados; runtime nativo NOT_VERIFIED
 
 ### FASES 9-12 — Estado [UNKNOWN / RESEARCH REQUIRED]
 

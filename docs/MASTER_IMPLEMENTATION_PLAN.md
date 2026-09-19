@@ -332,6 +332,35 @@ runtime nativo de Claude Code, que queda UNKNOWN / NOT_VERIFIED en este entorno 
 **Budget variance:** el owner acepto la expansion evidence-driven: 591 adiciones y 17 eliminaciones,
 7 fixtures, cero nuevos componentes de runtime y cero dependencias externas.
 
+### Fase 8 — F8: Fail-Closed Closure
+
+**Resultado actual:** COMPLETE / VERIFIED — EV-015/EV-016; REG-010/REG-011; independent fresh review PASS.
+
+**Objetivo:** cerrar A-03 y A-04 con cambios minimos, documentar A-06 y preservar F1-F7 sin nueva
+arquitectura.
+
+**Trabajo implementado:**
+
+- F8-A: `task-completed-evidence.sh` bloquea la ausencia de `contract_hash` con `exit 2` y razon
+  explicita, preservando coupling, riesgo, reviewer, hash invalido, tareas inexistentes y payloads
+  malformed ya cubiertos.
+- F8-B: `bash-firewall.sh` bloquea input vacio, whitespace-only, JSON invalido, streams multiples y
+  bytes NUL antes de extraer el comando; `{}`, comando vacio y comandos inocuos siguen permitidos.
+- A-06: Handbook §12 documenta identidad `code-reviewer@fresh-context`, `human/@owner` y
+  `NOT_REQUIRED` sin cambiar schema ni enforcement.
+- ARCH-004: addendum in-place; la advertencia F7 queda superseded por F8-A.
+
+**Evidence:** `docs/00_SYSTEM/EVIDENCE_REGISTRY.md` EV-015 y EV-016.
+**Regressions:** `REGRESSION_REGISTRY.md` REG-010 y REG-011; EV-001 a EV-014 y REG-001 a REG-009
+permanecen intactas.
+**Verification:** maintenance 12/12, INC-001, state integrity, Tier 1/2/3, todas las fixtures F7/F8,
+boundary adversarial y `bash -n` PASS. Independent fresh review round 3 PASS. Esto verifica scripts
+y controles del repositorio; el runtime nativo Claude Code permanece NOT_VERIFIED en OpenCode.
+**Rollback:** `git revert` de los commits F8 por bundle; no requiere reescribir evidencia historica.
+**Out of scope:** A-05, A-07, F9-F12 y todos los items DEFER del contrato F8.
+**Budget:** 18 lineas runtime cambiadas / 14 adiciones acumuladas en ambos hooks; 2 extensiones de
+fixture; 0 fixtures nuevos; 0 hooks/skills/agents/rules/dependencies/registries nuevos.
+
 ## 6. Matriz de dependencias
 
 ```text
@@ -343,7 +372,8 @@ F0 Plan validado
                   -> F5 state integrity + provenance
                        -> F6 evals + CI + maintenance
                            -> F7 Extended hardening + evidence
-                               -> F8+ UNKNOWN / RESEARCH REQUIRED
+                                -> F8 fail-closed closure + evidence
+                                    -> F9+ UNKNOWN / RESEARCH REQUIRED
 ```
 
 Bloqueos duros:

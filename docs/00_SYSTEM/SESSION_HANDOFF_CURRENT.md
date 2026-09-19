@@ -11,14 +11,14 @@
 | Repository | `claude-control-plane` (local) |
 | Working directory | `/home/juanls/Escritorio/claude-control-plane` |
 | Current branch | `main` |
-| HEAD | `c236b582ebcf223d70c40285d2da2092b20cdb24` |
-| HEAD^ | `47874a54e2c293c8fa74cacf41479650a638d013` |
+| HEAD | `95f1555` (F8 evidence checkpoint; closure docs follow) |
+| HEAD^ | `1427fbe` |
 | F7 checkpoint | `47874a5` |
 | F8 research checkpoint | `c236b58` |
-| Current phase | 7 |
+| Current phase | 8 |
 | Phase status | COMPLETE |
-| Next allowed action | Owner review of F8 research; approve/refuse Bundle F8-A + F8-B + A-06 |
-| Implementation authorization | **F8 IMPLEMENTATION = NOT AUTHORIZED** |
+| Next allowed action | F9 research only; no implementation authorized |
+| Implementation authorization | **F8 IMPLEMENTATION = COMPLETE / VERIFIED** |
 
 ## 2. EXECUTIVE STATE
 
@@ -26,12 +26,12 @@
 F7_STATUS             = COMPLETE / FROZEN
 F7_CHECKPOINT         = 47874a5
 F8_RESEARCH_STATUS    = COMPLETE
-F8_IMPLEMENTATION     = NOT AUTHORIZED
+F8_IMPLEMENTATION     = COMPLETE / VERIFIED
 IMPLEMENTATION_READY  = false
 WORKTREE              = CLEAN
 MAINTENANCE           = 12/12 PASS  (2026-09-19)
 HISTORICAL_EVIDENCE   = intact (EV-001..EV-014 unchanged; sha256:23325ab6…)
-RUNTIME_HOOKS         = unchanged since 47874a5 (0-byte diff)
+RUNTIME_HOOKS         = F8-A/F8-B changed only; no unrelated hook changes
 ```
 
 ## 3. PROJECT PURPOSE
@@ -219,7 +219,7 @@ Ran at handoff time (2026-09-19):
 | `bash evals/skills/validate.sh` | PASS | Tier 1 + Tier 2 + Tier 3 |
 | Registry counts | `EV=15 REG=10 INC=2 CTRL=2 ARCH=4` (14+schema EVs; 9+schema REGs) | Unchanged since F7 finalization |
 | Historical EV hash | `sha256:23325ab6…` | Unchanged |
-| Runtime hooks diff since 47874a5 | 0 bytes | No hook modified during F8 research |
+| Runtime hooks diff since 47874a5 | F8-A/F8-B only | No unrelated hook modified during F8 |
 
 ## 14. EXACT NEXT ACTION
 
@@ -229,20 +229,20 @@ Ran at handoff time (2026-09-19):
 2. Read `docs/00_SYSTEM/SESSION_HANDOFF_CURRENT.md` (this file).
 3. Verify git state (`git rev-parse HEAD`, `git status --short`, `git log --oneline -5`).
 4. Review `docs/00_SYSTEM/F8_RESEARCH.md`.
-5. Present D1–D4 (§9) to the owner.
-6. Wait for **explicit owner authorization** on D1.
-7. **DO NOT implement anything before authorization.**
+5. Read the F8 closure report, provenance and claim-vs-evidence documents.
+6. Treat F8 as COMPLETE / FROZEN and keep `IMPLEMENTATION_READY = false`.
+7. Research F9 separately; do not implement F9 automatically.
 
 ```
-NEXT_ALLOWED_ACTION = OWNER REVIEW / APPROVAL OF F8
-F8_IMPLEMENTATION   = NOT AUTHORIZED (unchanged until explicit owner GO)
+NEXT_ALLOWED_ACTION = F9 RESEARCH ONLY — NO IMPLEMENTATION AUTHORIZED
+F8_IMPLEMENTATION   = COMPLETE / VERIFIED
 ```
 
 ## 15. WHAT NOT TO DO IN THE NEXT SESSION
 
 - Do NOT reopen F7 without new independent evidence.
 - Do NOT rewrite historical evidence, POST_F6/POST_F7 reports, EV-001..EV-014, or the INC-001/CTRL-001/REG-001 cycle.
-- Do NOT implement F8 before explicit owner approval on D1.
+- Do NOT reopen completed F8 without new owner-authorized research.
 - Do NOT expand F8 scope beyond F8-A + F8-B + A-06 docs.
 - Do NOT create new architecture, hooks, skills, agents, rules, or dependencies without an approved contract.
 - Do NOT add agents/hooks/skills/rules just for activity.
@@ -280,5 +280,26 @@ registry win over any other mirror.
 | Runtime hooks diff since F7 | 0 bytes |
 | Handoff document path | `docs/00_SYSTEM/SESSION_HANDOFF_CURRENT.md` |
 | Result | READY-FOR-HANDOFF |
+
+## 18. F8 EXECUTION RESULT
+
+F8 is COMPLETE / FROZEN. The owner decisions were D1=GO, D2=AMEND_IN_PLACE, D3=TOGETHER and
+D4=DEFER. Runtime implementation and evidence were completed from baseline `f6eb0d5` through
+evidence checkpoint `95f1555`.
+
+- **F8-A:** COMPLETE — absent `contract_hash` blocks with `exit 2`; EV-015; REG-010.
+- **F8-B:** COMPLETE — malformed, empty, whitespace-only, multi-document and raw-NUL firewall
+  payloads block; valid empty-command JSON remains allowed; EV-016; REG-011.
+- **A-06:** COMPLETE — reviewer identity convention documented in Handbook §12.
+- **ARCH-004:** AMENDED_IN_PLACE — F7 transitional warning superseded by F8-A.
+- **Independent review:** round 3 PASS after two F8-scoped corrections.
+- **Verification:** maintenance 12/12; INC-001; state integrity; skills; all F7/F8 fixtures; syntax.
+- **Native Claude Code lifecycle:** NOT VERIFIED in OpenCode.
+- **Historical preservation:** PASS; F7 evidence, regressions, incident/control records and reports
+  remain unchanged.
+- **Deferred:** A-05, A-07, G-M1, G-L1, G-N4/N5 and all F9-F12 work.
+
+**Exact next action:** perform F9 research only after a new owner decision. Do not begin F9
+implementation automatically.
 
 **End of handoff. Read the canonical documents listed above for depth.**

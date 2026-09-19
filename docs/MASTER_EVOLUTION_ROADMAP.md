@@ -1191,17 +1191,29 @@ con convention aplicada desde su aprobacion. Ver §10.
 - **EVIDENCE:** F7_F12_RESEARCH_HANDOFF.md sections J/AI; EV-012.
 - **ROLLBACK:** trivial (retirar convention del Handbook).
 
-### 31.3 Post-F7: F8-F12 UNKNOWN / RESEARCH REQUIRED
+### 31.3 F8 — Fail-Closed Closure (IMPLEMENTED / VERIFIED)
 
-Ninguna F8/F9/F10/F11/F12 esta definida o implementada. Todos los items DEFER siguen DEFER hasta que
-aparezca evidencia concreta que los reactive:
+**CURRENT STATUS:** F8 implementada y verificada el 2026-09-19. F8-A cierra A-03, F8-B cierra A-04,
+A-06 queda documentado como convencion y ARCH-004 fue enmendado in-place.
+**CURRENT EVIDENCE:** EV-015/EV-016, con REG-010/REG-011 activos. EV-001..EV-014 y REG-001..REG-009
+permanecen historicos e intactos.
+**CURRENT VERIFICATION:** maintenance 12/12 PASS; INC-001, state integrity, Tier 1/2/3, fixtures F7/F8,
+boundary adversarial, `bash -n` e independent fresh review round 3 PASS.
+**CURRENT LIMITATION:** OpenCode no verifica el lifecycle nativo de Claude Code; permanece NOT_VERIFIED.
+**ROLLBACK:** revert de los commits F8 por bundle; no se reescribe evidencia historica.
+**SCOPE DECISION:** A-05, A-07, G-M1, G-L1, G-N4/N5 y demas items DEFER permanecen diferidos.
+
+### 31.4 Post-F8: F9-F12 UNKNOWN / RESEARCH REQUIRED
+
+F9/F10/F11/F12 no estan definidas ni implementadas. Los items DEFER siguen DEFER hasta que aparezca
+evidencia concreta que los reactive:
 
 - **G-T2:** un 2do incidente real.
 - **G-M1:** un bypass documentado.
 - **G-L1:** un fallo tool que paso sin registrarse.
 - **G-N3-N5:** un incidente de tampering de evidencia o hooks.
 
-### 31.4 Documental (no fases)
+### 31.5 Documental (no fases)
 
 - **G-S1:** dry-run rollback documentado en Handbook.
 - **G-S2:** heredoc en `CONTROL_REGISTRY.md`.

@@ -224,6 +224,8 @@ El plan inicial esta completo:
 | F4 — Aprendizaje de incidentes | PASS | `EV-006` |
 | F5 — Integridad y provenance | PASS | `EV-007` |
 | F6 — Evals y mantenimiento | PASS | `EV-008` |
+| F7 — Evidence Integrity + Behavioral Reliability | VERIFIED | `EV-009` a `EV-014` |
+| F8 — Fail-Closed Closure | COMPLETE / VERIFIED | `EV-015`, `EV-016` |
 
 Contrato completo de implementacion: [`docs/MASTER_IMPLEMENTATION_PLAN.md`](docs/MASTER_IMPLEMENTATION_PLAN.md).
 
@@ -235,7 +237,7 @@ Roadmap de evolucion post-F6 (research + gap register + F7 propuesta + what-not-
 
 Behavioral reliability audit (adversarial testing · bugs de loop, bypass, false pass): [`docs/00_SYSTEM/BEHAVIORAL_RELIABILITY_AUDIT.md`](docs/00_SYSTEM/BEHAVIORAL_RELIABILITY_AUDIT.md).
 
-F8 research handoff (cierre de gaps diferidos F7 · contrato de implementacion propuesto · no autorizada): [`docs/00_SYSTEM/F8_RESEARCH.md`](docs/00_SYSTEM/F8_RESEARCH.md).
+F8 closure (A-03/A-04 fail-closed, A-06 convention, scripts verified; native Claude runtime NOT_VERIFIED): [`docs/00_SYSTEM/POST_F8_AUDIT_REPORT.md`](docs/00_SYSTEM/POST_F8_AUDIT_REPORT.md). Research contract: [`docs/00_SYSTEM/F8_RESEARCH.md`](docs/00_SYSTEM/F8_RESEARCH.md).
 
 ## Limites De Alcance
 
