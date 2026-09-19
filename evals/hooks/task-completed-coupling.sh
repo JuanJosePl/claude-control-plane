@@ -1,5 +1,5 @@
 #!/bin/bash
-# Evidence coupling fixture: a supplied contract_hash must match the task evidence.
+# Evidence coupling fixture: contract_hash must match the task evidence when completing a task.
 set -u
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
@@ -113,8 +113,8 @@ expect_malformed
 expect_invalid_evidence 'ijkl' 'VERIFIED_BOGUS'
 expect_invalid_evidence 'mnop' 'VERIFIED extra'
 
-run_gate '{"task_id":"F7-current-2026-09-18-abcd","risk_level":"low"}'
-test "$GATE_RC" -eq 0 || fail 'transitional payload without contract_hash was blocked'
-printf '%s' "$GATE_ERR" | grep -F 'contract_hash' >/dev/null || fail 'missing transitional contract_hash warning'
+run_gate_at "$ROOT" '{"task_id":"F1-foundation-2026-09-16","risk_level":"medium"}'
+test "$GATE_RC" -eq 2 || fail "absent contract_hash was not blocked (rc=$GATE_RC)"
+printf '%s' "$GATE_ERR" | grep -F 'contract_hash' >/dev/null || fail 'absent contract_hash reason was not reported'
 
 printf '%s\n' 'task_completed_coupling=PASS'

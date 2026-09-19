@@ -76,9 +76,7 @@ if ! awk -v task_id="$TASK_ID" -v payload_contract_hash="$PAYLOAD_CONTRACT_HASH"
   block "Evidence Contract invalid for task_id=$TASK_ID: no matching VERIFIED evidence or required fields."
 fi
 
-if [ "$CONTRACT_HASH_PRESENT" != "true" ]; then
-  printf '%s\n' 'ADVERTENCIA (ARCH-004): TaskCompleted sin contract_hash; fail-open transicional durante F7.' >&2
-fi
+[ "$CONTRACT_HASH_PRESENT" = "true" ] || block "el payload requiere contract_hash."
 
 printf '%s\n' "TaskCompleted permitido: Evidence Contract VERIFIED para task_id=$TASK_ID (risk=$RISK_LEVEL)."
 exit 0
