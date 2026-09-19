@@ -11,8 +11,8 @@
 | Repository | `claude-control-plane` (local) |
 | Working directory | `/home/juanls/Escritorio/claude-control-plane` |
 | Current branch | `main` |
-| HEAD | `95f1555` (F8 evidence checkpoint; closure docs follow) |
-| HEAD^ | `1427fbe` |
+| HEAD | `916acf7` (F8 closure checkpoint) |
+| HEAD^ | `95f1555` |
 | F7 checkpoint | `47874a5` |
 | F8 research checkpoint | `c236b58` |
 | Current phase | 8 |
