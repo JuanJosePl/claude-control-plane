@@ -4,7 +4,14 @@
 # DRY_RUN=true imprime la decisión sin efecto. Timeout objetivo ≤3s.
 set -uo pipefail
 
-INPUT="$(cat)"
+INPUT_FILE="$(mktemp)"
+trap 'rm -f "$INPUT_FILE"' EXIT
+cat > "$INPUT_FILE"
+if od -An -tx1 "$INPUT_FILE" | grep -qE '(^|[[:space:]])00([[:space:]]|$)'; then
+  echo "BLOQUEADO por bash-firewall (fail-closed): payload JSON inválido o vacío." >&2
+  exit 2
+fi
+INPUT="$(cat "$INPUT_FILE")"
 
 # FAIL_CLOSED: sin jq no podemos analizar → denegar.
 if ! command -v jq >/dev/null 2>&1; then
