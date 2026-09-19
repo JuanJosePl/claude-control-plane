@@ -857,6 +857,20 @@ warning transicional para no romper payloads existentes; la siguiente fase debe 
 
 La decision completa vive en `DECISION_REGISTRY.md` como ARCH-004.
 
+#### Reviewer identity convention (A-06 / F8)
+
+Cuando una revision se registra en documentacion o notas de cierre, usa la identidad explicita:
+
+- `Reviewer: PASS (code-reviewer@fresh-context)` para una revision de subagente en contexto fresco.
+- `Reviewer: PASS (human/@owner)` para una aprobacion humana explicita.
+- `Reviewer: NOT_REQUIRED` cuando la politica documentada de bajo riesgo permite omitir reviewer.
+
+Esta es una convencion documental solamente. No agrega campos de schema, enforcement runtime ni
+afirma verificacion nativa de Claude Code.
+
+Desde F8-A, una tarea contractual sin `contract_hash` es bloqueada con `exit 2`; la ausencia ya no
+usa el warning transicional de F7.
+
 ### `/doctor` falla
 
 Ejecuta:

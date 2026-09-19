@@ -26,4 +26,4 @@ CUÁNDO AGREGAR UNA DECISIÓN AQUÍ:
 
 ## Arquitectura / Control Plane
 - **ARCH-002:** `SubagentStart` inyecta context packs por rol — no depender de `skills:` no verificado.
-- **ARCH-004:** Solo las CONTRACTUAL TASK pasan por Evidence Gate; TODOs, SUBTASKs y RESEARCH NOTE no requieren EV-NNN individual. `contract_hash`, cuando se envia, debe coincidir con la evidencia VERIFIED.
+- **ARCH-004:** Solo las CONTRACTUAL TASK pasan por Evidence Gate; TODOs, SUBTASKs y RESEARCH NOTE no requieren EV-NNN individual. Tras F8-A, `contract_hash` es obligatorio, debe coincidir con la evidencia VERIFIED y su ausencia bloquea.
