@@ -11,13 +11,14 @@
 | Repository | `claude-control-plane` (local) |
 | Working directory | `/home/juanls/Escritorio/claude-control-plane` |
 | Current branch | `main` |
-| HEAD | `916acf7` (F8 closure checkpoint) |
-| HEAD^ | `95f1555` |
+| HEAD | `2cd7953` (F8 closure checkpoint) |
+| HEAD^ | `916acf7` |
 | F7 checkpoint | `47874a5` |
 | F8 research checkpoint | `c236b58` |
 | Current phase | 8 |
 | Phase status | COMPLETE |
-| Next allowed action | F9 research only; no implementation authorized |
+| Next allowed action | Owner review of F9 research; no implementation authorized |
+| F9 research status | COMPLETE - `F9 NOT JUSTIFIED` |
 | Implementation authorization | **F8 IMPLEMENTATION = COMPLETE / VERIFIED** |
 
 ## 2. EXECUTIVE STATE
@@ -27,6 +28,8 @@ F7_STATUS             = COMPLETE / FROZEN
 F7_CHECKPOINT         = 47874a5
 F8_RESEARCH_STATUS    = COMPLETE
 F8_IMPLEMENTATION     = COMPLETE / VERIFIED
+F9_RESEARCH_STATUS    = COMPLETE
+F9_DECISION           = F9 NOT JUSTIFIED
 IMPLEMENTATION_READY  = false
 WORKTREE              = CLEAN
 MAINTENANCE           = 12/12 PASS  (2026-09-19)
@@ -231,7 +234,7 @@ Ran at handoff time (2026-09-19):
 4. Review `docs/00_SYSTEM/F8_RESEARCH.md`.
 5. Read the F8 closure report, provenance and claim-vs-evidence documents.
 6. Treat F8 as COMPLETE / FROZEN and keep `IMPLEMENTATION_READY = false`.
-7. Research F9 separately; do not implement F9 automatically.
+7. Review `docs/00_SYSTEM/F9_RESEARCH.md`; do not implement F9 automatically.
 
 ```
 NEXT_ALLOWED_ACTION = F9 RESEARCH ONLY — NO IMPLEMENTATION AUTHORIZED
@@ -248,7 +251,7 @@ F8_IMPLEMENTATION   = COMPLETE / VERIFIED
 - Do NOT add agents/hooks/skills/rules just for activity.
 - Do NOT claim native verification without native evidence.
 - Do NOT set `IMPLEMENTATION_READY = true` implicitly.
-- Do NOT start F9-F12 work.
+- Do NOT implement F9. F9 research is complete; F10-F12 remain undefined and research-required.
 
 ## 16. SOURCE-OF-TRUTH HIERARCHY (from `docs/DESIGN.md §1`)
 
@@ -297,9 +300,29 @@ evidence checkpoint `95f1555`.
 - **Native Claude Code lifecycle:** NOT VERIFIED in OpenCode.
 - **Historical preservation:** PASS; F7 evidence, regressions, incident/control records and reports
   remain unchanged.
-- **Deferred:** A-05, A-07, G-M1, G-L1, G-N4/N5 and all F9-F12 work.
+- **Deferred:** A-05, A-07, G-M1, G-L1, G-N4/N5 and F9 implementation; F10-F12 remain unknown.
 
-**Exact next action:** perform F9 research only after a new owner decision. Do not begin F9
-implementation automatically.
+**Exact next action:** owner reviews `docs/00_SYSTEM/F9_RESEARCH.md`. F9 implementation remains
+unauthorized.
+
+## 19. F9 RESEARCH RESULT
+
+F9 research was completed at baseline `2cd7953` without changing runtime, fixtures, evidence,
+regressions, F7 artifacts or F8 artifacts. The canonical package is
+`docs/00_SYSTEM/F9_RESEARCH.md`.
+
+- **F9:** `RESEARCH COMPLETE`.
+- **Decision:** `F9 NOT JUSTIFIED`.
+- **Candidates recommended for implementation:** `NONE`.
+- **Deferred:** A-05/G-N3, A-07/G-N4/G-B10, G-N5, G-M1, G-L1, G-B11 pending native/deterministic
+  evidence, G-T2, documentary items and all explicit no-build capabilities.
+- **Native runtime:** remains `NOT_VERIFIED`; this is a boundary, not a claim of runtime failure.
+- **New evidence:** `NONE`.
+- **New regressions:** `NONE`.
+- **Implementation authorization:** `NO`.
+- **Owner decisions:** F9-D01 through F9-D05 in the research package.
+
+**Next allowed action:** owner review only. Do not implement F9, open F10, modify runtime, or
+interpret research completion as implementation permission.
 
 **End of handoff. Read the canonical documents listed above for depth.**
