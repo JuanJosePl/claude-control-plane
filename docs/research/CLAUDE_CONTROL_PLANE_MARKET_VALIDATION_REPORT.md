@@ -1370,4 +1370,272 @@ The closure loop's net effect on engineering authorization is **null**. Strength
 
 **END RESEARCH REPORT (post-closure-loop, 2026-09-20)**
 
+---
+
+## 2026-09-20 BUYER + COMPETITIVE REALITY VALIDATION GATE
+
+> **Purpose.** This section is additive. It records the buyer + competitive-reality synthesis produced by the "Buyer + Competitive Reality Validation Gate" pass. It does not rewrite prior content. All buyer / WTP / pilot / PMF classifications remain `NOT ENOUGH EVIDENCE` because desk research cannot close those questions.
+>
+> **Anchor artifacts:** `docs/research/CLAUDE_CONTROL_PLANE_CUSTOMER_DISCOVERY_PROTOCOL.md` (real-world buyer-validation instrument) and `docs/research/CLAUDE_CONTROL_PLANE_COMPETITIVE_TEARDOWN_PROTOCOL.md` (reproducible V-02 competitor teardown).
+
+### BC-0. Explicit constraints preserved
+
+Desk research can identify plausible buyers. Desk research cannot prove customer demand. Desk research cannot prove willingness to pay. Desk research cannot prove product-market fit. Any statement in this section is either (a) sourced from the market re-baseline (RB-*) or (b) an *instrument specification* for future evidence collection, not a customer-validated claim.
+
+No customer interview was conducted. No competitor was installed. No pricing was formulated. No F10 was opened.
+
+### BC-1. Buyer reality synthesis (from desk research only)
+
+Applying the L0..L7 Buyer Signal Hierarchy per master prompt §13 to every desk-research signal captured so far:
+
+| Role | Plausible pain (desk-inferred) | Highest desk-observable signal | Signal level | Notes |
+|---|---|---|---|---|
+| Platform Engineering / Developer Productivity | Verifying agent-completed work; cross-tool governance; fleet visibility | Course announcement (Platform Engineering University, October 2026 — future-dated, per CR-03); role-oriented articles by DevEx vendors; Retool 2026 (builder sample) | **L0–L1** | Nothing beyond stated interest at the role level. No procurement evidence for the specific job. |
+| AppSec / Security Engineering | Agent-runtime write prevention; audit evidence; incident response | GitGuardian 2025 secret-leak data (S-E-05); Adversa AI blog series (S-B-12) | **L0–L1** | Adjacent tooling exists; specific coding-agent behavioral-assurance budget not evidenced. |
+| CISO / Security Leadership | AISPM procurement; agent accountability; audit posture | Zenity $125M Series C (S-B-04); Gartner "Company to Beat" (S-E-02, INCOMPLETE); Cursor AIUC-1 procurement demand (S-A-03) | **L2–L6 for AISPM category via Zenity as reference vendor; L0 for Claude Control Plane specifically** | CISO budget is real for *AISPM*; no evidence it extends to *coding-agent behavioral assurance* specifically. |
+| Engineering Management / CTO | Reliability of agent output; incident cost | Multiple 2026 incidents (S-D-01, S-D-04, S-D-05); MIT NANDA "5% deliver P&L" (S-E-01) | **L0–L1** | Incidents drive attention, not purchase, absent a defined product category. |
+| AI Platform / AI Infrastructure | Standing up agentic coding at internal scale | GitHub AI Controls GA (S-A-01); AGENTS.md adoption (S-A-07); TrueFoundry deployment metrics (S-B-03) | **L2 for adjacent categories; L0 for Claude Control Plane specifically** | Platform teams are actively investing in the space; the specific product-fit is not established. |
+
+**Aggregate desk-only buyer classification:**
+
+```
+USER                     : Engineering managers, platform engineers, AppSec engineers
+                           at organizations 20-2,000 engineers using ≥1 AI coding
+                           tool in production ≥3 months. (Plausible; not
+                           customer-validated.)
+CHAMPION                 : Not identified. A champion would be a specific named
+                           role at a specific class of organization with a
+                           documented incident and a documented workaround. Desk
+                           research cannot produce this.
+OWNER (operational)      : Platform Engineering most likely; AppSec plausible.
+                           (Desk-inferred; not customer-validated.)
+BUYER (economic)         : NOT IDENTIFIED. No evidence of a specific buyer.
+                           Zenity-tier procurement exists for AISPM but is not
+                           evidenced to extend to this specific product.
+APPROVER                 : UNKNOWN.
+PROCUREMENT PATH         : UNKNOWN.
+BUDGET LINE              : UNKNOWN — closest plausible categories are Security,
+                           AppSec, or Platform Engineering; none confirmed for
+                           this specific product.
+CURRENT SUBSTITUTE       : Provider-native (GitHub AI Controls, Claude Code
+                           TaskCompleted, Cursor managed settings) + Git/PR/CI
+                           + secret scanning + AISPM (for enterprises). Real
+                           substitutes; broader coverage than the parent report
+                           originally suggested (CL-3, CL-9).
+```
+
+The buyer-reality classification cannot be advanced beyond `PARTIALLY IDENTIFIED / NOT ENOUGH EVIDENCE` from this pass. The Customer Discovery Protocol defines the next real evidence.
+
+### BC-2. Q3 hypothesis re-classification (H1..H8)
+
+Applying master prompt §6 categories to each project-specific hypothesis, given the closure-loop evidence.
+
+| ID | Hypothesis | Concept status | Execution status | Provider-native | OSS equivalent | Commercial equivalent |
+|---|---|---|---|---|---|---|
+| H1 | Evidence-gated completion | **NOT UNIQUE CONCEPT** — matched in `aigis-control-plane` + 6 arXiv papers (CL-1, CL-2) | **UNIQUE EXECUTION** — CCP's specific `contract_hash` + `EVIDENCE_REGISTRY.md` + phase-gate integration is not observed in any tested-or-documented competitor | `TaskCompleted` blocking hook exists natively; specific evidence-registry pattern does not | AIGIS Control Plane (0 stars/0 forks — pattern match, unadopted) | **NOT OBSERVED** in tested-or-documented commercial products (per V-02 protocol pending) |
+| H2 | Evidence registry + contract-hash coupling | **NOT UNIQUE CONCEPT** — SHA-256 evidence-bundle pattern is in AIGIS + academic corpus | **UNIQUE EXECUTION at the schema level** (Markdown registry + provenance vocabulary + reviewer-identity convention) | No native equivalent | AIGIS bundle format (different schema) | **NOT OBSERVED** |
+| H3 | Incident → control → regression → verification loop | **NOT UNIQUE CONCEPT** — incident-loop pattern exists in SRE culture; encoded machine-readable version is rare | **UNIQUE EXECUTION** — CCP's `INCIDENT_REGISTRY.md` + `CONTROL_REGISTRY.md` + `REGRESSION_REGISTRY.md` + `INC-001 → CTRL-001 → REG-001` trace is not observed in competitors | Not native | Not observed in AIGIS or aegis-ai-governance-platform-aws in current READMEs (documentation-only) | **NOT OBSERVED** |
+| H4 | Behavioral self-regression of the governance layer | **PROBABLY UNIQUE CONCEPT at this granularity** — closest analogue is CI regression suites; testing the *governance layer itself* is less common | **UNIQUE EXECUTION** — 12/12 maintenance suite; hook fixtures; freshness eval | Not native | AIGIS declares 8/8 benchmark; different scope | **NOT OBSERVED** in documented competitors |
+| H5 | Historical evidence preservation (append-only registry + byte-identical prefix across phases) | **NOT UNIQUE CONCEPT** — append-only-log discipline is common; specific application to governance evidence less common | **UNIQUE EXECUTION as convention** — enforcement is Git + human reviewer (per F9-D04); no cryptographic append-only enforcement | Not native | Not observed | Not observed |
+| H6 | Fail-closed execution assurance (bash-firewall + secret-guard + evidence-gate + fixture regressions) | **NOT UNIQUE CONCEPT** — deny-by-default is standard; execution-time enforcement in coding-agent domain is present in AIGIS (deny-by-default Policy Engine) | **PARTIALLY UNIQUE EXECUTION** — combination of fail-closed points is broader than most competitors; GuardFall (CL-4) exposes the *shared design surface* of plain-text-regex bash-firewalls | Some fail-closed native (`TaskCompleted` exit 2); firewall not native | AIGIS deny-by-default Policy Engine; `killertcell428/aigis` firewall (S-B-10) | Not observed as an integrated stack |
+| H7 | Reviewer / human accountability convention | **NOT UNIQUE CONCEPT** — Git PR review is universal; explicit reviewer-identity vocabulary in the evidence record is a small novelty | **UNIQUE EXECUTION as documented convention** (`code-reviewer@fresh-context` / `human/@owner` / `NOT_REQUIRED`) | Git natively | Not observed | Not observed as explicit convention |
+| H8 | Cross-provider policy semantics | **NOT UNIQUE CONCEPT — actively contradicted** — CCP is Claude-specific (ARCH-001); multi-provider governance is exactly the space where Agentic Control Plane, Fiddler AI, Aegis Platform (CL-3) already play | **NOT UNIQUE EXECUTION** — CCP does not implement cross-provider today; H8 is aspiration, not asset | Provider-native controls are per-provider; no cross-provider native | AIGIS is also Claude-specific; other OSS is per-tool | Yes: Agentic Control Plane, Fiddler AI, Aegis Platform |
+
+**Net result of Q3:**
+- **Concept-level uniqueness:** only H4 (behavioral self-regression) shows probable concept uniqueness at the granularity of *the governance layer testing itself*. All others share concept with existing OSS, provider-native, or commercial systems.
+- **Execution-level uniqueness:** H1, H2, H3, H4, H7 exhibit unique-execution characteristics at CCP's current implementation, subject to the V-02 teardown for empirical confirmation.
+- **Nothing is `VALIDATED`**: no execution finding has customer evidence, and no concept finding has been through the competitive teardown protocol.
+
+### BC-3. Commercial substitute matrix
+
+| Alternative | Cost | Deployment | Governance coverage | Evidence retention | Cross-provider | Developer friction | Internal ownership |
+|---|---|---|---|---|---|---|---|
+| Do nothing | 0 | 0 | none | none | n/a | 0 | none |
+| Provider-native (Claude Code / Cursor / Copilot enterprise) | Included in enterprise tier (~$19–40/user/mo Copilot Enterprise; Cursor/Anthropic pricing not public per S-A) | Zero-install; managed settings | Policy + hooks + audit logs (varies) | Metadata-only for most providers (parent report §8); `TaskCompleted` blocking available (CL-9) | No | Low | Vendor |
+| CI / PR / branch protection | Existing spend | Existing | Test gates + review | Test artifacts + PR history | Yes | Medium (PR wait) | Engineering |
+| Security stack (GitGuardian, Snyk, Zenity) | Existing security spend | SaaS | Secret + SAST + AISPM (Zenity for agent posture) | Vendor-defined | Partial | Low | Security |
+| Internal platform build | Engineering labor (Retool 2026: 78% plan to build more) | Custom | Full custom | Custom | Custom | Depends on build | Platform Engineering |
+| Agent control plane (Agentic Control Plane, Fiddler AI, Aegis Platform, OpenHands Enterprise, TrueFoundry) | $100–$1,000/mo standalone tiers to enterprise contracts | SaaS or self-hosted | Tool-call authorization, observability, identity, audit | Vendor-defined | Yes (multi-provider is core value) | Medium | Security / Platform / AI Platform |
+| Claude Control Plane (current project) | 0 (personal); would require productization spend for enterprise | Local install; not fleet-deployable in current architecture | Evidence-gated completion + fail-closed firewall/secret + incident loop + self-regression suite | Markdown evidence registry with hash coupling | No (Claude-only by ARCH-001) | Medium (documentation-heavy onboarding) | Owner/personal |
+
+**Job genuinely not covered by any alternative (desk-inference; not customer-validated):**
+
+- *A machine-readable, hash-coupled evidence trail specifically gating agent DONE claims, integrated with a behavioral self-regression suite of the governance layer itself.* Provider-native gets close on `TaskCompleted` alone. Agent-control-plane commercial products offer runtime authorization + observability + identity, but do not appear (from S-B-05, S-B-06 verbatim retrieval) to gate DONE claims on hash-verified evidence with a machine-readable regression of the governance itself. The AIGIS OSS project comes closest (CL-1) but has zero adoption.
+
+**Caveat:** the above phrasing is a **desk-level differentiator hypothesis**, not a validated buyer job. Elevating it to "unmet job" requires: (a) the V-02 teardown scoring `NOT OBSERVED / REPRODUCED` on the relevant rows across competitors, and (b) customer discovery producing ≥3 independent behavioral descriptions of this specific unmet need.
+
+### BC-4. "Why would they buy this?" test (master prompt §18)
+
+Forced sentence:
+
+> A company would buy Claude Control Plane because their existing stack (provider-native controls + CI + PR + security tooling + potentially AISPM) does not prevent an AI coding agent from claiming DONE on incomplete work, and the cost of downstream rework or incident recovery outweighs the friction of adding an evidence gate.
+
+**Attack:**
+
+- *Why can't GitHub do this?* GitHub has `TaskCompleted`-adjacent controls at the org level, but has not shipped an evidence-hash gate; could ship one within 12–24 months (RB-4 P7).
+- *Why can't Claude Code do this?* `TaskCompleted` is already a blocking hook (CL-9); Claude Code could ship a first-party evidence-registry pattern natively.
+- *Why can't Cursor do this?* Cursor Enterprise has managed settings + hooks; not observed to have an evidence gate; could add.
+- *Why can't CI do this?* CI runs after commit; agent DONE claims happen before commit. CI closes some of the gap but not all.
+- *Why can't security do this?* Security tools verify content (secrets, vulnerabilities), not process (was work actually done). Category mismatch — evidence gate is a *process* control.
+- *Why can't platform engineering build this?* 78% of Retool 2026 respondents plan to build internal tools; a project-local evidence gate is well within a competent platform team's reach.
+- *Why does the company need another control plane?* Only if the specific problem is bad enough that adding a new tool is cheaper than the alternatives. That is the customer-validation question.
+- *Why now?* Provider absorption is a 12–24 month risk (RB-4 P7); the window may not stay open.
+
+**If the answer degrades to "because our implementation is elegant" — that is not buyer value.** The current answer must remain: "we don't know whether the pain is severe enough to buy a separate tool; the Customer Discovery Protocol is the instrument to find out."
+
+### BC-5. "Why would they not buy it?" test (master prompt §19)
+
+Strongest rejection cases, each with the desk evidence weighing on each side:
+
+| Rejection case | Desk evidence FOR the rejection | Desk evidence AGAINST |
+|---|---|---|
+| Too narrow | H8 fails; CCP is Claude-only in a multi-provider world | H1–H7 offer specific coding-agent-workflow value even without multi-provider |
+| Too much friction | Evidence gate + hash registry + human reviewer convention adds process steps | Fail-closed friction is only high when the gate fires — which may be rarely (unresolved without V-04) |
+| Already covered | Provider-native `TaskCompleted`; AISPM; GitHub AI Controls | None fully implements the evidence-hash + self-regression combination (subject to V-02 teardown) |
+| Provider will absorb | Provider trajectory clear (RB-4 P7); Anthropic could ship `TaskCompleted`-plus-evidence natively | Providers have not signaled this specific product roadmap; 12–24 month window |
+| CI is enough | CI runs and fails on broken tests | CI runs *after* commit; agent claims DONE *before* commit |
+| Internal team can build | Retool 2026 78% plan to build internally; AIGIS OSS exists | AIGIS has 0 adoption despite matching pattern; building may not be as cheap as it looks |
+| No budget owner | Owner analysis in BC-1 identifies no confirmed budget line | Zenity procurement exists for AISPM; a related budget could plausibly extend |
+| No measurable ROI | No incident-cost baseline established | Individual incidents (PocketOS S-D-04, Replit S-D-01, Claude 700GB S-D-05) show high per-incident cost when they occur |
+| Only matters after rare incidents | Incidents are rare per organization | Trackers (S-D-09) suggest 98+ documented across the industry |
+| Not needed at current scale | 5-person teams don't need this | Enterprise scale (100+ engineers) has documented incidents |
+
+**No rejection case is definitively defeated on desk evidence.** Every one requires customer discovery to resolve.
+
+### BC-6. Category-arbitrage test (master prompt §21)
+
+For each budget category, closest fit:
+
+| Budget category | Fit | Reasoning |
+|---|---|---|
+| Security / AppSec | **Partial** | CCP's fail-closed firewall + secret guard fit security; evidence-gate is process, not security |
+| IAM | Poor | CCP does not manage identity |
+| Platform Engineering | **Best** | Owns the control plane, developer platform, hooks. Aligns with 78% build-vs-buy signal |
+| Developer Experience | Partial | DevEx owns developer time savings; CCP is a workflow overhead, not a savings tool |
+| AI Platform | Partial | AI Platform owns agent infrastructure; CCP is a governance layer |
+| Governance / Risk | **Partial** | GRC owns compliance evidence; CCP provides audit-adjacent evidence |
+| FinOps | Poor | CCP does not measure agent spend |
+| Compliance | Partial | Compliance may value the audit trail; not a primary budget |
+
+**Category tentative home:** *Platform Engineering* — with *AppSec* as a secondary approver. Neither is confirmed. A tool that is homeless in every category is an orphan and typically fails to sell.
+
+`CATEGORY = PLAUSIBLE PLATFORM ENGINEERING TOOL WITH APPSEC APPROVER — DESK-INFERRED — CUSTOMER VALIDATION REQUIRED`
+
+### BC-7. Engineering vs commercial asset inventory (master prompt §22)
+
+**Engineering assets** (durable regardless of commercial outcome):
+
+- Fail-closed hook set (`bash-firewall.sh`, `secret-guard.sh`, `task-completed-evidence.sh`).
+- Evidence registry model with `contract_hash` coupling.
+- Incident → control → regression chain (INC-001 → CTRL-001 → REG-001).
+- 12/12 deterministic maintenance suite.
+- Phase-gate discipline (F1–F9 including F9's "not justified" outcome).
+- Provenance vocabulary (`EXTRACTED / INFERRED / ASSUMED / EXTERNAL / GENERATED`).
+- Reviewer-identity convention (F8 A-06).
+- Historical evidence preservation (byte-identical prefix across phases).
+- Trust-boundary discipline (`SCRIPT_VERIFIED / NATIVE_VERIFIED / NOT_VERIFIED / CLAIM / FACT`).
+
+**Commercial assets** (only items with any current buyer-relevance evidence):
+
+- **Currently none** at the L2+ buyer-signal level.
+- Concept-level interest signals exist for the *category* (Zenity funding, Gartner "Company to Beat", GitHub Enterprise AI Controls GA), but not for this specific product.
+- The Customer Discovery Protocol is the instrument to test whether any of the Engineering assets convert to Commercial assets.
+
+**OSS / standard assets** (potentially reusable regardless of commercial outcome):
+
+- The evidence-schema pattern (a specification of contract_hash + evidence registry semantics).
+- The incident-loop pattern (specification of the four-registry chain).
+- Provenance vocabulary.
+- Reviewer-identity convention.
+
+**Research assets:**
+
+- The F7 behavioral audit methodology.
+- The F8 minimum-fail-closed contract discipline.
+- The F9 "investigated and chose not to build" case as a governance example.
+
+### BC-8. 80% delete test (master prompt §11)
+
+If 80% of the project disappeared, the 20% that remains commercially plausible is:
+
+1. **The evidence-gate design contract** — schema for `contract_hash`, `Artifact Hash`, `Reviewer`, `Tests`, `Static`, `Security`, `Provenance` fields; the hook that gates `TaskCompleted` on their satisfaction.
+2. **The incident → control → regression skeleton** — four registries with a canonical linkage.
+
+Everything else is:
+
+- **Commodity** (Bash firewall style already exists in `killertcell428/aigis` and provider-native).
+- **Implementation detail** (specific fixture layouts).
+- **Internal engineering discipline** (phase gates, provenance vocabulary — valuable inside the project, not directly buyer-facing).
+- **Historical asset** (F1–F9 trace as proof-of-methodology; not a product surface).
+
+### BC-9. Self-attack, five strategic hypotheses (master prompt §23)
+
+| Claim | Supporting evidence | Counter-evidence | Unknown | Status |
+|---|---|---|---|---|
+| A. Should become a commercial product | Adjacent category funded (Zenity $125M); provider absorption not immediate | No buyer confirmed; no WTP; competitor density growing (CL-3); H8 cross-provider missing | Whether Platform Engineering budget will extend to this specific product | `NOT ENOUGH EVIDENCE` |
+| B. Should remain OSS | Multiple OSS in same space (AIGIS, aegis-aws, killertcell428/aigis, OpenHands); OSS is community substrate | OSS competitors have zero adoption; Claude-only limits utility | Whether the concept can drive OSS adoption absent commercial GTM | `NOT ENOUGH EVIDENCE` |
+| C. Should remain internal | Perfectly usable as personal engineering discipline; F9 already validated the "not-productized" mode | Under-investment risk if the pattern has broader value | Whether owner continues to derive personal value | Owner-discretionary |
+| D. Should become a standard / methodology | Academic literature is converging (CL-2); AGENTS.md model shows adoption is possible for standards | No standards body has expressed interest; standards work is long | Whether owner has the bandwidth for a standards-body engagement | `NOT ENOUGH EVIDENCE` |
+| E. Should narrow to one workflow (e.g., evidence-gate as OSS primitive) | 80% delete test (BC-8) identifies a narrow core; narrower scope reduces multi-provider burden | Narrow product may not have a buyer; open-source primitive may repeat AIGIS's zero-adoption outcome | Whether narrowing reveals customer demand | `NOT ENOUGH EVIDENCE` |
+
+**No claim is selected.** All remain owner-discretionary decisions.
+
+### BC-10. Decision-critical unknown matrix (master prompt §24)
+
+| Unknown | Materiality | Desk evidence available? | Resolution method | What changes if resolved |
+|---|---|---|---|---|
+| Buyer identity | HIGH | NO | Customer Discovery Protocol Round 1 (§10) | Enables/rejects category assignment (BC-6) |
+| WTP for evidence-gated completion | HIGH | NO | Customer Discovery Protocol Round 2 + adjacent-purchase behavioral evidence | Elevates or rejects Claim A (BC-9) |
+| Whether AIGIS or another OSS matches CCP in depth | HIGH | Partial (README-only) | Competitive Teardown Protocol §8 (C-01 depth drill) | Confirms/downgrades H1 execution uniqueness |
+| Whether commercial competitors implement evidence-gated DONE | HIGH | Partial (vendor docs) | Competitive Teardown Protocol §4 (Test A) | Confirms/rejects the "unmet job" phrasing in BC-3 |
+| Whether provider-native TaskCompleted-plus-evidence ships | HIGH | NO | Future observation (12–24 months); quarterly monitoring | Elevates or eliminates provider-absorption risk |
+| Whether the evidence gate fires at meaningful and value-generating frequency | HIGH | NO | V-04 (redesigned per CR-06 and §16 of this protocol pass) | Distinguishes gate activity from prevented value |
+| Whether GuardFall-class bypass affects CCP's own bash-firewall | MEDIUM | Partial (design analysis) | Adversarial review of `bash-firewall.sh` against the GuardFall class (research task) | Would strengthen ROB-F to concrete finding |
+| Whether MIT NANDA success-rate stats (67% purchased / 33% built) apply here | MEDIUM | NO | Primary-source retrieval of the MIT NANDA build-vs-buy paper | Refines Model C vs A in RB-6 |
+
+Every unknown has a specific resolution method. No unknown is "research more."
+
+### BC-11. Customer-validation gate (master prompt §27)
+
+The minimum real-world evidence to convert `NOT ENOUGH EVIDENCE` on Buyer/WTP into `EVIDENCE SUFFICIENT FOR AN OWNER DECISION`:
+
+- **Round 1** of Customer Discovery (3–5 warm-intro Platform Engineering + AppSec interviews) produces:
+  - At least 2 independent behavioral descriptions of an unresolved job specifically related to agent-completion verification, self-regression detection, or evidence retention;
+  - Without prompting for those terms;
+  - Recorded per §4 of the discovery protocol with all bias risks noted per §6.
+- **Round 2** of Customer Discovery brings `n ≥ 3` per role and preserves the same behavioral pattern.
+- **Round 1** of the Competitive Teardown (C-01 AIGIS + C-07 Claude Code native) confirms that:
+  - Test A (completion verification) shows `NOT OBSERVED` or `PARTIALLY IMPLEMENTS` for the specific hash-coupled evidence-gate row in both;
+  - AIGIS pattern-depth is not deeper than CCP's on the specific `contract_hash`-registry integration.
+- **At least one interviewee** volunteers a purchase or evaluation (Level ≥ 2) in the exact category without prompting.
+- **At least one identified budget owner** exists with an adjacent-category Level ≥ 5 purchase and a rationale for extension.
+
+If any row is missing after Round 2, the classification remains `NOT ENOUGH EVIDENCE` and the owner should not authorize further engineering.
+
+These are **PROPOSED DECISION RULES — OWNER DISCRETION** (per CR-06). The owner may accept, adjust, or reject them.
+
+### BC-12. Explicit non-claims
+
+- No customer has been interviewed.
+- No competitor has been installed and tested during this pass.
+- No pricing has been proposed.
+- No PMF has been claimed.
+- No buyer name has been recorded.
+- No procurement evidence has been produced.
+- No engineering authorization has been created.
+- No F10 has been opened.
+
+### BC-13. Engineering authorization state — unchanged
+
+```
+ENGINEERING JUSTIFICATION AFTER BUYER + COMPETITIVE REALITY GATE:
+   NO ENGINEERING JUSTIFIED
+```
+
+The customer discovery and competitive teardown protocols are the next evidence-generating steps. Neither authorizes engineering. Both produce the evidence that would either authorize engineering (per BC-11) or resolve the direction to Model B / D / F (BC-9) without engineering.
+
+---
+
+**END BUYER + COMPETITIVE REALITY VALIDATION GATE (post-buyer-gate, 2026-09-20)**
+
 *Research performed: 2026-09-20. Output is research truth state only. No implementation, roadmap, architecture, or code recommendation is made. Owner decides all subsequent actions.*

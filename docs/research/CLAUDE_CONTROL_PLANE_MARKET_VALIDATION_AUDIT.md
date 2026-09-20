@@ -853,3 +853,90 @@ Master prompt §33 "Research closed with bounded uncertainty" checklist:
 The closure loop is complete.
 
 **END OF CLOSURE-LOOP AUDIT.**
+
+---
+
+## 24. Buyer + competitive reality validation gate (2026-09-20)
+
+Audit consequences of the "Buyer + Competitive Reality Validation Gate" pass. Two new research artifacts were produced; the market report was extended with an additive BC-* section. **No customer was interviewed. No competitor was installed. No engineering was authorized.**
+
+### 24.1 New research artifacts
+
+- `docs/research/CLAUDE_CONTROL_PLANE_CUSTOMER_DISCOVERY_PROTOCOL.md` — behavioral interview instrument with anti-leading rules, per-role convergence criteria, and prohibitions against synthetic personas. This artifact defines *how* real interviews would be conducted and analyzed if the owner initiates outreach. It does not contain any interview result.
+- `docs/research/CLAUDE_CONTROL_PLANE_COMPETITIVE_TEARDOWN_PROTOCOL.md` — reproducible V-02 teardown specification, per-competitor version/tier/environment discipline, three-scenario observation tables (completion verification / behavioral self-regression / incident→control→regression), and per-row `DOCUMENTED / OBSERVED / REPRODUCED / NOT OBSERVED / UNKNOWN` labeling. This artifact defines *how* the teardown would run if the owner authorizes it. It does not contain any teardown result.
+- Both protocols explicitly forbid the fabrication of any customer or competitor evidence.
+
+### 24.2 Audit consequence: buyer-signal upgrades and downgrades
+
+Per master prompt §13 Buyer Signal Hierarchy applied to desk-level evidence only:
+
+| Prior audit statement | Buyer/competitive gate result | Change |
+|---|---|---|
+| BUYER = "PARTIALLY IDENTIFIED / NOT ENOUGH EVIDENCE" | Preserved unchanged. Report BC-1 elaborates the desk-inferred user/champion/owner/buyer/approver/budget structure but does not upgrade the classification. | No upgrade. Downgrade of specificity for `CHAMPION` (now "not identified") and `BUYER` (now "not identified" rather than the earlier "partially identified"), reflecting stricter behavioral discipline. |
+| WTP = NOT ENOUGH EVIDENCE | Preserved unchanged. | No upgrade. |
+| DIFFERENTIATION = "PARTIALLY SUPPORTED (potential; not yet externally validated)" — narrowed by closure loop | BC-2 re-classifies H1..H8: H4 is the only *probable concept-unique* hypothesis; H1/H2/H3/H4/H7 have unique-execution characteristics pending V-02 teardown | Further narrowing. No hypothesis is upgraded to `VALIDATED`. |
+| COMPETITIVE LANDSCAPE DENSER (CL-3) | BC-3 substitute matrix reinforces the denser reading | No change to closure-loop conclusion. |
+| ENGINEERING AUTHORIZATION = NO ENGINEERING JUSTIFIED | Preserved unchanged (BC-13). | No change. |
+
+### 24.3 Second-pass self-attack (master prompt §37 for the buyer/competitive pass)
+
+| # | Question | Answer |
+|---|---|---|
+| 1 | Did I confuse market demand with buyer demand? | No — BC-1 explicitly separates category-signal from CCP-specific buyer-signal. |
+| 2 | Did I confuse buyer interest with WTP? | No — BC-1 and BC-11 keep WTP as `NOT ENOUGH EVIDENCE`. |
+| 3 | Did I confuse feature presence with differentiation? | No — BC-2 distinguishes concept-uniqueness from execution-uniqueness and gates both on the V-02 teardown. |
+| 4 | Did I compare against the real current stack? | Yes — BC-3 substitute matrix includes do-nothing, provider-native, CI/PR, security stack, internal build, agent-control-plane commercial products. |
+| 5 | Did I include the do-nothing alternative? | Yes — first row of BC-3 substitute matrix. |
+| 6 | Did I test OSS competitors where possible? | No — no competitor was installed in this pass. The Competitive Teardown Protocol defines how testing would occur if authorized. |
+| 7 | Did I distinguish documented / observed / reproduced? | Yes — protocol §17 mandates the labels; report BC-2 preserves them. |
+| 8 | Did I accidentally claim competitor absence? | No — every "NOT OBSERVED" is bounded to tested version/tier; no `ABSENT` claim was made. |
+| 9 | Did I fabricate customer evidence? | No — Customer Discovery Protocol §9 and §12 explicitly forbid synthetic interviews and require anonymized real-interview provenance. |
+| 10 | Did I fabricate procurement evidence? | No. |
+| 11 | Did I overstate provider failure? | No — CL-8 (safety-harness caused Aug 2026 wipe) is cited factually; the buyer+competitive gate does not extend the finding into a "providers cannot be trusted" claim. |
+| 12 | Did I overstate project uniqueness? | No — H1..H8 re-classification (BC-2) preserves NOT UNIQUE CONCEPT labels where applicable. |
+| 13 | Did I reopen a closed objection without new evidence? | No — no closed objection was reopened. |
+| 14 | Did I modify runtime? | No. Confirmed at §24.4. |
+| 15 | Did I open F10? | No. |
+
+Q1–Q13 all `No`. Q14–Q15 all `No`. No corrections triggered; no stop condition triggered.
+
+### 24.4 Preservation verification
+
+- HEAD before buyer/competitive gate: `07cc702`.
+- Files added: `docs/research/CLAUDE_CONTROL_PLANE_CUSTOMER_DISCOVERY_PROTOCOL.md`, `docs/research/CLAUDE_CONTROL_PLANE_COMPETITIVE_TEARDOWN_PROTOCOL.md`.
+- Files modified: `docs/research/CLAUDE_CONTROL_PLANE_MARKET_VALIDATION_REPORT.md` (new BC-* section appended, no prior content edited), `docs/research/CLAUDE_CONTROL_PLANE_MARKET_VALIDATION_AUDIT.md` (this section appended).
+- Runtime paths touched: **none.**
+- `.claude/hooks/`, `.claude/settings.json`, `evals/`, `install.sh`, all registries in `docs/00_SYSTEM/*.md` (except `CLAUDE_SESSION_LOG.md` which is auto-appended by the SubagentStop hook — not part of this pass's commit): **unchanged.**
+- F7 checkpoint `47874a5`, F8 closure checkpoint `2cd7953`, F9 research checkpoint `bfe03b7`, F9 owner-gate closure `10a60d9`, market reconciliation `0433d2c`, closure loop `07cc702`: **unchanged.**
+- New phase opened: **no.**
+- Implementation authorized: **no.**
+
+### 24.5 Anti-infinite-loop compliance
+
+Per master prompt §30 (max 1 additional targeted desk-research loop):
+
+- **Primary pass** (this pass): protocol creation + BC-* synthesis recorded above.
+- **Second targeted loop:** NOT INITIATED. The evidence available from desk research alone has reached the limit defined by master prompt §28 — "Desk research cannot prove customer demand / WTP / PMF." The next evidence-generating actions are the Customer Discovery Protocol and the Competitive Teardown Protocol, both of which are owner-initiated real-world activities, not additional desk research. A second desk-research loop would not change any classification; it would only re-describe existing evidence.
+
+### 24.6 Residual objection register — buyer/competitive gate
+
+| ID | Objection | Status after buyer/competitive gate |
+|---|---|---|
+| ROB-01..ROB-04 (audit originals) | preserved | Unchanged. |
+| ROB-A..ROB-E (audit additions) | preserved | Unchanged. |
+| ROB-F..ROB-J (closure-loop additions) | preserved | Unchanged. |
+| ROB-K | The evidence-gate design shares its concept with `aigis-control-plane` and 2026 academic literature; the *execution* uniqueness is not empirically confirmed absent V-02 teardown. | **REQUIRES COMPETITIVE VALIDATION** — Competitive Teardown Protocol Round 1 (C-01 AIGIS depth drill) is the resolution method. |
+| ROB-L | The category-arbitrage best-fit budget line (Platform Engineering) is desk-inferred; no interview or procurement evidence exists. | **REQUIRES CUSTOMER VALIDATION** — Customer Discovery Protocol §8. |
+| ROB-M | The "unmet job" phrasing in BC-3 is a desk-level hypothesis; it may collapse if any tested competitor scores `OBSERVED / REPRODUCED` on the evidence-hash row of Test A. | **REQUIRES COMPETITIVE VALIDATION** — Competitive Teardown Protocol §4. |
+
+No objection was silently removed. No `RESEARCH MORE` label used; every residual has a specific resolution method.
+
+### 24.7 Final audit verdict (post buyer/competitive gate)
+
+`RESEARCH VALIDATED WITH LIMITATIONS` — unchanged.
+
+`RESEARCH CLOSED WITH BOUNDED UNCERTAINTY` — unchanged.
+
+The buyer + competitive reality gate does not resolve buyer/WTP/PMF uncertainty; it produces the *instruments* to resolve them in the real world. The classification of every remaining uncertainty is now tied to a specific, owner-initiated evidence-generating action.
+
+**END OF BUYER + COMPETITIVE REALITY GATE AUDIT.**
