@@ -7,40 +7,47 @@
 
 | Field | Value |
 |---|---|
-| Handoff date | 2026-09-19 |
+| Handoff date | 2026-09-20 |
 | Repository | `claude-control-plane` (local) |
 | Working directory | `/home/juanls/Escritorio/claude-control-plane` |
 | Current branch | `main` |
-| HEAD | current documentation reconciliation checkpoint (see §17 and `git log`) |
+| HEAD | F9 owner decision gate closure commit (see §17, §21 and `git log`) |
 | F8 closure checkpoint | `2cd7953` |
 | F9 research checkpoint | `bfe03b7` |
 | Post-F9 technical history dossier | `9a52875` (documentation-only, not part of the F9 research change budget) |
+| Post-F9 documentation reconciliation | `05c78ac` (documentation-only) |
+| F9 owner decision gate closure | this commit (documentation-only; see §21) |
 | F7 checkpoint | `47874a5` |
 | F8 research checkpoint | `c236b58` |
 | Current phase | 8 |
 | Phase status | COMPLETE |
-| Next allowed action | Owner review of F9 research (F9-D01..F9-D05); no F9 or F10 implementation authorized |
+| Next allowed action | New owner-driven project decision only; F9 implementation, F10 opening, native probe and integrity work all remain unauthorized until their respective triggers appear (see §21). |
 | F9 research status | COMPLETE - `F9 NOT JUSTIFIED` |
+| F9 owner decision gate | CLOSED (2026-09-20) — F9-D01=A · F9-D02=B · F9-D03=B · F9-D04=B · F9-D05=A |
 | F9 audit verdict | VALIDATED WITH LIMITATIONS (documentation-only reconciliation applied) |
 | Implementation authorization | **F8 IMPLEMENTATION = COMPLETE / VERIFIED · F9 IMPLEMENTATION = NOT AUTHORIZED / NOT PERFORMED** |
 
 ## 2. EXECUTIVE STATE
 
 ```
-F7_STATUS             = COMPLETE / FROZEN
-F7_CHECKPOINT         = 47874a5
-F8_RESEARCH_STATUS    = COMPLETE
-F8_IMPLEMENTATION     = COMPLETE / VERIFIED
-F9_RESEARCH_STATUS    = COMPLETE
-F9_DECISION           = F9 NOT JUSTIFIED
-F9_IMPLEMENTATION     = NOT AUTHORIZED / NOT PERFORMED
-F9_AUDIT_VERDICT      = VALIDATED WITH LIMITATIONS
-IMPLEMENTATION_READY  = false
-WORKTREE              = CLEAN (documentation reconciliation committed)
-MAINTENANCE           = 12/12 PASS  (2026-09-19)
-HISTORICAL_EVIDENCE   = intact (EV-001..EV-014 unchanged; sha256:23325ab6…)
-RUNTIME_HOOKS         = F8-A/F8-B changed only; no unrelated hook changes; no F9 hook changes
-DOCUMENTATION         = post-F9 reconciliation applied (see §17 and PROJECT_STATE.md)
+F7_STATUS               = COMPLETE / FROZEN
+F7_CHECKPOINT           = 47874a5
+F8_RESEARCH_STATUS      = COMPLETE
+F8_IMPLEMENTATION       = COMPLETE / VERIFIED
+F9_RESEARCH_STATUS      = COMPLETE
+F9_DECISION             = F9 NOT JUSTIFIED
+F9_IMPLEMENTATION       = NOT AUTHORIZED / NOT PERFORMED
+F9_OWNER_DECISION_GATE  = CLOSED (2026-09-20)
+F9_OWNER_DECISIONS      = D01=A · D02=B · D03=B · D04=B · D05=A
+F9_AUDIT_VERDICT        = VALIDATED WITH LIMITATIONS
+NATIVE_CLAUDE_CODE      = NOT VERIFIED (deferred per F9-D02=B)
+F10_F12                 = UNKNOWN / NOT STARTED (per F9-D05=A)
+IMPLEMENTATION_READY    = false
+WORKTREE                = CLEAN (F9 owner decision gate closure committed)
+MAINTENANCE             = 12/12 PASS  (2026-09-19; re-verified at 2026-09-20 closure)
+HISTORICAL_EVIDENCE     = intact (EV-001..EV-014 unchanged; sha256:23325ab6…)
+RUNTIME_HOOKS           = F8-A/F8-B changed only; no unrelated hook changes; no F9 hook changes
+DOCUMENTATION           = F9 owner decision gate closure recorded in F9_OWNER_DECISIONS.md; PROJECT_STATE mirror updated (see §17, §21)
 ```
 
 ## 3. PROJECT PURPOSE
@@ -328,8 +335,8 @@ runtime, fixtures, evidence, regressions, F7 artifacts or F8 artifacts. The cano
 - **Implementation authorization:** `NO`.
 - **Owner decisions:** F9-D01 through F9-D05 in the research package.
 
-**Next allowed action:** owner review only. Do not implement F9, open F10, modify runtime, or
-interpret research completion as implementation permission.
+**Next allowed action (superseded on 2026-09-20 by §21):** owner review only. Do not implement F9,
+open F10, modify runtime, or interpret research completion as implementation permission.
 
 ## 20. POST-F9 DOCUMENTATION CHRONOLOGY
 
@@ -339,10 +346,57 @@ To keep the record accurate, the post-F9 documentation history is explicit:
 |---|---|---|
 | `bfe03b7` | `[F9] docs: record research decision` — adds `F9_RESEARCH.md` and updates this handoff. | Strict F9 research change budget. |
 | `9a52875` | `docs: add F7-F9 technical history dossier` — adds `F7_F8_F9_TECHNICAL_HISTORY.md` as a supplementary reference for engineers/auditors joining without prior session context. | Post-F9 documentation only. Not part of the F9 research change budget, not part of F10, not runtime. |
-| (this reconciliation) | `docs: reconcile post-f9 documentation state` — updates stale metadata in `PROJECT_STATE.md` and this handoff, keeps the Spanish translation of the dossier, and records the chronology explicitly. | Documentation reconciliation only. |
+| `05c78ac` | `[CONFIG] docs: reconcile post-f9 documentation state` — updates stale metadata in `PROJECT_STATE.md` and this handoff, keeps the Spanish translation of the dossier, and records the chronology explicitly. | Documentation reconciliation only. |
+| (this closure) | `[CONFIG] docs: close f9 owner decision gate` — adds `F9_OWNER_DECISIONS.md`, updates `PROJECT_STATE.md`, its compact mirror and this handoff to record owner resolutions F9-D01..F9-D05. | Documentation-only closure of the F9 owner decision gate. |
 
-The reconciliation does not alter the F9 research conclusion (`F9 NOT JUSTIFIED`), does not modify
-F7/F8 runtime, hooks, fixtures, evidence or regressions, and does not authorize F9 or F10
-implementation.
+None of these commits alter the F9 research conclusion (`F9 NOT JUSTIFIED`), modify F7/F8 runtime,
+hooks, fixtures, evidence or regressions, or authorize F9 or F10 implementation.
+
+## 21. F9 OWNER DECISION GATE CLOSURE
+
+On 2026-09-20 the owner closed the F9 decision gate. The full record is
+`docs/00_SYSTEM/F9_OWNER_DECISIONS.md`. The resolutions are:
+
+```text
+F9-D01 = A     Keep F9 implementation closed
+F9-D02 = B     Defer native Claude Code evidence until concrete trigger
+F9-D03 = B     Keep documentary candidates deferred
+F9-D04 = B     Require external requirement trigger for integrity work
+F9-D05 = A     Keep F10-F12 UNKNOWN / RESEARCH REQUIRED
+```
+
+**Consequences (all documentation-only; no runtime change):**
+
+- No F9 runtime implementation is authorized. F7 and F8 remain frozen; no deferred candidate is
+  promoted.
+- The native Claude Code lifecycle remains `NOT VERIFIED`. This is a knowledge boundary, not a
+  runtime defect. A future native probe requires a concrete trigger (deterministic G-B11
+  recurrence, a lost tool failure, a native integration decision, or another reproducible problem
+  requiring native evidence).
+- The documentary candidates `G-S1`, `G-S2`, `G-Bob-1`, `G-A1`, `G-N1` and `G-N2` remain deferred.
+  No micro-task or roadmap "cleanup" is opened. Reactivation requires an actual incident,
+  operational need, or housekeeping reason per item.
+- Integrity work on `A-05`, `A-07`, `G-N5` and equivalent trust-boundary expansions remains
+  deferred. The current Git + human reviewer trust boundary stands at this scale. External
+  triggers (audit, compliance, contractual requirement, customer requirement, owner-approved trust
+  boundary expansion, organizational change) enable research first — never automatic
+  implementation.
+- F10, F11 and F12 remain `UNKNOWN / NOT STARTED`. No phase contract is defined pre-emptively. The
+  naming of any future work (`F10`, `F9-b`, dedicated ADR, micro-phase, or another structure) is
+  decided when a real problem+evidence contract appears.
+
+**Preservation confirmed at closure:**
+
+- F7 runtime, evidence (`EV-001..EV-014`), regressions (`REG-001..REG-009`), checkpoint `47874a5`,
+  reports and audits — unchanged.
+- F8 runtime, evidence (`EV-015`, `EV-016`), regressions (`REG-010`, `REG-011`), closure checkpoint
+  `2cd7953`, post-audit, claim-vs-evidence and provenance documents — unchanged.
+- `F9_RESEARCH.md` at commit `bfe03b7` — unchanged.
+- Technical history dossier at `9a52875` — unchanged.
+- Reconciliation at `05c78ac` — unchanged.
+- Historical evidence hash `sha256:23325ab6…` — unchanged.
+
+**Next allowed action:** a new owner-driven project decision. Nothing in the current state, the F9
+research, or this closure obliges any further activity.
 
 **End of handoff. Read the canonical documents listed above for depth.**

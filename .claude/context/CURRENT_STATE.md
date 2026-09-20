@@ -19,7 +19,7 @@ Si difiere de PROJECT_STATE.md → PROJECT_STATE manda, este se actualiza.
 
 # CONTEXT PACK — CURRENT STATE
 
-**Actualizado:** 2026-09-19
+**Actualizado:** 2026-09-20
 
 ## Estado de fases
 ```
@@ -32,15 +32,28 @@ FASE 5: Integridad de estado y provenance → COMPLETA (PASS)
 FASE 6: Evals y mantenimiento → COMPLETA (PASS)
 FASE 7: Evidence Integrity + Behavioral Reliability → COMPLETA (VERIFIED)
 FASE 8: Cierre fail-closed de gaps F7 → COMPLETA (VERIFIED)
+FASE 9: RESEARCH COMPLETE → `F9 NOT JUSTIFIED`; owner decision gate CERRADO 2026-09-20
+FASE 10-12: UNKNOWN / NOT STARTED
 ```
 
-## Fase actual: 8 — Cierre fail-closed de gaps F7
+## Fase actual: 8 — Cierre fail-closed de gaps F7 (fase 9 en investigacion cerrada por owner)
 **Objetivo:** Cerrar A-03 y A-04, documentar A-06 y preservar la evidencia historica.
 **Bloqueantes:** NONE
 
+## F9 Owner Decision Gate
+```
+F9-D01 = A     Keep F9 implementation closed
+F9-D02 = B     Defer native Claude Code evidence (trigger required)
+F9-D03 = B     Keep documentary candidates deferred
+F9-D04 = B     External requirement trigger for integrity work
+F9-D05 = A     F10-F12 remain UNKNOWN / RESEARCH REQUIRED
+```
+Fuente: `docs/00_SYSTEM/F9_OWNER_DECISIONS.md` (2026-09-20).
+
 ## Control Plane
-**Version:** 1.0 — F8 COMPLETE / VERIFIED; native Claude Code NOT_VERIFIED
+**Version:** 1.0 — F8 COMPLETE / VERIFIED; F9 RESEARCH COMPLETE + OWNER GATE CLOSED; native Claude Code NOT_VERIFIED (deferido por F9-D02=B).
 
 ## Próximos pasos
 1. Mantener `evals/maintenance.sh` como gate previo a cambios.
-2. Investigar F9 antes de cualquier implementacion; no iniciar F9 automaticamente.
+2. No abrir F10 ni F9 implementation automaticamente; la proxima accion requiere nueva decision owner-driven con problema+evidencia concreto.
+3. Registrar cualquier trigger F9-D02/F9-D04 si aparece, y tratarlo como habilitador de investigacion, no de implementacion.
