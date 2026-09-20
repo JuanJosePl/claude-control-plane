@@ -1131,3 +1131,64 @@ Per §2 the only permitted external retrieval purposes were (A) reproducible com
 - F10: not opened.
 
 **END OF TERMINAL BUSINESS VALIDATION GATE AUDIT.**
+
+---
+
+## 27. Field Validation Gate — Round 0 result (2026-09-20)
+
+**Round 0 = preparation.** No interviews were conducted. Real-world evidence collection requires owner-initiated outreach. Claude cannot contact humans on behalf of the owner and does not fabricate interview content. This section documents (a) what was produced this pass, (b) what was NOT produced, and (c) preservation.
+
+### 27.1 What was produced
+
+- `docs/research/CLAUDE_CONTROL_PLANE_FIELD_VALIDATION_PACKET.md` — owner-action hand-off packet. Contains: targeting criteria (unchanged from prior), verbatim opening lines (operator + auditor variants), refined H3 / H4 / assurance-vs-control / root-problem question sequences from the master prompt, data-handling rules, anti-fabrication contract, level classification, sample-size guidance, and an explicit owner-only pre-contact checklist. **Contains no target names, no fabricated conversations, no synthetic quotes.**
+
+### 27.2 What was NOT produced
+
+- **No interview log** (`CLAUDE_CONTROL_PLANE_FIELD_VALIDATION_LOG.md` intentionally not created — creating one now with no real interviews inside would violate the master prompt §2 and §26).
+- **No customer names.** No fabricated persona, no composite persona.
+- **No purchase / procurement / WTP evidence.**
+- **No pilot request.**
+- **No buyer identification.**
+- **No Round 1 conducted.**
+
+### 27.3 Anti-labyrinth self-check (master prompt §27 checklist)
+
+| Question | Answer |
+|---|---|
+| Did we obtain real external evidence? | **NO** — real evidence requires owner outreach; Claude cannot execute it. |
+| Did we merely produce another strategy document? | Not primarily — the packet is a short instrument overlay (~200 lines), not a strategy essay; it exists to enable Round 1. |
+| Did we discover a recurring owned job? | NO — no interview occurred. |
+| Did we identify a real budget? | NO. |
+| Did anyone request an evaluation or pilot? | NO. |
+| Did we receive meaningful negative evidence? | NO — no interaction with real operators occurred. |
+| Did we accidentally pitch CCP? | NO. |
+| Did we accidentally defend the thesis? | NO — the packet explicitly forbids product-pitch openings and requires the interviewee to independently describe a job before any CCP hypothesis is introduced. |
+| Did we accidentally authorize engineering? | NO. |
+
+**Explicit statement per master prompt final:** **NO NEW MATERIAL BUSINESS EVIDENCE GENERATED THIS PASS.** Round 0 completes preparation only. Round 1 requires owner action.
+
+### 27.4 Preservation verification
+
+- HEAD before Field Validation Gate: `035a573`.
+- Files created: `docs/research/CLAUDE_CONTROL_PLANE_FIELD_VALIDATION_PACKET.md`.
+- Files modified: `docs/research/CLAUDE_CONTROL_PLANE_MARKET_VALIDATION_AUDIT.md` (this §27 appended).
+- **Runtime paths touched: none.**
+- `.claude/hooks/`, `.claude/settings.json`, `evals/`, `install.sh`, `PROJECT_STATE.md`, all registries: **unchanged.**
+- F7 (`47874a5`) / F8 (`2cd7953`) / F9 research (`bfe03b7`) / F9 owner gate (`10a60d9`) / market reconciliation (`0433d2c`) / closure loop (`07cc702`) / buyer-competitive gate (`5980863`) / zero-based (`01fe762`) / terminal validation (`035a573`): all present, all unchanged.
+- No competitor artifact touched (no repeat of Track A this pass).
+
+### 27.5 State summary
+
+- All prior classifications preserved.
+- Round 0 status: **PREPARATION COMPLETE**.
+- Round 1 status: **NOT STARTED — REQUIRES OWNER ACTION**.
+- Business thesis state: unchanged from Terminal Business Validation Gate §26.9. Multiple exit states coexist:
+  - `COMMERCIAL THESIS NOT SUPPORTED` for standalone-agent-control-plane form.
+  - `COMPETITIVE DIFFERENTIATION NOT OBSERVED` for H1/H2/H6 (post-AIGIS teardown).
+  - `COMPETITIVE DIFFERENTIATION OBSERVED` for H3/H5 (and H7 vs AIGIS only).
+  - `FIELD VALIDATION WARRANTED` for Wedge C (auditor toolkit).
+  - `OSS / STANDARD INVESTIGATION WARRANTED` for Wedge A / B.
+  - `INTERNAL ENGINEERING VALUE ONLY` remains fully viable.
+  - `INSUFFICIENT EVIDENCE` for any specific commercial direction absent field validation.
+
+**END OF FIELD VALIDATION GATE ROUND 0 AUDIT.**
