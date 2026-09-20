@@ -738,3 +738,118 @@ These limitations are **bounded uncertainty** (master prompt §25), not defects.
 ---
 
 **END OF CORRECTION LEDGER AND POST-CORRECTIONS RE-AUDIT.**
+
+---
+
+## 22. Independent evidence refresh (2026-09-20 closure loop)
+
+Per master prompt "FINAL MARKET THESIS CLOSURE LOOP", the audit and reconciliation were followed by a fresh independent retrieval pass targeted at the highest-materiality claims that previously carried `INCOMPLETE`, `PARTIAL`, `UNVERIFIED` or `DISPUTED` labels. This section records the audit consequences of that retrieval. The retrievals themselves are recorded in `docs/research/CLAUDE_CONTROL_PLANE_MARKET_SOURCES.md` (S-A..S-F). The report's new additive section `2026-09-20 INDEPENDENT MARKET RE-BASELINE` (RB-1..RB-7) contains the report-level effect.
+
+### 22.1 Retrieval scope and discipline
+
+- **Tools used:** `WebSearch` and `WebFetch`. No paid databases, no fabricated URLs.
+- **Prioritization:** master prompt §26 materiality rule — items where verification could change a strategic classification.
+- **Non-retrievals disclosed:** Gartner primary documents (paywall) remain not directly retrieved; parent-report `CR-02` labeling is the correct treatment. Retool 2026, JetBrains AI Pulse, DX Q4 2025, KPMG, Menlo Ventures 76%, GitGuardian State of Secrets Sprawl 2025 primary document, Gravitee April 2026 primary document not re-fetched.
+- **Author identity:** self-declared; not cryptographically proven (unchanged since §17).
+
+### 22.2 Source-integrity delta
+
+- **VERIFIED with primary or high-quality secondary URL:** GitHub Enterprise AI Controls GA (S-A-01); Cursor AIUC-1 + Schellman first-auditor (S-A-03..S-A-05); Claude Code hook system incl. blocking `TaskCompleted` (S-A-06); AGENTS.md + Linux Foundation AAIF (S-A-07); Zenity $125M Series C (S-B-04); MIT NANDA "The GenAI Divide: State of AI in Business 2025" incl. sample of 52 executive interviews + 153-leader survey + 300 public-deployment analysis (S-E-01); Replit / SaaStr incident (S-D-01); Claude Code issue #10077 and related destructive-delete issues at same repo (S-D-02); PocketOS + Cursor + Claude Opus 4.6 (S-D-04); **Claude 700 GB home-directory wipe — upgraded from `UNVERIFIED` to `VERIFIED` (S-D-05).**
+- **Still not upgraded:** Gartner primary docs (S-E-02, S-E-03); AWS Kiro attribution (still DISPUTED — S-D-03); MIT NANDA 67%/33% build-vs-buy success statistic (not surfaced during retrieval; remains `INCOMPLETE`).
+
+### 22.3 New material findings not present in parent report
+
+| ID | Finding | Materiality | Effect on prior audit conclusion |
+|----|---------|-------------|----------------------------------|
+| CL-1 | **`cd-aguilar/aigis-control-plane`** OSS project implements the same evidence-gate pattern (SHA-256 evidence bundle; Decision Engine that never reads agent claims; deterministic PASS/FAIL/NEEDS_HUMAN from evidence). 0 stars / 0 forks. Claude-specific. Apache-2.0. | MATERIAL | `POTENTIAL DIFFERENTIATOR (UNVALIDATED)` for evidence-gated completion → **NARROWED** to "concept not unique — implemented in at least one unadopted OSS project and formalized in 2026 academic literature; no adopted commercial equivalent found." |
+| CL-2 | **Six 2026 arXiv papers** independently formalize the pattern (verify-gated completion, deterministic control planes, decision-evidence maturity, framework-agnostic trust layers): S-C-01..S-C-07 (arXiv 2605.17998, 2606.26924, 2607.03516, 2605.25376, 2605.04093, 2606.20520, 2608.30519). | MATERIAL | Confirms convergence rather than divergence. Same effect as CL-1. |
+| CL-3 | **Fiddler AI, Aegis Platform, Forrester AEGIS Framework, aegis-ai-governance-platform-aws, killertcell428/aigis** — commercial and OSS competitors not in the parent report's competitor list. Fiddler and Aegis focus on observability + inline policy + identity/audit; not evidence-gate. | MODERATE | Competitive landscape denser than parent report suggested. `P8` weakened. |
+| CL-4 | **GuardFall (July 2026)** universal shell-injection design flaw affecting >500,000 OSS deployments incl. OpenHands, opencode, Goose, Cline, Roo-Code, Aider, Plandex, Open Interpreter, SWE-agent, Hermes. Root cause: text-vs-shell filter divergence. | MATERIAL for project's own architecture | Project's `bash-firewall.sh` shares the design surface exploited by GuardFall. Not an authorization issue today; future scaling trigger. Recorded as **ROB-F**. |
+| CL-5 | **Claude Code GitHub Action supply-chain poisoning (June 2026)** — chain of authorization bypass + indirect prompt injection + env-var exfiltration; Anthropic fixed in v1.0.94. | MODERATE | New incident class strengthens P-02; not authorization-relevant. |
+| CL-6 | **Wider incident tracker landscape** — Permission Protocol (98 documented incidents), OWASP Agentic AI Security Incidents Tracker, Accuro AI Litigation Tracker, Vectara awesome-agent-failures. | MODERATE | Parent report's "9 in 14 months" is an undercount; recorded as **ROB-I** (resolved as wording preserved with broader-count reference added). |
+| CL-7 | **Claude Code destructive-delete pattern** — beyond #10077, related issues #12637, #4331, #3275, #82471, #81273, #95414, #95426. Systemic pattern in `anthropics/claude-code`. | MODERATE | Strengthens P-02. |
+| CL-8 | **Anthropic safety harness itself caused Aug-2026 700 GB wipe** (Sebastien Guillemot) via mid-task model downgrade + variable-name collision. | MATERIAL | Weakens the "provider-native controls will absorb the gap" argument in one specific dimension while not authorizing new engineering. |
+| CL-9 | Claude Code `TaskCompleted` is officially documented as a **blocking hook (exit code 2 rolls back)**. The capability the project's `task-completed-evidence.sh` implements is *provider-native*; only the specific *evidence-registry + hash-coupling* pattern is Claude Control Plane-specific. | MODERATE | Was implicit in parent report; now explicit. Reinforces `PF-11`-type discipline (the capability boundary vs the implementation boundary). |
+
+### 22.4 Reclassification summary
+
+- `EVIDENCE-GATED COMPLETION` — **NARROWED** (CL-1, CL-2).
+- `COMPETITIVE LANDSCAPE` — **DENSER** (CL-3).
+- `P-02 DESTRUCTIVE-ACTIONS PROBLEM` — **STRENGTHENED** (CL-6, CL-7).
+- `PROVIDER-NATIVE-CONTROLS ADEQUACY` — **WEAKENED in one dimension** (CL-8).
+- `PROJECT'S OWN BASH-FIREWALL DESIGN` — **NEW EXPOSURE CLASS DOCUMENTED** (CL-4, recorded as ROB-F).
+
+None of these changes flips the overall report verdict.
+
+### 22.5 Anti-infinite-loop compliance
+
+Per master prompt §25 (max 2 targeted reconciliation loops):
+
+- **Loop 1** (this pass): retrieval + reclassification recorded above.
+- **Loop 2**: not initiated. New evidence materially changed the differentiation classification and the competitive-density classification but did not change the overall report verdict (`RESEARCH VALIDATED WITH LIMITATIONS`) or the engineering authorization state (`NO ENGINEERING JUSTIFIED`). Under §25 a second targeted pass would only run against a *specifically changed conclusion*; the changed classifications (differentiation narrowing; landscape densification) are directly explained by the retrieved evidence and do not require further retrieval to bound. Second loop would produce diminishing returns.
+
+### 22.6 Second-pass self-attack (master prompt §32)
+
+Applied to the closure loop itself.
+
+| # | Question | Answer |
+|---|---|---|
+| 1 | Did I rely on memory? | No — every material claim in RB-1..RB-7 and CL-1..CL-9 is traceable to a retrieval recorded in the source appendix. |
+| 2 | Did I use a projection as a current fact? | No — all Gartner numbers retained `EXTERNAL PROJECTION` label from CR-02. |
+| 3 | Did I use future-dated evidence as historical evidence? | No — all cited evidence is dated ≤ 2026-09-20. |
+| 4 | Did I use a vendor claim as independent evidence? | No — vendor pages (Fiddler, Aegis, Agentic Control Plane, OpenHands, TrueFoundry) are labeled as vendor sources; AIGIS's benchmark claims are recorded as its own declarations. |
+| 5 | Did I convert incident evidence into WTP evidence? | No — WTP remains `NOT ENOUGH EVIDENCE`. |
+| 6 | Did I equate feature presence with differentiation? | No — Fiddler and Aegis are recorded as "adjacent, not evidence-gate"; AIGIS is recorded as "concept match, zero adoption." |
+| 7 | Did I treat "not found" as "does not exist"? | No — `no adopted commercial equivalent found` is the current wording. |
+| 8 | Did I confuse market size with demand? | No — Zenity Series C and Gartner market-size numbers remain labeled adjacent, not direct product demand. |
+| 9 | Did I confuse buyer plausibility with buyer validation? | No — buyer status remains `PARTIALLY IDENTIFIED / NOT ENOUGH EVIDENCE`. |
+| 10 | Did I ignore custom/internal alternatives? | No — Retool build-vs-buy data preserved with its builder-sample caveat. |
+| 11 | Did I ignore provider absorption? | No — CL-8 explicitly captures a provider-native failure. |
+| 12 | Did I overstate architecture portability? | No — RB-2.1 notes `aigis-control-plane` is Claude-specific too. |
+| 13 | Did I create an objection that was already answered? | No — ROB-F..ROB-J are genuinely new. |
+| 14 | Did I fail to pursue a material contradiction? | The GuardFall + safety-harness-failure findings are followed through in ROB-F and CL-8; not ignored. |
+| 15 | Did I preserve uncertainty honestly? | Yes — WTP, buyer, pilot commitment, PMF, commercial success all remain in the "does not prove" list of RB-6. |
+| 16 | Did I modify runtime? | **No.** Confirmed at §22.7 below. |
+| 17 | Did I accidentally open a new engineering phase? | **No.** Engineering authorization state remains `NO ENGINEERING JUSTIFIED` (RB-7). |
+
+All answers to Q1–Q15 = No corrections triggered. Q16–Q17 = No stop condition triggered.
+
+### 22.7 Preservation verification
+
+- HEAD before closure loop: `0433d2c`.
+- Files changed by closure loop:
+  - `docs/research/CLAUDE_CONTROL_PLANE_MARKET_VALIDATION_REPORT.md` — appended `2026-09-20 INDEPENDENT MARKET RE-BASELINE` section (RB-1..RB-7). No prior content edited.
+  - `docs/research/CLAUDE_CONTROL_PLANE_MARKET_VALIDATION_AUDIT.md` — this section (§22) appended. No prior content edited.
+  - `docs/research/CLAUDE_CONTROL_PLANE_MARKET_SOURCES.md` — new file (S-A..S-F provenance appendix).
+- Runtime paths touched: **none.**
+- `.claude/hooks/`, `.claude/settings.json`, `evals/`, `install.sh`, `docs/00_SYSTEM/`, `PROJECT_STATE.md`, all registries: **unchanged.**
+- F7 checkpoint `47874a5`, F8 closure checkpoint `2cd7953`, F9 research checkpoint `bfe03b7`, F9 owner-gate closure `10a60d9`: **unchanged.**
+- New phase opened: **no.**
+- Implementation authorized: **no.**
+
+---
+
+## 23. Final research verdict (post-closure-loop)
+
+Master prompt §35 classification:
+
+**`RESEARCH VALIDATED WITH LIMITATIONS`** (unchanged from post-corrections re-audit at §21).
+
+Master prompt §33 "Research closed with bounded uncertainty" checklist:
+
+| Criterion | Result |
+|---|---|
+| Material source gaps either retrieved or explicitly bounded | ACHIEVED. Retrieved: 700 GB wipe, #10077, PocketOS, Replit, Cursor AIUC-1, Zenity $125M, GitHub AI Controls GA, AGENTS.md, MIT NANDA. Explicitly bounded (not retrieved): Gartner primary docs (paywall). |
+| Provider-native competition re-baselined | ACHIEVED (S-A-01..S-A-07; RB-2.4; CL-9). |
+| Competitor claims bounded | ACHIEVED (RB-2.2; CL-3). |
+| Major strategic hypotheses attacked | ACHIEVED (RB-4; §22.3 CL-8). |
+| Buyer/WTP uncertainty explicitly separated from desk evidence | ACHIEVED (RB-6; unchanged from earlier). |
+| Provider absorption risk explicitly modeled | ACHIEVED (RB-4 P7; CL-8). |
+| Internal build / do-nothing alternatives included | ACHIEVED (unchanged from parent report §10, §11). |
+| Remaining objections have closure categories | ACHIEVED (§18 + ROB-F..ROB-J). |
+| No unresolved objection is both material AND answerable from currently available desk evidence | ACHIEVED (all remaining materials require primary customer interviews or long-window provider observation). |
+| No additional desk research likely to change classification without new external events | ACHIEVED. |
+
+The closure loop is complete.
+
+**END OF CLOSURE-LOOP AUDIT.**

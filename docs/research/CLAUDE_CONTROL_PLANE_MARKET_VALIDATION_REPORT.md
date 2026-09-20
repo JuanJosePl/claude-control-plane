@@ -1236,6 +1236,138 @@ Pilot with a design partner producing: measurable frequency of evidence gate fir
 
 ---
 
-**END RESEARCH REPORT**
+---
+
+## 2026-09-20 INDEPENDENT MARKET RE-BASELINE
+
+> **Purpose.** This section preserves the historical report above without rewriting it, and records new material evidence retrieved during the Final Research Closure Loop on 2026-09-20. It is additive. Historical labels, historical conclusions, evidence classifications and objection register remain as originally written. Provenance for every claim in this section is in `docs/research/CLAUDE_CONTROL_PLANE_MARKET_SOURCES.md` (sections S-A..S-F).
+>
+> **Retrieval scope.** Fresh WebSearch + WebFetch retrieval targeted the highest-materiality claims per master prompt §5, §6, §7, §10 and §26. Retrievals were prioritized where verification could change a strategic classification (differentiation, competitive gap, provider absorption, incident population). No URL was fabricated. No number was altered. No historical conclusion was rewritten.
+
+### RB-1. Source-integrity delta
+
+Of the material claims previously labeled `INCOMPLETE`, `PARTIAL`, `UNVERIFIED` or `DISPUTED`, the closure loop upgraded traceability as follows:
+
+- **VERIFIED with primary or high-quality secondary URL (see appendix):** GitHub Enterprise AI Controls GA (S-A-01); Cursor AIUC-1 + Schellman first-auditor (S-A-03, S-A-04, S-A-05); Claude Code hook system incl. blocking `TaskCompleted` (S-A-06); AGENTS.md standard + Linux Foundation AAIF (S-A-07); Zenity $125M Series C (S-B-04); MIT NANDA "The GenAI Divide: State of AI in Business 2025" (S-E-01); Replit / SaaStr incident (S-D-01); Claude Code recursive-delete GitHub issue #10077 (S-D-02); PocketOS + Cursor + Claude Opus 4.6 (S-D-04); **Claude Fable 700 GB home-directory wipe — previously UNVERIFIED, now VERIFIED with multiple Tier-2 sources (S-D-05)**.
+- **Still not upgraded:** Gartner primary documents (paywall; parent report `CR-02` labeling as `EXTERNAL PROJECTION` remains correct — S-E-03); AWS Kiro attribution (still DISPUTED — S-D-03); Retool 2026 reports; JetBrains AI Pulse; DX Q4 2025; KPMG AI Pulse; Menlo Ventures 76% purchased.
+
+### RB-2. New material findings
+
+**RB-2.1 — Evidence-gate differentiator: partial contradiction**
+
+The parent report labeled *evidence-gated completion* as `POTENTIAL DIFFERENTIATOR (UNVALIDATED)` with the qualifier "No commercial product currently implements this as a first-class machine-readable loop for coding agent governance". The closure loop finds:
+
+- **Commercial products** (Fiddler AI, Aegis Platform, GitHub AI Controls, Zenity, TrueFoundry, Agentic Control Plane, OpenHands Enterprise): none directly implement *evidence-gated DONE with SHA-256 registry* as their core primitive. Fiddler AI (S-B-05) and Aegis Platform (S-B-06) offer *observability + evaluation + inline policy enforcement* and *identity + policy + memory + audit* respectively — adjacent, not identical. The report's *commercial* differentiation claim survives.
+- **Open-source implementation exists that matches the pattern:** `cd-aguilar/aigis-control-plane` (S-B-09) — "deterministic Decision Engine that computes PASS/FAIL/NEEDS_HUMAN from evidence, never from the agent's own claim", SHA-256 evidence bundle, Decision Engine formula `contract_valid ∧ policy_ok ∧ tests_pass ∧ lint_pass ∧ scope_ok ∧ resource_limits_ok ⇒ PASS`, Apache-2.0, Claude-specific, **0 stars / 0 forks** at retrieval date. Adoption is effectively zero, but the *concept* has been independently instantiated.
+- **Academic corpus formalizes the pattern independently:** at least six 2026 arXiv papers describe verify-gated completion, deterministic control planes, decision-evidence maturity, and framework-agnostic trust layers (S-C-01..S-C-07). This is convergence, not divergence.
+
+**Net classification after closure loop:**
+- `EVIDENCE-GATED COMPLETION` differentiation status → **NARROWED** from `POTENTIAL DIFFERENTIATOR (UNVALIDATED)` to `CONCEPT NOT UNIQUE — IMPLEMENTED IN AT LEAST ONE UNADOPTED OSS PROJECT AND FORMALIZED IN 2026 ACADEMIC LITERATURE; NO ADOPTED COMMERCIAL EQUIVALENT FOUND`. This is a narrower and more defensible claim than the parent report's original phrasing.
+
+**RB-2.2 — Additional commercial competitors identified (not in parent report)**
+
+- **Fiddler AI — "AI Control Plane"** (S-B-05). Positions across creation layer *and* production layer for first-party, third-party and coding agents. Focus: observation, evaluation, inline policy enforcement. Not evidence-gate. Multi-provider integrations (Amazon SageMaker AI, Google Cloud, NVIDIA NIM, Databricks).
+- **Aegis Platform (aegisplatform.ai)** (S-B-06). "The Control Plane for Enterprise AI." Cryptographic identity per agent (Insignia); Five-layer policy (Arbiter); CortexDB memory; tamper-evident signed audit chain. Three-tier commercial pricing. Framework-agnostic (LangChain, CrewAI, AutoGen, Custom SDK, MCP).
+- **Forrester AEGIS Framework** (S-B-07). Analyst-published governance framework, not a product.
+- **Aegis AI Governance Platform for AWS** (github.com/virtualryder/aegis-ai-governance-platform-aws) (S-B-08). OSS. Deny-by-default authorization gateway; compliance overlay packs (CJIS, FedRAMP, HIPAA, FERPA, SOC 2); token budgets with chargeback; tamper-evident audit.
+- **Aigis (killertcell428/aigis)** (S-B-10). Zero-dependency Python firewall for AI agents; 44 compliance templates.
+- **Drata "The Agentic Control Plane: A Complete Guide"** (S-B-11). Category-language now used by compliance vendors.
+
+**Net classification after closure loop:**
+- `COMPETITIVE LANDSCAPE` → **DENSER than parent report suggested** at the "control plane" / "governance layer" tier. Competitive gap narrows accordingly.
+
+**RB-2.3 — New security incident classes not in parent report**
+
+- **GuardFall (S-D-06).** Universal shell-injection design flaw disclosed July 2026. Cloud Security Alliance + The Hacker News + Adversa AI. Affects >500,000 open-source deployments. Vulnerable coding agents: opencode, Goose, Cline, Roo-Code, Aider, Plandex, Open Interpreter, OpenHands, SWE-agent, Hermes. Root cause: **"Tools check commands as plain text, while bash rewrites that text before it runs — the shell strips quotes and expands shortcuts, so the filter and the shell end up looking at two different things."** This is directly relevant to Claude Control Plane's `bash-firewall.sh`, which uses plain-text-regex filtering. F7/F8 covered specific whitespace and case variants but did not address this systematic class. **This is a MATERIAL security finding for the project's own architecture** and belongs on a future roadmap trigger, not in this report's authorization scope.
+- **Claude Code GitHub Action supply-chain poisoning (S-D-07).** June 2026. Chain of authorization bypass + indirect prompt injection + env-variable exfiltration. Anthropic fixed in Claude Code GitHub Actions v1.0.94.
+- **Broader incident-count baseline.** Permission Protocol's public tracker (S-D-09) reports **98 documented incidents**; OWASP maintains an Agentic AI Security Incidents Tracker (S-D-08); Accuro AI maintains an AI Agent Incident & Litigation Tracker (S-D-10). The parent report's "9 documented cases in 14 months" (attributed to Adversa AI) is likely an undercount when measured against the wider tracker landscape.
+- **Claude Code destructive-delete pattern.** Beyond issue #10077, the same repo hosts related destructive-delete issues #12637, #4331, #3275, #82471, #81273, #95414, #95426 (S-D-02). This is a *pattern* in Claude Code, not a set of unrelated one-off incidents.
+- **Anthropic safety harness itself caused the August 2026 700 GB wipe** (S-D-05). "Anthropic's automated safety harness judged the task risky enough to downgrade the model mid-task before the cleanup step ran. The cleanup code reused the same variable name as the test itself — a collision that pointed the 'safe' deletion at the real home directory." **The safety mechanism produced the failure.** This is material for the report's provider-native-controls discussion (§8 of parent report) and strongly qualifies the confidence one can place in provider-native governance alone.
+
+**Net classification after closure loop:**
+- `P-02 DESTRUCTIVE-ACTIONS PROBLEM STATUS` → **STRENGTHENED** — more incidents, broader trackers, systemic patterns.
+- `PROVIDER-NATIVE-CONTROLS ADEQUACY` → **WEAKENED** — one high-profile 2026 incident was caused by the provider's own safety mechanism, not merely uncaught by it.
+- `Claude Control Plane's own bash-firewall.sh regex approach` → **NEW EXPOSURE class documented** (GuardFall). Not a defect at issuance; a fresh trigger for future research if the project ever leaves the personal-use scale.
+
+**RB-2.4 — Provider-native controls updated**
+
+- **Claude Code hook system:** officially documents `TaskCompleted` as a blocking hook (exit code 2 rolls back). The capability the project's `task-completed-evidence.sh` implements is *provider-native*; the *specific evidence-registry + hash-coupling* pattern is the project's contribution.
+- **Claude Code hook events:** current documentation describes ~30 lifecycle events (parent report referenced 8 wired by the project); the project uses a subset, and that subset choice is deliberate, not a coverage gap in Claude Code itself.
+- **AGENTS.md** (S-A-07): OpenAI-released August 2025; Linux Foundation Agentic AI Foundation formed December 2025 with AGENTS.md + MCP + `goose` as founding contributions; 60,000+ repos; 30+ agent tools read it. As of March 2026 Claude Code read `CLAUDE.md` but not natively `AGENTS.md`; parent report's claim of "AGENTS.md support: added September 18, 2026" was not corroborated in retrievable primary sources during this pass and remains `PARTIAL` traceability.
+
+### RB-3. Effect on the parent report's final classifications
+
+| Claim category | Parent report classification | Closure-loop classification | Direction of change |
+|---|---|---|---|
+| Real problem exists | SUPPORTED | SUPPORTED (STRENGTHENED — additional trackers, broader incident population, systemic delete pattern) | Stronger |
+| Problem is painful at project-local scale | PARTIALLY SUPPORTED | PARTIALLY SUPPORTED (unchanged; no primary interview evidence yet) | Unchanged |
+| Current alternatives insufficient | PARTIALLY SUPPORTED | PARTIALLY SUPPORTED (nuanced — safety-harness caused own incident) | Slight strengthening on the "provider-native alone is not enough" side; weakening on the "no commercial equivalent" side |
+| Specific user identified | PARTIALLY SUPPORTED | PARTIALLY SUPPORTED (unchanged) | Unchanged |
+| Specific buyer identified | NOT ENOUGH EVIDENCE | NOT ENOUGH EVIDENCE (unchanged) | Unchanged |
+| Commercial signal in the market category | SUPPORTED | SUPPORTED (STRENGTHENED — Zenity $125M Series C verified with primary; Fiddler + Aegis add category density) | Stronger |
+| Commercial signal for the specific product | NOT ENOUGH EVIDENCE | NOT ENOUGH EVIDENCE (unchanged) | Unchanged |
+| Willingness to pilot | NOT ENOUGH EVIDENCE | NOT ENOUGH EVIDENCE (unchanged) | Unchanged |
+| Willingness to pay | NOT ENOUGH EVIDENCE | NOT ENOUGH EVIDENCE (unchanged) | Unchanged |
+| Product differentiation vs. commercial alternatives | PARTIALLY SUPPORTED (potential differentiators exist; not yet externally validated) | PARTIALLY SUPPORTED — **NARROWED**: evidence-gated completion concept is not unique (matched by `aigis-control-plane` + 6 academic papers); no *adopted commercial equivalent* found; project's differentiator is now "unique execution and track record at zero adoption," not "unique concept" | Weakened |
+| Provider absorption risk | PARTIALLY SUPPORTED | PARTIALLY SUPPORTED (unchanged; provider trajectory continues but native controls have themselves failed high-profile at least once) | Unchanged |
+| Multi-provider requirement | SUPPORTED | SUPPORTED (unchanged) | Unchanged |
+| "Do nothing" viable substitute | SUPPORTED | SUPPORTED (unchanged) | Unchanged |
+
+**Overall research-quality verdict (post-closure-loop):** `RESEARCH VALIDATED WITH LIMITATIONS`, unchanged. The parent report's central classifications survive the closure loop. The main qualitative change is that the *evidence-gate differentiation claim* is now more precisely and more narrowly worded.
+
+### RB-4. Falsification tests (master prompt §21) — updated
+
+| Proposition | Parent classification | Post-closure-loop |
+|---|---|---|
+| P1 — The problem is real | SUPPORTED | **SUPPORTED (STRENGTHENED)** — broader incident base; ongoing pattern in Claude Code itself. |
+| P2 — The problem is recurring | SUPPORTED | **SUPPORTED (STRENGTHENED)** — multi-issue destructive-delete pattern in `anthropics/claude-code`. |
+| P3 — The problem is expensive | PARTIALLY SUPPORTED | PARTIALLY SUPPORTED — still no primary cost measurement per victim organization. |
+| P4 — The problem is owned by a buyer | NOT ENOUGH EVIDENCE | **NOT ENOUGH EVIDENCE** (unchanged). |
+| P5 — Current workarounds inadequate | PARTIALLY SUPPORTED | **PARTIALLY SUPPORTED (STRENGTHENED)** — provider safety harness itself failed in Aug 2026 700 GB incident. |
+| P6 — The gap is durable | PARTIALLY SUPPORTED | **PARTIALLY SUPPORTED (WEAKENED)** — providers continue to close it; Fiddler + Aegis + Agentic Control Plane + GitHub AI Controls active. |
+| P7 — Providers will not absorb it quickly | PARTIALLY SUPPORTED | PARTIALLY SUPPORTED — unchanged; native `TaskCompleted` blocking is provider-shipped, so a specific evidence-registry could be provider-native inside a 12–24 month window. |
+| P8 — Existing control-plane products will not absorb | PARTIALLY SUPPORTED | **PARTIALLY SUPPORTED (WEAKENED)** — more control-plane products identified. |
+| P9 — Capability is technically portable | PARTIALLY SUPPORTED | PARTIALLY SUPPORTED — unchanged; academic literature shows the pattern is portable in theory. |
+| P10 — Buyers would deploy it | NOT ENOUGH EVIDENCE | NOT ENOUGH EVIDENCE (unchanged). |
+| P11 — Buyers would pay for it | NOT ENOUGH EVIDENCE | NOT ENOUGH EVIDENCE (unchanged). |
+| P12 — Project contains a defensible asset | PARTIALLY SUPPORTED | **PARTIALLY SUPPORTED (NARROWED)** — the *concept* is not defensible on its own; the *specific execution track record + phase discipline + fail-closed integrity + regression suite* remains a distinct engineering asset, but its commercial defensibility is not established. |
+
+### RB-5. Objection register — closure-loop update
+
+Additions and re-classifications resulting from the closure loop:
+
+| ID | Objection | Status after closure loop |
+|---|---|---|
+| ROB-F | GuardFall universal shell-injection class exposes plain-text-regex bash-firewall design; Claude Control Plane's `bash-firewall.sh` shares the same design surface. | **ACCEPTED LIMITATION for current project scope (personal / research); LIMITATION IF PROJECT EVER SCALES.** Not authorization-relevant now; future trigger if project ever expands beyond current use. |
+| ROB-G | AIGIS Control Plane implements the same evidence-gate pattern as Claude Control Plane in OSS form; contradicts "no OSS equivalent" wording. | **RESOLVED (WORDING NARROWED IN RB-2.1).** Adoption is zero, but the pattern is not unique. |
+| ROB-H | Provider safety harnesses have themselves caused destructive incidents (Aug 2026 700 GB); provider-native governance is not sufficient by itself. | **ACCEPTED LIMITATION** — reinforces the "cross-tool + auditable" argument, but does not by itself validate any specific product. |
+| ROB-I | The wider incident-tracker landscape (98 in Permission Protocol; OWASP; Accuro AI) suggests the parent report's "9 in 14 months" was undercount. | **RESOLVED — parent report's number preserved as originally cited; closure loop adds a broader-count reference.** |
+| ROB-J | Additional commercial competitors exist (Fiddler AI, Aegis Platform, Forrester AEGIS Framework, aegis-ai-governance-platform-aws) not identified in parent report. | **ACCEPTED LIMITATION** — parent competitor list was incomplete; competitive landscape denser than reported. |
+
+No previously classified objection is silently re-opened or silently removed. `ROB-A..ROB-E` from the audit remain valid.
+
+### RB-6. What this closure loop does NOT prove
+
+Explicitly preserved (master prompt §29):
+
+- No primary customer / buyer interviews were performed. No new WTP evidence exists.
+- No pilot was launched. No design partner was engaged.
+- No competitor was independently tested; the addition of Fiddler AI and Aegis Platform to the competitor list is based on vendor documentation, not on independent capability tests.
+- No AIGIS Control Plane installation or benchmark was run; the pattern-match is based on the repository's README/description, not on running the software.
+- No arXiv paper's practical implementation was independently reproduced.
+- No new architecture, hook, agent, skill, rule, registry or dependency was created.
+- No F10 was opened. No engineering was authorized.
+
+### RB-7. Engineering authorization state — unchanged
+
+```
+ENGINEERING JUSTIFICATION AFTER CLOSURE LOOP: NO ENGINEERING JUSTIFIED
+```
+
+The closure loop's net effect on engineering authorization is **null**. Strengthening of P1/P2/P5 does not by itself authorize new engineering; weakening of P6/P8/P12 does not by itself authorize freezing or productization. Owner discretion over project direction is preserved.
+
+---
+
+**END RESEARCH REPORT (post-closure-loop, 2026-09-20)**
 
 *Research performed: 2026-09-20. Output is research truth state only. No implementation, roadmap, architecture, or code recommendation is made. Owner decides all subsequent actions.*
