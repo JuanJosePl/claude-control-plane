@@ -940,3 +940,100 @@ No objection was silently removed. No `RESEARCH MORE` label used; every residual
 The buyer + competitive reality gate does not resolve buyer/WTP/PMF uncertainty; it produces the *instruments* to resolve them in the real world. The classification of every remaining uncertainty is now tied to a specific, owner-initiated evidence-generating action.
 
 **END OF BUYER + COMPETITIVE REALITY GATE AUDIT.**
+
+---
+
+## 25. Zero-Based Thesis Reconstruction (2026-09-20 labyrinth exit)
+
+Audit consequences of the "Labyrinth Exit / Zero-Based Thesis Reconstruction" pass. Fresh 2026-09-20 web retrievals plus a systematic attempt to *falsify* the CCP commercial thesis. Sources: `docs/research/CLAUDE_CONTROL_PLANE_MARKET_SOURCES.md` §S-A extensions below (S-A-08..S-A-12); ZB-* section in the report.
+
+### 25.1 New material evidence retrieved
+
+- **Microsoft Agent 365 GA 2026-05-01** — $15/user/mo standalone or in ME7 licence; explicitly branded "The Control Plane for Agents"; cross-platform coverage; July 2026 updates added multi-tenant, ecosystem discovery, adoption insights. (S-A-08)
+- **Microsoft Entra Agent ID GA** — every agent identity requires a human sponsor accountable for lifecycle and access reviews; automatic sponsorship transfer if sponsor leaves; Conditional Access + lifecycle + access governance extended to agents. **Directly answers H7 (human accountability / reviewer identity) at hyperscaler scale.** (S-A-09)
+- **Salesforce / MuleSoft Agent Fabric** — since September 2025; April 2026 expansion: automated cross-platform agent discovery, drag-and-drop authoring, guided-determinism guardrails, centralized LLM governance; multi-vendor (Agentforce, Bedrock, Microsoft Foundry, OpenAI, Gemini); named enterprise customers Capita, Alcon, Diabsolut; "thousands of agentic instances" managed. (S-A-10)
+- **Boomi Agent Control Plane GA 2026-09-02** — vendor- and model-neutral; human-in-loop approvals + token cost management + data lineage; cited buyer signal: "only 34% of leaders trust their agents' actions" and "$2.1M average premature-deployment cost". (S-A-11)
+- **Academic assurance corpus dense** — arXiv 2607.05397 (Proof of Execution), arXiv 2609.16302 (Assurance Envelopes for Autonomous Coding Agents — essentially the CCP thesis formalized academically September 2026), Applied Technology Index 2026 comparative analysis; RASE 2026 subfield at ASE; Cloudsmith 2026 supply-chain guide "from static SBOMs to agentic governance"; standards SLSA / in-toto / Sigstore / TRACE v0.2. (S-A-12 collective)
+
+### 25.2 Effect on prior audit classifications
+
+| Prior classification | Zero-based effect | Direction |
+|---|---|---|
+| DIFFERENTIATION = "PARTIALLY SUPPORTED — evidence-gate concept not unique; execution unique pending V-02" | ZB-1 HB-3/HB-9 confirms provider absorption is already occurring across governance/identity/audit; only hash-coupled evidence-gate remains not-yet-native at commercial tier. Execution-uniqueness claim materially weaker after ZB-4 counterfactual. | Weakened |
+| BUYER = "PARTIALLY IDENTIFIED / NOT ENOUGH EVIDENCE" | Hyperscaler platforms have documented enterprise buyers (Capita, Alcon, Diabsolut for Salesforce; Microsoft 365 E7 licensees for Agent 365). Buyers for the *category* are L5–L7. Buyers for CCP-*specific* framing are still L0–L1. **Overlap between category-buyer and CCP-buyer at desk level: zero.** | No CCP-specific upgrade; category further validated. |
+| WTP = NOT ENOUGH EVIDENCE for CCP | Boomi's $2.1M premature-deployment average and Microsoft Agent 365 $15/user/mo are *category* WTP anchors, not CCP-specific. | Preserved. |
+| COMMERCIAL THESIS | Introduced as `COMMERCIAL THESIS NOT SUPPORTED` for the standalone-agent-control-plane form (ZB-16). Simultaneously introduced `THESIS REQUIRES REFRAMING`, `OSS / STANDARD INVESTIGATION WARRANTED`, `FIELD VALIDATION WARRANTED`, and `INTERNAL ENGINEERING VALUE ONLY` as coexisting exit states. | Materially changed — the standalone-product framing is falsified; reframing hypotheses (Wedges 1–4) are now on record. |
+| ENGINEERING AUTHORIZATION | Unchanged: `NO ENGINEERING JUSTIFIED`. | Preserved. |
+
+### 25.3 Objection register update
+
+New residual objections resulting from the zero-based pass:
+
+| ID | Objection | Status |
+|---|---|---|
+| ROB-N | Provider absorption of governance, identity, audit and human sponsor is already GA in 2026 across Microsoft, Salesforce, Boomi, GitHub. The CCP thesis in its current form is falsified as *category* competitor. | **RESOLVED (thesis falsified for that form).** The report's ZB-14 states the case AGAINST verbatim. Recorded as an evidence-based reclassification, not a defect. |
+| ROB-O | The most honest reframing is *assurance-primitive* / *methodology*, not *control plane*. This is a hypothesis, not a validated direction. | **REQUIRES FIELD VALIDATION** via Wedge-3 auditor conversation (ZB-17). |
+| ROB-P | GuardFall (July 2026) exposes CCP's own `bash-firewall.sh` design surface class-level. Not a Claude Control Plane bug at issuance; an accepted architectural limitation if the project ever leaves personal scope. | **ACCEPTED LIMITATION at current personal / research scale**; would be a **BLOCKER** if the project attempted commercial deployment without redesign. |
+| ROB-Q | arXiv 2609.16302 (Sept 2026) formalizes the "assurance envelope for autonomous coding agents" pattern academically. Independent academic instantiation weakens the CCP-as-novel-concept claim further. | **RESOLVED** — recorded as concept-uniqueness downgrade. |
+
+No previously closed objection has been silently re-opened. All prior residuals (ROB-01..ROB-04, ROB-A..ROB-M) remain valid and unchanged.
+
+### 25.4 Self-audit against master-prompt §54 checklist
+
+| # | Question | Answer |
+|---|---|---|
+| 1 | Did we accidentally defend the original thesis? | No — ZB-1 attempted to falsify each of HB-1..HB-10. Five falsifications strongly supported; three partial; two insufficient data. |
+| 2 | Did we treat implementation uniqueness as commercial differentiation? | No — ZB-2 and ZB-9 explicitly separate execution-uniqueness from defensibility. |
+| 3 | Did we use market momentum as customer validation? | No — Microsoft Agent 365 / Salesforce / Boomi commercial signals are treated as *category* validation and *absorption evidence*, not as CCP-specific customer validation. |
+| 4 | Did we assume Platform Engineering is the buyer? | No — the fresh Boomi data reframes toward *"leaders" and "34% trust"*; ZB-3 records the CCP-specific buyer at L0–L1 across desk evidence. |
+| 5 | Did we assume AppSec is the buyer? | No — same. |
+| 6 | Did we treat evidence-gated DONE as the root problem? | No — ZB-6 explicitly disassembles the DONE claim into upstream causes; classifies evidence-gate as a *secondary control*. |
+| 7 | Did we test whether DONE is merely a symptom? | Yes — ZB-6 answers that it *is* a symptom of upstream discipline failures. |
+| 8 | Did we include unrelated problem spaces? | Yes — Wedges 1–4 in ZB-8 (portable assurance evidence format; failure regression corpus; auditor toolkit; methodology-first publication). |
+| 9 | Did we search for budget evidence? | Yes — hyperscaler pricing anchors ($15/user/mo Microsoft Agent 365; Zenity $125M; Boomi $2.1M cost anchor) recorded. No CCP-specific budget owner identified. |
+| 10 | Did we include internal build? | Yes — Retool 2026 build-vs-buy signal preserved; AIGIS as existence proof of internal build. |
+| 11 | Did we include do-nothing? | Yes — retained from prior BC-3 substitute matrix. |
+| 12 | Did we include provider-native controls? | Yes — ZB-0 lists Microsoft Agent 365, Entra Agent ID, GitHub AI Controls, Cursor, Claude Code hooks as active controls. |
+| 13 | Did we include platform consolidation? | Yes — ZB-10 identifies the market direction as *platform consolidation*, not fragmentation. |
+| 14 | Did we search for failure of the category? | Yes — ZB-10 modes: consolidation, tool sprawl, developer resistance, small TAM for compliance, hard-to-monetize standards work. |
+| 15 | Did we test the AIGIS implementation seriously? | Partially — the closure loop (CL-1) captured concept-and-schema match at README level. A runnable AIGIS test is deferred to the Competitive Teardown Protocol §8 special drill; per §55 anti-labyrinth rule, a runnable AIGIS test is a future evidence action, not a current desk-research step. |
+| 16 | Did we separate concept uniqueness from execution uniqueness? | Yes — ZB-1 and ZB-4 keep them separate throughout. |
+| 17 | Did we fabricate customer evidence? | No. |
+| 18 | Did we fabricate WTP? | No. |
+| 19 | Did we modify runtime? | No. Confirmed at §25.5. |
+| 20 | Did we open F10? | No. |
+
+All answers to Q1–Q18 are consistent with the discipline. Q19–Q20 no.
+
+### 25.5 Preservation verification
+
+- HEAD before zero-based pass: `5980863`.
+- Files modified: `docs/research/CLAUDE_CONTROL_PLANE_MARKET_VALIDATION_REPORT.md` (ZB-0..ZB-20 appended, no prior content edited); `docs/research/CLAUDE_CONTROL_PLANE_MARKET_VALIDATION_AUDIT.md` (this §25 appended); `docs/research/CLAUDE_CONTROL_PLANE_MARKET_SOURCES.md` (S-A-08..S-A-12 rows appended, prior rows preserved).
+- Files created: none.
+- Runtime paths touched: **none.**
+- `.claude/hooks/`, `.claude/settings.json`, `evals/`, `install.sh`, `PROJECT_STATE.md`, all registries: **unchanged.**
+- F7 (`47874a5`) / F8 (`2cd7953`) / F9 research (`bfe03b7`) / F9 owner gate (`10a60d9`) / market reconciliation (`0433d2c`) / closure loop (`07cc702`) / buyer-competitive gate (`5980863`): **all unchanged.**
+- New phase opened: **no.**
+- Implementation authorized: **no.**
+- Competitor experiments run inside the project: **none.**
+
+### 25.6 Anti-labyrinth compliance (master prompt §55)
+
+Terminal desk-research pass. Post-pass triggers required for any further research:
+
+1. Real customer evidence arrives (interview, procurement outreach, unsolicited inbound).
+2. Reproducible competitor teardown produces a result that changes a material classification (per Competitive Teardown Protocol).
+3. Major external market event materially changes the thesis (e.g., Anthropic ships a native hash-registered evidence-gate; a hyperscaler acquires AIUC).
+4. Owner explicitly opens a new research question.
+
+Absent any of the four, `RESEARCH LOOP = CLOSED`.
+
+### 25.7 Final research verdict (post zero-based pass)
+
+`RESEARCH VALIDATED WITH LIMITATIONS` — for the research artifact quality.
+
+`RESEARCH CLOSED WITH BOUNDED UNCERTAINTY` — for the market-evidence state.
+
+**Newly recorded:** the standalone-agent-control-plane commercial thesis (Model B from BC-9 as originally framed) is **`COMMERCIAL THESIS NOT SUPPORTED`** by 2026-09-20 evidence. Simultaneously multiple non-product exit states are supported: `THESIS REQUIRES REFRAMING`, `OSS / STANDARD INVESTIGATION WARRANTED`, `FIELD VALIDATION WARRANTED` (Wedge-3), `INTERNAL ENGINEERING VALUE ONLY`. These are evidence classifications, not recommendations. The owner selects among them or accepts multiple simultaneously.
+
+**END OF ZERO-BASED RECONSTRUCTION AUDIT.**

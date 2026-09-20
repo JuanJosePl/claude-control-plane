@@ -1638,4 +1638,387 @@ The customer discovery and competitive teardown protocols are the next evidence-
 
 **END BUYER + COMPETITIVE REALITY VALIDATION GATE (post-buyer-gate, 2026-09-20)**
 
+---
+
+## 2026-09-20 ZERO-BASED THESIS RECONSTRUCTION — LABYRINTH EXIT
+
+> **Purpose.** This section is additive. It attempts to *kill* the Claude Control Plane commercial thesis using fresh 2026-09-20 external evidence, and to reconstruct — from zero — the strategic thesis without any presumption that the current product framing is correct. Historical conclusions above are preserved verbatim. New provenance is captured in the source appendix.
+>
+> **Discipline:** Per master prompt §2, treat the commercial hypothesis as FALSE unless the evidence rebuilds it. Per §3, the unit of differentiation is *outcome, not code novelty*. Per §55, this is the terminal desk-research pass; further loops require real customer or reproducible-competitor evidence.
+
+### ZB-0. What changed since the previous pass
+
+Fresh retrieval on 2026-09-20 confirms the "agent control plane" category is now occupied by hyperscalers and mid-market platform vendors:
+
+- **Microsoft Agent 365 — GA 2026-05-01, $15/user/month standalone or bundled in Microsoft 365 E7.** Explicitly named "The Control Plane for Agents" by Microsoft. Cross-platform coverage (Microsoft 1st-party + org-built + third-party agents). Provides centralized governance, security, observability. July 2026 updates added partner risk signals, cross-tenant central management, org-wide adoption insights, and ecosystem-wide agent discovery. (Sources: `microsoft.com/en-us/security/blog/2026/05/01/microsoft-agent-365-now-generally-available…`; `techcommunity.microsoft.com/blog/agent-365-blog/whats-new-in-agent-365-%E2%80%93-july-2026/`; `forbes.com/sites/janakirammsv/2026/06/09/microsoft-makes-governance-the-gate-for-enterprise-ai-agents/`.)
+- **Microsoft Entra Agent ID — GA.** Every agent gets a policy-controlled identity, and *every agent identity requires a human sponsor accountable for its purpose, lifecycle decisions, and access reviews. If the sponsor leaves, sponsorship automatically transfers to their manager.* Conditional Access, lifecycle management, access governance and network controls extend from the human-workforce Entra to agents. (Sources: `microsoft.com/en-us/security/business/identity-access/microsoft-entra-agent-id`; `learn.microsoft.com/en-us/entra/id-governance/agent-id-governance-overview`; `techcommunity.microsoft.com/blog/microsoft-entra-blog/govern-ai-agent-identities-and-access-the-same-way-you-govern-your-employees/…`.) **This is the operational answer to CCP H7 (human accountability / reviewer identity) at hyperscaler scale.**
+- **Salesforce / MuleSoft Agent Fabric.** Launched September 2025; April 2026 expansion adds automated agent discovery across third-party platforms, drag-and-drop workflow canvas, rules-based "guided determinism" guardrails for multi-agent orchestration, and a centralized LLM governance layer. Multi-vendor: Salesforce Agentforce, Amazon Bedrock, Microsoft Foundry, OpenAI, Gemini. Named enterprise customers include Capita, Alcon, Diabsolut. Managed "thousands of agentic instances" per Salesforce. (Sources: `salesforce.com/news/stories/agent-fabric-control-plane-announcement/`; `salesforce.com/mulesoft/agent-fabric/`; `futurumgroup.com/insights/salesforce-stakes-out-multi-vendor-agent-control-plane…`.)
+- **Boomi Agent Control Plane — GA 2026-09-02** (18 days before this research). Vendor- and model-neutral. Human-in-loop approvals, token cost management, data lineage tracking. Cited stat inside the launch: "only 34% of leaders trust the actions their agents take"; "organizations that deployed prematurely reported an average of $2.1M in added cost." (Sources: `boomi.com/platform/agent-control-plane/`; `itbrief.com.au/story/boomi-launches-ai-agent-control-plane-for-enterprises`; `erp.today/boomis-agent-control-plane-targets-the-governance-gap-stalling-enterprise-ai/`.)
+- **Academic assurance corpus is now dense.** New 2026 arXiv material includes: 2607.05397 *Proof of Execution: Runtime Verification for Governed AI Agent Actions*; 2609.16302 *Assurance Envelopes for Autonomous Coding Agents: Minimum-Cost Evidence for Software Change* — a September 2026 paper describing essentially the CCP thesis in generic form; the Applied Technology Index *2026 Comparative Analysis: Runtime Attestation and Verifiable Execution Evidence for AI Agents*; RASE 2026 at the ASE conference formally establishing "Reliable and trustworthy Automated Software Engineering" as a subfield. Cloudsmith's 2026 supply-chain guide is titled "*from static SBOMs to agentic governance*." Existing standards (in-toto, SLSA, Sigstore, TRACE v0.2) already cover most of what CCP's "evidence gate + provenance" pattern claims.
+
+The material implication:
+
+```
+"Agent control plane" is no longer an empty category.
+It is a fully-populated hyperscaler category with
+GA products from Microsoft, Salesforce, Boomi, GitHub,
+plus commercial startups (Zenity, Agentic Control Plane,
+Fiddler AI, Aegis Platform), plus OSS (OpenHands, AIGIS),
+plus academic formalizations (multiple 2026 arXiv papers),
+plus emerging standards (AIUC-1, RASE, MCP, AGENTS.md).
+```
+
+### ZB-1. Falsification attempts against the current thesis (master prompt §2)
+
+Applied as **attacks**, not defenses.
+
+| # | Falsification hypothesis | Fresh evidence FOR the falsification | Fresh evidence AGAINST | Verdict |
+|---|---|---|---|---|
+| HB-1 | Provider-native systems are sufficient | Microsoft Agent 365 (GA, cross-platform, $15/user/mo) + Entra Agent ID (identity + sponsor + lifecycle) + GitHub Enterprise AI Controls (GA) + Cursor Enterprise + Claude Code `TaskCompleted` blocking hook | Anthropic's own safety harness caused the Aug-2026 700 GB wipe (CL-8) — provider-native controls are not always sufficient | **PARTIALLY SUPPORTED — provider-native increasingly covers governance/identity/audit; not yet evidence-gated DONE with hash-registry** |
+| HB-2 | CI/CD + PR + security tooling is sufficient | GitGuardian, SLSA, in-toto, Sigstore already provide provenance/attestation; PR review + branch protection + CI is the industry default | Agent DONE claims happen *before* CI; CI covers what CI covers, not agent-workflow assurance | **PARTIALLY SUPPORTED — sufficient for most current teams; leaves the pre-commit agent-verification gap** |
+| HB-3 | Existing control planes already cover the useful problem | 4 hyperscaler / mid-market control planes shipping GA in 2026 (Microsoft Agent 365, Salesforce Agent Fabric, Boomi ACP, GitHub AI Controls); Zenity dominates AISPM; Fiddler + Aegis Platform in the market | None of the listed products advertises hash-coupled evidence-gate for DONE claims *within the tested/documented tier* | **STRONGLY SUPPORTED for governance/observability/identity; NOT OBSERVED (per V-02 protocol pending) for evidence-gate-specific job** |
+| HB-4 | Evidence-gated completion is too narrow | Boomi ACP frames the buyer job as *"human-in-loop approvals + cost + lineage"*, not *"hash-verified evidence"*. Microsoft Agent 365 frames as *governance + observability*. Neither uses "evidence gate" framing | Boomi cites "only 34% trust their agents' actions" — a trust deficit exists at the buyer level | **PARTIALLY SUPPORTED — market vocabulary is 'governance / identity / approvals', not 'evidence gate'. The current framing is narrower than what buyers appear to be buying** |
+| HB-5 | The problem is too infrequent to justify tooling | Boomi: "organizations that deployed prematurely reported an average $2.1M in added cost." This is a *per-organization aggregate*, not per-incident, so severity is real | Frequency data still absent for CCP-specific evidence-gate benefit | **NOT SUPPORTED — cost signal exists; frequency remains an open V-04 question** |
+| HB-6 | The buyer has no budget | Microsoft Agent 365 = $15/user/mo commercial line; Salesforce Agent Fabric commercial line; Boomi ACP commercial line; Zenity $125M Series C | The buyers of *those* products have not been shown to have budget for a *fourth or fifth* small vendor in the same category | **STRONGLY SUPPORTED against CCP-as-standalone-product; NOT SUPPORTED against CCP-as-methodology-or-primitive** |
+| HB-7 | The buyer would build internally | Retool 2026: 78% plan to build more internal tools; AIGIS OSS exists (0 adoption); arXiv 2609.16302 formalizes the pattern for internal builders | Enterprise buyers of Microsoft Agent 365 are *not* building — they are buying from a hyperscaler | **PARTIALLY SUPPORTED — small teams likely build; large enterprises are buying hyperscaler platforms** |
+| HB-8 | Developer friction exceeds risk reduction | GuardFall (July 2026) shows regex-based bash-firewalls are systematically vulnerable → CCP's firewall approach either fails safe (annoying) or fails open (unsafe) | Boomi cites $2.1M premature-deployment cost → some friction is worth paying for | **INSUFFICIENT DATA — V-04 as redesigned per CR-06 is the resolution instrument** |
+| HB-9 | Providers will absorb the remaining capability | Microsoft Agent 365 + Entra Agent ID + GitHub AI Controls have already absorbed identity, policy, observability, audit, governance, human sponsor, lifecycle. Only hash-coupled evidence-gate remains not-yet-native — and arXiv 2609.16302 shows academia is formalizing it | Anthropic has not announced this specific feature; 12-24 month absorption window is unmeasured | **STRONGLY SUPPORTED — the pattern of provider absorption is documented in five hyperscaler releases in 2026 alone** |
+| HB-10 | The project is an engineering methodology, not a product | 80% delete test (BC-8) already isolated the durable core to *methodology*; academic corpus is formalizing the same methodology; standards bodies (Linux Foundation AAIF) exist as adoption path | Methodology-as-standard has different economics than methodology-as-product | **STRONGLY SUPPORTED — the durable form of the work is methodology / OSS primitive / standard candidate, not a standalone commercial product** |
+
+**Falsification aggregate:** HB-1 (partial), HB-3 (strong for governance job / not-yet for evidence-gate job), HB-6 (strong against standalone product), HB-9 (strong), HB-10 (strong). The commercial-product thesis is materially weaker than after the closure loop; the methodology / standard thesis is materially stronger.
+
+### ZB-2. Root problem discovery (master prompt §5, §17)
+
+Killing the product name, restating the lifecycle failure map:
+
+| Lifecycle stage | Named failure (from external evidence, not CCP framing) | Current control | Current owner | Current cost | Remaining gap after 2026 hyperscaler stack |
+|---|---|---|---|---|---|
+| PLAN | Ambiguous task specification → agent misinterpretation | PRD templates; AGENTS.md conventions | Product / Eng Manager | Rework time | Persistent — spec quality is a human problem |
+| IMPLEMENT | Agent writes wrong code | Provider default settings | Developer | Rework | Well-covered by CI + review |
+| MODIFY | Agent modifies unrelated files | Provider-native sandboxes; Claude Code hooks | Developer | Rework | Mostly covered by native controls |
+| TEST | Agent skips or weakens tests | CI test gates; PR review | Developer / Reviewer | Rework | **Real gap**: pre-commit detection of test-weakening remains largely manual |
+| VERIFY | Agent claims DONE incorrectly | Human review; sometimes CI | Reviewer | Downstream rework | **Real gap**: no native evidence-gate; but 2609.16302 formalizes the pattern academically |
+| REVIEW | Reviewer approves without meaningful understanding | Human discipline | Reviewer | Silent risk | Underlying human problem; not a control problem |
+| MERGE | Agent commits over other work | Branch protection | Git | Well-covered |
+| DEPLOY | Agent deploys incorrectly | Deploy gates; CD | DevOps | Well-covered by native CD |
+| OPERATE | Agent takes destructive action on live systems | Provider-native firewalls; identity scoping (Entra Agent ID); Boomi ACP human-in-loop approvals | Ops / Platform | Incidents (Replit, PocketOS, Kiro, 700 GB wipe) | Partial gap — most 2026 controls address this |
+| LEARN | Failure not converted to durable regression | Postmortems; runbooks | SRE / Eng Manager | Repeat incidents | **Real gap**: machine-readable incident→control→regression is rare |
+| GOVERN | Fleet-scale agent management | Microsoft Agent 365, Salesforce Agent Fabric, Boomi ACP, GitHub AI Controls | Platform / Security / IT | Included in hyperscaler platform spend | Largely closed by 2026 GA products |
+
+**Three genuine remaining gaps (external-evidence-supported):**
+
+1. **Pre-commit detection of agent-weakened tests** — a symptom of the "test → verify → review" band. Not yet a first-class native primitive.
+2. **Hash-registered evidence coupling for DONE** — the CCP core; not yet native; academically formalized (2609.16302); OSS-instantiated (AIGIS with 0 adoption).
+3. **Machine-readable incident → control → regression chain** — SRE-culture concept, rarely implemented as a first-class product primitive in coding-agent tooling.
+
+Everything else is either covered by 2026 hyperscaler products or is a human/organizational problem no tool can solve.
+
+### ZB-3. Buyer reality — evidence-based reset
+
+Applied L0–L7 hierarchy (master prompt §30) to fresh evidence.
+
+- Enterprise buyers with real signals (L5–L6 in *category*): **Microsoft 365 E7 licensees** paying $15/user/mo for Agent 365; **Salesforce Agent Fabric customers** (Capita, Alcon, Diabsolut named); **Zenity enterprise customers** funding $125M Series C; **Boomi ACP** launch customer set (not named publicly at 2026-09-20).
+- Buyers of *CCP-specific* capability: still `L0–L1 across desk-observable signals`. No buyer has purchased or evaluated CCP's specific capability set at retrieval date.
+- The specific buyer role most likely to sponsor an in-house build (Platform Engineering): 78% plan to build more, per Retool 2026, but they are also buying hyperscaler platforms (Microsoft 365 E7 wraps Agent 365).
+
+Aggregate:
+
+```
+CCP-specific buyer signal at desk level:  L0-L1 (still NOT ENOUGH EVIDENCE)
+Category buyer signal at desk level:      L5-L7 for hyperscaler products
+Overlap of the two:                       ZERO at retrieval date
+```
+
+The category is validated. The specific product is not.
+
+### ZB-4. Provider-absorption counterfactual (master prompt §12, §13)
+
+If tomorrow **each of the four hyperscalers** (Microsoft, GitHub, Salesforce, Boomi) added hash-registered evidence-gate to their existing control-plane:
+
+| CCP hypothesis | Survives absorption? | Rationale |
+|---|---|---|
+| H1 Evidence-gated completion | **No** | Directly copied |
+| H2 Evidence registry + contract hash | **No** | Directly copied |
+| H3 Incident → control → regression loop | **Partially** | The *chain-as-first-class-primitive* is rare; hyperscalers focus on real-time governance, not encoded learning loops |
+| H4 Behavioral self-regression of governance | **Partially** | Not the natural focus of a hyperscaler product; more likely to remain outside their platforms |
+| H5 Historical evidence preservation | **No** | Handled by Sigstore + SLSA + platform audit |
+| H6 Fail-closed execution assurance | **No** | Native firewalls, deny-by-default, sandboxes are all shipping |
+| H7 Reviewer / human accountability | **No** | Entra Agent ID *requires* a human sponsor natively |
+| H8 Cross-provider policy semantics | **No** | Salesforce Agent Fabric explicitly ships multi-vendor governance |
+
+**Surviving asset under aggressive absorption:** H3 and H4 partially. Everything else is directly copyable and, per HB-9, being actively copied. The "unique execution" advantages identified in BC-2 collapse if hyperscalers extend their platforms — which their 2026 roadmaps indicate they are doing.
+
+### ZB-5. Assurance vs Control — the critical distinction (master prompt §14)
+
+- **Control** = prevent or constrain action. **Hyperscaler platforms have this well in hand for 2026.**
+- **Assurance** = an independent party can establish that the process behaved correctly.
+
+Real assurance evidence markets: SOC 2, ISO 42001, AIUC-1 (Schellman first accredited auditor 2026-02-03), MCP-server assurance, software bill of materials (SBOM), Sigstore attestations, SLSA, in-toto, TRACE v0.2.
+
+**A control-plane vendor produces evidence for itself. An assurance-plane vendor produces evidence that a third-party auditor accepts.** These are structurally different products with different buyers, different pricing, different distribution.
+
+Claude Control Plane's design (append-only Markdown registries + hash-coupled evidence + reviewer-identity vocabulary + phase gates + preserved historical evidence) is closer in shape to *assurance-plane* than to *control-plane*. But CCP does not have:
+
+- Third-party auditor acceptance.
+- Cryptographic attestation (per F9-D04 the reviewer identity is convention).
+- SLSA / in-toto / Sigstore integration.
+- Attestation compatible with existing enterprise-audit tooling.
+- Any customer who has taken CCP evidence to an auditor and had it accepted.
+
+**Zero-based insight:** the strongest surviving reframing of the project is not "control plane" (that category is now dominated by Microsoft/Salesforce/Boomi) but *assurance-primitive* or *methodology-for-agent-engineering-assurance*. This is a hypothesis, not a validated direction — but the shift changes what evidence would matter (auditor + compliance interviews, not Platform Engineering interviews).
+
+### ZB-6. The "DONE" claim disassembled (master prompt §16)
+
+Ask honestly: is *"agent claims DONE incorrectly"* the root problem or a symptom?
+
+External evidence says **symptom**. The upstream causes named across the 2026 corpus:
+
+- Poor task specification (Product / Eng Manager issue).
+- Weak or missing tests (Engineering discipline issue).
+- Poor acceptance criteria (Product issue).
+- Ambiguous ownership (Organizational issue).
+- Weak observability (Platform issue).
+- Poor CI (Engineering discipline issue).
+- Weak review discipline (Human issue).
+
+The evidence-gate is a *secondary control*: it catches false DONE when everything upstream fails. It is useful, but it is not addressing the root cause. The root causes are largely **human/organizational**, not primarily controllable by a tool.
+
+This does not make the evidence-gate valueless. It bounds the value proposition: the gate is a safety net for a small class of failures that upstream discipline missed. That is a narrower and more honest positioning than "essential agent governance."
+
+### ZB-7. 80% delete test — re-run from zero (master prompt §4)
+
+If every hook, registry, Claude-specific detail, phase gate, fixture, firewall regex, and product name were deleted, what remains interesting to a stranger?
+
+| Surviving asset | Why it might matter | Who cares | Current alternatives | Classification |
+|---|---|---|---|---|
+| The **contract** between a task-completion claim and a verified-evidence record (schema-level, not implementation) | It is a portable pattern; academic literature (2609.16302) is converging on it; SLSA-adjacent | Auditors, compliance, platform-engineering builders | in-toto, SLSA, Sigstore, TRACE v0.2, arXiv 2609.16302 | **OSS primitive or standard candidate** |
+| The four-registry **incident → control → regression → verification** methodology | It encodes SRE post-mortem discipline as a machine-readable process | SRE-oriented platform teams, compliance functions | Postmortem templates; runbooks; ITIL-adjacent frameworks | **Methodology / potential open reference** |
+| The **provenance vocabulary** (`EXTRACTED / INFERRED / ASSUMED / EXTERNAL / GENERATED`) and reviewer-identity convention | Not novel individually; but the *combination* is a clean small vocabulary for research/audit hygiene | Researchers, auditors, methodology-inclined teams | Various ad-hoc conventions | **Methodology asset** |
+| The **F1..F9 phase-gate + owner-decision trace** (including F9's "not justified" outcome) | A case study in evidence-based project discipline: it demonstrates what "researched and did not build" looks like as a governance artifact | Governance-minded engineering leaders; researchers of engineering process | Rare | **Research asset / case-study writeup** |
+| The **fail-closed integrity design** (`bash-firewall.sh`, `secret-guard.sh`, `task-completed-evidence.sh` as a fabric) | GuardFall (CL-4) exposes the class-level weakness of plain-text-regex bash-firewalls; the *combined fail-closed pattern* is a design study, not a proven security product | Adversarial-testing researchers | Adversa AI, Cloud Security Alliance, killertcell428/aigis | **Engineering knowledge; not a commercial security product** |
+
+Everything else in the current repository is **implementation detail**. The stranger who inherited the code would keep the top two rows and discard 80%+ of the specific files.
+
+### ZB-8. Three unrelated wedge candidates (master prompt §19)
+
+The prompt requires at least three plausible directions **not simply "sell CCP as-is."** Each is a *hypothesis*, not a recommendation.
+
+**Wedge-1 — Portable Agent Assurance Evidence Format**
+
+- Problem: enterprise auditors and buyers of AI coding tools have no vendor-neutral way to receive machine-readable evidence of what an agent did, why, and whether it was verified.
+- Buyer: compliance functions at organizations subject to SOC 2 / ISO 42001 / AIUC-1 audits that include AI-assisted development scope.
+- Current alternative: manual audit walkthroughs; provider-specific audit exports (metadata-only per report §8).
+- Gap: no cross-provider assurance-evidence schema is adopted; Sigstore/SLSA/in-toto cover build/supply-chain but not agent-run semantics.
+- Evidence: AIUC-1 exists as a standard (S-A-05); arXiv 2609.16302 formalizes the pattern.
+- Counter-evidence: standards work is long; adoption depends on auditor buy-in; Salesforce Agent Fabric might make this per-vendor for its customers.
+- Project reuse: contract_hash schema; evidence registry vocabulary; provenance vocabulary; F1..F9 case study as a demonstration.
+- Commercial risk: standards work is very hard to monetize; consulting/services is possible; product form is unclear.
+- **What must be validated:** whether any auditor has expressed interest in a schema of this shape; whether AIUC or ISO 42001 committees would take a contribution.
+
+**Wedge-2 — Agent Failure Regression Library / Corpus**
+
+- Problem: no shared corpus of AI-coding-agent failure patterns with reproducible regressions exists at the industry level. Every organization rediscovers the same failures. GuardFall (CL-4) affected 500,000+ deployments because of a single design class.
+- Buyer: security teams and platform-engineering teams that would benefit from a shared "AI coding agent failures we can reproduce" corpus, plus adversarial-testing vendors (Adversa AI).
+- Current alternative: OWASP Agentic AI Security Incidents Tracker (S-D-08), Adversa AI blog series (S-B-12), Permission Protocol (S-D-09), Vectara awesome-agent-failures (S-D-11) — narrative aggregators, not regression suites.
+- Gap: the trackers list incidents. None hosts a reproducible regression that any consumer can run to check their own agent stack against the taxonomy.
+- Evidence: incident population is real (98+ documented). Enterprise buyers of AISPM tools (Zenity) already pay for related capability.
+- Counter-evidence: incidents are provider-specific; regressions get stale fast; may end up as OSS with zero commercial upside.
+- Project reuse: `REGRESSION_REGISTRY.md` model; behavioral-audit methodology; INC-001 → REG-001 example.
+- Commercial risk: OSS/free-first models tend to dominate; commercial upside likely limited to enterprise-support offerings.
+- **What must be validated:** whether any tracker maintainer (OWASP, Adversa AI, Permission Protocol) would collaborate; whether adversarial-testing vendors would license a corpus.
+
+**Wedge-3 — AI-Engineering-Assurance Auditor Toolkit**
+
+- Problem: as SOC 2 / ISO 42001 / AIUC-1 audits start covering AI-assisted development, individual auditors need tooling to inspect an organization's evidence trail. Today they open Notion pages and PR descriptions.
+- Buyer: audit firms (Schellman is the first AIUC-1 accredited auditor — a warm entry point), Big-4 audit practices, boutique compliance shops.
+- Current alternative: manual walkthrough + PDF export from provider platforms.
+- Gap: no auditor-oriented tool exists to consume, verify and cross-check agent-workflow evidence at scale.
+- Evidence: AIUC-1 accreditation is beginning (S-A-04); ISO 42001 is emerging; SOC 2 is adding AI scope.
+- Counter-evidence: audit-tool market is small and unglamorous; deep relationships needed; specialist channel.
+- Project reuse: evidence-registry schema; provenance vocabulary; reviewer-identity convention.
+- Commercial risk: narrow buyer; long sales cycles; specialist product.
+- **What must be validated:** whether Schellman or another AIUC-1 auditor would pilot such a tool.
+
+**Wedge-4 (bonus — related but not identical to CCP-as-product) — Methodology-First / Book / Reference Repository**
+
+- Non-commercial or lightly commercial. Publish the methodology (evidence-gate + incident-loop + fail-closed + phase gates + provenance vocabulary + reviewer-identity convention) as a canonical open-source engineering-discipline reference, with the current repository as the reference implementation. Analogous to how "SRE Book" (Google) became foundational despite no product attached.
+- Buyer: engineering leaders. Revenue model: consulting engagement, speaking, book royalties, brand.
+- Evidence: RASE 2026 subfield exists; academic corpus is converging; SRE Book precedent.
+- Project reuse: 100%. The whole repository becomes the reference implementation.
+- Commercial risk: services-only revenue; no scalable product.
+
+### ZB-9. Moat / defensibility test (master prompt §21)
+
+| Moat class | CCP current status |
+|---|---|
+| Code | No moat — every CCP capability is now either provider-native, OSS-reproduced (AIGIS), or academically formalized (2609.16302) |
+| Data | No moat — no proprietary corpus |
+| Network effect | None |
+| Distribution | None (single-operator repo) |
+| Standard | Possible if Wedge-1 succeeds — but standards work is slow and hard-to-monetize |
+| Ecosystem | None |
+| Workflow lock-in | Minimal — Markdown registries + shell hooks are trivially replaceable |
+| Compliance position | Possible if Wedge-3 succeeds — but requires auditor buy-in |
+| Trust | Zero externally |
+| Brand | Zero externally |
+| Proprietary benchmark | None |
+| Proprietary evidence corpus | Only the project's own F1..F9 trace (case study, not commercial data) |
+
+**Aggregate:** defensibility is **weak in every commercial dimension**. The only plausibly durable positions are *standard* or *methodology* — both of which depend on adoption, not code.
+
+### ZB-10. Category-failure investigation (master prompt §38, §39)
+
+Categories where CCP could plausibly land, and their structural failure modes:
+
+- **Agent Governance product category:** consolidating around Microsoft Agent 365 + hyperscaler bundles. Standalone entrants without distribution advantage typically fail here (small startups get absorbed or fade).
+- **Enterprise Security product category:** dominated by Zenity for AISPM; procurement cycles 6-18 months; buyer fatigue from tool sprawl.
+- **Developer Tool category:** developer resistance to friction; provider-embedded features tend to win.
+- **Compliance product category:** small TAM; requires deep auditor relationships; long sales cycles.
+- **Standards / methodology:** hard to monetize directly; can produce indirect value (consulting, credibility).
+
+The market direction is *platform consolidation*, not fragmentation. A specialized point solution in agent governance has a difficult structural position.
+
+### ZB-11. The one-meeting test (master prompt §32)
+
+Can the owner explain the problem to one real engineering leader in 30 seconds, without mentioning the project's implementation?
+
+Attempt: *"When an AI coding agent claims it finished a task, there is no independent, machine-readable evidence that ties the claim to a specific verified artifact. Reviewers accept prose or run tests manually. When the agent lied or missed something, the failure is caught downstream in production, in rework, or not at all."*
+
+The problem statement above is coherent. **However:** it presumes evidence-gating is the buyer's chosen framing. The B-3 substitute matrix suggests the actual buyer framing is *"trust in agent actions"* (Boomi's 34% trust stat), *"cost overrun from premature deployment"* ($2.1M avg), *"identity + accountability"* (Entra Agent ID), *"unified multi-vendor governance"* (Salesforce Agent Fabric). CCP's framing is a niche of a niche of these.
+
+**Result of the one-meeting test:** the problem statement is technically clean; the buyer framing is likely wrong.
+
+### ZB-12. The one-metric test (master prompt §33)
+
+What single primary outcome metric would a real buyer report on their internal review to justify CCP-specific spending?
+
+Candidates and problems:
+
+- *"false-completion rework hours"* — no baseline; hard to measure; upstream causes contribute.
+- *"incident recovery time"* — provider-native controls address this; CCP contribution is unclear.
+- *"review hours saved"* — CCP likely *adds* review hours because reviewers must inspect evidence records.
+- *"approval latency"* — same problem.
+- *"audit preparation effort"* — plausible if Wedge-3 is real, but not for the current product framing.
+- *"agent deployment lead time"* — CCP does not primarily target this.
+- *"policy violations blocked"* — measures activity, not value (per V-04 methodology note).
+
+**No sharp metric exists for the current product framing.** For Wedge-3 (auditor toolkit) *"hours saved per AI-assisted audit engagement"* becomes credible. That is a different product.
+
+### ZB-13. The "if we never write another line of code" test (master prompt §35)
+
+Assuming zero further engineering:
+
+- **Engineering knowledge** (fail-closed hooks; evidence-registry schema; incident-loop chain) → transferable to any organization that reads the repo. **Valuable regardless of commercial outcome.**
+- **Research corpus** (`docs/research/*.md` × 5 files, ~8,900 lines) → the market analysis and audit trail are a real research asset that some strangers would find useful. **Valuable.**
+- **Methodology** (phase gates, provenance vocabulary, reviewer-identity convention, evidence-first discipline) → publishable as a reference document. **Valuable.**
+- **F1..F9 case study** (including F9's "not justified" outcome as a governance example) → publishable as an engineering-process case study. **Valuable.**
+- **Product form** → No product survives without further work. **Zero commercial value from a code freeze.**
+
+The vast majority of value in this project already exists as **knowledge**, not as a shippable product. Freezing the repository today loses very little compared with what freezing loses in most product-oriented codebases.
+
+### ZB-14. Strongest case AGAINST continuing (master prompt §49)
+
+*"The Claude Control Plane commercial thesis should not be continued because:*
+
+1. *The 'agent control plane' category is now GA-populated by Microsoft ($15/user/mo, cross-platform, human sponsor per agent), Salesforce (multi-vendor, named enterprise customers), Boomi (vendor-neutral, human-in-loop approvals, cost management), and GitHub (Enterprise AI Controls).*
+2. *The specific 'evidence-gated completion' concept is not unique: it exists as OSS in `aigis-control-plane` (0 stars but same architecture), it is formalized in academic literature (arXiv 2609.16302, 2607.05397), and it is being anticipated by standards work (AIUC-1, RASE 2026, TRACE v0.2).*
+3. *Provider-native controls have partially failed (CL-8 Aug-2026 700 GB wipe caused by Anthropic's own safety harness), but the response the market is choosing is 'buy a hyperscaler control plane', not 'buy a specialist evidence-gate vendor'.*
+4. *No buyer has been identified at the L2+ level for CCP specifically. Every plausible budget category has an incumbent (Zenity for AISPM; Microsoft 365 E7 for governance; Boomi ACP for cost/lineage).*
+5. *Defensibility is weak in every measurable dimension. The only durable positions (standard, methodology) do not monetize as product.*
+6. *The current framing ('control plane') is now a crowded category label; the more honest framing ('assurance primitive') is a different, narrower market.*
+7. *GuardFall (CL-4) exposes the design surface of CCP's own `bash-firewall.sh`, meaning the project would need to substantially re-architect that component before external use.*
+
+*Therefore the commercial thesis in its current form is not supported by the evidence available on 2026-09-20."*
+
+### ZB-15. Strongest case FOR continued investigation (master prompt §49)
+
+*"Continued investigation is still justified — but only in narrow, evidence-generating forms — because:*
+
+1. *Boomi's launch (Sept 2, 2026, 18 days ago) revealed a specific buyer signal: '34% of leaders trust their agents' actions' and '$2.1M average premature-deployment cost.' A trust-and-cost gap exists at enterprise scale that no product currently closes with hash-registered evidence-gate primitives.*
+2. *Academic convergence on 'Assurance Envelopes for Autonomous Coding Agents' (arXiv 2609.16302, Sept 2026) suggests the concept is on a formalization trajectory. Contributing to that trajectory (via Wedge-1, Wedge-4) is a low-cost, non-product form of continued engagement.*
+3. *The Schellman AIUC-1 auditor accreditation (Feb 3, 2026) opens a specific warm-intro path for Wedge-3 (auditor toolkit) validation with zero engineering.*
+4. *The 80% delete test confirms that the durable core (schema + methodology) is small and portable; continuing the research does not require large engineering investment.*
+5. *A single well-designed conversation with a real Platform Engineering or CISO buyer could resolve the largest remaining unknowns in a week.*
+
+*The form of continued investigation must therefore be:*
+
+- *NOT: build a product.*
+- *NOT: continue desk research.*
+- *YES: initiate a small number (3–5) of behavioral customer interviews per the Customer Discovery Protocol, weighted toward the assurance-plane framing rather than the control-plane framing.*
+- *YES: perform the AIGIS teardown per the Competitive Teardown Protocol to resolve ROB-K.*
+- *YES: publish the methodology as a reference document or contribute to RASE 2026 / AIUC-1 conversations, if the owner has bandwidth."*
+
+Neither the case AGAINST nor the case FOR is a recommendation.
+
+### ZB-16. Exit state (master prompt §41)
+
+The evidence available on 2026-09-20 supports **multiple simultaneous exit states**. Classified without ranking:
+
+- **`COMMERCIAL THESIS NOT SUPPORTED`** — for the CCP-as-standalone-agent-control-plane framing. Supported by ZB-1 HB-3/HB-6/HB-9, ZB-9, ZB-10, ZB-11.
+- **`THESIS REQUIRES REFRAMING`** — from "control plane" to "assurance primitive" or "methodology." Supported by ZB-5, ZB-6, ZB-12.
+- **`OSS / STANDARD INVESTIGATION WARRANTED`** — Wedge-1 (assurance-evidence format) and Wedge-2 (regression library) are consistent with existing standards trajectories. Supported by ZB-8.
+- **`FIELD VALIDATION WARRANTED`** — Wedge-3 (auditor toolkit) has a warm-intro path (Schellman) and would resolve a specific unknown with 2-4 conversations. Supported by ZB-15.
+- **`INTERNAL ENGINEERING VALUE ONLY`** — Model F from BC-9 remains fully viable; the project has real engineering value regardless of commercial outcome. Supported by ZB-13.
+- **`INSUFFICIENT EVIDENCE`** — for any specific commercial direction; every wedge requires field validation.
+
+These are **evidence states, not recommendations**. Multiple can be true simultaneously. The owner chooses which state to act on.
+
+### ZB-17. Next real-world evidence (master prompt §42)
+
+The single highest-information action outside desk research:
+
+**A 30-minute behavioral interview with Schellman (or any AIUC-1 accredited auditor) applying the Customer Discovery Protocol §3 questions, framed around Wedge-3 (auditor toolkit), not around CCP as a product.**
+
+- Why it is highest-information: it tests a specific unknown (auditor demand for machine-readable agent evidence) that no desk research can resolve. It uses a warm-intro path that exists (Schellman is a named, contactable organization). It costs a single owner-initiated outreach.
+- What would change the thesis: a positive Level-2+ signal (auditor describes a concrete unmet job in AI-assisted-development audits) would shift the direction toward Wedge-3. A negative Level-0 signal (auditor says "we do this in Notion and it works") would eliminate Wedge-3 and refocus on Wedge-1 / methodology.
+
+Second-highest-information action, in parallel:
+
+**A behavioral interview (per Customer Discovery Protocol) with 2–3 Platform Engineering leaders whose organizations bought Microsoft Agent 365 or Boomi ACP.** The question is: *"What does your ACP not do that you wish it did?"* — this identifies whether a hash-registered evidence-gate is a specific unmet need or whether ACP-native governance is sufficient.
+
+### ZB-18. Decision-critical unknowns after this pass (master prompt §42)
+
+| Unknown | Materiality | Can desk research resolve? | Resolution method |
+|---|---|---|---|
+| Whether any auditor would find CCP's evidence schema useful | HIGH | NO | Wedge-3 conversation with Schellman |
+| Whether Microsoft Agent 365 / Boomi ACP customers experience a specific gap that CCP would close | HIGH | NO | Post-purchase customer discovery interviews |
+| Whether academic assurance-envelope work (arXiv 2609.16302 et al.) would welcome contribution from an external practitioner | MEDIUM | Partially — direct authors could be contacted | Email / academic outreach |
+| Whether AIUC / Linux Foundation AAIF committees would receive a schema proposal | HIGH for Wedge-1 | NO | Owner-initiated contact with AIUC-1 / AAIF working groups |
+| Whether Anthropic's response to the 700 GB wipe (S-D-05) includes shipping a native hash-registered evidence-gate | HIGH | NO — future observation | Quarterly monitoring |
+| Whether GuardFall recurrence in Claude Code would create acute demand for a fail-closed firewall alternative | LOW | NO — future observation | Watch security advisories |
+
+No unknown is labeled "research more" without a specific resolution method.
+
+### ZB-19. Explicit non-claims
+
+- No customer was interviewed in this pass.
+- No competitor was installed in this pass.
+- No pricing was proposed.
+- No PMF was claimed.
+- No buyer name was recorded.
+- No procurement evidence was produced.
+- No commitment to any thesis (0..5) is made.
+- No engineering was authorized.
+- No F10 was opened.
+- No runtime file was modified.
+
+### ZB-20. Engineering authorization state — unchanged
+
+```
+ENGINEERING JUSTIFICATION AFTER ZERO-BASED RECONSTRUCTION:
+   NO ENGINEERING JUSTIFIED
+
+RESEARCH LOOP AFTER THIS PASS:
+   CLOSED unless one of the four §55 triggers occurs
+   (real customer evidence, reproducible competitor result changing
+    a material classification, major external market event, or an
+    owner-initiated new research question)
+```
+
+The next legitimate step is **outside desk research**: either a real customer interview (Wedge-3 first-preference), a reproducible AIGIS teardown, or a documented owner decision to freeze / narrow / reframe / publish / retire the project.
+
+---
+
+**END ZERO-BASED THESIS RECONSTRUCTION (labyrinth exit, 2026-09-20)**
+
 *Research performed: 2026-09-20. Output is research truth state only. No implementation, roadmap, architecture, or code recommendation is made. Owner decides all subsequent actions.*
