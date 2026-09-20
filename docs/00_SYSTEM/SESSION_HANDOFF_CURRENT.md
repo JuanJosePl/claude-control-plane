@@ -11,15 +11,18 @@
 | Repository | `claude-control-plane` (local) |
 | Working directory | `/home/juanls/Escritorio/claude-control-plane` |
 | Current branch | `main` |
-| HEAD | `2cd7953` (F8 closure checkpoint) |
-| HEAD^ | `916acf7` |
+| HEAD | current documentation reconciliation checkpoint (see §17 and `git log`) |
+| F8 closure checkpoint | `2cd7953` |
+| F9 research checkpoint | `bfe03b7` |
+| Post-F9 technical history dossier | `9a52875` (documentation-only, not part of the F9 research change budget) |
 | F7 checkpoint | `47874a5` |
 | F8 research checkpoint | `c236b58` |
 | Current phase | 8 |
 | Phase status | COMPLETE |
-| Next allowed action | Owner review of F9 research; no implementation authorized |
+| Next allowed action | Owner review of F9 research (F9-D01..F9-D05); no F9 or F10 implementation authorized |
 | F9 research status | COMPLETE - `F9 NOT JUSTIFIED` |
-| Implementation authorization | **F8 IMPLEMENTATION = COMPLETE / VERIFIED** |
+| F9 audit verdict | VALIDATED WITH LIMITATIONS (documentation-only reconciliation applied) |
+| Implementation authorization | **F8 IMPLEMENTATION = COMPLETE / VERIFIED · F9 IMPLEMENTATION = NOT AUTHORIZED / NOT PERFORMED** |
 
 ## 2. EXECUTIVE STATE
 
@@ -30,11 +33,14 @@ F8_RESEARCH_STATUS    = COMPLETE
 F8_IMPLEMENTATION     = COMPLETE / VERIFIED
 F9_RESEARCH_STATUS    = COMPLETE
 F9_DECISION           = F9 NOT JUSTIFIED
+F9_IMPLEMENTATION     = NOT AUTHORIZED / NOT PERFORMED
+F9_AUDIT_VERDICT      = VALIDATED WITH LIMITATIONS
 IMPLEMENTATION_READY  = false
-WORKTREE              = CLEAN
+WORKTREE              = CLEAN (documentation reconciliation committed)
 MAINTENANCE           = 12/12 PASS  (2026-09-19)
 HISTORICAL_EVIDENCE   = intact (EV-001..EV-014 unchanged; sha256:23325ab6…)
-RUNTIME_HOOKS         = F8-A/F8-B changed only; no unrelated hook changes
+RUNTIME_HOOKS         = F8-A/F8-B changed only; no unrelated hook changes; no F9 hook changes
+DOCUMENTATION         = post-F9 reconciliation applied (see §17 and PROJECT_STATE.md)
 ```
 
 ## 3. PROJECT PURPOSE
@@ -307,8 +313,8 @@ unauthorized.
 
 ## 19. F9 RESEARCH RESULT
 
-F9 research was completed at baseline `2cd7953` without changing runtime, fixtures, evidence,
-regressions, F7 artifacts or F8 artifacts. The canonical package is
+F9 research was completed at baseline `2cd7953` (F9 research commit `bfe03b7`) without changing
+runtime, fixtures, evidence, regressions, F7 artifacts or F8 artifacts. The canonical package is
 `docs/00_SYSTEM/F9_RESEARCH.md`.
 
 - **F9:** `RESEARCH COMPLETE`.
@@ -324,5 +330,19 @@ regressions, F7 artifacts or F8 artifacts. The canonical package is
 
 **Next allowed action:** owner review only. Do not implement F9, open F10, modify runtime, or
 interpret research completion as implementation permission.
+
+## 20. POST-F9 DOCUMENTATION CHRONOLOGY
+
+To keep the record accurate, the post-F9 documentation history is explicit:
+
+| Commit | Purpose | Scope classification |
+|---|---|---|
+| `bfe03b7` | `[F9] docs: record research decision` — adds `F9_RESEARCH.md` and updates this handoff. | Strict F9 research change budget. |
+| `9a52875` | `docs: add F7-F9 technical history dossier` — adds `F7_F8_F9_TECHNICAL_HISTORY.md` as a supplementary reference for engineers/auditors joining without prior session context. | Post-F9 documentation only. Not part of the F9 research change budget, not part of F10, not runtime. |
+| (this reconciliation) | `docs: reconcile post-f9 documentation state` — updates stale metadata in `PROJECT_STATE.md` and this handoff, keeps the Spanish translation of the dossier, and records the chronology explicitly. | Documentation reconciliation only. |
+
+The reconciliation does not alter the F9 research conclusion (`F9 NOT JUSTIFIED`), does not modify
+F7/F8 runtime, hooks, fixtures, evidence or regressions, and does not authorize F9 or F10
+implementation.
 
 **End of handoff. Read the canonical documents listed above for depth.**
