@@ -1,6 +1,6 @@
 # CCP Exploration Engine
 
-> Version: 1.1 | Last updated: 2026-09-23
+> Version: 1.2 | Last updated: 2026-09-23
 > State authority: `PROJECT_STATE.md` | Evidence authority: `EVIDENCE_REGISTRY.md`
 > This document converts static knowledge into operational movement. It is not an atlas.
 
@@ -41,6 +41,12 @@ HYPOTHESIS B:      CONDITIONALLY_SUFFICIENT at current scale (MOVEMENT 002)
 
 PRIMARY BOTTLENECK: Authorization gate (F9-D01=A) + Materiality (H-01 unknown)
 
+CDT-01:             COMPLETE (2026-09-23) — SAFE rate 87.5% after policy repair (vs. 75% baseline)
+NH-02:              COMPLETE (2026-09-23) — PARTIALLY_SUPPORTED; 4 patterns cover ~75–80% of bypass surface
+NH-03:              CONFIRMED — authorization gate is the real bottleneck
+NH-04:              OPENED — P1'+P2'+P3 may be sufficient for CCP's current threat surface
+AC-02 ROI:          CONFIRMED HIGH (4 repairs; highest ROI of all identified improvements)
+
 IMPLEMENTATION_READY: false
 NEXT_ALLOWED_PHASE:   Owner-driven decision required
 NEXT_MOVEMENT:        MOVEMENT 003 — Incremental Improvement Scoping
@@ -67,10 +73,11 @@ KNOWN (closed — additions from MOVEMENT 002)
 ├── Roger Hypothesis: REFORMULATION_CONFIRMED (not a new architecture or capability)
 └── Problem formulation: more tractable reformulations identified (effect-centric, evidence-centric)
 
-FRONTIER (new boundary after MOVEMENT 002)
-├── CDT-01: Does policy repair increase R-3 SAFE rate to >85%? (available now)
-├── NH-02: Do 3–5 bash-firewall extensions cover CCP semantic bypass domain? (available now)
+FRONTIER (new boundary after CDT-01 + NH-02)
+├── [CLOSED] CDT-01: SAFE rate 87.5% after policy repair — CONFIRMED (55_CDT01_NH02_RESULTS.md)
+├── [CLOSED] NH-02: 4 patterns cover ~75–80% of bypass surface — PARTIALLY_SUPPORTED
 ├── UNK-M2-04: Which incremental improvements are within F9-D01=A boundary? (owner decision)
+├── NH-04: P1'+P2'+P3 sufficient for CCP's current threat surface? (10-case bash test; no code)
 ├── NH-01: Can evidence-centric mid-task tracking partially close LABYRINTH-1? (owner scoping)
 ├── CDT-02: Blind subagent verifier confirmation (requires agent file → F9-D01 gate)
 └── H-01 (stall frequency): still blocked — requires real usage environment
@@ -403,14 +410,67 @@ REOPEN CONDITION: Concrete observable transition Roger performs that CCP's
 |---|---|---|---|
 | EXP-001 | R-3 9-case synthetic falsifiability test | COMPLETE (2026-09-23) | See MOVEMENT 001 |
 | EXP-002 | R-2 field observation — STALL_POLICY_LOG accumulation | BLOCKED (no real usage environment) | N real STALL_POLICY events with had_alternative observations |
-| EXP-003 | Roger Hypothesis falsification | DISCOVERED (requires reading 52 for falsifiers) | SUPPORTED or REFUTED |
-| EXP-004 | ROUTE-INDEP: subagent verifier design and test | HYPOTHESIS | Independent verifier label match or divergence |
-| EXP-005 | ROUTE-POLICY: policy explicitness measurement | READY_FOR_TEST | EXPLICIT / PARTIAL / VAGUE classification per CCP policy |
-| EXP-006 | ROUTE-B: hypothesis B human escalation evaluation | HYPOTHESIS | SUFFICIENT / NEEDS_MORE / INSUFFICIENT per scenario |
+| EXP-003 | Roger Hypothesis falsification | COMPLETE (MOVEMENT 002) | REFORMULATION_CONFIRMED |
+| EXP-004 | ROUTE-INDEP: subagent verifier design and test | PARTIALLY_RESOLVED (MOVEMENT 002); CDT-02 needed for empirical confirmation | Independent verifier label match or divergence |
+| EXP-005 | ROUTE-POLICY: policy explicitness measurement | COMPLETE (MOVEMENT 002) | 83% EXPLICIT; 4 PARTIAL; see 54_MOVEMENT_002 |
+| EXP-006 | ROUTE-B: hypothesis B human escalation evaluation | COMPLETE (MOVEMENT 002) | CONDITIONALLY_SUFFICIENT; see 54_MOVEMENT_002 §17–18 |
+| EXP-007 | CDT-01: policy repair SAFE rate test | COMPLETE (2026-09-23) | 87.5% SAFE rate (vs. 75% baseline); see 55_CDT01_NH02_RESULTS.md §1 |
+| EXP-008 | NH-02: bash-firewall semantic bypass coverage | COMPLETE (2026-09-23) | PARTIALLY_SUPPORTED; 4 patterns cover ~75–80%; see 55_CDT01_NH02_RESULTS.md §2 |
 
 ---
 
 ## §11 — Movement Results
+
+### CDT-01 + NH-02 — Policy Repair Test + Semantic Bypass Coverage
+
+```
+ID:            CDT-01 + NH-02
+DATE:          2026-09-23
+EXECUTOR:      Claude Sonnet 4.6 (this session)
+ARTIFACT:      55_CDT01_NH02_RESULTS.md
+
+START:
+  CDT-01: Does policy repair raise SAFE rate to >85%?
+  NH-02: Do 3–5 patterns cover CCP's semantic bypass domain?
+
+QUESTION: What is the ROI and scope of incremental improvements available now?
+
+ACTION:
+  CDT-01: Drafted repair text for POL-05, POL-08, POL-10, POL-13 (4 PARTIAL policies).
+          Re-evaluated RCE-05 with repaired POL-05 → UNKNOWN becomes SAFE.
+          Added 3 new RCE cases (RCE-09, RCE-10, RCE-11) for remaining PARTIAL policies.
+          Compared SAFE rates: baseline 75% → 87.5% (same cases) / 90.9% (extended set).
+  NH-02: Enumerated 6 bypass gap classes (printenv, interpreter env, encoding pipeline,
+         redirect to file, command substitution, obfuscation). Assessed bash-firewall
+         and secret-guard coverage per class. Proposed 4 new patterns (P1', P2', P3, P4).
+         Assessed coverage with proposed patterns. Identified hard-to-cover remainder.
+
+RESULT:
+  CDT-01: HYPOTHESIS CONFIRMED — 87.5% SAFE rate after policy repair
+  NH-02: PARTIALLY_SUPPORTED — 4 patterns cover 75–80% of practical bypass surface
+  AC-02 ROI: CONFIRMED HIGH (each repair = one sentence; no code change)
+  NH-02 implementation: READY_FOR_TEST but requires owner authorization (F9-D01=A)
+  New hypothesis NH-04 opened: P1'+P2'+P3 may be sufficient for current threat surface
+
+POSITION CHANGE:
+  BEFORE: CDT-01 and NH-02 open; bypass gap coverage unknown; policy repair ROI unquantified
+  AFTER:  Policy repair fully specified (repair drafts available in §1.3 of artifact).
+          Bypass gap concentrated: 3 primary classes fully coverable, 2 partially coverable.
+          Authorization gate confirmed as the remaining bottleneck for all improvements.
+
+OPENED:
+  NH-04: P1'+P2'+P3 sufficiency test (10-case analysis; no code change)
+
+CLOSED:
+  CDT-01 (policy repair test)
+  NH-02 (semantic bypass coverage analysis)
+  UNK-M2-03 (policy repair does increase SAFE rate to >85% — CONFIRMED)
+
+NEXT FRONTIER: Owner Scoping Decision (UNK-M2-04)
+NEXT MOVEMENT: MOVEMENT 003 — Incremental Improvement Scoping
+```
+
+---
 
 ### MOVEMENT 002 — Frontier Resolution Expedition
 
@@ -659,35 +719,36 @@ CURRENT STATE: R-3 PARTIALLY_TRACTABLE, independence blocker identified
 
 ## §15 — Current Exploration Frontier
 
-The frontier after MOVEMENT 002:
+The frontier after CDT-01 + NH-02:
 
 ```
 MOST SPECIFIC OPEN QUESTIONS (in priority order by information value):
 
-[1] CDT-01: Does policy repair increase R-3 SAFE rate to >85%?
-    → AVAILABLE NOW (read-only; no authorization needed)
-    → Information value: HIGH (calibrates AC-03 value estimate; closes UNK-M2-03)
-    → Cost: LOW (draft repair text for 4 PARTIAL policies; re-run RCE set; 45 min)
-
-[2] NH-02: Do 3–5 bash-firewall extensions cover CCP's semantic bypass domain?
-    → AVAILABLE NOW (analysis only; no code change)
-    → Information value: HIGH (could close semantic bypass risk without full non_bypass_verify)
-    → Cost: LOW (enumerate bypass patterns from research corpus; check coverage; 30 min)
-
-[3] UNK-M2-04: Which incremental improvements are within F9-D01=A authorization boundary?
+[1] UNK-M2-04: Which incremental improvements are within F9-D01=A authorization boundary?
     → REQUIRES OWNER DECISION
-    → Information value: VERY HIGH (unblocks AC-01, AC-02, NH-01, NH-02 implementation)
+    → Information value: VERY HIGH (unblocks AC-02 documentation, NH-02 implementation)
     → Cost: LOW (present concrete scope descriptions to owner; get yes/no per item)
+    → AC-02 repair drafts now fully specified (55_CDT01_NH02_RESULTS.md §1.3)
+    → NH-02 pattern extensions now fully specified (55_CDT01_NH02_RESULTS.md §2.5)
 
-[4] CDT-02: Blind subagent verifier empirical confirmation
+[2] NH-04: Are P1'+P2'+P3 (3 patterns) sufficient for CCP's current threat surface?
+    → AVAILABLE NOW (10-case analysis; no code change)
+    → Information value: MEDIUM (narrows NH-02 implementation to minimum set)
+    → Cost: VERY LOW (enumerate 10 realistic "agent checking env var" commands; test coverage)
+
+[3] CDT-02: Blind subagent verifier empirical confirmation
     → REQUIRES OWNER AUTHORIZATION (new agent file → F9-D01 gate)
     → Information value: HIGH (confirms independence claim empirically)
     → Cost: MEDIUM after authorization (agent definition + 8-case test)
 
-[5] H-01: Real stall frequency measurement
+[4] H-01: Real stall frequency measurement
     → BLOCKED (no real usage environment; EXP-002 blocked)
     → Information value: MAXIMUM if material (could close LABYRINTH-1 as IMMATERIAL)
     → Cost: ZERO design cost; requires real usage
+
+[CLOSED] CDT-01: SAFE rate 87.5% after policy repair — CONFIRMED
+[CLOSED] NH-02: 4 patterns cover ~75–80% of bypass surface — PARTIALLY_SUPPORTED
+[CLOSED] UNK-M2-03: policy repair does raise SAFE rate to >85% — CONFIRMED
 ```
 
 ---
@@ -696,80 +757,40 @@ MOST SPECIFIC OPEN QUESTIONS (in priority order by information value):
 
 The following moves are available now, ordered by information value per unit cost. (Updated after MOVEMENT 002.)
 
-### NEXT MOVE A — CDT-01: Policy Repair Test (Available now)
+### NEXT MOVE A — Owner Scoping Decision (Requires owner input, highest priority)
 
 ```
 WHAT QUESTION DOES IT ANSWER?
-  Does disambiguating CCP's 4 PARTIAL policies increase the R-3 SAFE rate
-  from 75% (current) to >85%?
-
-WHAT UNKNOWN DOES IT REDUCE?
-  UNK-M2-03: whether policy text repair is the remaining bottleneck for SAFE labels
-
-WHAT BRANCHES DOES IT OPEN?
-  If SAFE rate >85%: policy corpus is effectively complete; AC-03 has full domain coverage
-  If SAFE rate stays ~75%: model uncertainty is the remaining factor; B+ may dominate
-
-WHAT BRANCHES DOES IT CLOSE?
-  If SAFE rate >85%: closes the "policy quality" as remaining uncertainty
-
-WHAT IS THE CHEAPEST TEST?
-  Draft one-sentence disambiguation for each of the 4 PARTIAL policies.
-  Re-run RCE-01..08 with repaired policies. Compare SAFE rate.
-  45 minutes. Read-only test (no file modification needed).
-
-WHAT DOES IT REQUIRE?
-  Draft repair text for POL-05, POL-08, POL-13; re-run RCE set
-
-WHAT DOES IT NOT REQUIRE?
-  New code, new infrastructure, owner authorization (analysis only)
-
-WHAT RESULT WOULD CHANGE THE FRONTIER?
-  "SAFE rate rises to >85% after policy repair" — confirms AC-02 has high ROI;
-  makes the case for presenting AC-02 to owner for authorization.
-```
-
-### NEXT MOVE B — NH-02: Bash-Firewall Semantic Bypass Coverage (Available now)
-
-```
-WHAT QUESTION DOES IT ANSWER?
-  Can 3–5 additional bash-firewall patterns cover CCP's semantic bypass domain
-  without implementing a full semantic verifier?
-
-WHAT UNKNOWN DOES IT REDUCE?
-  Whether semantic bypass risk is concentrated (addressable by extension) or
-  diffuse (requires general verifier)
-
-WHAT BRANCHES DOES IT OPEN?
-  If concentrated: AC-02-style hook extension is sufficient for CCP's domain
-  If diffuse: AC-03 (full semantic verifier) is necessary
-
-CHEAPEST TEST:
-  Enumerate semantic bypass patterns from MOVEMENT 001 cases (C-02, C-03)
-  and MOVEMENT 002 analysis. Check whether they reduce to ≤10 concrete patterns.
-  30 minutes. Analysis only.
-
-WHAT RESULT WOULD CHANGE THE FRONTIER?
-  "3–5 patterns cover 90%+ of CCP's semantic bypass domain" — closes the semantic
-  bypass risk without full non_bypass_verify implementation.
-```
-
-### NEXT MOVE C — Owner Scoping Decision (Requires owner input)
-
-```
-WHAT QUESTION DOES IT ANSWER?
-  Which of AC-01, AC-02, NH-01, NH-02 are within the current F9-D01=A boundary?
+  Which of AC-01, AC-02, NH-02 are within the current F9-D01=A boundary?
 
 WHY THIS IS HIGH VALUE:
   Authorization gate (F9-D01=A) is the primary blocker for all incremental improvements.
-  Owner can unblock multiple improvements with one scoping decision.
+  AC-02 repair drafts and NH-02 pattern specs are now fully ready; owner can unblock both
+  with a single classification decision.
 
 WHAT TO PRESENT TO OWNER:
-  AC-01: hook schema extension (probable PROHIBITED — modifies hooks)
-  AC-02: rule text disambiguation (AMBIGUOUS — "rule" vs "documentation"?)
-  NH-01: STALL_POLICY_LOG schema extension (probable PROHIBITED — hook-adjacent)
-  NH-02: bash-firewall pattern extension (probable PROHIBITED — hook modification)
-  Documentation drafts: reviewing AC-02 repair text (PERMITTED — read-only)
+  AC-02: rule text disambiguation (AMBIGUOUS — "rule change" vs. "documentation clarification"?)
+         → Repair drafts fully specified in 55_CDT01_NH02_RESULTS.md §1.3
+         → SAFE rate impact: 75% → 87.5% (same case comparison)
+         → Implementation cost: 4 one-sentence edits to .claude/rules/*.md
+  NH-02 patterns: bash-firewall extension with P1'+P2'+P3+P4
+         → Patterns fully specified in 55_CDT01_NH02_RESULTS.md §2.5
+         → PROBABLE PROHIBITED — modifies P0 hook
+         → Coverage: ~75–80% of practical bypass surface
+  AC-01: hook denial message enhancement (PROBABLE PROHIBITED — modifies hooks)
+  NH-01: STALL_POLICY_LOG schema extension (PROBABLE PROHIBITED — hook-adjacent)
+  Documentation drafts: reviewing AC-02 repair text ONLY (PERMITTED — read-only)
+
+### NEXT MOVE B — NH-04: P1'+P2'+P3 Sufficiency Test (Available now, low cost)
+
+WHAT QUESTION DOES IT ANSWER?
+  Are 3 patterns (P1', P2', P3) sufficient for CCP's current threat surface,
+  without P4 (interpreter env reads)?
+
+CHEAPEST TEST:
+  Enumerate 10 realistic "agent checking env var" bash commands.
+  Check whether P1'+P2'+P3 catches semantic bypasses without false positives.
+  Analysis only; ~15 minutes.
 ```
 
 ---
@@ -777,6 +798,33 @@ WHAT TO PRESENT TO OWNER:
 ## §17 — Movement History
 
 Each completed movement, most recent first.
+
+```
+CDT-01 + NH-02
+DATE:      2026-09-23
+MOVE:      Policy repair test + semantic bypass coverage analysis
+QUESTION:  Does policy repair raise SAFE rate >85%? Do 3–5 patterns cover bypass domain?
+HYPOTHESIS: CDT-01 → SAFE rate increases with policy repair; NH-02 → bypass domain concentrated
+OBSERVATION: CDT-01 CONFIRMED (87.5%); NH-02 PARTIALLY_SUPPORTED (~75–80% coverage with 4 patterns)
+RESULT:    Policy repair high ROI confirmed; bypass coverage partially achievable via pattern extension
+CLASSIFICATION: CDT-01=HYPOTHESIS_CONFIRMED; NH-02=PARTIALLY_SUPPORTED
+WHAT CHANGED:
+  - CDT-01: SAFE rate 75% → 87.5% (same cases); 90.9% (extended 11 cases)
+  - NH-02: 6 bypass gap classes identified; 4 patterns (P1',P2',P3,P4) cover ~75–80%
+  - AC-02: repair drafts fully specified and ready for owner authorization
+  - NH-04: new hypothesis opened (P1'+P2'+P3 may be sufficient for current threat surface)
+  - UNK-M2-03: RESOLVED (policy repair does increase SAFE rate to >85%)
+CLOSED:
+  - CDT-01
+  - NH-02
+  - UNK-M2-03
+OPENED:
+  - NH-04 (P1'+P2'+P3 sufficiency test)
+NEXT FRONTIER: Owner Scoping Decision (UNK-M2-04)
+NEXT MOVE: UNK-M2-04 (requires owner input) or NH-04 (available now, low cost)
+```
+
+---
 
 ```
 MOVEMENT 002

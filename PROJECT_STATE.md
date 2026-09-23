@@ -11,7 +11,7 @@ BLOCKERS:               NONE
 ACTIVE_DECISIONS:       ARCH-001, ARCH-002, ARCH-003, ARCH-004
 RESOLVED_OWNER_DECISIONS: F9-D01=A, F9-D02=B, F9-D03=B, F9-D04=B, F9-D05=A (2026-09-20)
 LAST_GIT_CHECKPOINT:    d8cff63
-LAST_MOVEMENT:          MOVEMENT 002 (2026-09-23) — Frontier Resolution Expedition COMPLETE; primary bottleneck = authorization+materiality; policies 83% explicit; independence resolved; B conditionally sufficient; Roger reformulation confirmed
+LAST_MOVEMENT:          CDT-01+NH-02 (2026-09-23) — Policy repair test CONFIRMED (87.5% SAFE rate); bypass coverage PARTIALLY_SUPPORTED (4 patterns ~75-80%); AC-02 repair drafts fully specified; NH-04 opened
 LAST_AUDIT:             2026-09-19
 LAST_ROADMAP:           2026-09-19
 LAST_BEHAVIORAL_AUDIT:  2026-09-18
