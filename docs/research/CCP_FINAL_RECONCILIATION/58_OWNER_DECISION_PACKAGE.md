@@ -37,6 +37,16 @@ QUESTION:        Do the 4 proposed policy text additions (1-2 sentences each to
                  .claude/rules/*.md files) constitute a "rule change" prohibited by
                  F9-D01=A, or a "documentation improvement" permitted by F9-D01=A?
 
+NOTE (MOVEMENT 006 adversarial audit):
+  These repairs are NOT uniformly "documentation-only." Specifically:
+  - POL-08 repair adds an explicit exception for F9-D01=A owner gates
+    (new permission for already-authorized action; harmonizes two policies)
+  - POL-10 repair adds a prohibition on denormalized consent fields (new constraint)
+  - POL-13 repair converts an open-ended prefix list to an exclusive enumeration (new constraint)
+  - POL-05 repair makes implicit isolation requirement explicit (primarily clarification)
+  All changes are more restrictive or harmonizing; none weaken existing prohibitions.
+  The owner must decide whether these targeted constraint additions constitute a "rule change."
+
 CURRENT STATE:
   4 policies are PARTIAL: POL-05, POL-08, POL-10, POL-13.
   PARTIAL policies produce UNKNOWN outputs from R-3 where EXPLICIT policies produce SAFE.
@@ -159,15 +169,26 @@ FUTURE: After P3 FP testing, add P3 with allowlist in separate authorization
 ```
 DECISION ID:     READY-03
 QUESTION:        Accept the L1-C formulation as LABYRINTH-1 resolution criteria by
-                 making the following four explicit statements:
+                 making the following five explicit statements:
                  (a) The residual bypass classes (variable aliasing, heredoc body,
-                     numbered redirects, file-based interpreter calls) are accepted
-                     for CCP's current development context.
-                 (b) Mitigation for the residual: human review (B path) + git staging backstop.
-                 (c) This acceptance is conditioned on H-01 remaining at 0 real events.
-                     If H-01 exceeds owner-defined N, LABYRINTH-1 reopens.
+                     numbered redirects, file-based interpreter calls, and
+                     reasoning-mediated bypass) are accepted for CCP's current
+                     development context.
+                 (b) Mitigation for the residual: human review (B path) + git staging
+                     backstop + escalation path (NH-10 / handbook §12 for
+                     reasoning-mediated cases).
+                 (c) This acceptance is conditioned on H-01 remaining below N.
+                     N = [OWNER MUST DEFINE — e.g., "N=1: any real bypass event reopens
+                     LABYRINTH-1"]. Without a defined N, reactivation trigger-1 is
+                     non-operational.
                  (d) LABYRINTH-1 is not "solved" in the absolute sense; it is "resolved
-                     for current context" under L1-C.
+                     for current context" under L1-C. This acceptance does NOT claim
+                     that bypass risk is zero, low, or quantified.
+                 (e) H-01 materiality remains UNRESOLVED. This acceptance is made under
+                     acknowledged uncertainty about real bypass frequency.
+
+REQUIRED OWNER INPUT (in addition to YES/NO):
+  N = _____ (threshold for H-01 reactivation trigger; examples: 1, 5, "any real event")
 
 CURRENT STATE:
   LABYRINTH-1 is OPEN. No owner has accepted the residual risk.
@@ -200,8 +221,10 @@ WHAT DOES NOT CHANGE:
   Hook enforcement behavior
   Any existing bypass residual (it still exists; this is acceptance, not elimination)
 
-RISK:      MEDIUM — if H-01 reveals material bypass rate, reopening is needed
-           Bounded by 4 explicit reactivation triggers (57_MOVEMENT_004 §9.3)
+RISK:      UNKNOWN (H-01 materiality unresolved; bypass frequency not measurable from
+           synthetic data). Bounded by 4 explicit reactivation triggers + defined N
+           threshold (57_MOVEMENT_004 §9.3). Development context inference: low practical
+           exposure. This is NOT a quantified risk estimate.
 REVERSIBILITY: HIGH — owner can reopen with a single statement
 
 DEPENDENCIES:

@@ -66,7 +66,7 @@ READY PACKAGES:     READY-01/02/03/04 fully structured as owner decision documen
 
 IMPLEMENTATION_READY: false
 NEXT_ALLOWED_PHASE:   Owner-driven decision required (READY-01/02/03)
-LAST_MOVEMENT:        MOVEMENT 005 (2026-09-23) — NH-10 implemented; UNK-M4-01 resolved; 58_OWNER_DECISION_PACKAGE created
+LAST_MOVEMENT:        MOVEMENT 006 (2026-09-23) — Pre-authorization adversarial gate PASSED (4 fixes); 59_ and 59A_ created; 58_ corrected; frontier cleaned
 ```
 
 ---
@@ -102,18 +102,29 @@ FRONTIER (new boundary after MOVEMENT 004)
 ├── [CLOSED] L1-C conditions: 5 conditions specified; minimal vs. strong distinguished (57_ §9)
 ├── [CLOSED] READY packages: READY-01/02/03/04 fully structured (57_ §10)
 ├── NH-08: Semantic bypass problem not material — HYPOTHESIS; UNFALSIFIABLE (needs H-01)
-├── UNK-M4-01: NH-09 double-quote removal semantic accuracy — OPEN (20-cmd corpus test; no auth)
-├── READY-01: AC-02 authorization question — BLOCKED (owner binary decision required)
-├── READY-02: P1'+P2' + Level-1 normalization — BLOCKED (owner implementation authorization)
-├── READY-03: LABYRINTH-1 L1-C closure — BLOCKED (owner risk acceptance)
-├── READY-04: Enhanced-B message implementation — BLOCKED (owner hook auth; lower priority)
 ├── [CLOSED] NH-10: IMPLEMENTED (MOVEMENT 005 — handbook §12)
-├── [CLOSED] UNK-M4-01: RESOLVED — SAFE_NORMALIZATION (58A §5)
+├── [CLOSED] UNK-M4-01: RESOLVED — SAFE_NORMALIZATION (58A §5); NH-09 INVARIANT CONFIRMED (59_)
 ├── [CLOSED] CONFLICT-04: RESOLVED — NH-10 closes process gap
-├── CDT-02: Blind subagent verifier confirmation — BLOCKED (new agent authorization)
-└── H-01 (stall frequency): BLOCKED — requires real usage environment
+├── CDT-02: Blind subagent verifier confirmation — DEFERRED (new agent authorization required)
+└── H-01 (stall frequency): ENVIRONMENT_BLOCK — requires real usage environment
 
-UNKNOWN (unchanged)
+OWNER DECISION GATES (classified separately from BLOCKERS):
+├── READY-01: AC-02 authorization question — OWNER_DECISION_READY
+│             NOTE: repairs are NOT uniformly "documentation-only" (59_ Finding A)
+│             Decision question corrected in 58_ (MOVEMENT 006)
+├── READY-02: P1'+P2' + Level-1 normalization — OWNER_DECISION_READY
+├── READY-03: LABYRINTH-1 L1-C closure — OWNER_DECISION_READY
+│             NOTE: N threshold required as part of acceptance (59_ Finding B)
+│             RISK label corrected to UNKNOWN in 58_ (MOVEMENT 006)
+└── READY-04: Enhanced-B message implementation — OWNER_DECISION_READY (lower priority)
+
+ENVIRONMENT BLOCKS:
+├── H-01 materiality: requires real usage environment
+├── P1'/P2' production FP rate: requires real usage
+├── Production bypass frequency: requires real usage
+└── Native Claude Code lifecycle: NOT_VERIFIED (deferred per F9-D02=B)
+
+UNKNOWN (unchanged):
 ├── F10-F12 shape, scope, necessity
 ├── Production implementation of non_bypass_verify (not authorized)
 ├── Commercial viability (H-03)
@@ -462,6 +473,76 @@ REOPEN CONDITION: Concrete observable transition Roger performs that CCP's
 ---
 
 ## §11 — Movement Results
+
+### MOVEMENT 006 — Pre-Authorization Adversarial Gate
+
+```
+ID:            MOVEMENT 006
+DATE:          2026-09-23
+EXECUTOR:      Claude Sonnet 4.6 (this session)
+ARTIFACTS:     59_PRE_AUTHORIZATION_ADVERSARIAL_GATE.md,
+               59A_EXECUTION_REHEARSAL.md,
+               58_OWNER_DECISION_PACKAGE.md (updated with 4 precision fixes)
+
+START:
+  READY-01/02/03/04 at OWNER_DECISION_READY.
+  Adversarial audit not yet performed.
+  UNK-M4-01 dangling OPEN entry in Exploration Engine.
+  READY-03 N threshold undefined.
+
+QUESTION:  Can READY-01/02/03/04 be broken before owner authorization?
+           Is each decision correctly classified, scoped, and ready?
+           Are all consequences fully determined?
+
+TRACKS EXECUTED:
+  A — Source file audit (PROJECT_STATE, 58_, 58A, 57_, 56_, handbook, rules)
+  B — READY-01 adversarial audit (4 policy repairs; per-repair semantic scope analysis)
+  C — NH-09 INVARIANT independent verification (variable lifecycle trace)
+  D — READY-02 adversarial audit (ordering, FP/FN, dual-variable architecture)
+  E — READY-03 adversarial audit (residual matrix, reactivation triggers, N gap)
+  F — READY-04 adversarial audit (sensitive data check, exit codes, logging)
+  G — Cross-decision interaction matrix
+  H — Branch simulation (5 branches)
+  I — Authorization audit (F9-D01=A semantics per element)
+  J — Hidden dependency audit
+  K — Evidence sufficiency audit
+  L — Materiality audit (H-01 discipline check)
+  M — Reversibility audit
+  N — Premature closure audit (state machine)
+  O — Second-order objection hunt
+  P — Simpler closure search
+  Q — True frontier reconstruction
+
+RESULT:
+  GATE RESULT: CONDITIONAL PASS — 4 required precision fixes made to 58_
+  Finding A (HIGH): READY-01 misclassified; 3 of 4 repairs add new constraints/exceptions.
+                    Decision question corrected in 58_; execution rehearsal updated.
+  Finding B (MEDIUM): READY-03 N threshold undefined → added "REQUIRED OWNER INPUT" field to 58_.
+  Finding C (LOW): READY-03 RISK: MEDIUM → corrected to RISK: UNKNOWN in 58_.
+  Finding D (LOW): READY-02 dual-variable architecture note added to 59A_.
+  Finding E (ADMIN): UNK-M4-01 dangling OPEN entry → cleaned in §3 (this session).
+  NH-09 INVARIANT: CONFIRMED (design analysis; no execution path for COMMAND_NORM).
+  STOP CONDITION: Research agenda exhausted; no high-value low-cost experiment remains;
+                  no material unknown changes any decision (N requires owner input, not research).
+
+POSITION CHANGE:
+  BEFORE: READY decisions at OWNER_DECISION_READY; N undefined; READY-01 framing imprecise.
+  AFTER:  Decision package adversarially audited; precision fixes applied; execution plans ready.
+          Frontier simplified: OWNER DECISION GATE + N definition + H-01 monitoring.
+
+OPENED:
+  UNK-M6-01: NH-09 INVARIANT maintenance dependency (undocumented; low risk; future hook
+             modifications must not execute COMMAND_NORM)
+
+CLOSED:
+  UNK-M4-01 dangling OPEN entry (admin; already RESOLVED since MOVEMENT 005)
+
+STOP CONDITION:
+  No authorized research remains. All open questions require owner input or real usage.
+  TRUE FRONTIER: OWNER DECISION GATE → N definition → H-01 monitoring.
+```
+
+---
 
 ### MOVEMENT 005 — NH-10 Implementation, UNK-M4-01 Resolution, Owner Decision Package
 
@@ -967,7 +1048,7 @@ CURRENT STATE: R-3 PARTIALLY_TRACTABLE, independence blocker identified
 
 ## §15 — Current Exploration Frontier
 
-The frontier after MOVEMENT 005 (TRUE FRONTIER):
+The frontier after MOVEMENT 006 (TRUE FRONTIER):
 
 ```
 KNOWN (no more research needed without new authorization):
@@ -1043,8 +1124,10 @@ PERMANENTLY BLOCKED (requires real usage — not more design):
 
 ## §16 — Next Moves
 
-Updated after MOVEMENT 005. Non-authorized research space is exhausted.
+Updated after MOVEMENT 006. Non-authorized research space exhausted. Adversarial gate passed.
 All remaining moves require owner decisions or real usage data.
+Reference: 59_PRE_AUTHORIZATION_ADVERSARIAL_GATE.md for audit details.
+Reference: 59A_EXECUTION_REHEARSAL.md for exact implementation plans.
 
 ### NEXT MOVE A — READY-03 (minimum viable, highest leverage, no code change)
 
@@ -1054,7 +1137,8 @@ WHAT QUESTION DOES IT ANSWER?
   closing LABYRINTH-1 under L1-C?"
 
 COST: One owner statement (no implementation)
-REFERENCE: 58_OWNER_DECISION_PACKAGE.md §READY-03
+REFERENCE: 58_OWNER_DECISION_PACKAGE.md §READY-03 (updated MOVEMENT 006)
+REQUIRED OWNER INPUT: N threshold for H-01 reactivation trigger
 IMPACT: LABYRINTH-1 → CONDITIONALLY_CLOSED; research overhead stops
 PRECONDITION: None
 ```
@@ -1063,13 +1147,15 @@ PRECONDITION: None
 
 ```
 WHAT QUESTIONS DOES IT ANSWER?
-  "Is AC-02 a rule change or doc improvement?" → enables policy repairs
+  "Are these policy repairs 'rule change' or 'doc improvement'?" → enables policy repairs
+  NOTE: MOVEMENT 006 adversarial audit found repairs are NOT uniformly doc-only.
+        The owner must decide knowing 3 of 4 repairs add new constraints.
   "Authorize P1'+P2'+Level-1 normalization?" → enables firewall improvements
 
 COST: One owner review session; implementation ~30 min if authorized
-REFERENCE: 58_OWNER_DECISION_PACKAGE.md §READY-01, §READY-02
+REFERENCE: 58_OWNER_DECISION_PACKAGE.md §READY-01, §READY-02; 59A_EXECUTION_REHEARSAL §1-2
 IMPACT: L1-C Conditions 1+2 satisfied; Minimal Security Stack Layers 1+2 operational
-PRECONDITION: Review 58_OWNER_DECISION_PACKAGE.md
+PRECONDITION: Read updated READY-01 question in 58_ (corrected MOVEMENT 006)
 ```
 
 ### NEXT MOVE C — READY-04 (quality improvement, lower priority)
@@ -1079,9 +1165,9 @@ WHAT QUESTION DOES IT ANSWER?
   "Authorize enhanced denial message format in hooks?"
 
 COST: One owner authorization; implementation ~20 min if authorized
-REFERENCE: 58_OWNER_DECISION_PACKAGE.md §READY-04
+REFERENCE: 58_OWNER_DECISION_PACKAGE.md §READY-04; 59A_EXECUTION_REHEARSAL §4
 IMPACT: Human review quality for STA-02 improves
-PRECONDITION: NH-10 (SATISFIED this session)
+PRECONDITION: NH-10 (SATISFIED MOVEMENT 005)
 ```
 
 ### PERMANENTLY BLOCKED (no authorized experiment remains)
@@ -1100,6 +1186,32 @@ AC-03 implementation: REQUIRES F10 SCOPE GATE
 Each completed movement, most recent first.
 
 ```
+MOVEMENT 006
+DATE:      2026-09-23
+MOVE:      Pre-Authorization Adversarial Gate & Execution Rehearsal
+QUESTION:  Can READY-01/02/03/04 be broken before owner authorization?
+           Are all consequences fully determined? Are dependencies hidden?
+OBSERVATION: GATE RESULT: CONDITIONAL PASS (4 precision fixes applied).
+             Finding A: READY-01 misclassified — 3/4 repairs add new constraints/exceptions.
+             Finding B: READY-03 N threshold undefined → "REQUIRED OWNER INPUT" added to 58_.
+             Finding C: READY-03 RISK: MEDIUM → corrected to RISK: UNKNOWN.
+             Finding D: READY-02 dual-variable architecture note added to 59A.
+             Finding E: UNK-M4-01 dangling OPEN entry cleaned from §3.
+             NH-09 INVARIANT independently confirmed (variable lifecycle trace).
+             No blocking adversarial finding. No hidden dependency changes any decision.
+             Research stop condition met: all 5 STOP criteria satisfied.
+RESULT:    Decision package passes adversarial gate; execution rehearsal complete.
+           TRUE FRONTIER: OWNER DECISION GATE → N definition → H-01 monitoring.
+CLASSIFICATION: MOVEMENT_COMPLETE
+WHAT CHANGED:
+  - 58_: READY-01 question corrected; READY-03 N input required; RISK label corrected
+  - 59_: Pre-authorization adversarial gate (new artifact)
+  - 59A_: Execution rehearsal with dry-run plans and branch simulations (new artifact)
+  - CCP_EXPLORATION_ENGINE.md: §3 frontier cleaned (UNK-M4-01 OPEN removed); MOVEMENT 006 added
+  - PROJECT_STATE.md: updated
+CLOSED: UNK-M4-01 dangling OPEN entry (admin)
+OPENED: UNK-M6-01 (NH-09 INVARIANT maintenance dependency; low risk)
+
 MOVEMENT 005
 DATE:      2026-09-23
 MOVE:      NH-10 Implementation + UNK-M4-01 Resolution + Owner Decision Package

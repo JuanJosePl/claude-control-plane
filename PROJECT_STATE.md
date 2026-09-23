@@ -7,11 +7,22 @@ PHASE_STATUS:           COMPLETE
 PHASE_STARTED:          2026-09-19
 CURRENT_OBJECTIVE:      F8 cerrada, F9 investigada (`F9 NOT JUSTIFIED`) y F9 owner decision gate CERRADO (F9-D01=A, F9-D02=B, F9-D03=B, F9-D04=B, F9-D05=A)
 LAST_COMPLETED_PHASE:   8 (2026-09-19)
-BLOCKERS:               NONE
+BLOCKERS:               NONE (no technical blockers)
+OWNER_GATES:            READY-01 (AC-02 classification), READY-02 (hook patterns),
+                        READY-03 (L1-C risk acceptance + N definition), READY-04 (message format)
+ENVIRONMENT_BLOCKS:     H-01 materiality (requires real usage), P1'/P2' FP rate (real usage),
+                        Native Claude Code lifecycle (deferred F9-D02=B)
+DEFERRED:               CDT-02 (new agent auth), AC-03 (TRIGGER-4), NH-11, F10-F12
 ACTIVE_DECISIONS:       ARCH-001, ARCH-002, ARCH-003, ARCH-004
 RESOLVED_OWNER_DECISIONS: F9-D01=A, F9-D02=B, F9-D03=B, F9-D04=B, F9-D05=A (2026-09-20)
 LAST_GIT_CHECKPOINT:    f4730e4
-LAST_MOVEMENT:          MOVEMENT 005 (2026-09-23) — NH-10 IMPLEMENTED (handbook §12); UNK-M4-01 RESOLVED (SAFE_NORMALIZATION; 4 limitations documented); CONFLICT-04 RESOLVED; L1-C Condition 3 SATISFIED (1/5); Owner Decision Package consolidated (58_OWNER_DECISION_PACKAGE.md); NH-11 hypothesis logged; TRUE FRONTIER = owner decision gate (READY-01/02/03); no authorized research remains
+LAST_MOVEMENT:          MOVEMENT 006 (2026-09-23) — Pre-Authorization Adversarial Gate PASSED (CONDITIONAL);
+                        4 precision fixes to 58_ (READY-01 question corrected; READY-03 N required;
+                        READY-03 RISK corrected to UNKNOWN; READY-02 arch note added);
+                        59_PRE_AUTHORIZATION_ADVERSARIAL_GATE.md and 59A_EXECUTION_REHEARSAL.md created;
+                        CCP_EXPLORATION_ENGINE.md frontier cleaned and updated;
+                        NH-09 INVARIANT independently CONFIRMED; Research STOP CONDITION MET;
+                        TRUE FRONTIER = OWNER DECISION GATE (READY-01/02/03/04) + N definition
 LAST_AUDIT:             2026-09-19
 LAST_ROADMAP:           2026-09-19
 LAST_BEHAVIORAL_AUDIT:  2026-09-18
