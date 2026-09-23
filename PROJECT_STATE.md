@@ -17,7 +17,7 @@ NOW_EXECUTABLE:         HRQS checklist (doc change; no auth), PAC corpus complet
 DEFERRED:               CDT-02 (new agent auth), AC-03 (TRIGGER-4), NH-11, F10-F12
 ACTIVE_DECISIONS:       ARCH-001, ARCH-002, ARCH-003, ARCH-004
 RESOLVED_OWNER_DECISIONS: F9-D01=A, F9-D02=B, F9-D03=B, F9-D04=B, F9-D05=A (2026-09-20)
-LAST_GIT_CHECKPOINT:    62b5d4c
+LAST_GIT_CHECKPOINT:    df489d0
 LAST_MOVEMENT:          MOVEMENT 007 (2026-09-23) — Frontier Breakout & Autonomous Advancement;
                         PAC prototype built (docs/research/pac/; 13 policies, compiler, results);
                         NEW FP CLASS discovered: PATTERN_NAME_IN_LITERAL (PAC-EF-02);
