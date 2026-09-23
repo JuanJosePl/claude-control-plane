@@ -32,7 +32,9 @@ R-2:       INSTRUMENTATION IMPLEMENTED / AUDITED_CONFIRMED — 1 test event, no 
 R-3:       DESIGN AUDITED_CONFIRMED — EMPIRICAL TEST COMPLETE (2026-09-23)
            Classification: PARTIALLY_TRACTABLE (design level)
 
-STALL_POLICY_LOG:  1 event (R-2 test instrumentation; not production data)
+STALL_POLICY_LOG:  3 events: 1 test (rm -rf / maintenance), 2 FP from MOVEMENT 007 PAC experiment
+                   H-01 real events = 2 (BOTH FALSE POSITIVES — PAC-EF-02 pattern-name-in-literal)
+                   H-01 genuine bypass events = 0 (no real bypasses observed)
 ROGER HYPOTHESIS:  REFORMULATION_CONFIRMED (tendency strengthened; MOVEMENT 002)
 
 POLICY CORPUS:     25 policies identified; 20 EXPLICIT (83%), 4 PARTIAL, 1 META
@@ -63,10 +65,17 @@ NH-11 (NEW):        HYPOTHESIS — single-quote normalization (extend Step 1 to 
                     NOT ON AUTHORIZED PATH; logged for future consideration
 CCP MINIMAL STACK:  Layers 0-6 defined as complete detection-to-escalation architecture (57_ §6.2)
 READY PACKAGES:     READY-01/02/03/04 fully structured as owner decision documents (57_ §10; 58_ consolidated)
+PAC PROTOTYPE:      COMPLETE (docs/research/pac/) — 13 policies in YAML; compiler functional; no drift detected
+P1'/P2' SPEC:       RESOLVED — 59A §2.2 placeholder filled; exact regex in 60_FRONTIER_BREAKOUT.md §C2
+PAC-EF-02:          NEW FINDING — false positive class "PATTERN_NAME_IN_LITERAL" discovered experimentally
+N THRESHOLD:        N = 1 RECOMMENDED (analysis in 60A_IDEA_PORTFOLIO.md §A3) — but see PAC-EF-02 note
+H-01 FP NOTE:       Current H-01 count = 2; BOTH are PAC experiment FPs; zero genuine bypass events
+HRQS GAP:           IDENTIFIED — human review has no quality standard for evaluating blocked commands
 
 IMPLEMENTATION_READY: false
-NEXT_ALLOWED_PHASE:   Owner-driven decision required (READY-01/02/03)
-LAST_MOVEMENT:        MOVEMENT 006 (2026-09-23) — Pre-authorization adversarial gate PASSED (4 fixes); 59_ and 59A_ created; 58_ corrected; frontier cleaned
+NEXT_ALLOWED_PHASE:   Owner-driven decision required (READY-01/02/03); 3 authorized improvements available NOW
+LAST_MOVEMENT:        MOVEMENT 007 (2026-09-23) — Frontier Breakout; PAC prototype built; new FP class discovered;
+                      P1'/P2' spec completed; N=1 recommendation; 17 ideas generated; parallel tracks identified
 ```
 
 ---
@@ -113,10 +122,22 @@ OWNER DECISION GATES (classified separately from BLOCKERS):
 │             NOTE: repairs are NOT uniformly "documentation-only" (59_ Finding A)
 │             Decision question corrected in 58_ (MOVEMENT 006)
 ├── READY-02: P1'+P2' + Level-1 normalization — OWNER_DECISION_READY
+│             NOTE: Exact P1'/P2' regex resolved (60_FRONTIER_BREAKOUT.md §C2)
+│             ENHANCED URGENCY (M007): Current H-01 FP events hard to classify without READY-04 messages
 ├── READY-03: LABYRINTH-1 L1-C closure — OWNER_DECISION_READY
 │             NOTE: N threshold required as part of acceptance (59_ Finding B)
 │             RISK label corrected to UNKNOWN in 58_ (MOVEMENT 006)
-└── READY-04: Enhanced-B message implementation — OWNER_DECISION_READY (lower priority)
+│             RECOMMENDATION: N = 1 (see 60A §A3); but be aware current H-01=2 is ALL FPs (PAC-EF-02)
+└── READY-04: Enhanced-B message implementation — OWNER_DECISION_READY
+              NOTE (M007): URGENCY ELEVATED — FP classification requires enhanced messages;
+              PAC-EF-02 FPs would be hard to classify without enhanced denial context
+
+NOW-EXECUTABLE (no owner authorization needed):
+├── HRQS: Human Review Quality Standard — checklist for evaluating blocked commands
+│         (adds §13 to CONTROL_PLANE_HANDBOOK; documentation change)
+├── PAC corpus: Complete PAC YAML with remaining 10 bash-firewall patterns
+│              (extends docs/research/pac/ccp_policies.yaml; research artifact)
+└── query-log.sh: H-01 monitoring tool — ALREADY CREATED (docs/00_SYSTEM/query-log.sh)
 
 ENVIRONMENT BLOCKS:
 ├── H-01 materiality: requires real usage environment
@@ -1124,10 +1145,10 @@ PERMANENTLY BLOCKED (requires real usage — not more design):
 
 ## §16 — Next Moves
 
-Updated after MOVEMENT 006. Non-authorized research space exhausted. Adversarial gate passed.
-All remaining moves require owner decisions or real usage data.
+Updated after MOVEMENT 007. Three tracks available: owner decisions (A/B/C) + now-executable improvements (D/E).
 Reference: 59_PRE_AUTHORIZATION_ADVERSARIAL_GATE.md for audit details.
 Reference: 59A_EXECUTION_REHEARSAL.md for exact implementation plans.
+Reference: 60_FRONTIER_BREAKOUT.md for MOVEMENT 007 results and new findings.
 
 ### NEXT MOVE A — READY-03 (minimum viable, highest leverage, no code change)
 
@@ -1170,6 +1191,28 @@ IMPACT: Human review quality for STA-02 improves
 PRECONDITION: NH-10 (SATISFIED MOVEMENT 005)
 ```
 
+### NEXT MOVE D — HRQS Checklist (now-executable, no owner input)
+
+```
+WHAT QUESTION DOES IT ANSWER?
+  "What criteria should a human reviewer apply when evaluating a blocked command?"
+  Currently NH-10 provides escalation path but not evaluation criteria.
+
+COST: One documentation session (~45 min); adds §13 to CONTROL_PLANE_HANDBOOK
+REFERENCE: 60_FRONTIER_BREAKOUT.md §J.1, §B5 (HRQS gap finding)
+IMPACT: Closes human review quality gap; directly improves B-path effectiveness
+PRECONDITION: None (documentation change, not rule change)
+```
+
+### NEXT MOVE E — STALL_POLICY_LOG Query Tool (ALREADY CREATED)
+
+```
+WHAT: docs/00_SYSTEM/query-log.sh — READ-ONLY H-01 monitoring tool
+STATUS: IMPLEMENTED in MOVEMENT 007 (this session)
+USAGE: bash docs/00_SYSTEM/query-log.sh --summary
+NOTE: Current H-01 real count = 2 (both PAC-EF-02 FPs; zero genuine bypass events)
+```
+
 ### PERMANENTLY BLOCKED (no authorized experiment remains)
 
 ```
@@ -1177,6 +1220,7 @@ NH-11 analysis: AVAILABLE NOW (no auth); but minimal value before READY-02
 H-01 measurement: REQUIRES REAL USAGE ENVIRONMENT
 CDT-02 blind verifier: REQUIRES NEW AGENT AUTHORIZATION
 AC-03 implementation: REQUIRES F10 SCOPE GATE
+PAC production adoption: REQUIRES OWNER AUTHORIZATION (architecture change)
 ```
 
 ---
@@ -1186,6 +1230,43 @@ AC-03 implementation: REQUIRES F10 SCOPE GATE
 Each completed movement, most recent first.
 
 ```
+MOVEMENT 007
+DATE:      2026-09-23
+MOVE:      Frontier Breakout & Autonomous Advancement
+QUESTION:  Is the MOVEMENT 006 conclusion ("research should stop") correct under a new
+           formulation? Are there new ideas, capabilities, or architectures that move
+           the project forward without violating authorization?
+OBSERVATION: 8 core CCP assumptions attacked; 2 confirmed weak, 2 new findings discovered.
+             PAC prototype: 13 policies encoded in YAML; compiler ran; no drift detected (PAC-EF-01).
+             NEW FP CLASS: pattern-name-in-literal causes false positives (PAC-EF-02).
+             PAC-EF-02 generated 2 H-01 events in this session — both false positives.
+             P1'/P2' exact regex resolved (59A placeholder filled).
+             N=1 recommendation derived analytically for READY-03.
+             HRQS gap identified (human review quality standard missing).
+             3 parallel execution tracks identified (query tool, HRQS, PAC corpus).
+             READY-04 urgency elevated: FP classification harder without enhanced messages.
+             17 ideas generated across 4 horizons; B1 (PAC) designated breakout candidate.
+             query-log.sh created and verified operational.
+RESULT:    Frontier is WIDER than MOVEMENT 006 described.
+           3 now-executable improvements (query tool DONE; HRQS pending; PAC corpus pending).
+           PAC architecture demonstrates future path to eliminating READY-01/READY-02 split.
+CLASSIFICATION: MOVEMENT_COMPLETE
+WHAT CHANGED:
+  - docs/research/pac/: 3 files created (YAML corpus, compiler, results)
+  - docs/research/CCP_FINAL_RECONCILIATION/60A_IDEA_PORTFOLIO.md: idea portfolio (17 ideas)
+  - docs/research/CCP_FINAL_RECONCILIATION/60_FRONTIER_BREAKOUT.md: main movement artifact
+  - docs/00_SYSTEM/query-log.sh: H-01 monitoring tool (OPERATIONAL)
+  - CCP_EXPLORATION_ENGINE.md: §2, §3, §16, §17 updated
+  - PROJECT_STATE.md: updated (LAST_MOVEMENT, STALL_POLICY_LOG note)
+CLOSED: PAC-EF-01 (consistency), PAC-EF-02 (new FP class), PAC-EF-03 (feasibility)
+        P1'/P2' spec placeholder (59A §2.2 resolved)
+        STALL_POLICY_LOG monitoring gap (query-log.sh created)
+OPENED: PAC production adoption (future; architecture change authorization needed)
+        HRQS gap (documentation; authorized; pending)
+        PAC corpus completion (research; authorized; pending)
+        PAC-EF-02 FP class (documented; suggests READY-04 urgency elevated)
+NEXT FRONTIER: Owner decisions (READY-01/02/03/04) + parallel tracks (HRQS, PAC corpus)
+
 MOVEMENT 006
 DATE:      2026-09-23
 MOVE:      Pre-Authorization Adversarial Gate & Execution Rehearsal

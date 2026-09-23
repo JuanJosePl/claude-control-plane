@@ -1,13 +1,36 @@
 #!/bin/bash
 # task-completed-evidence (P0 · FAIL_CLOSED) — exige evidencia verificada por task_id.
 set -uo pipefail
+. "$(dirname "${BASH_SOURCE[0]}")/lib/stall-record.sh"
 
 PROJ="${CLAUDE_PROJECT_DIR:-$(pwd)}"
 REGISTRY="$PROJ/docs/00_SYSTEM/EVIDENCE_REGISTRY.md"
 
 block() {
   printf 'TaskCompleted bloqueado: %s\n' "$1" >&2
-  exit 2
+  local decision=2
+  local stall_type="STALL_ERROR"
+  local policy_category="validation_error"
+  case "$1" in
+    "el payload requiere contract_hash.")
+      stall_type="STALL_POLICY"
+      policy_category="contract_hash_required"
+      ;;
+    "Evidence Contract invalid for task_id="*)
+      stall_type="UNKNOWN"
+      policy_category="evidence_contract"
+      ;;
+  esac
+  stall_record_event \
+    "task-completed-evidence.sh" \
+    "DENY" \
+    "$stall_type" \
+    "$policy_category" \
+    "${INPUT:-}" \
+    "${TASK_ID:-}" \
+    "" \
+    "classification is conservative; alternative is not inferred" || true
+  exit "$decision"
 }
 
 command -v jq >/dev/null 2>&1 || block "jq es requerido para validar el payload."

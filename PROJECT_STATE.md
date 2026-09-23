@@ -12,17 +12,22 @@ OWNER_GATES:            READY-01 (AC-02 classification), READY-02 (hook patterns
                         READY-03 (L1-C risk acceptance + N definition), READY-04 (message format)
 ENVIRONMENT_BLOCKS:     H-01 materiality (requires real usage), P1'/P2' FP rate (real usage),
                         Native Claude Code lifecycle (deferred F9-D02=B)
+NOW_EXECUTABLE:         HRQS checklist (doc change; no auth), PAC corpus completion (research),
+                        query-log.sh (DONE — docs/00_SYSTEM/query-log.sh)
 DEFERRED:               CDT-02 (new agent auth), AC-03 (TRIGGER-4), NH-11, F10-F12
 ACTIVE_DECISIONS:       ARCH-001, ARCH-002, ARCH-003, ARCH-004
 RESOLVED_OWNER_DECISIONS: F9-D01=A, F9-D02=B, F9-D03=B, F9-D04=B, F9-D05=A (2026-09-20)
-LAST_GIT_CHECKPOINT:    f4730e4
-LAST_MOVEMENT:          MOVEMENT 006 (2026-09-23) — Pre-Authorization Adversarial Gate PASSED (CONDITIONAL);
-                        4 precision fixes to 58_ (READY-01 question corrected; READY-03 N required;
-                        READY-03 RISK corrected to UNKNOWN; READY-02 arch note added);
-                        59_PRE_AUTHORIZATION_ADVERSARIAL_GATE.md and 59A_EXECUTION_REHEARSAL.md created;
-                        CCP_EXPLORATION_ENGINE.md frontier cleaned and updated;
-                        NH-09 INVARIANT independently CONFIRMED; Research STOP CONDITION MET;
-                        TRUE FRONTIER = OWNER DECISION GATE (READY-01/02/03/04) + N definition
+LAST_GIT_CHECKPOINT:    62b5d4c
+LAST_MOVEMENT:          MOVEMENT 007 (2026-09-23) — Frontier Breakout & Autonomous Advancement;
+                        PAC prototype built (docs/research/pac/; 13 policies, compiler, results);
+                        NEW FP CLASS discovered: PATTERN_NAME_IN_LITERAL (PAC-EF-02);
+                        P1'/P2' implementation spec completed (59A placeholder resolved);
+                        N=1 threshold recommendation derived analytically;
+                        H-01 monitoring tool created (query-log.sh — operational);
+                        17 ideas generated; B1 (PAC) = BREAKOUT CANDIDATE;
+                        HRQS gap identified; READY-04 urgency elevated;
+                        3 parallel execution tracks identified (2 authorized NOW);
+                        8 CCP assumptions attacked; 4 new findings
 LAST_AUDIT:             2026-09-19
 LAST_ROADMAP:           2026-09-19
 LAST_BEHAVIORAL_AUDIT:  2026-09-18

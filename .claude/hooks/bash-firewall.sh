@@ -3,6 +3,7 @@
 # secretos y supply chain. Bloqueo: exit 2 + stderr (canal universal en Claude Code 2.1.273).
 # DRY_RUN=true imprime la decisión sin efecto. Timeout objetivo ≤3s.
 set -uo pipefail
+. "$(dirname "${BASH_SOURCE[0]}")/lib/stall-record.sh"
 
 INPUT_FILE="$(mktemp)"
 trap 'rm -f "$INPUT_FILE"' EXIT
@@ -31,7 +32,17 @@ block() {
   echo "BLOQUEADO por bash-firewall (P0): $1" >&2
   echo "Comando: $COMMAND" >&2
   [ "${DRY_RUN:-false}" = "true" ] && { echo "[DRY_RUN] se habría bloqueado"; exit 0; }
-  exit 2
+  local decision=2
+  stall_record_event \
+    "bash-firewall.sh" \
+    "DENY" \
+    "STALL_POLICY" \
+    "$1" \
+    "$COMMAND" \
+    "" \
+    "" \
+    "policy predicate matched" || true
+  exit "$decision"
 }
 
 # --- Patrones destructivos (regex tolerante a espacios y case SQL) ---
