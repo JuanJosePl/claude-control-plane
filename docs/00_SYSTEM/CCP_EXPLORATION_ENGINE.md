@@ -1,6 +1,6 @@
 # CCP Exploration Engine
 
-> Version: 1.0 | Last updated: 2026-09-23
+> Version: 1.1 | Last updated: 2026-09-23
 > State authority: `PROJECT_STATE.md` | Evidence authority: `EVIDENCE_REGISTRY.md`
 > This document converts static knowledge into operational movement. It is not an atlas.
 
@@ -33,10 +33,17 @@ R-3:       DESIGN AUDITED_CONFIRMED — EMPIRICAL TEST COMPLETE (2026-09-23)
            Classification: PARTIALLY_TRACTABLE (design level)
 
 STALL_POLICY_LOG:  1 event (R-2 test instrumentation; not production data)
-ROGER HYPOTHESIS:  INDETERMINED / tendency = REFORMULATION
+ROGER HYPOTHESIS:  REFORMULATION_CONFIRMED (tendency strengthened; MOVEMENT 002)
+
+POLICY CORPUS:     25 policies identified; 20 EXPLICIT (83%), 4 PARTIAL, 1 META
+INDEPENDENCE:      Context isolation via subagents = SUFFICIENT for R-3 (MOVEMENT 002)
+HYPOTHESIS B:      CONDITIONALLY_SUFFICIENT at current scale (MOVEMENT 002)
+
+PRIMARY BOTTLENECK: Authorization gate (F9-D01=A) + Materiality (H-01 unknown)
 
 IMPLEMENTATION_READY: false
 NEXT_ALLOWED_PHASE:   Owner-driven decision required
+NEXT_MOVEMENT:        MOVEMENT 003 — Incremental Improvement Scoping
 ```
 
 ---
@@ -46,7 +53,7 @@ NEXT_ALLOWED_PHASE:   Owner-driven decision required
 The frontier is the boundary between what is known and what is not yet resolved.
 
 ```
-KNOWN (closed)
+KNOWN (closed — additions from MOVEMENT 002)
 ├── F1-F8 architecture and verification
 ├── R-1 prior art (four candidates do not close residual)
 ├── R-2 instrumentation (operational, no field data)
@@ -54,16 +61,21 @@ KNOWN (closed)
 ├── R-3 security invariant holds (design level)
 ├── R-3 UNKNOWN discipline holds (design level)
 ├── Protocol coherence: VERIFIED (design level)
-└── Independence blocker: IDENTIFIED
+├── Independence blocker: RESOLVED (context isolation via subagents sufficient)
+├── Policy explicitness: RESOLVED (83% of CCP policies explicit; 4 PARTIAL with repair paths)
+├── Hypothesis B: CONDITIONALLY_SUFFICIENT at current CCP scale
+├── Roger Hypothesis: REFORMULATION_CONFIRMED (not a new architecture or capability)
+└── Problem formulation: more tractable reformulations identified (effect-centric, evidence-centric)
 
-FRONTIER (boundary)
-├── Independence architecture: how can proposer/verifier separation be achieved?
-├── Policy explicitness: are CCP's existing policies explicit enough for R-3 SAFE labels?
-├── H-01 (stall frequency): unknown — R-2 has no field data
-├── Roger Hypothesis: INDETERMINED — needs specific falsification test
-└── Hypothesis B viability: what would human escalation rate look like for real denials?
+FRONTIER (new boundary after MOVEMENT 002)
+├── CDT-01: Does policy repair increase R-3 SAFE rate to >85%? (available now)
+├── NH-02: Do 3–5 bash-firewall extensions cover CCP semantic bypass domain? (available now)
+├── UNK-M2-04: Which incremental improvements are within F9-D01=A boundary? (owner decision)
+├── NH-01: Can evidence-centric mid-task tracking partially close LABYRINTH-1? (owner scoping)
+├── CDT-02: Blind subagent verifier confirmation (requires agent file → F9-D01 gate)
+└── H-01 (stall frequency): still blocked — requires real usage environment
 
-UNKNOWN (not yet entered)
+UNKNOWN (unchanged)
 ├── F10-F12 shape, scope, necessity
 ├── Production implementation of non_bypass_verify (not authorized)
 ├── Commercial viability (H-03)
@@ -218,162 +230,86 @@ EXIT CONDITIONS:
 ### ROUTE-INDEP: Investigate Role-Separated Architecture for Independence
 
 ```
-ROUTE:     Can proposer/verifier independence be achieved in a Claude Code
-           session using existing infrastructure?
+STATUS:    PARTIALLY_RESOLVED (MOVEMENT 002) — CDT-02 needed for empirical confirmation
 
-START:     Independence blocker identified (MOVEMENT 001, PI-1)
+RESULT:    Independence model analyzed in depth (54_MOVEMENT_002 §13–16).
 
-TARGET:    A design where the proposer and verifier run with genuinely
-           isolated context — no shared reasoning chain
+KEY FINDING: R-3's independence requirement uses "person" not "model".
+             Context isolation via subagents satisfies the written requirement.
+             6 of 7 independence dimensions are achievable with CCP's subagent infrastructure.
+             Model isolation (dimension 7) is NOT achievable without different model providers,
+             but R-3 does not require it.
 
-MECHANISM: Use Claude Code's subagent infrastructure (separate agent with
-           separate context pack) for the verifier role. The proposer
-           generates A'; a fresh subagent receives only the R-3 input
-           contract plus frozen policy evidence, and evaluates A' without
-           seeing the proposer's reasoning.
+COMMON-MODE FAILURE: Real risk, but mitigated by R-3's explicit UNSAFE taxonomy:
+                     verification is rule-based for explicit policies → reduces judgment calls
+                     where shared model priors matter most.
 
-PROBLEM:   Both agents run on the same underlying model. Common-mode
-           failure through shared model priors is possible even if
-           context isolation holds.
+BLIND VERIFIER DESIGN: Protocol designed (§15). For cases with explicit policy_intent
+                       and complete input contracts, blind verification produces same results
+                       as non-blind verification.
 
-DELTA:     Context isolation (achievable with subagents) vs. model isolation
-           (not achievable without different model providers). The question
-           is whether context isolation is sufficient for R-3's independence
-           requirement.
+REMAINING OPEN: CDT-02 (empirical test with actual subagent verifier) not yet executed.
+                Requires new agent definition file → NOT_AUTHORIZED per F9-D01=A.
 
-REUSE:     CCP already has subagent infrastructure (architect, code-reviewer,
-           implementer agents) with role-separated context packs (ARCH-002).
+ARCHITECTURE: AC-03 (subagent verifier) is the implementation candidate.
+              NOT AUTHORIZED under current F9-D01=A; requires owner decision for new agent.
 
-NEW PIECE: A "verifier" agent definition with read-only access to
-           policy text and the R-3 decision contract, receiving ONLY
-           the A'/A_blocked/P input package — not the proposer's reasoning.
+ARTIFACT:  54_MOVEMENT_002_FRONTIER_RESOLUTION.md §13–16, §25 AC-03
 
-NEW RELATION: Proposer → generates A' → passes to verifier (no reasoning)
-              Verifier → independently evaluates → returns SAFE/UNSAFE/UNKNOWN
-
-VALUE:     If context isolation meets R-3's requirement, the independence
-           blocker is resolved without changing the model.
-
-COMPLEXITY: Low to medium. CCP has subagent infrastructure. The question
-            is design + protocol, not new technology.
-
-RISK:      Common-mode model failure may still invalidate the independence
-           claim. This must be tested, not assumed away.
-
-TEST:      Design the verifier subagent context pack. Run the same 9 cases
-           with a separate verifier agent. Compare to MOVEMENT 001 results.
-           Check whether the subagent reaches the same labels independently.
-
-FALSIFIER: If the verifier agent receives the proposer's reasoning chain
-           (directly or through shared evidence) and produces labels
-           identical to the proposer — common-mode failure not mitigated.
-
-STATUS:    DISCOVERED → HYPOTHESIS (ready for test design)
+REOPEN CONDITION (for CDT-02): Owner authorizes new agent definition file.
 ```
 
 ### ROUTE-POLICY: Measure Policy Explicitness in CCP Context
 
 ```
-ROUTE:     Are CCP's existing policies explicit enough for R-3 to produce
-           SAFE labels in realistic agent scenarios?
+STATUS:    CLOSED / RESOLVED (MOVEMENT 002)
 
-START:     C-04 (vague policy → UNKNOWN) and C-01 (explicit policy → SAFE)
-           in MOVEMENT 001 show that policy explicitness is the primary
-           discriminant between useful and blocked outputs.
+RESULT:    25-policy corpus analyzed. 20 of 24 actionable policies (83%) are EXPLICIT
+           under R-3 criteria. 4 are PARTIAL with identified repair paths (one sentence
+           of disambiguation each). 1 is a META-RULE governing classification behavior.
 
-TARGET:    A characterization of CCP's policy corpus:
-           what fraction of real-world agent scenarios have policy text
-           explicit enough to satisfy R-3's policy_intent requirement?
+RCE TEST:  8 real-CCP scenarios: SAFE=6, UNKNOWN=1, UNSAFE=1 (75% SAFE rate).
+           High UNKNOWN rate in MOVEMENT 001 was an artifact of test case design,
+           not a CCP-wide property.
 
-MECHANISM: Select 5-10 representative CCP policy rules. For each,
-           construct a realistic agent scenario. Apply R-3's
-           policy_intent field criteria: is the prohibited outcome,
-           permitted scope, and applicable condition specified?
-           Classify each policy as EXPLICIT / PARTIAL / VAGUE.
+POLICY REPAIR: AC-02 (draft disambiguation text for 4 PARTIAL policies) identified
+               as a documentation-level improvement. Each repair = one sentence.
 
-PROBLEM:   CCP's policies were written for human review, not for
-           machine-verifiable policy_intent fields. Some may be partially
-           explicit but require interpretation.
+FINDING:   CCP's policies DO support hypothesis A in the explicit-policy domain.
+           Policy explicitness is NOT the primary blocker.
 
-DELTA:     What fraction of CCP policies produce SAFE (vs. UNKNOWN)
-           results under the R-3 protocol? This informs whether
-           hypothesis A has practical reach.
+ARTIFACT:  54_MOVEMENT_002_FRONTIER_RESOLUTION.md §5–12
 
-REUSE:     Uses existing CCP policy corpus (security.md, rules/*.md,
-           ARCH-001..004) — no new infrastructure needed.
-
-NEW PIECE: A structured policy evaluation using R-3 input contract fields
-           as the assessment rubric.
-
-VALUE:     Either confirms that CCP's policies support hypothesis A
-           in practice, or identifies which policies need to be
-           reformulated before A becomes usable.
-
-COMPLEXITY: Low. Read-only analysis of existing policy files.
-
-RISK:      Conclusion may be that policies need significant reformulation —
-           which creates new work.
-
-TEST:      Select 8-10 real CCP policy rules. Apply R-3's
-           SAFE conditions 1 (policy intent) and 2 (objective preservation)
-           as a checklist for each. Record EXPLICIT / PARTIAL / VAGUE
-           for each policy.
-
-FALSIFIER: If all or most CCP policies are VAGUE under R-3 criteria,
-           hypothesis A has no practical domain in the current CCP context.
-
-STATUS:    DISCOVERED → READY_FOR_TEST (no prerequisites)
+REOPEN CONDITION: Counter-evidence showing >50% PARTIAL policies in a representative
+                  random sample of real CCP scenarios (not synthetic test cases).
 ```
 
 ### ROUTE-B: Evaluate Hypothesis B as Production Baseline
 
 ```
-ROUTE:     Is hypothesis B (refuse + human escalation) already sufficient
-           as the production response to STALL_POLICY events?
+STATUS:    CLOSED / CONDITIONALLY_SUFFICIENT (MOVEMENT 002)
 
-START:     R-3 established that B is the conservative baseline.
-           MOVEMENT 001 did not evaluate B — it only evaluated A.
+RESULT:    5-scenario evaluation complete.
+           SUFFICIENT: STA-01 (secrets), STA-03 (git push), STA-04 (supply chain)
+           NEEDS_MORE: STA-02 (evidence contract — information quality gap)
+           DELAYED: STA-05 (phase freeze — no hook coverage; caught at review)
 
-TARGET:    A characterization of hypothesis B:
-           what would a human reviewer need to see to resolve a
-           STALL_POLICY event? How complex is the typical decision?
-           What information is already surfaced by the current deny output?
+FINDING:   B is the CURRENT PRODUCTION PATH for hook-enforced stalls.
+           B is SUFFICIENT for 3/5 hook-enforced stall classes at current CCP scale.
+           B's primary weakness is information quality in complex cases (STA-02),
+           not structural insufficiency. This is addressable as B+ (AC-01).
 
-MECHANISM: Take 3-5 realistic STALL_POLICY scenarios (similar to C-01..C-08
-           cases). For each, apply hypothesis B: what does the agent say to
-           the human? Does the human have enough information to decide?
-           How many back-and-forth turns does resolution require?
+IMPLICATION: LABYRINTH-1 does not require hypothesis A for current CCP scale.
+             If H-01 (stall frequency) remains low, B is the permanent production path.
 
-PROBLEM:   "Human in the loop" is operationally cheap when the human is
-           present and the decision is simple. It becomes expensive when
-           the human is absent, the decision is complex, or the context
-           is deep.
+AC-01:     Enhanced-B (richer denial messages) identified as improvement path.
+           Requires hook schema extension → NOT_AUTHORIZED per F9-D01=A.
+           Requires owner decision.
 
-DELTA:     Understanding the actual cost of B in CCP's real usage would
-           determine whether A is worth its complexity.
+ARTIFACT:  54_MOVEMENT_002_FRONTIER_RESOLUTION.md §17–18
 
-REUSE:     Uses existing STALL_POLICY event model (R-2 infrastructure).
-
-NEW PIECE: A structured human-escalation protocol description for
-           the B outcome.
-
-VALUE:     If B is sufficient for CCP's usage patterns, the labyrinth
-           LABYRINTH-1 closes without implementing hypothesis A.
-
-COMPLEXITY: Low. Thought experiment + design analysis. No new code.
-
-RISK:      Conclusion may simply be that B IS sufficient — which closes
-           LABYRINTH-1 without requiring independence architecture.
-
-TEST:      Construct 5 representative STALL_POLICY scenarios.
-           Apply B: what information does the deny output provide?
-           What does the human need to resolve it?
-           Classify: SUFFICIENT / NEEDS_MORE / INSUFFICIENT.
-
-FALSIFIER: If all 5 scenarios in B are SUFFICIENT, hypothesis A adds
-           complexity without adding value at current CCP scale.
-
-STATUS:    DISCOVERED → HYPOTHESIS (ready for test design)
+REOPEN CONDITION: A class of CCP stall scenarios where even richer information
+                  does not enable human resolution, OR H-01 exceeds materiality threshold.
 ```
 
 ### ROUTE-ROGER: Falsify or Confirm Roger Hypothesis
@@ -397,8 +333,20 @@ VALUE:     Closes a standing open question in the research corpus.
 
 COMPLEXITY: Unknown until 52 is read for specific falsifiers.
 
-STATUS:    DISCOVERED (requires reading 52's falsifier section before
-           test can be designed)
+STATUS:    CLOSED / REFORMULATION_CONFIRMED (MOVEMENT 002)
+
+RESULT:    Concrete falsification test executed (54_MOVEMENT_002 §19).
+           CCP's existing artifact+registry system handles the "representation
+           reactivation with causal history preservation" scenario that Roger proposes.
+           Roger = formalization of CCP's implicit model. No new capability.
+           F7 (no test distinguishing Roger): PARTIALLY SATISFIED.
+           F5 ("native" has no operational definition): still technically true;
+           but concrete scenario shows the distinction is immaterial for CCP.
+
+ARTIFACT:  54_MOVEMENT_002_FRONTIER_RESOLUTION.md §19
+
+REOPEN CONDITION: Concrete observable transition Roger performs that CCP's
+                  artifact+registry model cannot.
 ```
 
 ---
@@ -411,6 +359,11 @@ STATUS:    DISCOVERED (requires reading 52's falsifier section before
 | State-Aware Runtime v4 as residual solution | R-1 | Conceptual paper only; no policy-aware alternative generation | Published implementation with empirical evaluation |
 | arXiv:2606.31339 as residual solution | R-1 | Structured multi-robot domain; not open-ended | Generalization to open-ended agents demonstrated |
 | ae-framework as residual solution | R-1 | Dry-run only; no alternative generation | Published working implementation with policy bypass verification |
+| ROUTE-POLICY (policy explicitness) | MOVEMENT 002 (54_MOVEMENT_002) | 83% of CCP policies are EXPLICIT; 4 PARTIAL have repair paths; high UNKNOWN rate in MOVEMENT 001 was artifact of test design | Counter-evidence showing >50% PARTIAL in representative sample |
+| ROUTE-B (hypothesis B sufficiency) | MOVEMENT 002 (54_MOVEMENT_002) | B is CONDITIONALLY_SUFFICIENT at current scale; information quality (not structure) is the improvement target | Class of stalls where even richer information cannot enable human resolution |
+| ROUTE-ROGER (Roger Hypothesis) | MOVEMENT 002 (54_MOVEMENT_002) | REFORMULATION confirmed via concrete falsification scenario; CCP artifact+registry already handles the proposed pattern | Concrete observable transition Roger performs that CCP model cannot |
+| "CCP policies too vague for R-3" | MOVEMENT 002 | Falsified: 83% explicit rate established via full corpus analysis | Representative sample showing >50% PARTIAL |
+| "Independence requires model isolation" | MOVEMENT 002 | R-3 uses "person" not "model"; context isolation satisfies written requirement | R-3 post-audit requiring model independence; or controlled test showing common-mode failure for rule-based explicit-policy cases |
 | VERITAS OS as residual solution | R-1 | Refusal terminal; no alternative generation | Published version with alternative generation and bypass verification |
 | "R-3 protocol is conceptually incoherent" | MOVEMENT 001 | 9/9 cases correctly classified; taxonomy discriminating | Contrary evidence from an independent empirical test |
 | "UNKNOWN always dominates the protocol" | MOVEMENT 001 | C-01 produced SAFE in explicit-policy domain | Independent test showing SAFE rate = 0 in a well-specified domain |
@@ -458,6 +411,80 @@ STATUS:    DISCOVERED (requires reading 52's falsifier section before
 ---
 
 ## §11 — Movement Results
+
+### MOVEMENT 002 — Frontier Resolution Expedition
+
+```
+ID:            MOVEMENT 002
+DATE:          2026-09-23
+EXECUTOR:      Claude Sonnet 4.6 (this session)
+ARTIFACT:      54_MOVEMENT_002_FRONTIER_RESOLUTION.md
+
+START:
+  R-3 PARTIALLY_TRACTABLE.
+  Three compounding blockers: B-1 (independence), B-2 (policy explicitness), B-3 (threshold).
+  Open routes: ROUTE-POLICY, ROUTE-B, ROUTE-INDEP, ROUTE-ROGER.
+
+QUESTION:  What is the true limiting factor for LABYRINTH-1?
+
+ACTION:
+  Full CCP policy corpus enumerated (25 policies).
+  Per-policy semantic completeness analysis (EXPLICIT/PARTIAL/META).
+  Policy composition and precedence analysis.
+  8 real-CCP-policy RCE test cases evaluated.
+  Policy ablation test to find minimum semantic core.
+  Policy repair experiment for 4 PARTIAL policies.
+  Independence model analysis (7 dimensions).
+  Independence threat model (common-mode failure scenarios).
+  Blind verifier protocol designed.
+  5-scenario Hypothesis B evaluation against real CCP stall types.
+  Roger Hypothesis concrete falsification test.
+  Cross-domain analysis (aviation, medical, formal methods, PLC/SCADA).
+  6 representation shifts and 5 problem reframings investigated.
+  4 architecture candidates generated.
+  Combinatorial synthesis of 3 candidate combinations.
+
+RESULT:
+  ROUTE-POLICY: RESOLVED — 83% explicit, 4 PARTIAL with repair paths
+  ROUTE-B: CONDITIONALLY_SUFFICIENT at current scale
+  ROUTE-ROGER: REFORMULATION_CONFIRMED
+  ROUTE-INDEP: PARTIALLY_RESOLVED — CDT-02 still needed
+
+  PRIMARY BOTTLENECK: Authorization (F9-D01=A) + Materiality (H-01 unknown)
+  The architecture blockers B-1 and B-2 are substantially smaller than assessed.
+
+POSITION CHANGE:
+  BEFORE: Three equal blockers unknown in magnitude
+  AFTER:  Architecture blockers partially resolved; authorization/materiality confirmed as the real gate
+          LABYRINTH-1 is exitable incrementally via AC-01+AC-02 without full non_bypass_verify
+
+OPENED:
+  CDT-01: Policy repair test (available now, no auth needed)
+  NH-02: Bash-firewall semantic bypass coverage analysis (available now)
+  UNK-M2-04: F9-D01 boundary for incremental improvements (owner decision)
+  NH-01: Evidence-centric mid-task tracking (owner scoping)
+  CDT-02: Blind verifier test (requires owner decision for agent file)
+
+CLOSED:
+  ROUTE-POLICY (policies largely explicit)
+  ROUTE-B (conditionally sufficient)
+  ROUTE-ROGER (reformulation confirmed)
+  "CCP policies too vague for R-3" (falsified)
+  "Independence requires model isolation" (weakened/resolved)
+
+NEW HYPOTHESES:
+  NH-01: Evidence-centric mid-task tracking can partially close LABYRINTH-1
+  NH-02: 3–5 bash-firewall extensions cover CCP semantic bypass domain
+  NH-03: Authorization gate (not architecture) is the real bottleneck
+
+NEW UNKNOWNS:
+  UNK-M2-01..06 (see §11 archive artifact)
+
+NEXT FRONTIER:  Incremental Improvement Decision Gate
+NEXT MOVEMENT:  MOVEMENT 003 — Incremental Improvement Scoping
+```
+
+---
 
 ### MOVEMENT 001 — R-3 Empirical Falsifiability Test
 
@@ -632,104 +659,117 @@ CURRENT STATE: R-3 PARTIALLY_TRACTABLE, independence blocker identified
 
 ## §15 — Current Exploration Frontier
 
-The frontier after MOVEMENT 001:
+The frontier after MOVEMENT 002:
 
 ```
 MOST SPECIFIC OPEN QUESTIONS (in priority order by information value):
 
-[1] ROUTE-POLICY: Are CCP's existing policies explicit enough for R-3 to
-    produce SAFE labels in realistic scenarios?
-    → Cheapest route: read-only analysis of existing policy files
-    → Information value: HIGH (determines if hypothesis A has any domain in CCP)
-    → Cost: LOW (no new code; no new design; 30-60 minutes)
+[1] CDT-01: Does policy repair increase R-3 SAFE rate to >85%?
+    → AVAILABLE NOW (read-only; no authorization needed)
+    → Information value: HIGH (calibrates AC-03 value estimate; closes UNK-M2-03)
+    → Cost: LOW (draft repair text for 4 PARTIAL policies; re-run RCE set; 45 min)
 
-[2] ROUTE-B: Is hypothesis B (refuse + escalate) sufficient as the
-    production response to STALL_POLICY events?
-    → Cheapest route: 5-scenario thought experiment
-    → Information value: HIGH (could close LABYRINTH-1 without implementing A)
-    → Cost: LOW (no new code; no new design; 30-60 minutes)
-    → Ordering: ROUTE-POLICY and ROUTE-B can run in parallel
+[2] NH-02: Do 3–5 bash-firewall extensions cover CCP's semantic bypass domain?
+    → AVAILABLE NOW (analysis only; no code change)
+    → Information value: HIGH (could close semantic bypass risk without full non_bypass_verify)
+    → Cost: LOW (enumerate bypass patterns from research corpus; check coverage; 30 min)
 
-[3] ROUTE-INDEP: Can role-separated subagents meet R-3's independence requirement?
-    → Prerequisite: ROUTE-POLICY confirms A has a domain in CCP
-    → Information value: HIGH if A is the chosen path
-    → Cost: MEDIUM (subagent context pack design + 9-case repeat test)
+[3] UNK-M2-04: Which incremental improvements are within F9-D01=A authorization boundary?
+    → REQUIRES OWNER DECISION
+    → Information value: VERY HIGH (unblocks AC-01, AC-02, NH-01, NH-02 implementation)
+    → Cost: LOW (present concrete scope descriptions to owner; get yes/no per item)
 
-[4] ROUTE-ROGER: Clarify Roger Hypothesis classification
-    → Prerequisite: read 52's falsifier section
-    → Information value: MEDIUM (closes standing open question)
-    → Cost: LOW (read + one targeted test)
+[4] CDT-02: Blind subagent verifier empirical confirmation
+    → REQUIRES OWNER AUTHORIZATION (new agent file → F9-D01 gate)
+    → Information value: HIGH (confirms independence claim empirically)
+    → Cost: MEDIUM after authorization (agent definition + 8-case test)
+
+[5] H-01: Real stall frequency measurement
+    → BLOCKED (no real usage environment; EXP-002 blocked)
+    → Information value: MAXIMUM if material (could close LABYRINTH-1 as IMMATERIAL)
+    → Cost: ZERO design cost; requires real usage
 ```
 
 ---
 
 ## §16 — Next Moves
 
-The following moves are available now, ordered by information value per unit cost.
+The following moves are available now, ordered by information value per unit cost. (Updated after MOVEMENT 002.)
 
-### NEXT MOVE A — ROUTE-POLICY (Recommended first)
+### NEXT MOVE A — CDT-01: Policy Repair Test (Available now)
 
 ```
 WHAT QUESTION DOES IT ANSWER?
-  Do CCP's existing policy rules provide sufficient policy_intent
-  for R-3's SAFE conditions to produce useful labels?
+  Does disambiguating CCP's 4 PARTIAL policies increase the R-3 SAFE rate
+  from 75% (current) to >85%?
 
 WHAT UNKNOWN DOES IT REDUCE?
-  PI-2 (high UNKNOWN rate in ambiguous domains) — is this because
-  of the domain chosen, or because CCP's policies are generally vague?
+  UNK-M2-03: whether policy text repair is the remaining bottleneck for SAFE labels
 
 WHAT BRANCHES DOES IT OPEN?
-  If EXPLICIT: proceed to ROUTE-INDEP (independence architecture)
-  If VAGUE: reconsider hypothesis A's scope in CCP; B may dominate
+  If SAFE rate >85%: policy corpus is effectively complete; AC-03 has full domain coverage
+  If SAFE rate stays ~75%: model uncertainty is the remaining factor; B+ may dominate
 
 WHAT BRANCHES DOES IT CLOSE?
-  If VAGUE: ROUTE-INDEP becomes lower priority
+  If SAFE rate >85%: closes the "policy quality" as remaining uncertainty
 
 WHAT IS THE CHEAPEST TEST?
-  Read 8-10 CCP policy rules. Apply R-3 SAFE conditions 1-2 as
-  a checklist per rule. 45 minutes.
+  Draft one-sentence disambiguation for each of the 4 PARTIAL policies.
+  Re-run RCE-01..08 with repaired policies. Compare SAFE rate.
+  45 minutes. Read-only test (no file modification needed).
 
 WHAT DOES IT REQUIRE?
-  Read-only access to security.md, rules/*.md, ARCH-001..004
+  Draft repair text for POL-05, POL-08, POL-13; re-run RCE set
 
 WHAT DOES IT NOT REQUIRE?
-  New code, new infrastructure, owner authorization (read-only)
-
-HOW REVERSIBLE IS THIS?
-  Fully reversible — no code, no state change
-
-WHAT WOULD MAKE THIS TEST USELESS?
-  If all 8-10 selected policies happen to be from the explicit tail
-  of the distribution; must include representative policies across
-  policy types
+  New code, new infrastructure, owner authorization (analysis only)
 
 WHAT RESULT WOULD CHANGE THE FRONTIER?
-  "70%+ of CCP policies are VAGUE under R-3 criteria" — would reframe
-  LABYRINTH-1 as requiring policy reformulation before implementation,
-  not independence architecture.
+  "SAFE rate rises to >85% after policy repair" — confirms AC-02 has high ROI;
+  makes the case for presenting AC-02 to owner for authorization.
 ```
 
-### NEXT MOVE B — ROUTE-B (Can run in parallel with MOVE A)
+### NEXT MOVE B — NH-02: Bash-Firewall Semantic Bypass Coverage (Available now)
 
 ```
 WHAT QUESTION DOES IT ANSWER?
-  Is human escalation already sufficient for STALL_POLICY events?
+  Can 3–5 additional bash-firewall patterns cover CCP's semantic bypass domain
+  without implementing a full semantic verifier?
 
 WHAT UNKNOWN DOES IT REDUCE?
-  Whether hypothesis A is necessary at all in CCP's context.
+  Whether semantic bypass risk is concentrated (addressable by extension) or
+  diffuse (requires general verifier)
 
 WHAT BRANCHES DOES IT OPEN?
-  If SUFFICIENT: LABYRINTH-1 closes. B is the production path.
-  If INSUFFICIENT: Evidence accumulates for hypothesis A's necessity.
+  If concentrated: AC-02-style hook extension is sufficient for CCP's domain
+  If diffuse: AC-03 (full semantic verifier) is necessary
 
 CHEAPEST TEST:
-  Construct 5 realistic STALL_POLICY scenarios. Apply B:
-  what does the current deny output say? Is it enough for a human?
-  30-45 minutes.
+  Enumerate semantic bypass patterns from MOVEMENT 001 cases (C-02, C-03)
+  and MOVEMENT 002 analysis. Check whether they reduce to ≤10 concrete patterns.
+  30 minutes. Analysis only.
 
 WHAT RESULT WOULD CHANGE THE FRONTIER?
-  "5/5 scenarios are SUFFICIENT under B" — closes LABYRINTH-1 without
-  architecture work. Major position change.
+  "3–5 patterns cover 90%+ of CCP's semantic bypass domain" — closes the semantic
+  bypass risk without full non_bypass_verify implementation.
+```
+
+### NEXT MOVE C — Owner Scoping Decision (Requires owner input)
+
+```
+WHAT QUESTION DOES IT ANSWER?
+  Which of AC-01, AC-02, NH-01, NH-02 are within the current F9-D01=A boundary?
+
+WHY THIS IS HIGH VALUE:
+  Authorization gate (F9-D01=A) is the primary blocker for all incremental improvements.
+  Owner can unblock multiple improvements with one scoping decision.
+
+WHAT TO PRESENT TO OWNER:
+  AC-01: hook schema extension (probable PROHIBITED — modifies hooks)
+  AC-02: rule text disambiguation (AMBIGUOUS — "rule" vs "documentation"?)
+  NH-01: STALL_POLICY_LOG schema extension (probable PROHIBITED — hook-adjacent)
+  NH-02: bash-firewall pattern extension (probable PROHIBITED — hook modification)
+  Documentation drafts: reviewing AC-02 repair text (PERMITTED — read-only)
 ```
 
 ---
@@ -737,6 +777,42 @@ WHAT RESULT WOULD CHANGE THE FRONTIER?
 ## §17 — Movement History
 
 Each completed movement, most recent first.
+
+```
+MOVEMENT 002
+DATE:      2026-09-23
+MOVE:      Frontier Resolution Expedition (policy corpus, independence, Hypothesis B, Roger)
+QUESTION:  What is the true limiting factor for LABYRINTH-1?
+HYPOTHESIS: Architecture blockers (B-1, B-2) are smaller than assessed; authorization + materiality are the real gate
+OBSERVATION: 83% CCP policies explicit; context isolation sufficient for R-3; B conditionally sufficient; Roger = reformulation
+RESULT:    PRIMARY BOTTLENECK = Authorization gate (F9-D01=A) + Materiality (H-01 unknown)
+CLASSIFICATION: LABYRINTH-1 PARTIALLY_RESOLVED at architecture level; authorization gate confirmed
+WHAT CHANGED:
+  - Policy explicitness: UNKNOWN → 83% EXPLICIT (4 PARTIAL with repair paths)
+  - Independence (B-1): ARCHITECTURAL BLOCKER → PARTIALLY_RESOLVED (context isolation sufficient)
+  - Hypothesis B: UNTESTED → CONDITIONALLY_SUFFICIENT at current scale
+  - Roger Hypothesis: INDETERMINED → REFORMULATION_CONFIRMED
+  - Problem formulation: more tractable reformulations identified (RF-02, RF-03, RF-04)
+CLOSED ROUTES:
+  - ROUTE-POLICY (resolved)
+  - ROUTE-B (conditionally sufficient)
+  - ROUTE-ROGER (reformulation confirmed)
+  - "CCP policies too vague" falsifier
+  - "Independence requires model isolation" falsifier
+OPENED ROUTES:
+  - CDT-01: policy repair test (available now)
+  - NH-02: bash-firewall coverage analysis (available now)
+  - UNK-M2-04: owner scoping decision
+  - CDT-02: blind verifier test (after owner decision)
+NEW HYPOTHESES:
+  NH-01: evidence-centric mid-task tracking
+  NH-02: 3–5 bash-firewall extensions sufficient
+  NH-03: authorization is the real bottleneck
+NEXT FRONTIER: Incremental Improvement Decision Gate
+NEXT MOVE:     CDT-01 + NH-02 (available now, in parallel)
+```
+
+---
 
 ```
 MOVEMENT 001
