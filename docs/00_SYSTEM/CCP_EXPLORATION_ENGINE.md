@@ -1,6 +1,6 @@
 # CCP Exploration Engine
 
-> Version: 1.2 | Last updated: 2026-09-23
+> Version: 1.3 | Last updated: 2026-09-23
 > State authority: `PROJECT_STATE.md` | Evidence authority: `EVIDENCE_REGISTRY.md`
 > This document converts static knowledge into operational movement. It is not an atlas.
 
@@ -41,15 +41,21 @@ HYPOTHESIS B:      CONDITIONALLY_SUFFICIENT at current scale (MOVEMENT 002)
 
 PRIMARY BOTTLENECK: Authorization gate (F9-D01=A) + Materiality (H-01 unknown)
 
-CDT-01:             COMPLETE (2026-09-23) — SAFE rate 87.5% after policy repair (vs. 75% baseline)
-NH-02:              COMPLETE (2026-09-23) — PARTIALLY_SUPPORTED; 4 patterns cover ~75–80% of bypass surface
+CDT-01:             COMPLETE — SAFE rate 87.5% after policy repair (vs. 75% baseline; EXPERIMENTAL)
+NH-02:              COMPLETE — PARTIALLY_SUPPORTED; 4 patterns cover ~75–80% practical bypass surface
 NH-03:              CONFIRMED — authorization gate is the real bottleneck
-NH-04:              OPENED — P1'+P2'+P3 may be sufficient for CCP's current threat surface
-AC-02 ROI:          CONFIRMED HIGH (4 repairs; highest ROI of all identified improvements)
+NH-04:              PARTIALLY_SUPPORTED — P1'+P2'+P3 cover 6/15 corpus; ${VAR} gap identified; P4 inadvisable (FP)
+AC-02 ROI:          CONFIRMED HIGH; policy repairs validated and specified (56_MOVEMENT_003 §7)
+BYPASS TAXONOMY:    4 upper families (Observation, Transformation, Storage, Transport)
+STATIC BOUNDARY:    6-level detection spectrum; Level-1 (AST normalization) is new viable intermediate
+LABYRINTH-1 L1-C:   NEW EXIT PATH — closeable without AC-03 if owner accepts residual (see §11.4 of 56_)
+POLICY PRECEDENCE:  NO explicit precedence document in CCP (UNK-M3-01)
+ALIASING:           Variable aliasing bypasses ALL proposed patterns; requires session taint tracking
+NEW HYPOTHESES:     NH-05 (AST normalization), NH-06 (precedence doc), NH-07 (enhanced-B STA-02), NH-08 (H-01 not material)
 
 IMPLEMENTATION_READY: false
 NEXT_ALLOWED_PHASE:   Owner-driven decision required
-NEXT_MOVEMENT:        MOVEMENT 003 — Incremental Improvement Scoping
+NEXT_MOVEMENT:        MOVEMENT 004 — Available-Now Closure + Owner Decision Package
 ```
 
 ---
@@ -73,14 +79,20 @@ KNOWN (closed — additions from MOVEMENT 002)
 ├── Roger Hypothesis: REFORMULATION_CONFIRMED (not a new architecture or capability)
 └── Problem formulation: more tractable reformulations identified (effect-centric, evidence-centric)
 
-FRONTIER (new boundary after CDT-01 + NH-02)
-├── [CLOSED] CDT-01: SAFE rate 87.5% after policy repair — CONFIRMED (55_CDT01_NH02_RESULTS.md)
-├── [CLOSED] NH-02: 4 patterns cover ~75–80% of bypass surface — PARTIALLY_SUPPORTED
-├── UNK-M2-04: Which incremental improvements are within F9-D01=A boundary? (owner decision)
-├── NH-04: P1'+P2'+P3 sufficient for CCP's current threat surface? (10-case bash test; no code)
-├── NH-01: Can evidence-centric mid-task tracking partially close LABYRINTH-1? (owner scoping)
-├── CDT-02: Blind subagent verifier confirmation (requires agent file → F9-D01 gate)
-└── H-01 (stall frequency): still blocked — requires real usage environment
+FRONTIER (new boundary after MOVEMENT 003)
+├── [CLOSED] CDT-01: SAFE rate 87.5% — CONFIRMED
+├── [CLOSED] NH-02: 4 patterns cover ~75–80% — PARTIALLY_SUPPORTED
+├── [CLOSED] NH-04: P1'+P2'+P3 cover 6/15 corpus; ${VAR} gap; P4 inadvisable — PARTIALLY_SUPPORTED
+├── UNK-M3-01: CCP has no explicit policy precedence document (OPENED — needs owner)
+├── READY-01: AC-02 authorization question — single binary owner decision (highest priority)
+├── READY-02: NH-02 patterns specified; FP risks quantified; ready for authorization
+├── READY-03: LABYRINTH-1 L1-C closure — ready for owner risk acceptance decision
+├── NH-05: Shell AST normalization — HYPOTHESIS; CHEAPEST TEST available now (no auth)
+├── NH-06: Policy precedence document — HYPOTHESIS; CHEAPEST TEST available now (no auth)
+├── NH-07: Enhanced-B denial message for STA-02 — HYPOTHESIS; design available now
+├── NH-08: Semantic bypass problem not material — HYPOTHESIS; UNFALSIFIABLE (needs H-01)
+├── CDT-02: Blind subagent verifier confirmation — BLOCKED (new agent authorization)
+└── H-01 (stall frequency): BLOCKED — requires real usage environment
 
 UNKNOWN (unchanged)
 ├── F10-F12 shape, scope, necessity
@@ -416,10 +428,83 @@ REOPEN CONDITION: Concrete observable transition Roger performs that CCP's
 | EXP-006 | ROUTE-B: hypothesis B human escalation evaluation | COMPLETE (MOVEMENT 002) | CONDITIONALLY_SUFFICIENT; see 54_MOVEMENT_002 §17–18 |
 | EXP-007 | CDT-01: policy repair SAFE rate test | COMPLETE (2026-09-23) | 87.5% SAFE rate (vs. 75% baseline); see 55_CDT01_NH02_RESULTS.md §1 |
 | EXP-008 | NH-02: bash-firewall semantic bypass coverage | COMPLETE (2026-09-23) | PARTIALLY_SUPPORTED; 4 patterns cover ~75–80%; see 55_CDT01_NH02_RESULTS.md §2 |
+| EXP-009 | NH-04: P1'+P2'+P3 deep evaluation (corpus, mutations, FP, 3vs4) | COMPLETE (2026-09-23) | PARTIALLY_SUPPORTED; 6/15 corpus; ${VAR} gap; P4 inadvisable; see 56_MOVEMENT_003 §3 |
+| EXP-010 | Bypass taxonomy expansion (Track B) | COMPLETE (2026-09-23) | 4-family taxonomy; 6-level detection spectrum; aliasing undetectable by regex; see 56_ §4,§5,§6 |
+| EXP-011 | Policy repair adversarial validation (Track E) | COMPLETE (2026-09-23) | All repairs better; residual ambiguity in each; see 56_ §7 |
+| EXP-012 | Owner gate decomposition (Track G) | COMPLETE (2026-09-23) | Minimum decision per improvement identified; READY-01/02/03 specified; see 56_ §9,§19 |
+| EXP-013 | NH-05 shlex normalization test | READY_FOR_TEST (available now; no auth needed) | Shell AST closes ${VAR} gap claim |
+| EXP-014 | NH-06 policy precedence pair analysis | READY_FOR_TEST (available now; no auth needed) | Composition UNKNOWN resolution claim |
+| EXP-015 | NH-07 enhanced denial message design | READY_FOR_TEST (available now; no auth needed) | STA-02 closure without AC-03 claim |
 
 ---
 
 ## §11 — Movement Results
+
+### MOVEMENT 003 — Master Frontier Closure Expedition
+
+```
+ID:            MOVEMENT 003
+DATE:          2026-09-23
+EXECUTOR:      Claude Sonnet 4.6 (this session)
+ARTIFACT:      56_MOVEMENT_003_MASTER_FRONTIER_CLOSURE.md
+
+START:
+  NH-04 open; bypass taxonomy unknown; policy repair adversarial robustness unknown;
+  owner gate minimum decision unknown; static-analysis intermediates unknown;
+  LABYRINTH-1 alternative formulations unknown.
+
+QUESTION:  What is the maximum research progress achievable without new authorization?
+
+TRACKS EXECUTED:
+  A — NH-04 deep (corpus 15 cases, mutation testing, FP analysis, 3-vs-4 comparison)
+  B — Bypass space expansion (4 upper families; 6-level detection spectrum)
+  C — Second-order bypass (aliasing chain SC-01 identified as dominant gap)
+  D — Static-analysis boundary (Level-1 AST normalization as new intermediate)
+  E — Policy repair adversarial validation (5-case per policy; residual identified)
+  F — Policy composition / precedence (no explicit precedence document = UNK-M3-01)
+  G — Owner gate decomposition (minimum decision per improvement; READY-01/02/03)
+  H — Alternatives to AC-03 (X1/X2/X3 comparison; AC-03 not needed under L1-C)
+  I — LABYRINTH-1 reformulations (L1-A/B/C; L1-C enables closure without AC-03)
+  J — Negative space (aliasing/script not material; single-step bypasses are target class)
+  K — New hypotheses (NH-05..NH-08)
+
+RESULT:
+  NH-04: PARTIALLY_SUPPORTED (covers 6/15; ${VAR} gap; P4 inadvisable)
+  Bypass taxonomy: 4 families; 6-level detection spectrum resolved
+  Aliasing: dominant undetectable class (requires session taint or human review)
+  Shell AST normalization: NEW intermediate architecture option (NH-05 — HYPOTHESIS)
+  Policy repairs: all better; residual edge case each
+  Policy precedence: absent — UNK-M3-01 opened
+  Minimum owner decisions: decomposed; READY-01/02/03 specified
+  L1-C formulation: LABYRINTH-1 closeable without AC-03 if owner accepts residual
+  NH-05, NH-06, NH-07: AVAILABLE_NOW (no authorization)
+  NH-08: UNFALSIFIABLE (blocked by H-01)
+
+POSITION CHANGE:
+  BEFORE: NH-04 open; bypass taxonomy unknown; intermediates unknown; LABYRINTH-1 open
+  AFTER:  NH-04 PARTIALLY_SUPPORTED; taxonomy resolved; NEW intermediate identified;
+          LABYRINTH-1 has new exit path (L1-C); owner decision package ready
+
+OPENED:
+  UNK-M3-01: no explicit policy precedence document
+  NH-05: shell AST normalization hypothesis
+  NH-06: policy precedence document hypothesis
+  NH-07: enhanced-B denial message hypothesis
+  NH-08: semantic bypass not material (UNFALSIFIABLE until H-01)
+  READY-01/02/03: owner decision specifications
+
+CLOSED:
+  NH-04 (PARTIALLY_SUPPORTED)
+  Bypass taxonomy structure (RESOLVED as 4 families + 6-level spectrum)
+  Policy repair adversarial robustness (VALIDATED — better but residual each)
+  Owner gate decomposition (COMPLETE)
+  LABYRINTH-1 under L1-C formulation (new exit path identified)
+
+NEXT FRONTIER: READY-01/02/03 (owner decisions) + NH-05/06/07 (available-now tests)
+NEXT MOVEMENT: MOVEMENT 004 — Available-Now Closure + Owner Decision Package
+```
+
+---
 
 ### CDT-01 + NH-02 — Policy Repair Test + Semantic Bypass Coverage
 
@@ -668,6 +753,10 @@ EXP-002 (field observation)
 | F9 implementation research | Is F9 justified? | F9 NOT JUSTIFIED (research complete) | F9-D01=A; F9_RESEARCH.md; owner gate closed |
 | R-3 protocol design | What protocol for non_bypass_verify? | Protocol designed (artifact 50) and audited (artifact 51) | AUDITED_CONFIRMED; design does not need redesign |
 | R-3 empirical test | Does the protocol discriminate cases? | PARTIALLY_TRACTABLE (artifact 53) | MOVEMENT 001 COMPLETE |
+| NH-04 deep evaluation | Is P1'+P2'+P3 sufficient? | PARTIALLY_SUPPORTED (artifact 56) | MOVEMENT 003 COMPLETE |
+| Bypass taxonomy | What is the bypass family structure? | 4 families + 6-level spectrum (artifact 56 §4,§6) | MOVEMENT 003 COMPLETE |
+| Policy repair validation | Are CDT-01 repairs adversarially robust? | Better + residual each (artifact 56 §7) | MOVEMENT 003 COMPLETE |
+| Owner gate decomposition | Minimum decision per improvement? | READY-01/02/03 (artifact 56 §9,§19) | MOVEMENT 003 COMPLETE |
 
 ### Duplication detection checklist (before opening new investigation)
 
@@ -719,36 +808,56 @@ CURRENT STATE: R-3 PARTIALLY_TRACTABLE, independence blocker identified
 
 ## §15 — Current Exploration Frontier
 
-The frontier after CDT-01 + NH-02:
+The frontier after MOVEMENT 003:
 
 ```
 MOST SPECIFIC OPEN QUESTIONS (in priority order by information value):
 
-[1] UNK-M2-04: Which incremental improvements are within F9-D01=A authorization boundary?
-    → REQUIRES OWNER DECISION
-    → Information value: VERY HIGH (unblocks AC-02 documentation, NH-02 implementation)
-    → Cost: LOW (present concrete scope descriptions to owner; get yes/no per item)
-    → AC-02 repair drafts now fully specified (55_CDT01_NH02_RESULTS.md §1.3)
-    → NH-02 pattern extensions now fully specified (55_CDT01_NH02_RESULTS.md §2.5)
+[1] READY-01: AC-02 authorization question
+    → REQUIRES OWNER DECISION; binary question
+    → "Is adding disambiguation text to .claude/rules/*.md a 'rule change' or 'documentation improvement'?"
+    → Value: HIGHEST ROI of all improvements; repair texts fully specified in 55_CDT01_NH02_RESULTS.md §1.3
+    → Precondition: None (all supporting evidence compiled; READY)
 
-[2] NH-04: Are P1'+P2'+P3 (3 patterns) sufficient for CCP's current threat surface?
-    → AVAILABLE NOW (10-case analysis; no code change)
-    → Information value: MEDIUM (narrows NH-02 implementation to minimum set)
-    → Cost: VERY LOW (enumerate 10 realistic "agent checking env var" commands; test coverage)
+[2] READY-02: NH-02 pattern implementation authorization
+    → REQUIRES OWNER DECISION (hook modification)
+    → Patterns P1'+P2'+P3 fully specified; FP profile characterized (P3 MEDIUM FP)
+    → Recommendation: start with P1'+P2' (LOW FP) before adding P3
+    → Precondition: Review 56_MOVEMENT_003 §3.4 for FP analysis
 
-[3] CDT-02: Blind subagent verifier empirical confirmation
-    → REQUIRES OWNER AUTHORIZATION (new agent file → F9-D01 gate)
-    → Information value: HIGH (confirms independence claim empirically)
-    → Cost: MEDIUM after authorization (agent definition + 8-case test)
+[3] READY-03: LABYRINTH-1 closure under L1-C
+    → REQUIRES OWNER DECISION (residual risk acceptance)
+    → "Accept that LABYRINTH-1 closes with AC-02 + P1'+P2'+P3 + B path; aliasing/script/
+       reasoning-mediated bypass goes through human review pending H-01 data"
+    → Precondition: READY-01 and READY-02 (or separate authorization)
 
-[4] H-01: Real stall frequency measurement
-    → BLOCKED (no real usage environment; EXP-002 blocked)
-    → Information value: MAXIMUM if material (could close LABYRINTH-1 as IMMATERIAL)
-    → Cost: ZERO design cost; requires real usage
+[4] NH-05 test (shell AST normalization — available now):
+    → No authorization needed; ~20-line script applying Python shlex to mutation corpus
+    → Confirms or refutes whether Level-1 tokenization closes ${VAR} bypass gap
+    → Dependency for: refined NH-02 proposal (whether to include tokenizer step)
 
-[CLOSED] CDT-01: SAFE rate 87.5% after policy repair — CONFIRMED
-[CLOSED] NH-02: 4 patterns cover ~75–80% of bypass surface — PARTIALLY_SUPPORTED
-[CLOSED] UNK-M2-03: policy repair does raise SAFE rate to >85% — CONFIRMED
+[5] NH-06 test (policy precedence analysis — available now):
+    → No authorization needed; read-only policy pair enumeration
+    → Confirms or refutes whether explicit precedence resolves all composition UNKNOWNs
+    → Dependency for: resolving UNK-M3-01
+
+[6] NH-07 design (enhanced-B denial message — available now):
+    → No authorization needed; design document
+    → Confirms or refutes whether B+ closes STA-02 without AC-03
+    → Dependency for: alternative AC-03 path assessment
+
+[7] CDT-02 (blind verifier empirical test)
+    → BLOCKED (new agent authorization)
+    → Value: HIGH (empirical independence confirmation)
+
+[8] H-01 (real stall frequency — permanently blocked until real usage)
+    → BLOCKED (environment; not authorization)
+    → Value: MAXIMUM — determines materiality of everything above
+
+[CLOSED] CDT-01: SAFE rate 87.5% — CONFIRMED (EXPERIMENTAL; not owner-approved threshold)
+[CLOSED] NH-02: 4 patterns cover ~75–80% — PARTIALLY_SUPPORTED
+[CLOSED] NH-04: P1'+P2'+P3 partially supported; ${VAR} gap; P4 inadvisable — PARTIALLY_SUPPORTED
+[CLOSED] UNK-M2-03: policy repair does raise experimental SAFE rate — CONFIRMED
 ```
 
 ---
@@ -757,40 +866,38 @@ MOST SPECIFIC OPEN QUESTIONS (in priority order by information value):
 
 The following moves are available now, ordered by information value per unit cost. (Updated after MOVEMENT 002.)
 
-### NEXT MOVE A — Owner Scoping Decision (Requires owner input, highest priority)
+### NEXT MOVE A — Owner Decision Package (READY-01/02/03, highest priority)
 
 ```
 WHAT QUESTION DOES IT ANSWER?
-  Which of AC-01, AC-02, NH-02 are within the current F9-D01=A boundary?
+  Three binary owner decisions that unlock the highest-value improvements.
 
-WHY THIS IS HIGH VALUE:
-  Authorization gate (F9-D01=A) is the primary blocker for all incremental improvements.
-  AC-02 repair drafts and NH-02 pattern specs are now fully ready; owner can unblock both
-  with a single classification decision.
+WHAT IS READY:
+  READY-01: "Is .claude/rules/*.md text disambiguation a 'rule change' or 'documentation clarification'?"
+    → Repair drafts: 55_CDT01_NH02_RESULTS.md §1.3
+    → Validation: 56_MOVEMENT_003 §7 (5-case per policy; residuals identified)
+    → Impact: experimental SAFE rate 75% → 87.5%
 
-WHAT TO PRESENT TO OWNER:
-  AC-02: rule text disambiguation (AMBIGUOUS — "rule change" vs. "documentation clarification"?)
-         → Repair drafts fully specified in 55_CDT01_NH02_RESULTS.md §1.3
-         → SAFE rate impact: 75% → 87.5% (same case comparison)
-         → Implementation cost: 4 one-sentence edits to .claude/rules/*.md
-  NH-02 patterns: bash-firewall extension with P1'+P2'+P3+P4
-         → Patterns fully specified in 55_CDT01_NH02_RESULTS.md §2.5
-         → PROBABLE PROHIBITED — modifies P0 hook
-         → Coverage: ~75–80% of practical bypass surface
-  AC-01: hook denial message enhancement (PROBABLE PROHIBITED — modifies hooks)
-  NH-01: STALL_POLICY_LOG schema extension (PROBABLE PROHIBITED — hook-adjacent)
-  Documentation drafts: reviewing AC-02 repair text ONLY (PERMITTED — read-only)
+  READY-02: "Authorize P1'+P2'+P3 for bash-firewall.sh with FP risks reviewed"
+    → Pattern specs: 55_CDT01_NH02_RESULTS.md §2.5
+    → FP analysis: 56_MOVEMENT_003 §3.4 (P1' LOW, P2' LOW, P3 MEDIUM)
+    → Recommendation: P1'+P2' first; test P3 separately due to FP risk
 
-### NEXT MOVE B — NH-04: P1'+P2'+P3 Sufficiency Test (Available now, low cost)
+  READY-03: "Accept L1-C formulation: LABYRINTH-1 closes via AC-02+NH-02+B path;
+             aliasing/script residual goes through human review pending H-01"
+    → Supporting evidence: 56_MOVEMENT_003 §11.4, §12
+    → Impact: LABYRINTH-1 closed without non_bypass_verify implementation
 
-WHAT QUESTION DOES IT ANSWER?
-  Are 3 patterns (P1', P2', P3) sufficient for CCP's current threat surface,
-  without P4 (interpreter env reads)?
+COST: One owner review session
 
-CHEAPEST TEST:
-  Enumerate 10 realistic "agent checking env var" bash commands.
-  Check whether P1'+P2'+P3 catches semantic bypasses without false positives.
-  Analysis only; ~15 minutes.
+### NEXT MOVE B — NH-05/06/07 Tests (Available now, no authorization)
+
+WHAT QUESTIONS DOES IT ANSWER?
+  NH-05: Does shell AST normalization close the ${VAR} bypass gap? (20-line shlex script)
+  NH-06: Does explicit policy precedence resolve all composition UNKNOWNs? (read-only analysis)
+  NH-07: Does enhanced-B denial message close STA-02 without AC-03? (design document)
+
+COST: 2-3 sessions of analysis; no code changes
 ```
 
 ---
@@ -798,6 +905,35 @@ CHEAPEST TEST:
 ## §17 — Movement History
 
 Each completed movement, most recent first.
+
+```
+MOVEMENT 003
+DATE:      2026-09-23
+MOVE:      Master Frontier Closure Expedition (10 tracks; all available-now research exhausted)
+QUESTION:  What is the maximum research progress achievable without new authorization?
+OBSERVATION: NH-04 PARTIALLY_SUPPORTED; ${VAR} gap in all 3 patterns; P4 high FP (inadvisable);
+             4-family bypass taxonomy + 6-level detection spectrum; variable aliasing = dominant undetectable class;
+             shell AST normalization = new viable intermediate architecture; all 4 policy repairs
+             validated (better + residual); CCP has no explicit policy precedence (UNK-M3-01);
+             L1-C formulation opens LABYRINTH-1 exit without AC-03; owner decision package ready
+RESULT:    Non-authorized research space fully traversed; READY-01/02/03 owner decisions specified;
+           NH-05/06/07 available-now hypotheses opened; NH-08 opened (unfalsifiable until H-01)
+CLASSIFICATION: MOVEMENT_COMPLETE
+WHAT CHANGED:
+  - NH-04: OPEN → PARTIALLY_SUPPORTED
+  - Bypass taxonomy: unknown → 4 families + 6-level spectrum
+  - Shell AST normalization: unknown → DESIGN_RESULT (viable new intermediate)
+  - Policy repairs: validated but each has residual ambiguity
+  - LABYRINTH-1: new exit path (L1-C) identified — does not require AC-03
+  - Owner decision minimum: decomposed into READY-01/02/03
+  - New unknowns: UNK-M3-01..04
+CLOSED: NH-04, Track A-J analysis, owner gate decomposition, LABYRINTH-1 L1-C path
+OPENED: NH-05, NH-06, NH-07, NH-08, UNK-M3-01..04, READY-01/02/03
+NEXT FRONTIER: READY-01/02/03 (owner) + NH-05/06/07 (available now)
+NEXT MOVE: MOVEMENT 004 (Available-Now Closure + Owner Decision Package)
+```
+
+---
 
 ```
 CDT-01 + NH-02
