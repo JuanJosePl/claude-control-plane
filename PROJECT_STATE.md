@@ -11,7 +11,7 @@ BLOCKERS:               NONE
 ACTIVE_DECISIONS:       ARCH-001, ARCH-002, ARCH-003, ARCH-004
 RESOLVED_OWNER_DECISIONS: F9-D01=A, F9-D02=B, F9-D03=B, F9-D04=B, F9-D05=A (2026-09-20)
 LAST_GIT_CHECKPOINT:    d8cff63
-LAST_MOVEMENT:          MOVEMENT 003 (2026-09-23) — Master Frontier Closure COMPLETE; NH-04 PARTIALLY_SUPPORTED; ${VAR} gap identified; P4 inadvisable; shell AST normalization new intermediate; LABYRINTH-1 L1-C exit path; READY-01/02/03 owner decisions specified; NH-05..08 opened
+LAST_MOVEMENT:          MOVEMENT 004 (2026-09-23) — Frontier Integration COMPLETE; NH-05/06/07 resolved; NH-09 (2-sed Level-1; zero deps; LOW complexity) and NH-10 (escalation path in handbook; no auth) discovered and confirmed; L1-C 5 conditions specified; READY-01/02/03/04 fully structured as owner decision packages; non-authorized research space exhausted; next is owner decision gate
 LAST_AUDIT:             2026-09-19
 LAST_ROADMAP:           2026-09-19
 LAST_BEHAVIORAL_AUDIT:  2026-09-18

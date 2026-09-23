@@ -1,6 +1,6 @@
 # CCP Exploration Engine
 
-> Version: 1.3 | Last updated: 2026-09-23
+> Version: 1.4 | Last updated: 2026-09-23
 > State authority: `PROJECT_STATE.md` | Evidence authority: `EVIDENCE_REGISTRY.md`
 > This document converts static knowledge into operational movement. It is not an atlas.
 
@@ -47,15 +47,21 @@ NH-03:              CONFIRMED — authorization gate is the real bottleneck
 NH-04:              PARTIALLY_SUPPORTED — P1'+P2'+P3 cover 6/15 corpus; ${VAR} gap identified; P4 inadvisable (FP)
 AC-02 ROI:          CONFIRMED HIGH; policy repairs validated and specified (56_MOVEMENT_003 §7)
 BYPASS TAXONOMY:    4 upper families (Observation, Transformation, Storage, Transport)
-STATIC BOUNDARY:    6-level detection spectrum; Level-1 (AST normalization) is new viable intermediate
-LABYRINTH-1 L1-C:   NEW EXIT PATH — closeable without AC-03 if owner accepts residual (see §11.4 of 56_)
-POLICY PRECEDENCE:  NO explicit precedence document in CCP (UNK-M3-01)
+STATIC BOUNDARY:    6-level detection spectrum; Level-1 tokenizer normalization is new intermediate (LOW complexity)
+LABYRINTH-1 L1-C:   5 CONDITIONS SPECIFIED (57_MOVEMENT_004 §9); minimal vs. strong closure distinguished
+POLICY PRECEDENCE:  NO active unresolved conflicts beyond POL-08/F9-D01=A (resolved); CONFLICT-04 is missing spec
 ALIASING:           Variable aliasing bypasses ALL proposed patterns; requires session taint tracking
-NEW HYPOTHESES:     NH-05 (AST normalization), NH-06 (precedence doc), NH-07 (enhanced-B STA-02), NH-08 (H-01 not material)
+NH-05:              PARTIALLY_SUPPORTED — shlex is tokenizer not AST; ${VAR} needs separate regex (57_ §3)
+NH-06:              PARTIALLY_SUPPORTED — no active conflicts; CONFLICT-04 = missing spec; doc forward-value (57_ §4)
+NH-07:              SUPPORTED — enhanced-B closes INFORMATION GAP for STA-02; not judgment gap; ≠ AC-03 (57_ §5)
+NH-09 (NEW):        SUPPORTED — 2 sed normalizations achieve Level-1 coverage; zero dependencies; LOW complexity (57_ §3.4)
+NH-10 (NEW):        CONFIRMED — escalation path = handbook documentation; no authorization needed; CAN DO NOW (57_ §4.3)
+CCP MINIMAL STACK:  Layers 0-6 defined as complete detection-to-escalation architecture (57_ §6.2)
+READY PACKAGES:     READY-01/02/03/04 fully structured as owner decision documents (57_ §10)
 
 IMPLEMENTATION_READY: false
 NEXT_ALLOWED_PHASE:   Owner-driven decision required
-NEXT_MOVEMENT:        MOVEMENT 004 — Available-Now Closure + Owner Decision Package
+NEXT_MOVEMENT:        MOVEMENT 005 — NH-10 Documentation + Owner Decision Brief
 ```
 
 ---
@@ -79,18 +85,24 @@ KNOWN (closed — additions from MOVEMENT 002)
 ├── Roger Hypothesis: REFORMULATION_CONFIRMED (not a new architecture or capability)
 └── Problem formulation: more tractable reformulations identified (effect-centric, evidence-centric)
 
-FRONTIER (new boundary after MOVEMENT 003)
+FRONTIER (new boundary after MOVEMENT 004)
 ├── [CLOSED] CDT-01: SAFE rate 87.5% — CONFIRMED
 ├── [CLOSED] NH-02: 4 patterns cover ~75–80% — PARTIALLY_SUPPORTED
 ├── [CLOSED] NH-04: P1'+P2'+P3 cover 6/15 corpus; ${VAR} gap; P4 inadvisable — PARTIALLY_SUPPORTED
-├── UNK-M3-01: CCP has no explicit policy precedence document (OPENED — needs owner)
-├── READY-01: AC-02 authorization question — single binary owner decision (highest priority)
-├── READY-02: NH-02 patterns specified; FP risks quantified; ready for authorization
-├── READY-03: LABYRINTH-1 L1-C closure — ready for owner risk acceptance decision
-├── NH-05: Shell AST normalization — HYPOTHESIS; CHEAPEST TEST available now (no auth)
-├── NH-06: Policy precedence document — HYPOTHESIS; CHEAPEST TEST available now (no auth)
-├── NH-07: Enhanced-B denial message for STA-02 — HYPOTHESIS; design available now
+├── [CLOSED] NH-05: PARTIALLY_SUPPORTED — shlex is tokenizer not AST; ${VAR} gap needs separate step
+├── [CLOSED] NH-06: PARTIALLY_SUPPORTED — no active conflicts; CONFLICT-04 = missing spec, not precedence
+├── [CLOSED] NH-07: SUPPORTED (information gap for STA-02) — not AC-03 substitute
+├── [CLOSED] NH-09: SUPPORTED — 2 sed normalizations achieve Level-1 (zero dependencies; LOW complexity)
+├── [CLOSED] NH-10: CONFIRMED — escalation path = handbook addition; no auth needed
+├── [CLOSED] L1-C conditions: 5 conditions specified; minimal vs. strong distinguished (57_ §9)
+├── [CLOSED] READY packages: READY-01/02/03/04 fully structured (57_ §10)
 ├── NH-08: Semantic bypass problem not material — HYPOTHESIS; UNFALSIFIABLE (needs H-01)
+├── UNK-M4-01: NH-09 double-quote removal semantic accuracy — OPEN (20-cmd corpus test; no auth)
+├── READY-01: AC-02 authorization question — BLOCKED (owner binary decision required)
+├── READY-02: P1'+P2' + Level-1 normalization — BLOCKED (owner implementation authorization)
+├── READY-03: LABYRINTH-1 L1-C closure — BLOCKED (owner risk acceptance)
+├── READY-04: Enhanced-B message implementation — BLOCKED (owner hook auth; lower priority)
+├── NH-10 implementation: AVAILABLE NOW (handbook addition; no auth)
 ├── CDT-02: Blind subagent verifier confirmation — BLOCKED (new agent authorization)
 └── H-01 (stall frequency): BLOCKED — requires real usage environment
 
@@ -432,13 +444,88 @@ REOPEN CONDITION: Concrete observable transition Roger performs that CCP's
 | EXP-010 | Bypass taxonomy expansion (Track B) | COMPLETE (2026-09-23) | 4-family taxonomy; 6-level detection spectrum; aliasing undetectable by regex; see 56_ §4,§5,§6 |
 | EXP-011 | Policy repair adversarial validation (Track E) | COMPLETE (2026-09-23) | All repairs better; residual ambiguity in each; see 56_ §7 |
 | EXP-012 | Owner gate decomposition (Track G) | COMPLETE (2026-09-23) | Minimum decision per improvement identified; READY-01/02/03 specified; see 56_ §9,§19 |
-| EXP-013 | NH-05 shlex normalization test | READY_FOR_TEST (available now; no auth needed) | Shell AST closes ${VAR} gap claim |
-| EXP-014 | NH-06 policy precedence pair analysis | READY_FOR_TEST (available now; no auth needed) | Composition UNKNOWN resolution claim |
-| EXP-015 | NH-07 enhanced denial message design | READY_FOR_TEST (available now; no auth needed) | STA-02 closure without AC-03 claim |
+| EXP-013 | NH-05 shlex normalization test | COMPLETE (2026-09-23) | PARTIALLY_SUPPORTED; shlex is tokenizer not AST; ${VAR} needs separate regex; see 57_ §3 |
+| EXP-014 | NH-06 policy precedence pair analysis | COMPLETE (2026-09-23) | PARTIALLY_SUPPORTED; no active conflicts; CONFLICT-04 = missing spec; see 57_ §4 |
+| EXP-015 | NH-07 enhanced denial message design | COMPLETE (2026-09-23) | SUPPORTED (information gap); not AC-03 substitute; see 57_ §5 |
+| EXP-016 | NH-09 2-regex Level-1 normalization test | COMPLETE (2026-09-23) | SUPPORTED analytically; M1.3/M2.1/M3.1 closed; zero deps; LOW complexity; see 57_ §3.4 |
+| EXP-017 | NH-10 escalation path authorization scope | COMPLETE (2026-09-23) | CONFIRMED; handbook addition = permitted now; no auth needed; see 57_ §4.3 |
+| EXP-018 | UNK-M4-01 double-quote removal semantic accuracy | READY_FOR_TEST (available now; no auth needed) | 20-command corpus; verify no semantic errors from NH-09 Step 1 |
 
 ---
 
 ## §11 — Movement Results
+
+### MOVEMENT 004 — Frontier Integration, Closure & Decision Readiness
+
+```
+ID:            MOVEMENT 004
+DATE:          2026-09-23
+EXECUTOR:      Claude Sonnet 4.6 (this session)
+ARTIFACT:      57_MOVEMENT_004_FRONTIER_INTEGRATION.md
+
+START:
+  NH-05/06/07 open (all available without authorization).
+  Level-1 normalization complexity unknown; CONFLICT-04 resolution path unknown;
+  Enhanced-B scope vs. AC-03 unclear; L1-C conditions not fully specified;
+  READY-01/02/03 structured but not in decision-package format.
+
+QUESTION:  What are the results of NH-05/06/07? What is the minimum viable security
+           stack? What conditions close L1-C? What do owner decision packages look like?
+
+TRACKS EXECUTED:
+  A — NH-05: shlex analysis; tokenizer vs. AST distinction; ${VAR} gap resolution
+  B — NH-09 discovery: 2-regex alternative to shlex (zero dependencies; LOW complexity)
+  C — NH-06: full policy conflict matrix; CONFLICT-04 as missing spec
+  D — NH-10 discovery: escalation path = handbook documentation (no auth)
+  E — NH-07: enhanced-B message format; STA-02 information vs. judgment gap
+  F — Cross-track synthesis: CCP Minimal Security Stack (Layers 0-6)
+  G — Second-order architecture: Level-1.5 AST cost-justified threshold analysis
+  H — Residual risk reconstruction: full bypass class × detection layer matrix
+  I — L1-C reassessment: 5 conditions; minimal vs. strong; reactivation triggers
+  J — READY-01/02/03/04 decision packages (full structure per decision)
+  K — New hypotheses (NH-09, NH-10); new unknowns (UNK-M4-01, UNK-M4-02)
+  L — Claim audit: overstatements corrected throughout
+
+RESULT:
+  NH-05: PARTIALLY_SUPPORTED (shlex tokenizer not AST; ${VAR} needs separate step)
+  NH-06: PARTIALLY_SUPPORTED (no active conflicts; CONFLICT-04 = missing spec)
+  NH-07: SUPPORTED (information gap; not judgment gap; not AC-03 substitute)
+  NH-09: SUPPORTED (2 sed = Level-1; zero deps; LOW complexity — SIMPLIFICATION FINDING)
+  NH-10: CONFIRMED (handbook addition = permitted now; AVAILABLE IMMEDIATELY)
+  L1-C: 5 conditions specified; minimal vs. strong closure distinguished
+  CCP Minimal Security Stack: Layers 0-6 named and characterized
+  READY-01/02/03/04: fully structured as owner decision documents
+
+POSITION CHANGE:
+  BEFORE: NH-05/06/07 open; Level-1 complexity uncertain; L1-C conditions vague
+  AFTER:  All NH-05/06/07 resolved; Level-1 complexity is LOW (not MEDIUM);
+          NH-09/10 discovered; L1-C conditions precise; all owner decisions structured;
+          non-authorized research space effectively exhausted
+
+OPENED:
+  UNK-M4-01: NH-09 double-quote removal semantic accuracy
+  UNK-M4-02: Level-1.5 AST cost-justification threshold
+  READY-04: Enhanced-B implementation authorization (new)
+
+CLOSED:
+  NH-05 (PARTIALLY_SUPPORTED)
+  NH-06 (PARTIALLY_SUPPORTED)
+  NH-07 (SUPPORTED — information gap scope)
+  NH-09 (SUPPORTED — new; zero-dependency Level-1)
+  NH-10 (CONFIRMED — new; can be done now)
+  L1-C conditions (fully specified; 5 conditions)
+  READY packages (fully structured; READY-01/02/03/04)
+
+STOP CONDITION: Non-authorized research space exhausted except:
+  NH-10 implementation (~10 lines in handbook)
+  UNK-M4-01 corpus test (20 commands; analytical)
+  Owner decision brief formatting
+
+NEXT FRONTIER: Owner decision gate (READY-01/02/03); NH-10 implementation; H-01 data
+NEXT MOVEMENT: MOVEMENT 005 — NH-10 Documentation + Owner Decision Brief
+```
+
+---
 
 ### MOVEMENT 003 — Master Frontier Closure Expedition
 
