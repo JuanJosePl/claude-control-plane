@@ -1,6 +1,6 @@
 # CCP Exploration Engine
 
-> Version: 1.4 | Last updated: 2026-09-23
+> Version: 1.5 | Last updated: 2026-09-23
 > State authority: `PROJECT_STATE.md` | Evidence authority: `EVIDENCE_REGISTRY.md`
 > This document converts static knowledge into operational movement. It is not an atlas.
 
@@ -55,13 +55,18 @@ NH-05:              PARTIALLY_SUPPORTED — shlex is tokenizer not AST; ${VAR} n
 NH-06:              PARTIALLY_SUPPORTED — no active conflicts; CONFLICT-04 = missing spec; doc forward-value (57_ §4)
 NH-07:              SUPPORTED — enhanced-B closes INFORMATION GAP for STA-02; not judgment gap; ≠ AC-03 (57_ §5)
 NH-09 (NEW):        SUPPORTED — 2 sed normalizations achieve Level-1 coverage; zero dependencies; LOW complexity (57_ §3.4)
-NH-10 (NEW):        CONFIRMED — escalation path = handbook documentation; no authorization needed; CAN DO NOW (57_ §4.3)
+NH-10 (NEW):        IMPLEMENTED — escalation path added to CONTROL_PLANE_HANDBOOK §12 (MOVEMENT 005)
+UNK-M4-01:          RESOLVED — NH-09 is SAFE_NORMALIZATION; 4 limitations documented (58A §5)
+CONFLICT-04:        RESOLVED — NH-10 closes the process gap; no missing spec (MOVEMENT 005)
+L1-C Condition 3:   SATISFIED — escalation path documented (MOVEMENT 005)
+NH-11 (NEW):        HYPOTHESIS — single-quote normalization (extend Step 1 to remove single quotes)
+                    NOT ON AUTHORIZED PATH; logged for future consideration
 CCP MINIMAL STACK:  Layers 0-6 defined as complete detection-to-escalation architecture (57_ §6.2)
-READY PACKAGES:     READY-01/02/03/04 fully structured as owner decision documents (57_ §10)
+READY PACKAGES:     READY-01/02/03/04 fully structured as owner decision documents (57_ §10; 58_ consolidated)
 
 IMPLEMENTATION_READY: false
-NEXT_ALLOWED_PHASE:   Owner-driven decision required
-NEXT_MOVEMENT:        MOVEMENT 005 — NH-10 Documentation + Owner Decision Brief
+NEXT_ALLOWED_PHASE:   Owner-driven decision required (READY-01/02/03)
+LAST_MOVEMENT:        MOVEMENT 005 (2026-09-23) — NH-10 implemented; UNK-M4-01 resolved; 58_OWNER_DECISION_PACKAGE created
 ```
 
 ---
@@ -102,7 +107,9 @@ FRONTIER (new boundary after MOVEMENT 004)
 ├── READY-02: P1'+P2' + Level-1 normalization — BLOCKED (owner implementation authorization)
 ├── READY-03: LABYRINTH-1 L1-C closure — BLOCKED (owner risk acceptance)
 ├── READY-04: Enhanced-B message implementation — BLOCKED (owner hook auth; lower priority)
-├── NH-10 implementation: AVAILABLE NOW (handbook addition; no auth)
+├── [CLOSED] NH-10: IMPLEMENTED (MOVEMENT 005 — handbook §12)
+├── [CLOSED] UNK-M4-01: RESOLVED — SAFE_NORMALIZATION (58A §5)
+├── [CLOSED] CONFLICT-04: RESOLVED — NH-10 closes process gap
 ├── CDT-02: Blind subagent verifier confirmation — BLOCKED (new agent authorization)
 └── H-01 (stall frequency): BLOCKED — requires real usage environment
 
@@ -449,11 +456,73 @@ REOPEN CONDITION: Concrete observable transition Roger performs that CCP's
 | EXP-015 | NH-07 enhanced denial message design | COMPLETE (2026-09-23) | SUPPORTED (information gap); not AC-03 substitute; see 57_ §5 |
 | EXP-016 | NH-09 2-regex Level-1 normalization test | COMPLETE (2026-09-23) | SUPPORTED analytically; M1.3/M2.1/M3.1 closed; zero deps; LOW complexity; see 57_ §3.4 |
 | EXP-017 | NH-10 escalation path authorization scope | COMPLETE (2026-09-23) | CONFIRMED; handbook addition = permitted now; no auth needed; see 57_ §4.3 |
-| EXP-018 | UNK-M4-01 double-quote removal semantic accuracy | READY_FOR_TEST (available now; no auth needed) | 20-command corpus; verify no semantic errors from NH-09 Step 1 |
+| EXP-018 | UNK-M4-01 double-quote removal semantic accuracy | COMPLETE (2026-09-23) | SAFE_NORMALIZATION; 4 documented limitations; invariant verified; see 58A_NH09_SEMANTIC_VALIDATION.md |
+| EXP-019 | NH-10 escalation path implementation | COMPLETE (2026-09-23) | DOCUMENTATION_ONLY; §12 of handbook; 5 scenarios validated; L1-C Condition 3 SATISFIED |
 
 ---
 
 ## §11 — Movement Results
+
+### MOVEMENT 005 — NH-10 Implementation, UNK-M4-01 Resolution, Owner Decision Package
+
+```
+ID:            MOVEMENT 005
+DATE:          2026-09-23
+EXECUTOR:      Claude Sonnet 4.6 (this session)
+ARTIFACTS:     58_OWNER_DECISION_PACKAGE.md, 58A_NH09_SEMANTIC_VALIDATION.md,
+               CONTROL_PLANE_HANDBOOK.md §12 (new escalation subsection)
+
+START:
+  NH-10 not yet implemented (handbook unchanged per git log).
+  UNK-M4-01 open (20-cmd corpus test pending).
+  READY-01/02/03/04 structured but not consolidated.
+
+QUESTION:  What is the correct classification of NH-10? Can it be implemented?
+           Is NH-09 semantically safe for matching? What is the true frontier?
+
+TRACKS EXECUTED:
+  A — Initial state audit (NH-10 classification: DOCUMENTATION_ONLY → proceed)
+  B — NH-10 implementation: §12 escalation path in CONTROL_PLANE_HANDBOOK
+  C — NH-10 validation: 5 conceptual scenarios (ESC-01..ESC-05)
+  D — UNK-M4-01: 20-command corpus across 14 categories; semantic analysis (58A)
+  E — Normalization architecture boundary (RAW→NORM→TOKENIZE→AST→DATAFLOW→SEMANTIC)
+  F — Second-order consequences (NH-10 effect on L1-C; CONFLICT-04 resolved)
+  G — LABYRINTH-1 recheck (1/5 conditions now satisfied; minimal/practical/strong defined)
+  H — Owner decision package consolidated (58_OWNER_DECISION_PACKAGE.md; 4 decisions)
+  I — Decision minimization (3 scenarios; minimum viable unlock identified)
+  J — Authorization map (7 items; 5 status categories)
+  K — Empirical gap audit (REQUIRES_REAL_USAGE register created)
+  L — Second-order research pass (NH-11 logged; CONFLICT-04 RESOLVED; no premature closures)
+  M — Claim audit (no new overstatements found; all claims correctly classified)
+  N — TRUE FRONTIER generated
+
+RESULT:
+  NH-10: IMPLEMENTED (DOCUMENTATION_ONLY confirmed; handbook §12 added)
+  UNK-M4-01: RESOLVED — SAFE_NORMALIZATION (4 limitations documented)
+  CONFLICT-04: RESOLVED — process gap closed by NH-10
+  L1-C Condition 3: SATISFIED (1/5 conditions now met)
+  NH-11: HYPOTHESIS (single-quote normalization; not authorized; logged)
+  Owner decision package: COMPLETE (58_OWNER_DECISION_PACKAGE.md)
+  TRUE FRONTIER: 5 questions (see §16)
+
+POSITION CHANGE:
+  BEFORE: NH-10 unimplemented; UNK-M4-01 open; owner package not consolidated
+  AFTER:  NH-10 implemented; UNK-M4-01 resolved; L1-C advances to 1/5; owner package ready
+
+OPENED:
+  NH-11 (HYPOTHESIS — single-quote normalization; not on authorized path)
+
+CLOSED:
+  NH-10 (IMPLEMENTED — handbook addition)
+  UNK-M4-01 (RESOLVED — SAFE_NORMALIZATION with 4 limitations)
+  CONFLICT-04 (RESOLVED — process spec now exists)
+
+STOP CONDITION:
+  No high-value authorized experiment remains without new owner authorization.
+  TRUE FRONTIER is owner decision gate (READY-01/02/03).
+```
+
+---
 
 ### MOVEMENT 004 — Frontier Integration, Closure & Decision Readiness
 
@@ -844,6 +913,9 @@ EXP-002 (field observation)
 | Bypass taxonomy | What is the bypass family structure? | 4 families + 6-level spectrum (artifact 56 §4,§6) | MOVEMENT 003 COMPLETE |
 | Policy repair validation | Are CDT-01 repairs adversarially robust? | Better + residual each (artifact 56 §7) | MOVEMENT 003 COMPLETE |
 | Owner gate decomposition | Minimum decision per improvement? | READY-01/02/03 (artifact 56 §9,§19) | MOVEMENT 003 COMPLETE |
+| NH-05/06/07/09/10 | Shell normalization, precedence, enhanced-B, Level-1, escalation path | All resolved (57_MOVEMENT_004; 58A; handbook §12) | MOVEMENT 004/005 COMPLETE |
+| UNK-M4-01 | NH-09 double-quote removal semantic accuracy | SAFE_NORMALIZATION (58A §5); 4 limitations documented | MOVEMENT 005 COMPLETE |
+| NH-10 implementation | Escalation path in handbook | IMPLEMENTED (handbook §12) | MOVEMENT 005 COMPLETE |
 
 ### Duplication detection checklist (before opening new investigation)
 
@@ -895,96 +967,130 @@ CURRENT STATE: R-3 PARTIALLY_TRACTABLE, independence blocker identified
 
 ## §15 — Current Exploration Frontier
 
-The frontier after MOVEMENT 003:
+The frontier after MOVEMENT 005 (TRUE FRONTIER):
 
 ```
-MOST SPECIFIC OPEN QUESTIONS (in priority order by information value):
+KNOWN (no more research needed without new authorization):
+  All NH-05/06/07/09/10 questions resolved
+  UNK-M4-01 resolved (SAFE_NORMALIZATION)
+  CONFLICT-04 resolved (NH-10 closes process gap)
+  L1-C Condition 3 satisfied (handbook §12)
+  Owner decision packages complete (58_OWNER_DECISION_PACKAGE.md)
+  Non-authorized research space effectively exhausted
 
-[1] READY-01: AC-02 authorization question
-    → REQUIRES OWNER DECISION; binary question
-    → "Is adding disambiguation text to .claude/rules/*.md a 'rule change' or 'documentation improvement'?"
-    → Value: HIGHEST ROI of all improvements; repair texts fully specified in 55_CDT01_NH02_RESULTS.md §1.3
-    → Precondition: None (all supporting evidence compiled; READY)
+TRUE FRONTIER (5 questions — each requires a different kind of unblocking):
 
-[2] READY-02: NH-02 pattern implementation authorization
-    → REQUIRES OWNER DECISION (hook modification)
-    → Patterns P1'+P2'+P3 fully specified; FP profile characterized (P3 MEDIUM FP)
-    → Recommendation: start with P1'+P2' (LOW FP) before adding P3
-    → Precondition: Review 56_MOVEMENT_003 §3.4 for FP analysis
+[F1] READY-03: Owner risk acceptance for LABYRINTH-1 L1-C closure
+     QUESTION:  Will the owner accept the bypass residual (aliasing/heredoc/file-scripts)
+                as mitigated by human review + staging for current development context?
+     WHY MATTERS: Without this statement, LABYRINTH-1 never closes regardless of how much
+                  is implemented. Lowest-friction decision available.
+     CHEAPEST:  One owner statement (no implementation)
+     AUTH:      Owner decision only; no technical change required
+     DEPENDENCY: None (can be done first, independently of READY-01/02)
+     CHANGES MAP: LABYRINTH-1 → CONDITIONALLY_CLOSED; research overhead stops
 
-[3] READY-03: LABYRINTH-1 closure under L1-C
-    → REQUIRES OWNER DECISION (residual risk acceptance)
-    → "Accept that LABYRINTH-1 closes with AC-02 + P1'+P2'+P3 + B path; aliasing/script/
-       reasoning-mediated bypass goes through human review pending H-01 data"
-    → Precondition: READY-01 and READY-02 (or separate authorization)
+[F2] READY-01: AC-02 authorization classification
+     QUESTION:  Is adding disambiguation text to .claude/rules/*.md a "rule change" or
+                "documentation improvement" under F9-D01=A?
+     WHY MATTERS: Determines whether policy repairs can be implemented immediately or
+                  require a separate authorization gate
+     CHEAPEST:  Binary classification by owner; repair texts are ready (55_CDT01 §1.3)
+     AUTH:      Owner classification decision; no technical change until classified
+     DEPENDENCY: None (independent of READY-02 and READY-03)
+     CHANGES MAP: If YES → AC-02 implementable; L1-C Condition 2 satisfied
 
-[4] NH-05 test (shell AST normalization — available now):
-    → No authorization needed; ~20-line script applying Python shlex to mutation corpus
-    → Confirms or refutes whether Level-1 tokenization closes ${VAR} bypass gap
-    → Dependency for: refined NH-02 proposal (whether to include tokenizer step)
+[F3] READY-02: P1'+P2' pattern + Level-1 normalization authorization
+     QUESTION:  Authorize ~6 new lines in bash-firewall.sh to close printenv/encoding
+                pipeline and ${VAR}/quoting bypass gaps
+     WHY MATTERS: Currently, `printenv ANTHROPIC_API_KEY` is NOT blocked. This is the
+                  highest-risk syntactic gap in the current firewall.
+     CHEAPEST:  Owner authorization; spec and validation are complete (55_CDT01; 58A)
+     AUTH:      Hook modification authorization (F9-D01=A gate)
+     DEPENDENCY: None (independent of READY-01 and READY-03)
+     CHANGES MAP: L1-C Condition 1 satisfied; Minimal Security Stack Layers 1+2 operational
 
-[5] NH-06 test (policy precedence analysis — available now):
-    → No authorization needed; read-only policy pair enumeration
-    → Confirms or refutes whether explicit precedence resolves all composition UNKNOWNs
-    → Dependency for: resolving UNK-M3-01
+[F4] H-01: Real usage data (stall frequency)
+     QUESTION:  How often do real STALL_POLICY events occur with had_alternative ≠ null?
+     WHY MATTERS: Determines materiality of the entire bypass problem.
+                  If H-01 → 0, LABYRINTH-1 closes as IMMATERIAL regardless of decisions.
+     CHEAPEST:  Wait for real usage (no design work can accelerate this)
+     AUTH:      None needed; blocked by environment only
+     DEPENDENCY: Real usage environment (no trigger exists today)
+     CHANGES MAP: If H-01 < N → LABYRINTH-2 closed; possibly LABYRINTH-1 as IMMATERIAL
 
-[6] NH-07 design (enhanced-B denial message — available now):
-    → No authorization needed; design document
-    → Confirms or refutes whether B+ closes STA-02 without AC-03
-    → Dependency for: alternative AC-03 path assessment
+[F5] NH-11: Single-quote normalization (HYPOTHESIS — logged only)
+     QUESTION:  Can Step 1 of NH-09 be extended to remove single quotes as well?
+     WHY MATTERS: Single-quoted secrets are a pre-existing bypass gap (case 09 of 58A)
+     CHEAPEST:  Analytical corpus test (~20 cases); no auth needed
+     AUTH:      None for analysis; hook auth needed for implementation
+     DEPENDENCY: NH-09 implementation authorization (READY-02)
+     CHANGES MAP: If SAFE_NORMALIZATION → extends NH-09 coverage; new READY package needed
 
-[7] CDT-02 (blind verifier empirical test)
-    → BLOCKED (new agent authorization)
-    → Value: HIGH (empirical independence confirmation)
+PERMANENTLY BLOCKED (requires real usage — not more design):
+  H-01 frequency (see F4)
+  AC-03 utility threshold (B3 block of LABYRINTH-1)
+  Enhanced-B effectiveness (NH-07 real usage validation)
+  NH-10 escalation effectiveness (real event required)
 
-[8] H-01 (real stall frequency — permanently blocked until real usage)
-    → BLOCKED (environment; not authorization)
-    → Value: MAXIMUM — determines materiality of everything above
-
-[CLOSED] CDT-01: SAFE rate 87.5% — CONFIRMED (EXPERIMENTAL; not owner-approved threshold)
-[CLOSED] NH-02: 4 patterns cover ~75–80% — PARTIALLY_SUPPORTED
-[CLOSED] NH-04: P1'+P2'+P3 partially supported; ${VAR} gap; P4 inadvisable — PARTIALLY_SUPPORTED
-[CLOSED] UNK-M2-03: policy repair does raise experimental SAFE rate — CONFIRMED
+[CLOSED] NH-05/06/07/09/10: all resolved
+[CLOSED] UNK-M4-01: SAFE_NORMALIZATION
+[CLOSED] CONFLICT-04: RESOLVED
+[CLOSED] CDT-01, NH-02, NH-04: all PARTIALLY_SUPPORTED/CONFIRMED
 ```
 
 ---
 
 ## §16 — Next Moves
 
-The following moves are available now, ordered by information value per unit cost. (Updated after MOVEMENT 002.)
+Updated after MOVEMENT 005. Non-authorized research space is exhausted.
+All remaining moves require owner decisions or real usage data.
 
-### NEXT MOVE A — Owner Decision Package (READY-01/02/03, highest priority)
+### NEXT MOVE A — READY-03 (minimum viable, highest leverage, no code change)
 
 ```
 WHAT QUESTION DOES IT ANSWER?
-  Three binary owner decisions that unlock the highest-value improvements.
+  "Will the owner explicitly accept the bypass residual for current context,
+  closing LABYRINTH-1 under L1-C?"
 
-WHAT IS READY:
-  READY-01: "Is .claude/rules/*.md text disambiguation a 'rule change' or 'documentation clarification'?"
-    → Repair drafts: 55_CDT01_NH02_RESULTS.md §1.3
-    → Validation: 56_MOVEMENT_003 §7 (5-case per policy; residuals identified)
-    → Impact: experimental SAFE rate 75% → 87.5%
+COST: One owner statement (no implementation)
+REFERENCE: 58_OWNER_DECISION_PACKAGE.md §READY-03
+IMPACT: LABYRINTH-1 → CONDITIONALLY_CLOSED; research overhead stops
+PRECONDITION: None
+```
 
-  READY-02: "Authorize P1'+P2'+P3 for bash-firewall.sh with FP risks reviewed"
-    → Pattern specs: 55_CDT01_NH02_RESULTS.md §2.5
-    → FP analysis: 56_MOVEMENT_003 §3.4 (P1' LOW, P2' LOW, P3 MEDIUM)
-    → Recommendation: P1'+P2' first; test P3 separately due to FP risk
+### NEXT MOVE B — READY-01 + READY-02 (implementation unlock, one session)
 
-  READY-03: "Accept L1-C formulation: LABYRINTH-1 closes via AC-02+NH-02+B path;
-             aliasing/script residual goes through human review pending H-01"
-    → Supporting evidence: 56_MOVEMENT_003 §11.4, §12
-    → Impact: LABYRINTH-1 closed without non_bypass_verify implementation
-
-COST: One owner review session
-
-### NEXT MOVE B — NH-05/06/07 Tests (Available now, no authorization)
-
+```
 WHAT QUESTIONS DOES IT ANSWER?
-  NH-05: Does shell AST normalization close the ${VAR} bypass gap? (20-line shlex script)
-  NH-06: Does explicit policy precedence resolve all composition UNKNOWNs? (read-only analysis)
-  NH-07: Does enhanced-B denial message close STA-02 without AC-03? (design document)
+  "Is AC-02 a rule change or doc improvement?" → enables policy repairs
+  "Authorize P1'+P2'+Level-1 normalization?" → enables firewall improvements
 
-COST: 2-3 sessions of analysis; no code changes
+COST: One owner review session; implementation ~30 min if authorized
+REFERENCE: 58_OWNER_DECISION_PACKAGE.md §READY-01, §READY-02
+IMPACT: L1-C Conditions 1+2 satisfied; Minimal Security Stack Layers 1+2 operational
+PRECONDITION: Review 58_OWNER_DECISION_PACKAGE.md
+```
+
+### NEXT MOVE C — READY-04 (quality improvement, lower priority)
+
+```
+WHAT QUESTION DOES IT ANSWER?
+  "Authorize enhanced denial message format in hooks?"
+
+COST: One owner authorization; implementation ~20 min if authorized
+REFERENCE: 58_OWNER_DECISION_PACKAGE.md §READY-04
+IMPACT: Human review quality for STA-02 improves
+PRECONDITION: NH-10 (SATISFIED this session)
+```
+
+### PERMANENTLY BLOCKED (no authorized experiment remains)
+
+```
+NH-11 analysis: AVAILABLE NOW (no auth); but minimal value before READY-02
+H-01 measurement: REQUIRES REAL USAGE ENVIRONMENT
+CDT-02 blind verifier: REQUIRES NEW AGENT AUTHORIZATION
+AC-03 implementation: REQUIRES F10 SCOPE GATE
 ```
 
 ---
@@ -992,6 +1098,34 @@ COST: 2-3 sessions of analysis; no code changes
 ## §17 — Movement History
 
 Each completed movement, most recent first.
+
+```
+MOVEMENT 005
+DATE:      2026-09-23
+MOVE:      NH-10 Implementation + UNK-M4-01 Resolution + Owner Decision Package
+QUESTION:  Can NH-10 be implemented? Is NH-09 semantically safe? What is the true frontier?
+OBSERVATION: NH-10 classified DOCUMENTATION_ONLY → implemented in handbook §12.
+             UNK-M4-01 resolved: SAFE_NORMALIZATION (20-command corpus; 4 documented limitations).
+             CONFLICT-04 RESOLVED (process gap → handbook spec). L1-C Condition 3 SATISFIED.
+             Owner package consolidated in 58_OWNER_DECISION_PACKAGE.md.
+             NH-11 hypothesis logged (single-quote normalization; not authorized).
+             No premature closures found. Claim audit clean.
+RESULT:    NH-10 IMPLEMENTED; UNK-M4-01 RESOLVED; TRUE FRONTIER = owner decision gate
+CLASSIFICATION: MOVEMENT_COMPLETE
+WHAT CHANGED:
+  - NH-10: CONFIRMED → IMPLEMENTED (handbook §12 added)
+  - UNK-M4-01: OPEN → RESOLVED (SAFE_NORMALIZATION; 4 limitations)
+  - CONFLICT-04: MISSING_SPEC → RESOLVED
+  - L1-C Condition 3: NOT_SATISFIED → SATISFIED
+  - Owner decision package: structured → consolidated in 58_OWNER_DECISION_PACKAGE.md
+  - Normalization architecture boundary: precisely defined (6 levels)
+CLOSED: NH-10 (implemented), UNK-M4-01 (resolved), CONFLICT-04 (resolved)
+OPENED: NH-11 (hypothesis; not authorized)
+NEXT FRONTIER: Owner decision gate (READY-01/02/03) — no authorized research remains
+NEXT MOVE: READY-03 (minimum viable) or READY-01+READY-02 (full implementation path)
+```
+
+---
 
 ```
 MOVEMENT 003

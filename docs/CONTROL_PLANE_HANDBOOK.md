@@ -908,6 +908,90 @@ bash -n .claude/hooks/*.sh
 Si hace falta rollback, conserva primero el estado actual y utiliza el checkpoint registrado. No
 restaures configuracion global sin backup.
 
+### Un hook P0 bloquea con STALL_POLICY o UNKNOWN
+
+Este es el procedimiento canónico de escalamiento cuando un agente queda bloqueado y no puede
+continuar autónomamente. Aplica a cualquier bloqueo con código `STALL_POLICY`, `UNKNOWN`, o
+`BLOCKED` emitido por un hook P0.
+
+**Cuándo aplica**
+
+```text
+TRIGGER:   Un hook P0 (bash-firewall, task-completed-evidence) emite exit 2 con:
+           - reason_code = STALL_POLICY   (alternativa propuesta bloqueada)
+           - reason_code = UNKNOWN        (el agente no puede clasificar la acción)
+           - reason_code = BLOCKED        (condición de bloqueo explícita)
+           - Cualquier bloqueo donde la acción correcta no está definida por la política
+```
+
+**Qué hace el agente**
+
+```text
+1. HALT    — detener la tarea actual; no reintentar la acción bloqueada.
+2. LOG     — el evento queda registrado en STALL_POLICY_LOG automáticamente (R-2 operacional).
+3. INFORM  — reportar al humano: qué fue bloqueado, por qué razón, qué política aplica.
+4. WAIT    — aguardar confirmación explícita del humano antes de reanudar.
+```
+
+**Qué NO hace el agente**
+
+```text
+PROHIBIDO:
+  - Reintentar la misma acción con formulación diferente (bypass semántico).
+  - Marcar la tarea como completada mientras persiste el bloqueo.
+  - Asumir que el bloqueo es un falso positivo sin confirmación humana.
+  - Continuar con subtareas que dependen de la acción bloqueada.
+```
+
+**Qué incluye el reporte al humano**
+
+```text
+  - Acción bloqueada: comando o evento exacto que disparó el hook.
+  - Razón: código de bloqueo + política aplicada.
+  - Alternativa considerada (si existe): qué intentó el agente y por qué fue clasificada UNKNOWN.
+  - Referencia: archivo de política relevante (.claude/rules/, DECISION_REGISTRY.md, etc.).
+```
+
+**Proceso de resolución humana**
+
+```text
+1. Revisar la acción bloqueada contra la política citada en el bloqueo.
+2. Consultar DECISION_REGISTRY.md para contexto arquitectónico.
+3. Consultar docs/00_SYSTEM/F9_OWNER_DECISIONS.md para decisiones del owner que apliquen.
+4. Decidir:
+     A. La acción es conforme → autorizar explícitamente y el agente reanuda.
+     B. La acción está correctamente bloqueada → redirigir al agente con alternativa.
+     C. La política es ambigua para este caso → escalar al project owner para decisión.
+```
+
+**Escalamiento al project owner**
+
+```text
+CUÁNDO:  La revisión humana no produce una decisión clara en el paso 4C.
+QUIÉN:   Project owner (juanjosepolo.dev@gmail.com).
+QUÉ INCLUYE:
+  - Descripción del bloqueo (tarea, acción, hook, razón).
+  - La política citada y por qué produce ambigüedad.
+  - La alternativa considerada y por qué fue clasificada UNKNOWN.
+  - Impacto de no resolver: qué progreso queda bloqueado.
+```
+
+**Qué cierra el escalamiento**
+
+```text
+  - Una decisión explícita del humano (autorizar o prohibir la acción).
+  - Una actualización de política que elimine la ambigüedad (requiere autorización separada).
+  - Una redirección del agente con un camino alternativo que no requiere la acción bloqueada.
+```
+
+**Evidencia registrada**
+
+```text
+  - STALL_POLICY_LOG: entrada automática por R-2 (bash-firewall).
+  - SESSION_LOG: entrada manual si el bloqueo requirió decisión humana o cambio de rumbo.
+  - Si genera incidente: INCIDENT_REGISTRY.md con RCA y resolución.
+```
+
 ## 13. Como Personalizarlo Sin Romperlo
 
 ### Puedes personalizar
