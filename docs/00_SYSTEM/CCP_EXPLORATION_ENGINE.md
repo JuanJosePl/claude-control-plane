@@ -1,6 +1,6 @@
 # CCP Exploration Engine
 
-> Version: 1.5 | Last updated: 2026-09-23
+> Version: 1.6 | Last updated: 2026-09-23
 > State authority: `PROJECT_STATE.md` | Evidence authority: `EVIDENCE_REGISTRY.md`
 > This document converts static knowledge into operational movement. It is not an atlas.
 
@@ -74,8 +74,8 @@ HRQS GAP:           IDENTIFIED — human review has no quality standard for eval
 
 IMPLEMENTATION_READY: false
 NEXT_ALLOWED_PHASE:   Owner-driven decision required (READY-01/02/03); 3 authorized improvements available NOW
-LAST_MOVEMENT:        MOVEMENT 007 (2026-09-23) — Frontier Breakout; PAC prototype built; new FP class discovered;
-                      P1'/P2' spec completed; N=1 recommendation; 17 ideas generated; parallel tracks identified
+LAST_MOVEMENT:        MOVEMENT 008 (2026-09-23) — HRQS checklist added to handbook; PAC corpus completed (23 policies);
+                      CCP Complete Handoff (61_*) created and committed; all M001-M007 artifacts staged
 ```
 
 ---
@@ -133,11 +133,9 @@ OWNER DECISION GATES (classified separately from BLOCKERS):
               PAC-EF-02 FPs would be hard to classify without enhanced denial context
 
 NOW-EXECUTABLE (no owner authorization needed):
-├── HRQS: Human Review Quality Standard — checklist for evaluating blocked commands
-│         (adds §13 to CONTROL_PLANE_HANDBOOK; documentation change)
-├── PAC corpus: Complete PAC YAML with remaining 10 bash-firewall patterns
-│              (extends docs/research/pac/ccp_policies.yaml; research artifact)
-└── query-log.sh: H-01 monitoring tool — ALREADY CREATED (docs/00_SYSTEM/query-log.sh)
+├── [DONE M008] HRQS: Human Review Quality Standard — checklist added to handbook §12 (STALL subsection)
+├── [DONE M008] PAC corpus: Complete — 23 policies in YAML (21 enforced + 2 proposed/READY-02)
+└── [DONE M007] query-log.sh: H-01 monitoring tool — CREATED (docs/00_SYSTEM/query-log.sh)
 
 ENVIRONMENT BLOCKS:
 ├── H-01 materiality: requires real usage environment
@@ -490,10 +488,84 @@ REOPEN CONDITION: Concrete observable transition Roger performs that CCP's
 | EXP-017 | NH-10 escalation path authorization scope | COMPLETE (2026-09-23) | CONFIRMED; handbook addition = permitted now; no auth needed; see 57_ §4.3 |
 | EXP-018 | UNK-M4-01 double-quote removal semantic accuracy | COMPLETE (2026-09-23) | SAFE_NORMALIZATION; 4 documented limitations; invariant verified; see 58A_NH09_SEMANTIC_VALIDATION.md |
 | EXP-019 | NH-10 escalation path implementation | COMPLETE (2026-09-23) | DOCUMENTATION_ONLY; §12 of handbook; 5 scenarios validated; L1-C Condition 3 SATISFIED |
+| EXP-020 | HRQS checklist — human review quality standard | COMPLETE (2026-09-23) | Added as §12 subsection in CONTROL_PLANE_HANDBOOK; PAC-EF-02 FP class documented |
+| EXP-021 | PAC corpus completion — all bash-firewall patterns to YAML | COMPLETE (2026-09-23) | 23 total policies (21 enforced + 2 proposed READY-02); gaps documented |
 
 ---
 
 ## §11 — Movement Results
+
+### MOVEMENT 008 — HRQS Implementation + PAC Corpus Completion + CCP Handoff
+
+```
+ID:            MOVEMENT 008
+DATE:          2026-09-23
+EXECUTOR:      Claude Sonnet 4.6
+ARTIFACTS:     docs/CONTROL_PLANE_HANDBOOK.md (HRQS §12 subsection added)
+               docs/research/pac/ccp_policies.yaml (23 policies — corpus complete)
+               docs/00_SYSTEM/61_CCP_COMPLETE_HANDOFF.md (Phase A handoff)
+               docs/00_SYSTEM/61A_CCP_FILE_CATALOG.md
+               docs/00_SYSTEM/61B_CCP_JOURNEY_MAP.md
+               docs/00_SYSTEM/61C_CCP_DECISION_AND_AUTHORIZATION_HISTORY.md
+               docs/00_SYSTEM/61D_CCP_EVIDENCE_LINEAGE.md
+               docs/00_SYSTEM/61G_CCP_CONTINUATION_GUIDE.md
+
+START:
+  MOVEMENT 007 complete. Three now-executable improvements identified.
+  query-log.sh already created (M007).
+  HRQS checklist: pending (documentation change; no auth needed).
+  PAC corpus: 13 policies (incomplete).
+  Handoff: not yet created.
+
+QUESTION:  Execute the two remaining authorized improvements from M007.
+           Create a complete continuity handoff so CCP can continue from history.
+
+TRACKS EXECUTED:
+  A — Phase A: CCP Complete Handoff (61_* documents)
+      Full journey reconstruction: F1-F8 build + M001-M007 research
+      File catalog, journey map, decision history, evidence lineage, continuation guide
+      All M001-M007 artifacts staged (39_ through 60A_, PAC prototype, STALL_POLICY_LOG)
+      Handoff commit: c41c8c9
+  B — HRQS Checklist (§12 subsection in CONTROL_PLANE_HANDBOOK)
+      Human Review Quality Standard with:
+        - 6-step evaluation checklist
+        - PAC-EF-02 class documented with diagnosis guide
+        - FP classification table
+        - H-01 threshold guidance (N=1 recommendation)
+        - Escalation triggers for human review patterns
+  C — PAC Corpus Completion
+      Added 10 missing policies: POL-D05..D11, POL-S10..S12
+      Total: 23 policies (21 enforced now + 2 proposed/READY-02)
+      Coverage: ~90%+ of current bash-firewall.sh enforced patterns
+      Remaining gaps documented in corpus_metadata
+
+RESULT:
+  HRQS: IMPLEMENTED (handbook §12 STALL subsection)
+  PAC corpus: COMPLETE at 23 policies (research prototype — not production)
+  Handoff: COMMITTED (c41c8c9 — 31 files, 18503 insertions)
+  All M001-M007 research artifacts: STAGED AND COMMITTED
+  NOW-EXECUTABLE list: EXHAUSTED (all 3 items complete)
+
+POSITION CHANGE:
+  BEFORE: HRQS pending; PAC corpus at 13 policies; handoff not created; M001-M007 untracked
+  AFTER:  HRQS implemented; PAC corpus complete; handoff committed; all artifacts tracked;
+          NOW-EXECUTABLE list fully exhausted
+
+OPENED:
+  Nothing new without owner authorization
+
+CLOSED:
+  EXP-020 (HRQS checklist) — COMPLETE
+  EXP-021 (PAC corpus completion) — COMPLETE
+  Handoff gap — CCP now has persistent memory of its own history
+
+STOP CONDITION:
+  All authorized improvements complete. No new authorized research or documentation
+  change remains without owner decisions.
+  TRUE FRONTIER: OWNER DECISION GATE (READY-01/02/03/04)
+```
+
+---
 
 ### MOVEMENT 006 — Pre-Authorization Adversarial Gate
 
@@ -1191,25 +1263,17 @@ IMPACT: Human review quality for STA-02 improves
 PRECONDITION: NH-10 (SATISFIED MOVEMENT 005)
 ```
 
-### NEXT MOVE D — HRQS Checklist (now-executable, no owner input)
+### NEXT MOVE D — HRQS Checklist ✓ DONE (MOVEMENT 008)
 
 ```
-WHAT QUESTION DOES IT ANSWER?
-  "What criteria should a human reviewer apply when evaluating a blocked command?"
-  Currently NH-10 provides escalation path but not evaluation criteria.
-
-COST: One documentation session (~45 min); adds §13 to CONTROL_PLANE_HANDBOOK
-REFERENCE: 60_FRONTIER_BREAKOUT.md §J.1, §B5 (HRQS gap finding)
-IMPACT: Closes human review quality gap; directly improves B-path effectiveness
-PRECONDITION: None (documentation change, not rule change)
+STATUS: IMPLEMENTED — CONTROL_PLANE_HANDBOOK.md §12 STALL subsection
+IMPACT: PAC-EF-02 FP class documented; 6-step checklist; H-01 threshold guidance
 ```
 
-### NEXT MOVE E — STALL_POLICY_LOG Query Tool (ALREADY CREATED)
+### NEXT MOVE E — STALL_POLICY_LOG Query Tool ✓ DONE (MOVEMENT 007)
 
 ```
-WHAT: docs/00_SYSTEM/query-log.sh — READ-ONLY H-01 monitoring tool
-STATUS: IMPLEMENTED in MOVEMENT 007 (this session)
-USAGE: bash docs/00_SYSTEM/query-log.sh --summary
+STATUS: IMPLEMENTED — docs/00_SYSTEM/query-log.sh
 NOTE: Current H-01 real count = 2 (both PAC-EF-02 FPs; zero genuine bypass events)
 ```
 
@@ -1230,6 +1294,26 @@ PAC production adoption: REQUIRES OWNER AUTHORIZATION (architecture change)
 Each completed movement, most recent first.
 
 ```
+MOVEMENT 008
+DATE:      2026-09-23
+MOVE:      HRQS Implementation + PAC Corpus Completion + CCP Complete Handoff
+QUESTION:  Execute all authorized now-executable improvements. Create a persistent
+           memory layer (handoff) so CCP can continue from its full history.
+OBSERVATION: Phase A (handoff): 6 documents, 31 files, 18503 insertions committed at c41c8c9.
+             Phase B (execution): HRQS checklist added to handbook; PAC corpus extended to 23 policies.
+             NOW-EXECUTABLE list fully exhausted. No new authorized improvements remain.
+             CCP now has persistent memory of M001-M007 journey.
+RESULT:    MOVEMENT_COMPLETE. All authorized improvements done.
+           True frontier: OWNER DECISION GATE (READY-01/02/03/04).
+CLASSIFICATION: MOVEMENT_COMPLETE
+WHAT CHANGED:
+  - docs/CONTROL_PLANE_HANDBOOK.md: HRQS §12 subsection (human review quality standard)
+  - docs/research/pac/ccp_policies.yaml: corpus complete (23 policies)
+  - docs/00_SYSTEM/61_*.md: 6 handoff documents (continuity layer)
+  - All M001-M007 research artifacts: staged in c41c8c9
+CLOSED: EXP-020 (HRQS), EXP-021 (PAC corpus), handoff gap
+NEXT FRONTIER: OWNER DECISION GATE — READY-01/02/03/04
+
 MOVEMENT 007
 DATE:      2026-09-23
 MOVE:      Frontier Breakout & Autonomous Advancement

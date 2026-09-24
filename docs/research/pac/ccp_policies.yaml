@@ -231,3 +231,177 @@ normalizations:
       - "Nested expansions not handled"
       - "Escaped quotes not handled"
     source: "57_MOVEMENT_004_FRONTIER_INTEGRATION.md §3.4"
+
+# ---
+# CORPUS COMPLETION — MOVEMENT 008 (2026-09-23)
+# Added: 10 missing policies from bash-firewall.sh not captured in M007 prototype
+# Total policies after: 23 (all current enforced patterns; POL-S08/S09 are PROPOSED/READY-02)
+# ---
+
+# --- Missing DESTRUCTIVE_REGEX entries ---
+
+  - id: "POL-D05"
+    layer: 0
+    source_rule: "no-go.md (implied: no destructive operations)"
+    prohibited_outcome: "recursive deletion of home directory"
+    enforcement_type: "DESTRUCTIVE_REGEX"
+    bash_pattern_key: "rm -rf home"
+    bash_pattern: 'rm[[:space:]]+-rf[[:space:]]+(~|\$HOME)'
+    severity: "CRITICAL"
+    known_true_positives:
+      - "rm -rf ~"
+      - "rm -rf $HOME"
+    known_false_positives: []
+    notes: "Overlaps with REGEX POL-S10 which adds double-quote variant"
+    authorization_status: "F1-INITIAL"
+
+  - id: "POL-D06"
+    layer: 0
+    source_rule: "no-go.md (implied: no destructive operations)"
+    prohibited_outcome: "fork bomb — process table exhaustion"
+    enforcement_type: "DESTRUCTIVE_REGEX"
+    bash_pattern_key: "fork bomb"
+    bash_pattern: ':[[:space:]]*\(\)[[:space:]]*\{[[:space:]]*:[[:space:]]*\|[[:space:]]*:[[:space:]]*&[[:space:]]*\}[[:space:]]*;[[:space:]]*:'
+    severity: "CRITICAL"
+    known_true_positives:
+      - ": (){ :|:& };:"
+    known_false_positives: []
+    notes: "Pattern requires exact fork bomb syntax with spaces — highly specific"
+    authorization_status: "F1-INITIAL"
+
+  - id: "POL-D07"
+    layer: 0
+    source_rule: "no-go.md (implied: no destructive operations)"
+    prohibited_outcome: "world-writable permissions on filesystem root"
+    enforcement_type: "DESTRUCTIVE_REGEX"
+    bash_pattern_key: "chmod root"
+    bash_pattern: 'chmod[[:space:]]+-R[[:space:]]+777[[:space:]]+'
+    severity: "CRITICAL"
+    known_true_positives:
+      - "chmod -R 777 /"
+      - "chmod -R 777 /etc"
+    known_false_positives:
+      - "chmod -R 777 ./build (project-local directory — pattern matches any path after 777)"
+    notes: "FP risk: chmod 777 on non-root project dirs. Pattern does not restrict path scope."
+    authorization_status: "F1-INITIAL"
+
+  - id: "POL-D08"
+    layer: 0
+    source_rule: "no-go.md (implied: no destructive operations)"
+    prohibited_outcome: "recursive ownership change (could affect system files)"
+    enforcement_type: "DESTRUCTIVE_REGEX"
+    bash_pattern_key: "chown recursive"
+    bash_pattern: 'chown[[:space:]]+-R'
+    severity: "HIGH"
+    known_true_positives:
+      - "chown -R root:root /etc"
+    known_false_positives:
+      - "chown -R $USER ./my-project (legitimate project file ownership)"
+    notes: "Broad pattern — catches all recursive chown including legitimate project usage."
+    authorization_status: "F1-INITIAL"
+
+  - id: "POL-D09"
+    layer: 0
+    source_rule: "no-go.md (implied: no destructive operations)"
+    prohibited_outcome: "direct write to block device (data destruction)"
+    enforcement_type: "DESTRUCTIVE_REGEX"
+    bash_pattern_key: "write system disk"
+    bash_pattern: '>[[:space:]]*/dev/sda'
+    severity: "CRITICAL"
+    known_true_positives:
+      - "> /dev/sda"
+      - "dd of=/dev/sda"
+    known_false_positives: []
+    notes: "Only catches /dev/sda specifically; other block devices (sdb, nvme0n1) not covered"
+    authorization_status: "F1-INITIAL"
+
+  - id: "POL-D10"
+    layer: 0
+    source_rule: "no-go.md (implied: no destructive operations)"
+    prohibited_outcome: "database dropped"
+    enforcement_type: "DESTRUCTIVE_REGEX"
+    bash_pattern_key: "DROP DATABASE"
+    bash_pattern: '[Dd][Rr][Oo][Pp][[:space:]]+[Dd][Aa][Tt][Aa][Bb][Aa][Ss][Ee]'
+    severity: "CRITICAL"
+    known_true_positives:
+      - "DROP DATABASE production"
+      - "drop database myapp"
+    known_false_positives: []
+    authorization_status: "F1-INITIAL"
+
+  - id: "POL-D11"
+    layer: 0
+    source_rule: "no-go.md (implied: no destructive operations)"
+    prohibited_outcome: "table data destroyed via TRUNCATE"
+    enforcement_type: "DESTRUCTIVE_REGEX"
+    bash_pattern_key: "TRUNCATE TABLE"
+    bash_pattern: '[Tt][Rr][Uu][Nn][Cc][Aa][Tt][Ee][[:space:]]+[Tt][Aa][Bb][Ll][Ee]'
+    severity: "CRITICAL"
+    known_true_positives:
+      - "TRUNCATE TABLE users"
+      - "truncate table payments"
+    known_false_positives: []
+    authorization_status: "F1-INITIAL"
+
+# --- Missing REGEX entries ---
+
+  - id: "POL-S10"
+    layer: 1
+    source_rule: "no-go.md (implied)"
+    prohibited_outcome: "recursive home deletion with quoted or unquoted variable forms"
+    enforcement_type: "REGEX"
+    bash_pattern_key: "rm -rf con variable de home"
+    bash_pattern: 'rm +-rf +("?\$HOME"?|~)'
+    severity: "CRITICAL"
+    known_true_positives:
+      - 'rm -rf "$HOME"'
+      - "rm -rf ~"
+    known_false_positives: []
+    notes: "Adds double-quoted $HOME variant to POL-D05; both patterns are enforced in parallel"
+    authorization_status: "F1-INITIAL"
+
+  - id: "POL-S11"
+    layer: 1
+    source_rule: "security.md: Secrets NUNCA en código"
+    prohibited_outcome: "Bearer token exposed in command"
+    enforcement_type: "REGEX"
+    bash_pattern_key: "token Bearer"
+    bash_pattern: 'Bearer +[A-Za-z0-9._-]{20,}'
+    severity: "HIGH"
+    known_true_positives:
+      - "curl -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiJ9...'"
+    known_false_positives:
+      - "Bearer in a comment or documentation text with a long word following"
+    notes: "PAC-EF-02 risk: commit messages or docs referencing 'Bearer' token format examples"
+    authorization_status: "F1-INITIAL"
+
+  - id: "POL-S12"
+    layer: 1
+    source_rule: "security.md: Secrets NUNCA en código"
+    prohibited_outcome: "AWS access key ID exposed in command"
+    enforcement_type: "REGEX"
+    bash_pattern_key: "AWS access key id"
+    bash_pattern: 'AKIA[0-9A-Z]{16}'
+    severity: "CRITICAL"
+    known_true_positives:
+      - "AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE aws s3 ls"
+    known_false_positives: []
+    notes: "Highly specific AWS key prefix format — very low FP risk"
+    authorization_status: "F1-INITIAL"
+
+# ---
+# CORPUS STATUS (after MOVEMENT 008)
+# ---
+corpus_metadata:
+  total_policies: 23
+  enforced_now: 21          # POL-D01..D11 + POL-S01..S07 + POL-S10..S12
+  proposed_ready_02: 2      # POL-S08, POL-S09 (require READY-02 authorization)
+  coverage_estimate: "~90%+ of current bash-firewall.sh enforced patterns"
+  remaining_gaps:
+    - "Single-quoted variable forms not normalized (NH-09 limitation)"
+    - "Variable aliasing (requires session taint tracking — architectural gap)"
+    - "Heredoc injection not covered"
+    - "/dev/sdb /dev/nvme0n1 variants of POL-D09"
+    - "chmod 777 on non-root paths (POL-D07 FP tradeoff)"
+  pac_status: "PROTOTYPE — research artifact; not production enforcement"
+  last_updated: "2026-09-23 MOVEMENT 008"

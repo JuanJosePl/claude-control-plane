@@ -992,6 +992,90 @@ QUÉ INCLUYE:
   - Si genera incidente: INCIDENT_REGISTRY.md con RCA y resolución.
 ```
 
+### Estándar de Calidad para Revisión Humana (HRQS — Human Review Quality Standard)
+
+Cuando un humano revisa un bloqueo STALL_POLICY, esta checklist asegura que la decisión de
+revisión sea reproducible, documentada y útil para el sistema de aprendizaje.
+
+**Objetivo del HRQS**
+
+```text
+Transformar "este comando fue bloqueado" en "se determinó si fue TP o FP, por qué, y qué clase es".
+```
+
+**Checklist HRQS — Revisión de Bloqueo**
+
+```text
+[ ] 1. IDENTIFICAR: ¿Qué comando/acción fue bloqueada exactamente?
+        → Copiar el comando literal desde el reporte del agente o STALL_POLICY_LOG.
+
+[ ] 2. POLÍTICA: ¿Qué política/patrón disparó el bloqueo?
+        → El hook debería indicarlo en su mensaje de salida.
+        → Si no indica la política, marcar como "MENSAJE_INSUFICIENTE" y ver READY-04.
+
+[ ] 3. CLASIFICAR CLASE DE BLOQUEO:
+        TP  — Verdadero Positivo: el comando es peligroso y fue correctamente bloqueado.
+        FP  — Falso Positivo: el comando es legítimo y el bloqueo fue un error.
+        UNKNOWN — No hay suficiente contexto para decidir.
+
+[ ] 4. SI FP — IDENTIFICAR CLASE DE FALSO POSITIVO:
+        FP-PATTERN_NAME_IN_LITERAL (PAC-EF-02):
+          El comando referencia el NOMBRE de un patrón peligroso como identificador literal,
+          no como la acción peligrosa. Ejemplos:
+            - git commit -m "fix: bypass for testing" → la palabra 'bypass' en el mensaje
+            - git commit -m "add rm-rf safeguard" → 'rm -rf' en un comentario o mensaje
+            - Variable o string que contiene el nombre de un comando bloqueado
+          Diagnóstico: ¿El patrón peligroso ESTÁ en el comando o solo NOMBRA al patrón?
+        
+        FP-BENIGN_VARIANT:
+          El comando tiene la forma sintáctica del patrón pero no el efecto peligroso.
+          Ejemplo: 'chmod 755 ./script.sh' (no chmod 777 de archivos del sistema)
+        
+        FP-CONTEXT_MISSING:
+          El contexto del comando cambia su clasificación pero el hook no lo puede ver.
+
+[ ] 5. REGISTRAR DECISIÓN:
+        TP → Confirmar bloqueo. Redirigir agente con alternativa.
+        FP → Autorizar acción explícitamente. Si FP-PATTERN_NAME_IN_LITERAL → agregar
+             nota en STALL_POLICY_LOG con clase identificada.
+        UNKNOWN → Escalar al project owner (ver procedimiento de escalamiento arriba).
+
+[ ] 6. H-01 REGISTRO (si had_alternative = true en el log):
+        Este evento cuenta para el umbral N del parámetro H-01.
+        N = 1 es suficiente para abrir investigación de materialidad de LABYRINTH-1.
+        Documentar: ¿El agente tenía una alternativa viable? ¿Cuál era?
+```
+
+**Cuándo un bloqueo es "de alta calidad" para el sistema**
+
+```text
+ALTA CALIDAD:
+  - Clase TP/FP identificada (no solo "decidí autorizar")
+  - Para FP: clase específica documentada (PAC-EF-02, FP-BENIGN_VARIANT, etc.)
+  - had_alternative registrado (sí/no + descripción si sí)
+  - Decisión tomada en el momento (no semanas después)
+
+BAJA CALIDAD (no aprende el sistema):
+  - "Autorizo esta vez" sin clasificación
+  - Decisión no documentada en SESSION_LOG ni STALL_POLICY_LOG
+  - Asumir que el bloqueo es FP sin verificar la política
+```
+
+**Umbrales de escalamiento**
+
+```text
+Escalar al owner si:
+  - 3+ eventos UNKNOWN en la misma semana (política potencialmente ambigua)
+  - 2+ eventos PAC-EF-02 del mismo patrón (patrón potencialmente demasiado amplio)
+  - 1 evento TP genuino que los controles actuales no debían cubrir (nuevo riesgo)
+```
+
+**Clases de FP conocidas (registro vivo — actualizar cuando se descubran nuevas)**
+
+| Clase | ID | Descripción | Primera aparición |
+|---|---|---|---|
+| Pattern Name In Literal | PAC-EF-02 | El nombre del patrón aparece como literal en un comando legítimo | M007 (2026-09-23) |
+
 ## 13. Como Personalizarlo Sin Romperlo
 
 ### Puedes personalizar
