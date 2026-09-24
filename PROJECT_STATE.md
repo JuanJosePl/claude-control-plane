@@ -16,7 +16,7 @@ NOW_EXECUTABLE:         ALL COMPLETE — HRQS (done M008), PAC corpus (done M008
 DEFERRED:               CDT-02 (new agent auth), AC-03 (TRIGGER-4), NH-11, F10-F12
 ACTIVE_DECISIONS:       ARCH-001, ARCH-002, ARCH-003, ARCH-004
 RESOLVED_OWNER_DECISIONS: F9-D01=A, F9-D02=B, F9-D03=B, F9-D04=B, F9-D05=A (2026-09-20)
-LAST_GIT_CHECKPOINT:    c41c8c9
+LAST_GIT_CHECKPOINT:    f6a874f
 LAST_MOVEMENT:          MOVEMENT 008 (2026-09-23) — HRQS Implementation + PAC Corpus Completion + CCP Handoff;
                         HRQS checklist added to handbook §12 (PAC-EF-02 FP class documented);
                         PAC corpus complete: 23 policies (21 enforced + 2 proposed/READY-02);
