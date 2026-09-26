@@ -112,3 +112,6 @@ SESIÓN:               subagent
 AGENTE:                  (agent_id:ae8a1a480263767fa)
 RESUMEN:              /checkpoint 
 RESULTADO:            (ver resumen)
+
+## 2026-09-25 13:44
+CONFIG CHANGE:        source=? keys=[]

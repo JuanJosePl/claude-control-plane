@@ -43,3 +43,46 @@
   omision es fail-closed y bloquea TaskCompleted con `exit 2`. La advertencia transicional de F7
   queda SUPERSEDED por F8-A. El addendum no altera la distincion historica de tipos de trabajo.
 - EVIDENCIA F8-A: EV-015
+
+## ARCH-005 — Deferral Policy (DEC-11 HYB-FINAL-v4)
+
+- TIPO: GOVERNANCE
+- ESTADO: OWNER_CHOSEN (2026-09-26); IMPLEMENTATION_STATUS: PENDING
+- FECHA: 2026-09-26
+- DECISION: Formaliza los triggers de deferrals Owner-authorized mediante bloques
+  YAML estructurados in-document con vocab cerrado {EVENT, CONDITION, COUNT, DATE,
+  LINK}, IDs namespaced estables (formato `<scope>.<deferral-id>.T<index>`),
+  combinación explícita por bloque (`combine: ANY` sólo donde la prosa fuente
+  documenta triggers alternativos), y `provenance:` en cada trigger. Principio
+  rector: normalización de representación ≠ cambio semántico ≠ reapertura de
+  decisión. Introduce `docs/00_SYSTEM/DEFERRAL_POLICY.md` como política canónica.
+  Absorbe DEC-13 (external-triggered) como campo `trigger:`. Habilita DEC-08
+  formal con precedente procedimental limpio.
+- ALCANCE: docs-only. Retrofit in-situ de F9_OWNER_DECISIONS.md (F9-D01..D05),
+  PROJECT_STATE.md (DEFERRED entries + notas 55-56 vía LINK-normalization),
+  BEHAVIORAL_RELIABILITY_AUDIT.md (G-B10, G-N4). NH-11 y G-L1 (HYPOTHESIS-tier
+  NOT AUTHORIZED) permanecen sin retrofit; documentados como gaps en
+  DEFERRAL_INVENTORY.md.
+- NO-GOALS: registry paralelo; runtime; hooks; maintenance.sh integration;
+  revisión periódica obligatoria; lint automático; combine operators distintos
+  de ANY; articulación de NH-11/G-L1; definición del predicado TRIGGER-4 (AC-03).
+- EVIDENCIA: docs/00_SYSTEM/DEFERRAL_INVENTORY.md (persistido 2026-09-26 vía
+  EXP-1: baseline empírica; 34/36 triggers ya observables). Contrato completo en
+  el bloque §18 Owner Decision registrado en conversation log.
+- REVERSIBILIDAD: FACIL (`git revert` del commit de retrofit).
+- LOCK-IN: BAJO (Markdown + YAML in-document; sin runtime; sin dependencias).
+- REVIEW TRIGGER: (observable, combine: ANY)
+  - EVENT: LINK dangling detectado tras cambio de ID sin migración.
+  - COUNT: ≥3 deferrals Owner-authorized nuevos añadidos sin trigger estructurado
+    cuando el predicado observable era extraíble.
+  - EVENT: apertura de DEC-08 formal invoca DEC-11 como precedente y expone
+    tensión no prevista.
+  - EVENT: futura política invoca "literal retrofit ≠ reapertura" y Owner
+    determina misaplicación.
+  - EVENT: emerge deferral cuya semántica de combinación requiere operador
+    distinto de ANY (fuerza nueva decisión Owner).
+- CRUZA F9-D01: NO.
+- IMPLEMENTATION AUTHORIZATION: PENDING (separate authorization required per
+  Master Prompt v2.0 §20).
+- K3-D-DEFERRAL-LIFECYCLE STATUS: ADDRESSED (empirical validation pending;
+  closure criteria in Decision Contract §K3 section).

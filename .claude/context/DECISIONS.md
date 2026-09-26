@@ -27,3 +27,6 @@ CUÁNDO AGREGAR UNA DECISIÓN AQUÍ:
 ## Arquitectura / Control Plane
 - **ARCH-002:** `SubagentStart` inyecta context packs por rol — no depender de `skills:` no verificado.
 - **ARCH-004:** Solo las CONTRACTUAL TASK pasan por Evidence Gate; TODOs, SUBTASKs y RESEARCH NOTE no requieren EV-NNN individual. Tras F8-A, `contract_hash` es obligatorio, debe coincidir con la evidencia VERIFIED y su ausencia bloquea.
+
+## Governance
+- **ARCH-005:** Deferrals Owner-authorized llevan bloque YAML in-document con vocab {EVENT, CONDITION, COUNT, DATE, LINK}, IDs `<scope>.<deferral-id>.T<index>`, `combine: ANY` sólo si prosa fuente documenta alternativa, y `provenance:`. NH-11/G-L1 (HYPOTHESIS-tier) fuera del requisito. Normalización ≠ cambio semántico ≠ reapertura. No registry, no runtime, no maintenance.sh. IMPL_PENDING (2026-09-26).
