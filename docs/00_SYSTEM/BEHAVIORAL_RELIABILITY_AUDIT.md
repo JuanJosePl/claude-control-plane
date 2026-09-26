@@ -693,6 +693,35 @@ paralela. Owner decide.
 - **F-FALSE_BLOCK-01 (G-B6):** no fix en el firewall. La solucion correcta es que los fixtures
   positivos se creen via install (no via Write en sesion viva), que es lo que G-T1 ya asume.
 
+<!-- deferral-triggers:
+scope: abrau
+deferral: gb10
+combine: null
+note: "F-SELFMOD-01 (§29 findings table) is a duplicate reference to G-B10; it is NOT a distinct deferral."
+triggers:
+  - id: abrau.gb10.T1
+    type: EVENT
+    predicate: "Human review fails to catch a self-modification attempt on a P0 hook (currently mitigated by git diff review pre-commit)."
+    provenance: "docs/00_SYSTEM/BEHAVIORAL_RELIABILITY_AUDIT.md §19 F-SELFMOD-01; §35 Deferred Risks · G-B10; §37 What NOT to Fix · F-SELFMOD-01"
+related:
+  - id: abrau.gn4.T1
+    reason: "G-N4 (hook integrity fingerprint) is the roadmap-level mitigation candidate for G-B10, not an alternative trigger. Relationship is 'shared mitigation surface', not 'alternative reactivation predicate'."
+    provenance: "docs/00_SYSTEM/BEHAVIORAL_RELIABILITY_AUDIT.md §19 F-SELFMOD-01; §32 findings table · G-B10 row; §37 · F-SELFMOD-01 entry"
+-->
+
+<!-- deferral-triggers:
+scope: abrau
+deferral: gn4
+combine: null
+note: "G-N4 (hook integrity fingerprint) inherits its reactivation predicate from G-B10 via the shared mitigation-surface relationship documented in §19 and §37. Direction: G-N4 → G-B10 (G-N4 reactivates when G-B10 does). The inverse direction (G-B10 → G-N4) is a related mitigation, not an alternative trigger, captured in G-B10's related block."
+triggers:
+  - id: abrau.gn4.T1
+    type: LINK
+    predicate: "G-N4 reactivates when G-B10 T1 fires (same underlying event: silent hook mutation not caught by human review)."
+    provenance: "docs/00_SYSTEM/BEHAVIORAL_RELIABILITY_AUDIT.md §19 F-SELFMOD-01 (G-N4 gap); §37 · F-SELFMOD-01 ('Alineado con roadmap G-N4'); docs/00_SYSTEM/DEFERRAL_INVENTORY.md §Cluster-C.G-N4"
+    link: abrau.gb10.T1
+-->
+
 ---
 
 ## 38. Next Investigation
@@ -704,6 +733,12 @@ Areas no cubiertas exhaustivamente esta sesion:
 3. **Fantasmas SubagentStop origen:** buscar en runtime docs o intentar reproducir con Task*.
 4. **install.sh sobre working tree modificado** (no solo target vacio).
 5. **PostToolUseFailure comportamiento si se activara** (G-L1 DEFER).
+<!-- deferral-triggers: null
+scope: abrau
+deferral: gl1
+note: "HYPOTHESIS-tier (no observable predicate stated in source prose). Exempt from mandatory retrofit per DEFERRAL_POLICY.md INV-4. Original defer prose in §7, §10, §38 does not articulate a reactivation criterion; the DEFERRAL_INVENTORY.md §Cluster-C candidate ('reproducible tool failure lost that a PostToolUseFailure hook would have caught') remains explicitly NOT authorized as a trigger by ARCH-005 NO-GOALS."
+provenance: "docs/00_SYSTEM/BEHAVIORAL_RELIABILITY_AUDIT.md §7 Loop/Reentrancy item 3 (DEFER G-L1); §10 Tool Failures (DEFER G-L1); §38 Next Investigation item 5 (G-L1 DEFER); docs/00_SYSTEM/DEFERRAL_INVENTORY.md §Cluster-C.G-L1"
+-->
 6. **Interaccion PreCompact + SessionStart con state modificado durante compact.**
 7. **Tier 3 behavioral con `session_id` reciclado** (G-V1 roadmap ya lo cubre).
 

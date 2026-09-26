@@ -73,6 +73,87 @@ candidate is promoted to implementation.
 - Any of the triggers listed under F9-D02 or F9-D04 producing evidence that
   crosses a phase threshold.
 
+<!-- deferral-triggers:
+scope: f9
+deferral: d01
+combine: ANY
+note: |
+  Source bullet 5 ("Any of the triggers listed under F9-D02 or F9-D04
+  producing evidence that crosses a phase threshold") is a compound: a set of
+  ten alternative LINK targets, each gated by the additional condition
+  "producing evidence that crosses a phase threshold". Per DEFERRAL_POLICY.md
+  §5.1, each split is assigned the next positive integer; the condition is
+  preserved verbatim in every LINK trigger's predicate. Yielding T5..T14 for
+  the ten F9-D02+F9-D04 targets.
+triggers:
+  - id: f9.d01.T1
+    type: EVENT
+    predicate: "A reproducible incident that a current control does not cover."
+    provenance: "docs/00_SYSTEM/F9_OWNER_DECISIONS.md §3.F9-D01 · Reactivation triggers bullet 1"
+  - id: f9.d01.T2
+    type: EVENT
+    predicate: "A firewall bypass that survives F8 fixtures."
+    provenance: "docs/00_SYSTEM/F9_OWNER_DECISIONS.md §3.F9-D01 · Reactivation triggers bullet 2"
+  - id: f9.d01.T3
+    type: EVENT
+    predicate: "A tool failure demonstrably lost by the manual /incident open workflow."
+    provenance: "docs/00_SYSTEM/F9_OWNER_DECISIONS.md §3.F9-D01 · Reactivation triggers bullet 3"
+  - id: f9.d01.T4
+    type: EVENT
+    predicate: "A deterministic native reproduction of the G-B11 phantom SubagentStop entries."
+    provenance: "docs/00_SYSTEM/F9_OWNER_DECISIONS.md §3.F9-D01 · Reactivation triggers bullet 4"
+  - id: f9.d01.T5
+    type: LINK
+    predicate: "F9-D02 T1 producing evidence that crosses a phase threshold."
+    provenance: "docs/00_SYSTEM/F9_OWNER_DECISIONS.md §3.F9-D01 · Reactivation triggers bullet 5 (split 1/10)"
+    link: f9.d02.T1
+  - id: f9.d01.T6
+    type: LINK
+    predicate: "F9-D02 T2 producing evidence that crosses a phase threshold."
+    provenance: "docs/00_SYSTEM/F9_OWNER_DECISIONS.md §3.F9-D01 · Reactivation triggers bullet 5 (split 2/10)"
+    link: f9.d02.T2
+  - id: f9.d01.T7
+    type: LINK
+    predicate: "F9-D02 T3 producing evidence that crosses a phase threshold."
+    provenance: "docs/00_SYSTEM/F9_OWNER_DECISIONS.md §3.F9-D01 · Reactivation triggers bullet 5 (split 3/10)"
+    link: f9.d02.T3
+  - id: f9.d01.T8
+    type: LINK
+    predicate: "F9-D02 T4 producing evidence that crosses a phase threshold."
+    provenance: "docs/00_SYSTEM/F9_OWNER_DECISIONS.md §3.F9-D01 · Reactivation triggers bullet 5 (split 4/10)"
+    link: f9.d02.T4
+  - id: f9.d01.T9
+    type: LINK
+    predicate: "F9-D04 T1 producing evidence that crosses a phase threshold."
+    provenance: "docs/00_SYSTEM/F9_OWNER_DECISIONS.md §3.F9-D01 · Reactivation triggers bullet 5 (split 5/10)"
+    link: f9.d04.T1
+  - id: f9.d01.T10
+    type: LINK
+    predicate: "F9-D04 T2 producing evidence that crosses a phase threshold."
+    provenance: "docs/00_SYSTEM/F9_OWNER_DECISIONS.md §3.F9-D01 · Reactivation triggers bullet 5 (split 6/10)"
+    link: f9.d04.T2
+  - id: f9.d01.T11
+    type: LINK
+    predicate: "F9-D04 T3 producing evidence that crosses a phase threshold."
+    provenance: "docs/00_SYSTEM/F9_OWNER_DECISIONS.md §3.F9-D01 · Reactivation triggers bullet 5 (split 7/10)"
+    link: f9.d04.T3
+  - id: f9.d01.T12
+    type: LINK
+    predicate: "F9-D04 T4 producing evidence that crosses a phase threshold."
+    provenance: "docs/00_SYSTEM/F9_OWNER_DECISIONS.md §3.F9-D01 · Reactivation triggers bullet 5 (split 8/10)"
+    link: f9.d04.T4
+  - id: f9.d01.T13
+    type: LINK
+    predicate: "F9-D04 T5 producing evidence that crosses a phase threshold."
+    provenance: "docs/00_SYSTEM/F9_OWNER_DECISIONS.md §3.F9-D01 · Reactivation triggers bullet 5 (split 9/10)"
+    link: f9.d04.T5
+  - id: f9.d01.T14
+    type: LINK
+    predicate: "F9-D04 T6 producing evidence that crosses a phase threshold."
+    provenance: "docs/00_SYSTEM/F9_OWNER_DECISIONS.md §3.F9-D01 · Reactivation triggers bullet 5 (split 10/10)"
+    link: f9.d04.T6
+-->
+
 ### F9-D02 = B - Defer native Claude Code evidence
 
 **Question closed:** When should native Claude Code lifecycle evidence be
@@ -103,6 +184,29 @@ native evidence is accepted; no reinterpretation to `BROKEN` is authorized.
   ordering, payload shape, or re-entry facts.
 - Any other reproducible problem whose resolution requires native lifecycle
   evidence.
+
+<!-- deferral-triggers:
+scope: f9
+deferral: d02
+combine: ANY
+triggers:
+  - id: f9.d02.T1
+    type: EVENT
+    predicate: "Deterministic recurrence of the G-B11 phantom SubagentStop events."
+    provenance: "docs/00_SYSTEM/F9_OWNER_DECISIONS.md §3.F9-D02 · Reactivation triggers bullet 1"
+  - id: f9.d02.T2
+    type: EVENT
+    predicate: "A tool failure demonstrably lost by the manual incident workflow."
+    provenance: "docs/00_SYSTEM/F9_OWNER_DECISIONS.md §3.F9-D02 · Reactivation triggers bullet 2"
+  - id: f9.d02.T3
+    type: CONDITION
+    predicate: "A native integration decision that depends on dispatcher, matcher, ordering, payload shape, or re-entry facts."
+    provenance: "docs/00_SYSTEM/F9_OWNER_DECISIONS.md §3.F9-D02 · Reactivation triggers bullet 3"
+  - id: f9.d02.T4
+    type: CONDITION
+    predicate: "Any other reproducible problem whose resolution requires native lifecycle evidence."
+    provenance: "docs/00_SYSTEM/F9_OWNER_DECISIONS.md §3.F9-D02 · Reactivation triggers bullet 4"
+-->
 
 ### F9-D03 = B - Keep documentary candidates deferred
 
@@ -137,6 +241,63 @@ of its own. Historical rationale remains preserved in
   cadence was missed.
 - G-N2: a real disk-usage, retention or consumer requirement.
 
+<!-- deferral-triggers:
+scope: f9
+deferral: d03
+note: "Six sub-items; each carries its own triggers per source prose. IDs use <deferral-id>.<sub-slug>.T<index> per DEFERRAL_POLICY.md §4."
+sub-items:
+  - deferral: d03.gs1
+    combine: ANY
+    triggers:
+      - id: f9.d03.gs1.T1
+        type: EVENT
+        predicate: "A real rollback that fails."
+        provenance: "docs/00_SYSTEM/F9_OWNER_DECISIONS.md §3.F9-D03 · Reactivation triggers, item G-S1/G-S2 (split OR-branch 1)"
+      - id: f9.d03.gs1.T2
+        type: EVENT
+        predicate: "An owner-approved recovery validation micro-task."
+        provenance: "docs/00_SYSTEM/F9_OWNER_DECISIONS.md §3.F9-D03 · Reactivation triggers, item G-S1/G-S2 (split OR-branch 2)"
+  - deferral: d03.gs2
+    combine: ANY
+    triggers:
+      - id: f9.d03.gs2.T1
+        type: EVENT
+        predicate: "A real rollback that fails."
+        provenance: "docs/00_SYSTEM/F9_OWNER_DECISIONS.md §3.F9-D03 · Reactivation triggers, item G-S1/G-S2 (split OR-branch 1)"
+      - id: f9.d03.gs2.T2
+        type: EVENT
+        predicate: "An owner-approved recovery validation micro-task."
+        provenance: "docs/00_SYSTEM/F9_OWNER_DECISIONS.md §3.F9-D03 · Reactivation triggers, item G-S1/G-S2 (split OR-branch 2)"
+  - deferral: d03.gbob1
+    combine: null
+    triggers:
+      - id: f9.d03.gbob1.T1
+        type: EVENT
+        predicate: "An evaluator or maintainer misread caused by the missing semantic header."
+        provenance: "docs/00_SYSTEM/F9_OWNER_DECISIONS.md §3.F9-D03 · Reactivation triggers, item G-Bob-1"
+  - deferral: d03.ga1
+    combine: null
+    triggers:
+      - id: f9.d03.ga1.T1
+        type: EVENT
+        predicate: "A maintainer confusing the control-plane installer template with a configured project pack."
+        provenance: "docs/00_SYSTEM/F9_OWNER_DECISIONS.md §3.F9-D03 · Reactivation triggers, item G-A1"
+  - deferral: d03.gn1
+    combine: null
+    triggers:
+      - id: f9.d03.gn1.T1
+        type: CONDITION
+        predicate: "A drift or stale system detected because a manual revalidation cadence was missed."
+        provenance: "docs/00_SYSTEM/F9_OWNER_DECISIONS.md §3.F9-D03 · Reactivation triggers, item G-N1"
+  - deferral: d03.gn2
+    combine: null
+    triggers:
+      - id: f9.d03.gn2.T1
+        type: EVENT
+        predicate: "A real disk-usage, retention or consumer requirement."
+        provenance: "docs/00_SYSTEM/F9_OWNER_DECISIONS.md §3.F9-D03 · Reactivation triggers, item G-N2"
+-->
+
 ### F9-D04 = B - External requirement trigger for integrity work
 
 **Question closed:** What trigger should be required before revisiting
@@ -166,6 +327,39 @@ An external trigger does not authorize implementation automatically. It
 authorizes research first, which must establish threat model, missing
 control, and proportional scope before any code, contract, or new phase is
 opened.
+
+<!-- deferral-triggers:
+scope: f9
+deferral: d04
+combine: ANY
+constraint: "An external trigger authorizes RESEARCH first, not implementation. Threat model, missing control, and proportional scope must be established before any code, contract, or new phase is opened."
+constraint-provenance: "docs/00_SYSTEM/F9_OWNER_DECISIONS.md §3.F9-D04 · Constraint on any future reactivation"
+triggers:
+  - id: f9.d04.T1
+    type: EVENT
+    predicate: "External audit."
+    provenance: "docs/00_SYSTEM/F9_OWNER_DECISIONS.md §3.F9-D04 · Reactivation triggers bullet 1"
+  - id: f9.d04.T2
+    type: EVENT
+    predicate: "Compliance obligation."
+    provenance: "docs/00_SYSTEM/F9_OWNER_DECISIONS.md §3.F9-D04 · Reactivation triggers bullet 2"
+  - id: f9.d04.T3
+    type: EVENT
+    predicate: "Contractual requirement."
+    provenance: "docs/00_SYSTEM/F9_OWNER_DECISIONS.md §3.F9-D04 · Reactivation triggers bullet 3"
+  - id: f9.d04.T4
+    type: EVENT
+    predicate: "Explicit customer requirement."
+    provenance: "docs/00_SYSTEM/F9_OWNER_DECISIONS.md §3.F9-D04 · Reactivation triggers bullet 4"
+  - id: f9.d04.T5
+    type: EVENT
+    predicate: "Owner-approved expansion of the trust boundary."
+    provenance: "docs/00_SYSTEM/F9_OWNER_DECISIONS.md §3.F9-D04 · Reactivation triggers bullet 5"
+  - id: f9.d04.T6
+    type: CONDITION
+    predicate: "Organizational change that makes the current boundary insufficient."
+    provenance: "docs/00_SYSTEM/F9_OWNER_DECISIONS.md §3.F9-D04 · Reactivation triggers bullet 6"
+-->
 
 ### F9-D05 = A - Keep F10-F12 unknown
 
@@ -197,6 +391,54 @@ assumption is made that the next necessity must be named F10.
 - A concrete, evidenced problem that requires runtime work at phase scale.
 - An external requirement (per F9-D04) that brings its own
   problem+evidence contract.
+
+<!-- deferral-triggers:
+scope: f9
+deferral: d05
+combine: ANY
+note: |
+  Source bullet 2 ("An external requirement (per F9-D04) that brings its own
+  problem+evidence contract") is a compound: a set of six alternative LINK
+  targets (F9-D04 T1..T6), each gated by the additional condition "brings its
+  own problem+evidence contract". Per DEFERRAL_POLICY.md §5.1, each split is
+  assigned the next positive integer; the condition is preserved verbatim in
+  every LINK trigger's predicate. Yielding T2..T7 for the six F9-D04 targets.
+triggers:
+  - id: f9.d05.T1
+    type: EVENT
+    predicate: "A concrete, evidenced problem that requires runtime work at phase scale."
+    provenance: "docs/00_SYSTEM/F9_OWNER_DECISIONS.md §3.F9-D05 · Reactivation triggers bullet 1"
+  - id: f9.d05.T2
+    type: LINK
+    predicate: "An external requirement (F9-D04 T1) that brings its own problem+evidence contract."
+    provenance: "docs/00_SYSTEM/F9_OWNER_DECISIONS.md §3.F9-D05 · Reactivation triggers bullet 2 (split 1/6)"
+    link: f9.d04.T1
+  - id: f9.d05.T3
+    type: LINK
+    predicate: "An external requirement (F9-D04 T2) that brings its own problem+evidence contract."
+    provenance: "docs/00_SYSTEM/F9_OWNER_DECISIONS.md §3.F9-D05 · Reactivation triggers bullet 2 (split 2/6)"
+    link: f9.d04.T2
+  - id: f9.d05.T4
+    type: LINK
+    predicate: "An external requirement (F9-D04 T3) that brings its own problem+evidence contract."
+    provenance: "docs/00_SYSTEM/F9_OWNER_DECISIONS.md §3.F9-D05 · Reactivation triggers bullet 2 (split 3/6)"
+    link: f9.d04.T3
+  - id: f9.d05.T5
+    type: LINK
+    predicate: "An external requirement (F9-D04 T4) that brings its own problem+evidence contract."
+    provenance: "docs/00_SYSTEM/F9_OWNER_DECISIONS.md §3.F9-D05 · Reactivation triggers bullet 2 (split 4/6)"
+    link: f9.d04.T4
+  - id: f9.d05.T6
+    type: LINK
+    predicate: "An external requirement (F9-D04 T5) that brings its own problem+evidence contract."
+    provenance: "docs/00_SYSTEM/F9_OWNER_DECISIONS.md §3.F9-D05 · Reactivation triggers bullet 2 (split 5/6)"
+    link: f9.d04.T5
+  - id: f9.d05.T7
+    type: LINK
+    predicate: "An external requirement (F9-D04 T6) that brings its own problem+evidence contract."
+    provenance: "docs/00_SYSTEM/F9_OWNER_DECISIONS.md §3.F9-D05 · Reactivation triggers bullet 2 (split 6/6)"
+    link: f9.d04.T6
+-->
 
 ---
 

@@ -47,7 +47,10 @@
 ## ARCH-005 — Deferral Policy (DEC-11 HYB-FINAL-v4)
 
 - TIPO: GOVERNANCE
-- ESTADO: OWNER_CHOSEN (2026-09-26); IMPLEMENTATION_STATUS: PENDING
+- ESTADO: OWNER_CHOSEN (2026-09-26); IMPLEMENTATION_AUTHORIZED: YES (2026-09-26);
+  IMPLEMENTATION_WORKING_TREE: EXECUTED (2026-09-26);
+  CONFORMANCE_VERIFICATION: PASS (2026-09-26 · 13/13 checks V1-V13);
+  COMMIT_POST_IMPLEMENTATION: PENDING (awaiting Owner checkpoint authorization)
 - FECHA: 2026-09-26
 - DECISION: Formaliza los triggers de deferrals Owner-authorized mediante bloques
   YAML estructurados in-document con vocab cerrado {EVENT, CONDITION, COUNT, DATE,
@@ -82,7 +85,7 @@
   - EVENT: emerge deferral cuya semántica de combinación requiere operador
     distinto de ANY (fuerza nueva decisión Owner).
 - CRUZA F9-D01: NO.
-- IMPLEMENTATION AUTHORIZATION: PENDING (separate authorization required per
-  Master Prompt v2.0 §20).
+- IMPLEMENTATION AUTHORIZATION: GRANTED (2026-09-26, Owner). Retrofit executed
+  and conformance-verified (V1-V13 PASS). Awaiting checkpoint commit.
 - K3-D-DEFERRAL-LIFECYCLE STATUS: ADDRESSED (empirical validation pending;
   closure criteria in Decision Contract §K3 section).

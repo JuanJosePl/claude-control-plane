@@ -30,5 +30,18 @@ Format per entry:
                     structured trigger when extractable; DEC-08 formal opening
                     reveals tension; "literal retrofit ≠ reopening" misapplied
                     elsewhere; deferral requires combine operator other than ANY.
-- LESSON          : no lesson yet (empirical validation pending — see
-                    K3-D-DEFERRAL-LIFECYCLE closure criteria in ARCH-005).
+- IMPLEMENTATION  : 2026-09-26 — retrofit executed in working tree; 4 files
+                    (1 new DEFERRAL_POLICY.md + 3 in-situ YAML blocks in
+                    F9_OWNER_DECISIONS.md, PROJECT_STATE.md,
+                    BEHAVIORAL_RELIABILITY_AUDIT.md). Conformance V1-V13 PASS
+                    (schema, IDs, LINK resolution, semantic invariance,
+                    scope isolation). Commit pending Owner checkpoint.
+- IN-FLIGHT LESSON: Initial retrofit pass used `kind:`/`text:` and alphabetic
+                    sub-suffixes (`T5.a..T5.j`) — deviation from ARCH-005
+                    schema (`type:`/`predicate:`, positive-integer index).
+                    Caught by post-implementation conformance audit; corrected
+                    before checkpoint. Lesson recorded: contract-field names
+                    are load-bearing; do not paraphrase schema during
+                    execution even when the meaning seems equivalent.
+- LESSON          : no long-term lesson yet (empirical validation pending —
+                    see K3-D-DEFERRAL-LIFECYCLE closure criteria in ARCH-005).
