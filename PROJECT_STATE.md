@@ -5,7 +5,7 @@
 CURRENT_PHASE:          8
 PHASE_STATUS:           COMPLETE
 PHASE_STARTED:          2026-09-19
-CURRENT_OBJECTIVE:      F8 cerrada, F9 investigada (`F9 NOT JUSTIFIED`) y F9 owner decision gate CERRADO (F9-D01=A, F9-D02=B, F9-D03=B, F9-D04=B, F9-D05=A)
+CURRENT_OBJECTIVE:      F8 cerrada, F9 investigada (`F9 NOT JUSTIFIED`) y F9 owner decision gate CERRADO (F9-D01=A, F9-D02=B, F9-D03=B, F9-D04=B, F9-D05=A). DEC-11/ARCH-005 CHECKPOINTED (cd0511c). DEC-AUTH-BOUNDARY/ARCH-006 OWNER_CHOSEN=AB5+VOCAB-A, IMPL_AUTHORIZED=YES, IMPLEMENTATION EXECUTED en docs/00_SYSTEM/AUTHORITY_KIND.md (2026-09-26), CONFORMANCE_PASS (V-AUTH-1..11 + 12/12 adversarial), CHECKPOINT=PENDING.
 LAST_COMPLETED_PHASE:   8 (2026-09-19)
 BLOCKERS:               NONE (no technical blockers)
 OWNER_GATES:            READY-01 (AC-02 classification), READY-02 (hook patterns),
@@ -93,11 +93,15 @@ sub-items:
         provenance: "PROJECT_STATE.md · DEFERRED · F10-F12 (split 6/6)"
         link: f9.d05.T7
 -->
-ACTIVE_DECISIONS:       ARCH-001, ARCH-002, ARCH-003, ARCH-004, ARCH-005
+ACTIVE_DECISIONS:       ARCH-001, ARCH-002, ARCH-003, ARCH-004, ARCH-005, ARCH-006
 RESOLVED_OWNER_DECISIONS: F9-D01=A, F9-D02=B, F9-D03=B, F9-D04=B, F9-D05=A (2026-09-20);
                         DEC-11=HYB-FINAL-v4 (2026-09-26, OWNER_CHOSEN, IMPL_AUTHORIZED,
-                        WORKING_TREE_EXECUTED, CONFORMANCE_PASS, COMMIT_PENDING)
-LAST_GIT_CHECKPOINT:    4277830
+                        WORKING_TREE_EXECUTED, CONFORMANCE_PASS, CHECKPOINTED_cd0511c);
+                        DEC-AUTH-BOUNDARY=AB5+VOCAB-A (2026-09-26, OWNER_CHOSEN,
+                        IMPL_AUTHORIZED=YES, WORKING_TREE_EXECUTED,
+                        CONFORMANCE_PASS, CHECKPOINT=PENDING;
+                        location: docs/00_SYSTEM/AUTHORITY_KIND.md)
+LAST_GIT_CHECKPOINT:    cd0511c
 LAST_MOVEMENT:          MOVEMENT 008 (2026-09-23) — HRQS Implementation + PAC Corpus Completion + CCP Handoff;
                         HRQS checklist added to handbook §12 (PAC-EF-02 FP class documented);
                         PAC corpus complete: 23 policies (21 enforced + 2 proposed/READY-02);
