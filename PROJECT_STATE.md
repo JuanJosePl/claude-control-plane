@@ -5,7 +5,7 @@
 CURRENT_PHASE:          8
 PHASE_STATUS:           COMPLETE
 PHASE_STARTED:          2026-09-19
-CURRENT_OBJECTIVE:      F8 cerrada, F9 investigada (`F9 NOT JUSTIFIED`) y F9 owner decision gate CERRADO (F9-D01=A, F9-D02=B, F9-D03=B, F9-D04=B, F9-D05=A). DEC-11/ARCH-005 CHECKPOINTED (cd0511c). DEC-AUTH-BOUNDARY/ARCH-006 OWNER_CHOSEN=AB5+VOCAB-A, IMPL_AUTHORIZED=YES, IMPLEMENTATION EXECUTED en docs/00_SYSTEM/AUTHORITY_KIND.md (2026-09-26), CONFORMANCE_PASS (V-AUTH-1..11 + 12/12 adversarial), CHECKPOINT=PENDING.
+CURRENT_OBJECTIVE:      F8 cerrada, F9 investigada (`F9 NOT JUSTIFIED`) y F9 owner decision gate CERRADO (F9-D01=A, F9-D02=B, F9-D03=B, F9-D04=B, F9-D05=A). DEC-11/ARCH-005 CHECKPOINTED (cd0511c). DEC-AUTH-BOUNDARY/ARCH-006 OWNER_CHOSEN=AB5+VOCAB-A, IMPL_AUTHORIZED=YES, IMPLEMENTATION EXECUTED en docs/00_SYSTEM/AUTHORITY_KIND.md (2026-09-26), CONFORMANCE_PASS (V-AUTH-1..11 + 12/12 adversarial), CHECKPOINTED (473759c, 2026-09-27). DEC-01/ARCH-007 OWNER_CHOSEN=E (SPLIT + DEFER), IMPL_AUTHORIZED=YES, IMPLEMENTATION EXECUTED como docs-only bookkeeping (DECISION_REGISTRY + DECISION_HISTORY + PROJECT_STATE; 2026-09-27); E1 (type-taxonomy) DEFERRED con dec01.T1..T6; E2/E3/E4 RETIRED con RESOLVED_BY; CONFORMANCE_PENDING (V-CATALOG-1..12); CHECKPOINT_PENDING; gate document en docs/00_SYSTEM/DEC-01_D-CATALOG_DECISION_GATE.md (Stratum-C untracked, no comiteado por este trabajo).
 LAST_COMPLETED_PHASE:   8 (2026-09-19)
 BLOCKERS:               NONE (no technical blockers)
 OWNER_GATES:            READY-01 (AC-02 classification), READY-02 (hook patterns),
@@ -13,7 +13,7 @@ OWNER_GATES:            READY-01 (AC-02 classification), READY-02 (hook patterns
 ENVIRONMENT_BLOCKS:     H-01 materiality (requires real usage), P1'/P2' FP rate (real usage),
                         Native Claude Code lifecycle (deferred F9-D02=B)
 NOW_EXECUTABLE:         ALL COMPLETE — HRQS (done M008), PAC corpus (done M008), query-log.sh (done M007)
-DEFERRED:               CDT-02 (new agent auth), AC-03 (TRIGGER-4), NH-11, F10-F12
+DEFERRED:               CDT-02 (new agent auth), AC-03 (TRIGGER-4), NH-11, F10-F12, DEC-01-E1 (type-taxonomy)
 <!-- deferral-triggers:
 scope: project-state
 deferral: deferred-list
@@ -92,16 +92,58 @@ sub-items:
         predicate: "F10-F12 reactivates on F9-D05 T7 (external requirement per F9-D04 T6 that brings its own problem+evidence contract)."
         provenance: "PROJECT_STATE.md · DEFERRED · F10-F12 (split 6/6)"
         link: f9.d05.T7
+
+  - deferral: dec01
+    combine: ANY
+    note: "E1 sub-decision (type-taxonomy) of DEC-01/ARCH-007 (SPLIT + DEFER). Sibling sub-decisions E2 (gate-mapping), E3 (auth_holder-mapping), E4 (precedent-index) are RETIRED (see ARCH-007 DECISION with RESOLVED_BY pointers). Only E1 is observable via this deferral block. Contract: DECISION_REGISTRY.md · ARCH-007. Learning: docs/00_SYSTEM/DECISION_HISTORY.md · DEC-01."
+    provenance: "PROJECT_STATE.md · DEFERRED · DEC-01-E1; docs/00_SYSTEM/DEC-01_D-CATALOG_DECISION_GATE.md §23 canonical trigger definitions"
+    triggers:
+      - id: project-state.dec01.T1
+        type: EVENT
+        predicate: "EXP-D01-01 registra ≥10 casos/mes de consulta simultánea multi-fuente por reviewer humano al clasificar tipos de cambio."
+        provenance: "PROJECT_STATE.md · DEFERRED · DEC-01-E1 · trigger T1; docs/00_SYSTEM/DEC-01_D-CATALOG_DECISION_GATE.md §20.1 EXP-D01-01 + §23 dec01.T1"
+      - id: project-state.dec01.T2
+        type: EVENT
+        predicate: "DEC-02 se abre y requiere `change_type` como key primaria del delegation registry (no cubierta por AUTHORITY_KIND four-class taxonomy)."
+        provenance: "PROJECT_STATE.md · DEFERRED · DEC-01-E1 · trigger T2; docs/00_SYSTEM/DEC-01_D-CATALOG_DECISION_GATE.md §14 DEC-02 dependency revalidation + §23 dec01.T2"
+      - id: project-state.dec01.T3
+        type: COUNT
+        predicate: "≥3 tipos de commit nuevos fuera de la enumeración canónica de `.claude/rules/git-policy.md` observados en un período de 3 meses."
+        provenance: "PROJECT_STATE.md · DEFERRED · DEC-01-E1 · trigger T3; docs/00_SYSTEM/DEC-01_D-CATALOG_DECISION_GATE.md §22.1 + §23 dec01.T3"
+      - id: project-state.dec01.T4
+        type: EVENT
+        predicate: "Incidente material atribuido a ausencia de D-CATALOG documentado en INCIDENT_REGISTRY.md con RCA que lo enlace."
+        provenance: "PROJECT_STATE.md · DEFERRED · DEC-01-E1 · trigger T4; docs/00_SYSTEM/DEC-01_D-CATALOG_DECISION_GATE.md §22.1 + §23 dec01.T4"
+      - id: project-state.dec01.T5
+        type: EVENT
+        predicate: "Owner planea escalamiento a S2/S3 (≥2 humanos activos) con requerimiento de onboarding uniforme sobre tipos de cambio y sus autoridades."
+        provenance: "PROJECT_STATE.md · DEFERRED · DEC-01-E1 · trigger T5; docs/00_SYSTEM/DEC-01_D-CATALOG_DECISION_GATE.md §9.2 + §23 dec01.T5"
+      - id: project-state.dec01.T6
+        type: LINK
+        predicate: "ARCH-006 Trigger T3 activa (DEC-02 se abre y requiere referencia canónica a AUTHORITY-KIND que la taxonomía sola no puede resolver)."
+        provenance: "PROJECT_STATE.md · DEFERRED · DEC-01-E1 · trigger T6; docs/00_SYSTEM/AUTHORITY_KIND.md §5.6 Trigger T3; docs/00_SYSTEM/DEC-01_D-CATALOG_DECISION_GATE.md §23 dec01.T6"
+        link: arch06.T3
 -->
-ACTIVE_DECISIONS:       ARCH-001, ARCH-002, ARCH-003, ARCH-004, ARCH-005, ARCH-006
+ACTIVE_DECISIONS:       ARCH-001, ARCH-002, ARCH-003, ARCH-004, ARCH-005, ARCH-006, ARCH-007
 RESOLVED_OWNER_DECISIONS: F9-D01=A, F9-D02=B, F9-D03=B, F9-D04=B, F9-D05=A (2026-09-20);
                         DEC-11=HYB-FINAL-v4 (2026-09-26, OWNER_CHOSEN, IMPL_AUTHORIZED,
                         WORKING_TREE_EXECUTED, CONFORMANCE_PASS, CHECKPOINTED_cd0511c);
                         DEC-AUTH-BOUNDARY=AB5+VOCAB-A (2026-09-26, OWNER_CHOSEN,
                         IMPL_AUTHORIZED=YES, WORKING_TREE_EXECUTED,
-                        CONFORMANCE_PASS, CHECKPOINT=PENDING;
-                        location: docs/00_SYSTEM/AUTHORITY_KIND.md)
-LAST_GIT_CHECKPOINT:    cd0511c
+                        CONFORMANCE_PASS, CHECKPOINTED_473759c (2026-09-27);
+                        location: docs/00_SYSTEM/AUTHORITY_KIND.md);
+                        DEC-01=E SPLIT+DEFER (2026-09-27, OWNER_CHOSEN,
+                        IMPL_AUTHORIZED=YES, WORKING_TREE_EXECUTED,
+                        CONFORMANCE_PENDING (V-CATALOG-1..12), CHECKPOINT_PENDING;
+                        contract: DECISION_REGISTRY.md ARCH-007;
+                        sub-decisions: E1 type-taxonomy DEFERRED (dec01.T1..T6),
+                        E2 gate-mapping RETIRED (RESOLVED_BY hooks+rules),
+                        E3 auth_holder-mapping RETIRED (RESOLVED_BY ARCH-006),
+                        E4 precedent-index RETIRED (RESOLVED_BY DECISION_REGISTRY+
+                        DECISION_HISTORY+git);
+                        gate document: docs/00_SYSTEM/DEC-01_D-CATALOG_DECISION_GATE.md
+                        (Stratum-C untracked, no comiteado por este trabajo))
+LAST_GIT_CHECKPOINT:    473759c
 LAST_MOVEMENT:          MOVEMENT 008 (2026-09-23) — HRQS Implementation + PAC Corpus Completion + CCP Handoff;
                         HRQS checklist added to handbook §12 (PAC-EF-02 FP class documented);
                         PAC corpus complete: 23 policies (21 enforced + 2 proposed/READY-02);

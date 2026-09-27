@@ -98,8 +98,9 @@
   IMPLEMENTATION_AUTHORIZED: YES (2026-09-26);
   IMPLEMENTATION: EXECUTED (2026-09-26);
   IMPLEMENTATION_LOCATION: docs/00_SYSTEM/AUTHORITY_KIND.md;
-  CONFORMANCE_VERIFICATION: PASS (2026-09-26 · V-AUTH-1..V-AUTH-11 + 12/12 adversarial);
-  CHECKPOINT: PENDING
+  CONFORMANCE_VERIFICATION: PASS (2026-09-26 · V-AUTH-1..V-AUTH-11 + 12/12 adversarial;
+  re-verified 2026-09-27);
+  CHECKPOINT: DONE (473759c, 2026-09-27); CHECKPOINTED
 - FECHA: 2026-09-26
 - OWNER_CHOICE: AB5 (Taxonomy + change rules only) + VOCAB-A (CLOSED vocabulary)
 - OWNER_JUSTIFICATION (fielmente preservada): "Elijo AB5 porque materializa
@@ -159,4 +160,111 @@
   VOCAB-A CLOSED, §5 Reglas de evolución, §6 Prohibiciones, §7 Relación con
   otras decisiones, §8 Gaps, §9 Provenance y evidencia). Conformance V-AUTH-1
   through V-AUTH-11 PASS; 12/12 adversarial post-implementation audit PASS.
-  Checkpoint PENDING (separate Owner authorization required).
+  Checkpointed at commit 473759c (2026-09-27, Owner authorization).
+
+## ARCH-007 — DEC-01 D-CATALOG (SPLIT + DEFER)
+
+- TIPO: GOVERNANCE
+- ESTADO: OWNER_CHOSEN (2026-09-27);
+  IMPLEMENTATION_AUTHORIZED: YES (2026-09-27);
+  IMPLEMENTATION: EXECUTED (2026-09-27);
+  IMPLEMENTATION_LOCATION: docs-only bookkeeping (DECISION_REGISTRY.md this entry
+  + docs/00_SYSTEM/DECISION_HISTORY.md + PROJECT_STATE.md);
+  CONFORMANCE_VERIFICATION: PENDING (V-CATALOG-1..12);
+  CHECKPOINT: PENDING (Owner authorization requerida)
+- FECHA: 2026-09-27
+- OWNER_CHOICE: E (SPLIT + DEFER) — E1 (type-taxonomy) DEFERRED con §23 triggers;
+  E2 (gate-mapping) / E3 (auth_holder-mapping) / E4 (precedent-index) RETIRED
+  con `RESOLVED_BY:` explícito.
+- OWNER_JUSTIFICATION (fielmente preservada): "Elijo E (SPLIT + DEFER)"
+- DECISION: Cerrar DEC-01/D-CATALOG particionando el objeto histórico monolítico
+  (`type × gate × auth_holder × precedent`) en cuatro sub-decisiones con
+  veredictos separados:
+  - **E1 (type-taxonomy)**: DEFERRED con bloque YAML de triggers observables
+    (`dec01.T1..T6`, combine `ANY`) en `PROJECT_STATE.DEFERRED` per
+    `docs/00_SYSTEM/DEFERRAL_POLICY.md` schema. No se materializa taxonomía hoy.
+    Reactivación por evidencia empírica (EXP-D01-01, COUNT tipos nuevos),
+    apertura de DEC-02 con requerimiento `change_type`-key, incidente material,
+    escalamiento S2/S3, o link a ARCH-006 T3.
+  - **E2 (gate-mapping)**: RETIRED. `RESOLVED_BY:` `.claude/hooks/*.sh` +
+    `.claude/rules/*.md` + `.claude/settings.json` (los hooks *son* los gates;
+    documento consultivo redundante).
+  - **E3 (auth_holder-mapping)**: RETIRED. `RESOLVED_BY:` ARCH-006
+    (`docs/00_SYSTEM/AUTHORITY_KIND.md`). Materializar mapping
+    change-type → authority-kind está PROHIBIDO por ARCH-006 §6 (piece →
+    authority mapping y análogos); intentarlo activaría Trigger T4 de
+    ARCH-006 §5.6.
+  - **E4 (precedent-index)**: RETIRED. `RESOLVED_BY:` `DECISION_REGISTRY.md`
+    (ADRs estructurados) + `docs/00_SYSTEM/DECISION_HISTORY.md` (learning
+    entries) + git log (provenance histórica).
+- ALCANCE: docs-only. Sin creación de artefactos filesystem. Sin runtime, hooks,
+  skills, agentes, rules, settings, evals. Sin modificación de `git-policy.md`,
+  `AUTHORITY_KIND.md`, `DEFERRAL_POLICY.md`, `MASTER_HANDOFF.md`, `CLAUDE.md`.
+- NO-GOALS: creación de `CHANGE_TYPE_TAXONOMY.md`, `CHANGE_TYPES_CATALOG.md`,
+  `AUTHORITY_BOUNDARY.md`, `DELEGATION_REGISTRY.md`, o cualquier artefacto
+  derivado análogo; elevación de `.claude/rules/git-policy.md` a taxonomía
+  canónica; mapping change-type → authority; reapertura de ARCH-006 §5; cambio
+  en F9-D01 gate closure; enforcement mecánico de tipos de cambio; alteración
+  del contract snapshot de MASTER_HANDOFF; modificación de fuentes-de-verdad
+  canónicas ya establecidas; introducción de EV-NNN individual (ARCH-004:
+  docs-only bookkeeping no requiere).
+- RELACIÓN CON OTRAS DECISIONES:
+  - **DEC-02 (D-DELEG)**: **SOFT / ENABLER** (revalidada desde HARD histórico
+    en `DEC-01_D-CATALOG_DECISION_GATE.md §14`). Formulable con AUTHORITY_KIND
+    como taxonomía canónica única; ARCH-007 no es precondición HARD.
+  - **ARCH-006 (DEC-AUTH-BOUNDARY)**: precedente estructural (patrón AB5
+    taxonomy-only) y restricción activa (§6 prohibiciones aplicadas a E3;
+    §5.6 Triggers T2/T4 protegidos).
+  - **ARCH-005 (DEC-11 DEFERRAL_POLICY)**: precedente procedimental y
+    contrato del DEFER de E1 (bloque YAML en `PROJECT_STATE.DEFERRED` per §7
+    schema).
+  - **ARCH-004**: docs-only bookkeeping; ARCH-007 no es CONTRACTUAL TASK; no
+    requiere EV-NNN individual.
+  - **DEC-12 (D-META-DOC)**: ortogonal. ARCH-007 no bloquea ni depende.
+  - Sub-decisiones **DEC-STREAM-CONSUMER**, **DEC-REVIEWER-VERDICT**:
+    ortogonales.
+- REVIEW TRIGGER (E1 reactivación, observable, combine: ANY — canonical en
+  `PROJECT_STATE.DEFERRED` dec01):
+  - `dec01.T1` EVENT: EXP-D01-01 registra ≥10 casos/mes de consulta
+    multi-fuente por reviewer humano.
+  - `dec01.T2` EVENT: DEC-02 se abre y requiere `change_type` como key
+    primaria del registry (no cubierta por AUTHORITY_KIND).
+  - `dec01.T3` COUNT: ≥3 nuevos tipos de commit fuera de
+    `.claude/rules/git-policy.md` en 3 meses.
+  - `dec01.T4` EVENT: incidente material atribuido a ausencia de D-CATALOG
+    en `INCIDENT_REGISTRY.md`.
+  - `dec01.T5` EVENT: Owner planea escalamiento a S2/S3 (≥2 humanos activos)
+    con requerimiento de onboarding uniforme sobre tipos de cambio.
+  - `dec01.T6` LINK: ARCH-006 T3 activa (DEC-02 requiere referencia canónica
+    adicional a AUTHORITY-KIND que la taxonomía sola no puede resolver).
+- REVERSIBILIDAD: ALTA. `git revert` del commit docs-only restaura estado
+  pre-DEC-01. Sin runtime side effects. Reset path: DEC-01 vuelve a "pending"
+  con framing corregido documentado en gate.
+- LOCK-IN: BAJO (docs-only; sin dependencias runtime; sin materialización de
+  filesystem; retirements documentales revocables; DEFER de E1 no fija
+  arquitectura).
+- EVIDENCIA:
+  - `docs/00_SYSTEM/DEC-01_D-CATALOG_DECISION_GATE.md` (2075 líneas, 33
+    secciones): evidence matrix E1-E21, homogeneity test 10/12 fails,
+    terminological analysis, multi-representation analysis, consumer
+    analysis, source-of-truth analysis, redundancy analysis, necessity
+    test, empirical 30-commit experiment, DEC-02 dependency reclassification,
+    6 alternatives, regression matrix, lock-in analysis, reversible
+    experiments, 6 information gaps, falsifiers, deferral triggers,
+    second-order adversarial audit, three-level perspectives, absence and
+    materialization thought experiments, final decision space, confidence
+    table, Owner Decision Brief, consistency checks, comparative matrix.
+  - `docs/00_SYSTEM/PIECE_AND_IDEA_PUZZLE_AUDIT.md` §5A (`CATALOG` GAP-piece
+    heredado sin ataque; ataque adversarial ejecutado en gate).
+  - `docs/00_SYSTEM/DECISION_SPACE_PREPARED.md` §4.1 (formulación previa
+    pre-ARCH-006, reformulada en gate §3 y §14).
+  - `docs/00_SYSTEM/AUTHORITY_KIND.md` §6 (prohibiciones activas para E3
+    resolution).
+  - `.claude/rules/git-policy.md` línea 3 (source-of-truth de 8 tipos
+    canónicos: `feat, fix, docs, arch, decision, security, infra, config`;
+    E2 resolution baseline).
+- IMPLEMENTATION AUTHORIZATION GATE: GRANTED (2026-09-27, Owner). Implementation
+  executed as docs-only bookkeeping (this ARCH-007 entry + DECISION_HISTORY
+  entry + PROJECT_STATE update). Conformance V-CATALOG-1..12 PENDING para
+  verificación in-session post-persist. Checkpoint autorización SEPARATED (per
+  patrón ARCH-006).

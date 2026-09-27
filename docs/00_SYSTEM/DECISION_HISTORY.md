@@ -87,8 +87,8 @@ Format per entry:
                     coupling. NO MASTER_HANDOFF mutation. NO runtime / hooks /
                     skills / agents / rules / settings / evals changes.
                     Conformance V-AUTH-1..V-AUTH-11 PASS; 12/12 adversarial
-                    post-implementation audit PASS. Checkpoint PENDING
-                    (separate Owner authorization required).
+                    post-implementation audit PASS. Checkpointed at commit
+                    473759c (2026-09-27, Owner authorization).
 - IMPLEMENTATION_LOCATION : docs/00_SYSTEM/AUTHORITY_KIND.md
 - IN-FLIGHT LESSON: (M010→M011) M010 opened the gate; M011 adversarial
                     validation found material defects (illegitimate authority
@@ -115,3 +115,103 @@ Format per entry:
                     empirical validation begins with the first future event
                     that tests VOCAB-A closure or the SOFT/ENABLER relation
                     with DEC-02).
+
+---
+
+## DECISION LEARNING — DEC-01
+
+- DATE            : 2026-09-27
+- CHOICE          : E (SPLIT + DEFER) — E1 (type-taxonomy) DEFERRED con §23
+                    triggers observables (dec01.T1..T6, combine ANY);
+                    E2 (gate-mapping), E3 (auth_holder-mapping),
+                    E4 (precedent-index) RETIRED con RESOLVED_BY explícito.
+- CONTRACT        : DECISION_REGISTRY.md · ARCH-007
+- EXPECTED        : Docs-only bookkeeping. DEC-01 monolítico histórico retirado
+                    del decision graph activo y reemplazado por veredictos
+                    particionados. E1 continúa observable vía DEFERRED entry
+                    con 6 triggers YAML compatibles con DEFERRAL_POLICY.md.
+                    E2/E3/E4 explícitamente resueltos por fuentes canónicas
+                    existentes: `.claude/rules/git-policy.md` (types),
+                    `docs/00_SYSTEM/AUTHORITY_KIND.md` (authority),
+                    DECISION_REGISTRY + DECISION_HISTORY + git log
+                    (precedents). No file creation, no runtime, no hooks, no
+                    rules, no settings changes. ARCH-006 precedent AB5
+                    preservado; ARCH-005 procedural pattern aplicado al
+                    DEFER de E1. Reversibilidad ALTA (`git revert` docs-only).
+- UNKNOWN AT TIME : (a) Si EXP-D01-01 mostrará frecuencia real de consulta
+                    multi-fuente por reviewer humano (INFO-GAP-D01-1);
+                    (b) Si DEC-02 futura elegirá `change_type` como key
+                    primaria del registry, lo que invalidaría la revalidación
+                    SOFT/ENABLER hecha en el gate §14 (INFO-GAP-D01-2);
+                    (c) Trayectoria empírica de diversidad de tipos de commit
+                    a 6-12 meses (INFO-GAP-D01-3);
+                    (d) Impacto de un eventual escalamiento S2/S3 sobre
+                    discoverability de tipos (INFO-GAP-D01-6);
+                    (e) Si el gap "convención `[RESEARCH]` vs git-policy.md
+                    8 tipos" es incidente material (INFO-GAP-D01-4);
+                    (f) Preferencia Owner futura sobre quick-win documental
+                    A2 vs coste semántico (INFO-GAP-D01-5).
+- TRIGGER SET     : combine: ANY of —
+                    (dec01.T1) EVENT: EXP-D01-01 ≥10 casos/mes de consulta
+                       multi-fuente por reviewer humano al clasificar cambios;
+                    (dec01.T2) EVENT: DEC-02 se abre requiriendo `change_type`
+                       como key primaria (no cubierta por AUTHORITY_KIND);
+                    (dec01.T3) COUNT: ≥3 tipos de commit nuevos fuera
+                       `.claude/rules/git-policy.md` en 3 meses;
+                    (dec01.T4) EVENT: incidente material atribuido a ausencia
+                       de D-CATALOG documentado en INCIDENT_REGISTRY.md;
+                    (dec01.T5) EVENT: Owner planea S2/S3 escalamiento
+                       (≥2 humanos activos) con onboarding uniforme;
+                    (dec01.T6) LINK: ARCH-006 T3 activa (DEC-02 requiere
+                       referencia canónica adicional a AUTHORITY-KIND).
+- IMPLEMENTATION  : 2026-09-27 — docs-only bookkeeping ejecutado. Sin creación
+                    de filesystem. Modificaciones: DECISION_REGISTRY.md
+                    (append ARCH-007 entry), docs/00_SYSTEM/DECISION_HISTORY.md
+                    (append this entry), PROJECT_STATE.md
+                    (RESOLVED_OWNER_DECISIONS + DEFERRED YAML block
+                    `dec01` + CURRENT_OBJECTIVE + ACTIVE_DECISIONS updates).
+                    Conformance V-CATALOG-1..12 PENDING para verificación
+                    in-session post-persist; checkpoint autorización SEPARATED.
+- IMPLEMENTATION_LOCATION : DECISION_REGISTRY.md (ARCH-007) +
+                    docs/00_SYSTEM/DECISION_HISTORY.md +
+                    PROJECT_STATE.md (docs-only bookkeeping)
+- IN-FLIGHT LESSON: (framing genealogy) Este gate reveló un anti-patrón: la
+                    formulación histórica de DEC-01 se heredó a través de al
+                    menos 3 documentos (MASTER_HANDOFF §7.1/§13.1,
+                    DECISION_SPACE_PREPARED §4.1, PIECE_AND_IDEA_PUZZLE_AUDIT
+                    §5A) sin que ninguno atacara la hipótesis subyacente de
+                    que "catalog" era una entidad semánticamente coherente.
+                    El ataque tardío (esta sesión) reveló que 3 de 4 columnas
+                    ya tenían source-of-truth canónico (git-policy.md,
+                    hooks/rules, DECISION_REGISTRY+HISTORY) y que la 4ª
+                    (`auth_holder`) estaba PROHIBIDA por ARCH-006 §6. Lección:
+                    cada decisión heredada de niveles anteriores del análisis
+                    requiere ataque de homogeneidad y consumer analysis antes
+                    de asumir su formulación monolítica.
+- IN-FLIGHT LESSON: (SPLIT + DEFER pattern) SPLIT + DEFER particiona una
+                    decisión monolítica en veredictos separados sin fragmentar
+                    el registro decisional. E1 queda observable vía DEFERRED
+                    entry canónica; E2/E3/E4 RESOLVED_BY con puntero explícito
+                    a fuente. Esta forma de cierre es compatible con
+                    reactivación selectiva (solo E1 puede reactivarse por
+                    trigger; E2/E3/E4 no pueden reactivarse sin cambio de
+                    framing porque su función ya está satisfecha en otro
+                    artefacto canónico). Lección: RETIRE con RESOLVED_BY
+                    explícito (puntero a fuente-de-verdad efectiva) es más
+                    informativo para el futuro maintainer que RETIRE
+                    silencioso; deja legible el decision graph y previene
+                    re-descubrimiento del mismo objeto bajo otro nombre.
+- IN-FLIGHT LESSON: (ARCH-006 propagation gap) DECISION_SPACE_PREPARED §4.1
+                    (2026-09-25) preparó DEC-01 sin incorporar ARCH-006
+                    (2026-09-26/27). La formulación A2 con columna
+                    `auth_holder` habría entrado en tensión activa con
+                    ARCH-006 §6 T4 (piece → authority mapping). El gate detectó
+                    la propagación pendiente y la resolvió en el ataque §10.3
+                    y §14. Lección: decisiones nuevas (ARCH-006) requieren
+                    audit de propagación sobre el decision space pendiente
+                    antes del siguiente Owner Choice; sin ese audit, el
+                    framing heredado puede violar precedentes activos.
+- LESSON          : no long-term lesson yet (empirical validation begins with
+                    first trigger evaluation — earliest window: EXP-D01-01
+                    resultados a 30-60 días; latest: dec01.T5 al S2/S3
+                    planning).
