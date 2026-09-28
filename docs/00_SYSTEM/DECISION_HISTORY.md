@@ -215,3 +215,138 @@ Format per entry:
                     first trigger evaluation — earliest window: EXP-D01-01
                     resultados a 30-60 días; latest: dec01.T5 al S2/S3
                     planning).
+
+---
+
+## DECISION LEARNING — DEC-02
+
+- DATE            : 2026-09-28
+- CHOICE          : R1 (docs-only representation) + K-A (ACTOR-ARTIFACT /
+                    MODEL-A) + MINIMUM SCHEMA (3 semantically required fields:
+                    delegator, delegatee_ref, scope) + V=DEFER + Q=DEFER +
+                    P=DEFER + EXP-DEC02-SEM=SKIP.
+- CONTRACT        : DECISION_REGISTRY.md · ARCH-008
+- EXPECTED        : Docs-only governance convention that documents the
+                    delegation pattern with ACTOR as the semantic target.
+                    Skills, workflows, and action-types are scope contents,
+                    not target types. AUTHORITY_KIND classes `agente` and
+                    `humana` are the delegatee kinds; harness-primitive
+                    residuals stay as explicit UNKNOWN. Schema breadth is
+                    minimum (3 fields) — actor_kind, activation, revocation,
+                    provenance are deferable schema-level fields, not part
+                    of the semantic contract. V/Q/P remain deferable to
+                    later gates. No runtime enforcement introduced. No
+                    AUTHORITY_KIND / VOCAB-A modification. No CAPABILITY
+                    registry. CAPABILITY remains SPECULATIVE (NOT PRESENT,
+                    NOT REFUTED). Reversibility HIGH across technical,
+                    governance, audit, and cultural dimensions.
+- UNKNOWN AT TIME : (a) Whether reviewer + Owner will sustain the discipline
+                    of consulting entries before despachar (drift-stale
+                    failure mode); (b) Whether DEC-07 F2/F3 will open in
+                    the near horizon and materially benefit from ARCH-008
+                    as governance anchor; (c) Whether any real delegation
+                    entry will be authored under ARCH-008 within the
+                    6–12-month horizon (the risk is "orphaned convention"
+                    if no entries appear); (d) Whether the schema minimum
+                    (3 fields) is sufficient once a real entry is drafted,
+                    or whether the deferred fields (actor_kind, activation,
+                    revocation) will become materially needed; (e) Whether
+                    a case will emerge where the target is naturally
+                    non-actor (would activate arch08.T4); (f) Whether a
+                    CAPABILITY threshold (T-CAP-1..T-CAP-5 per Super
+                    Analysis §18) will fire in the horizon.
+- TRIGGER SET     : combine: ANY of —
+                    (arch08.T1) EVENT: delegation-attributed incident
+                       recorded in INCIDENT_REGISTRY.md;
+                    (arch08.T2) EVENT: DEC-07 F2/F3 opens and requires an
+                       authorization anchor MODEL-A cannot express with
+                       the 3-field minimum;
+                    (arch08.T3) EVENT: Owner declares S2/S3 scaling
+                       (≥2 humans active) with per-role delegation
+                       documentation requirement;
+                    (arch08.T4) EVENT: real delegation case surfaces where
+                       target cannot be honestly modeled as an actor with
+                       scope prose (falsifies the derived "target = actor"
+                       finding);
+                    (arch08.T5) EVENT: per-skill invocation authority
+                       becomes materially useful, forcing consideration of
+                       K-A → K-B migration;
+                    (arch08.T6) EVENT: any of the CAPABILITY re-entry
+                       thresholds T-CAP-1..T-CAP-5 (per
+                       DEC_02_SUPER_OWNER_DECISION_ANALYSIS.md §18) fires.
+- IMPLEMENTATION  : 2026-09-28 — docs-only bookkeeping executed. Sin creación
+                    de filesystem beyond one canonical ADR + two
+                    bookkeeping updates. Modificaciones:
+                    DECISION_REGISTRY.md (append ARCH-008 entry),
+                    docs/00_SYSTEM/DECISION_HISTORY.md (this entry),
+                    PROJECT_STATE.md (CURRENT_OBJECTIVE +
+                    ACTIVE_DECISIONS + RESOLVED_OWNER_DECISIONS +
+                    arch08.T1..T6 deferral-triggers block updates).
+                    Per ARCH-004 (same pattern as ARCH-005/006/007):
+                    docs-only bookkeeping no requiere EV-NNN individual;
+                    aggregated evidence lives in DECISION_REGISTRY.md
+                    ARCH-008 EVIDENCIA section and in this learning
+                    entry. Conformance V-DELEG-1..V-DELEG-10 PENDING for
+                    in-session post-persist verification. Checkpoint
+                    autorización SEPARATED (per patrón ARCH-006 /
+                    ARCH-007).
+- IMPLEMENTATION_LOCATION : DECISION_REGISTRY.md (ARCH-008) +
+                    docs/00_SYSTEM/DECISION_HISTORY.md (this entry) +
+                    PROJECT_STATE.md (docs-only bookkeeping)
+- IN-FLIGHT LESSON: (six-artifact analytical chain necessity) DEC-02
+                    required a six-audit analytical chain (target
+                    semantics → reconciliation → ground-truth → Owner
+                    package → super analysis → final integrity, 5,309
+                    lines total) to arrive at a decision that ultimately
+                    committed only 3 semantic fields and deferred nearly
+                    everything else. The lesson is not that the analysis
+                    was excessive; it is that arriving at a
+                    correctly-scoped minimum decision required
+                    successive elimination of over-extensions
+                    (H3-SPLIT's compound/stable_role/authorized_invoker),
+                    over-reach (skills as targets), and premature schema
+                    commitments (7-field MODEL-A vs 3-field minimum).
+                    Future decisions with similar semantic-target
+                    ambiguity should expect a multi-pass adversarial
+                    audit chain rather than a single pass.
+- IN-FLIGHT LESSON: (schema breadth as hidden decision) The Owner Choice
+                    Package (§5) initially presented MODEL-A as a 7-field
+                    schema; the Final Decision Integrity check (§3, §11)
+                    surfaced that this covertly bundled a schema decision
+                    with the semantic decision. Splitting semantic
+                    minimum (delegator, delegatee_ref, scope) from schema
+                    breadth (actor_kind, activation, revocation,
+                    provenance-as-field) is the correct decomposition.
+                    Lesson: whenever a decision presents "the model", audit
+                    whether every field is semantically required or is
+                    a convenience that could be deferred; hidden schema
+                    decisions inflate the Owner's cognitive load
+                    unnecessarily.
+- IN-FLIGHT LESSON: (CAPABILITY classification precision) The initial
+                    Target Semantics Audit used "NOT SUPPORTED BY
+                    EVIDENCE" for CAPABILITY (H4), which the
+                    Reconciliation correctly downgraded to "NOT PRESENT
+                    as first-class primitive; NOT REFUTED; SPECULATIVE".
+                    The distinction matters: `absence of materialization`
+                    ≠ `refutation`. Future decisions about deferred
+                    abstractions should carry epistemic precision — a
+                    deferred concept is available for reopening under
+                    triggers, not eliminated.
+- IN-FLIGHT LESSON: (5-of-11 default-covered) The 11 empirical ACTION_TYPE
+                    items in the revised gate §6.1 decomposed to 5 real
+                    actor-shaped delegations, 5 default-covered procedure
+                    invocations (Owner invokes skill; primary Claude
+                    runs), and 1 workflow. The finding that 5 of 11 are
+                    not delegations at all was the pivot that made MODEL-A
+                    sufficient. Reconciliation's initial phrasing
+                    ("Owner actions") was imprecise; ground-truth audit
+                    corrected to "default-covered procedure invocations".
+                    Lesson: an inventory presented as evidence for a
+                    decision must be audited for whether every item
+                    actually belongs to the class being decided; heuristic
+                    inventories can silently include items that don't fit
+                    the semantic contract under scrutiny.
+- LESSON          : no long-term lesson yet (empirical validation begins
+                    with first authored delegation entry, first trigger
+                    firing, or DEC-07 F2/F3 opening — whichever comes
+                    first).

@@ -5,7 +5,7 @@
 CURRENT_PHASE:          8
 PHASE_STATUS:           COMPLETE
 PHASE_STARTED:          2026-09-19
-CURRENT_OBJECTIVE:      F8 cerrada, F9 investigada (`F9 NOT JUSTIFIED`) y F9 owner decision gate CERRADO (F9-D01=A, F9-D02=B, F9-D03=B, F9-D04=B, F9-D05=A). DEC-11/ARCH-005 CHECKPOINTED (cd0511c). DEC-AUTH-BOUNDARY/ARCH-006 OWNER_CHOSEN=AB5+VOCAB-A, IMPL_AUTHORIZED=YES, IMPLEMENTATION EXECUTED en docs/00_SYSTEM/AUTHORITY_KIND.md (2026-09-26), CONFORMANCE_PASS (V-AUTH-1..11 + 12/12 adversarial), CHECKPOINTED (473759c, 2026-09-27). DEC-01/ARCH-007 OWNER_CHOSEN=E (SPLIT + DEFER), IMPL_AUTHORIZED=YES, IMPLEMENTATION EXECUTED como docs-only bookkeeping (DECISION_REGISTRY + DECISION_HISTORY + PROJECT_STATE; 2026-09-27); E1 (type-taxonomy) DEFERRED con dec01.T1..T6; E2/E3/E4 RETIRED con RESOLVED_BY; CONFORMANCE_PENDING (V-CATALOG-1..12); CHECKPOINT_PENDING; gate document en docs/00_SYSTEM/DEC-01_D-CATALOG_DECISION_GATE.md (Stratum-C untracked, no comiteado por este trabajo).
+CURRENT_OBJECTIVE:      F8 cerrada, F9 investigada (`F9 NOT JUSTIFIED`) y F9 owner decision gate CERRADO (F9-D01=A, F9-D02=B, F9-D03=B, F9-D04=B, F9-D05=A). DEC-11/ARCH-005 CHECKPOINTED (cd0511c). DEC-AUTH-BOUNDARY/ARCH-006 CHECKPOINTED (473759c, 2026-09-27). DEC-01/ARCH-007 CHECKPOINTED (e529359, 2026-09-27); E1 (type-taxonomy) DEFERRED con dec01.T1..T6; E2/E3/E4 RETIRED. DEC-02/ARCH-008 OWNER_CHOSEN=R1+K-A+MINIMUM (2026-09-28), IMPL_AUTHORIZED=YES, IMPLEMENTATION EXECUTED como docs-only bookkeeping (DECISION_REGISTRY.md ARCH-008 + docs/00_SYSTEM/DECISION_HISTORY.md DEC-02 + PROJECT_STATE.md; per ARCH-004 mismo patrón que ARCH-005/006/007: no requiere EV-NNN individual); target semántico = ACTOR; minimum schema = {delegator, delegatee_ref, scope}; V/Q/P DEFERRED; EXP-DEC02-SEM SKIP; CAPABILITY SPECULATIVE / DEFERRED; RUNTIME AUTHORIZATION NONE; reopening triggers arch08.T1..T6 (combine ANY); CONFORMANCE_PENDING (V-DELEG-1..V-DELEG-10); CHECKPOINT_PENDING; analytical support chain (Stratum-C) en docs/00_SYSTEM/DEC_02_{TARGET_SEMANTICS_AUDIT, TARGET_SEMANTICS_RECONCILIATION, DELEGATION_GROUND_TRUTH_AUDIT, OWNER_CHOICE_PACKAGE, SUPER_OWNER_DECISION_ANALYSIS, FINAL_DECISION_INTEGRITY}.md (5,309 líneas, untracked, no canonical).
 LAST_COMPLETED_PHASE:   8 (2026-09-19)
 BLOCKERS:               NONE (no technical blockers)
 OWNER_GATES:            READY-01 (AC-02 classification), READY-02 (hook patterns),
@@ -123,8 +123,38 @@ sub-items:
         predicate: "ARCH-006 Trigger T3 activa (DEC-02 se abre y requiere referencia canónica a AUTHORITY-KIND que la taxonomía sola no puede resolver)."
         provenance: "PROJECT_STATE.md · DEFERRED · DEC-01-E1 · trigger T6; docs/00_SYSTEM/AUTHORITY_KIND.md §5.6 Trigger T3; docs/00_SYSTEM/DEC-01_D-CATALOG_DECISION_GATE.md §23 dec01.T6"
         link: arch06.T3
+
+  - deferral: arch08
+    combine: ANY
+    note: "Review-triggers for DEC-02/ARCH-008 (R1+K-A+MINIMUM). Reopening events for the docs-only delegation convention. Contract: DECISION_REGISTRY.md · ARCH-008. Learning: docs/00_SYSTEM/DECISION_HISTORY.md · DEC-02. Note: DEC-02 itself is RESOLVED (Owner Choice applied); these are triggers for future reopening, not a deferred sub-decision. Triggers reopen the gate; they do NOT auto-decide."
+    provenance: "PROJECT_STATE.md · ARCH-008 REVIEW TRIGGER; DECISION_REGISTRY.md · ARCH-008 REVIEW TRIGGER section; docs/00_SYSTEM/DEC_02_SUPER_OWNER_DECISION_ANALYSIS.md §25 canonical reopening triggers"
+    triggers:
+      - id: project-state.arch08.T1
+        type: EVENT
+        predicate: "Incidente material atribuido a delegación implícita registrado en INCIDENT_REGISTRY.md (falla de la convención R1 o del baseline K3-D-OWNER-DEFAULT)."
+        provenance: "DECISION_REGISTRY.md · ARCH-008 REVIEW TRIGGER · arch08.T1; docs/00_SYSTEM/DEC_02_SUPER_OWNER_DECISION_ANALYSIS.md §25 R0→R1 trigger (a)"
+      - id: project-state.arch08.T2
+        type: EVENT
+        predicate: "DEC-07 F2/F3 se abre y requiere un anclaje de autorización a un delegatee que MODEL-A no puede expresar con el schema mínimo {delegator, delegatee_ref, scope}."
+        provenance: "DECISION_REGISTRY.md · ARCH-008 REVIEW TRIGGER · arch08.T2; docs/00_SYSTEM/DEC-02_D-DELEG_DECISION_GATE_REVISED.md §16 DEC-07 F2/F3 SOFT-INFORMING; docs/00_SYSTEM/DEC_02_SUPER_OWNER_DECISION_ANALYSIS.md §25 R0→R1 trigger (b)"
+      - id: project-state.arch08.T3
+        type: EVENT
+        predicate: "Owner declara escalamiento a S2/S3 (≥2 humanos activos) con requerimiento de delegaciones documentadas per role."
+        provenance: "DECISION_REGISTRY.md · ARCH-008 REVIEW TRIGGER · arch08.T3; docs/00_SYSTEM/DEC_02_SUPER_OWNER_DECISION_ANALYSIS.md §25 R0→R1 trigger (c)"
+      - id: project-state.arch08.T4
+        type: EVENT
+        predicate: "Un caso real de delegación surge cuyo target no es naturalmente un actor y no se puede modelar como scope-of-actor con honestidad (falsaría el hallazgo derivado 'target = actor')."
+        provenance: "DECISION_REGISTRY.md · ARCH-008 REVIEW TRIGGER · arch08.T4; docs/00_SYSTEM/DEC_02_DELEGATION_GROUND_TRUTH_AUDIT.md §12 counterexample survey; docs/00_SYSTEM/DEC_02_SUPER_OWNER_DECISION_ANALYSIS.md §25 K-A→K3 trigger"
+      - id: project-state.arch08.T5
+        type: EVENT
+        predicate: "Una entrada de delegación necesita autorización per-skill materialmente distinta del scope-prose actual (activaría considerar K-A → K-B migración: type: skill entries con authorized_invoker)."
+        provenance: "DECISION_REGISTRY.md · ARCH-008 REVIEW TRIGGER · arch08.T5; docs/00_SYSTEM/DEC_02_SUPER_OWNER_DECISION_ANALYSIS.md §25 K-A→K-B trigger"
+      - id: project-state.arch08.T6
+        type: EVENT
+        predicate: "Cualquiera de los CAPABILITY re-entry thresholds T-CAP-1..T-CAP-5 se dispara: (T-CAP-1) ≥2 entries comparten stable-role a través de implementation churn con costo observable; (T-CAP-2) bulk-edit sobre ≥3 entries por implementation replacement; (T-CAP-3) DEC-07/DEC-REVIEWER-VERDICT requiere identidad implementación-independiente irreducible por scope prose; (T-CAP-4) artefacto canónico CCP comienza a referir 'capability' first-class; (T-CAP-5) PRIM excavation independiente identifica CAPABILITY como primitiva latente."
+        provenance: "DECISION_REGISTRY.md · ARCH-008 REVIEW TRIGGER · arch08.T6; docs/00_SYSTEM/DEC_02_SUPER_OWNER_DECISION_ANALYSIS.md §18 CAPABILITY REENTRY THRESHOLD T-CAP-1..T-CAP-5"
 -->
-ACTIVE_DECISIONS:       ARCH-001, ARCH-002, ARCH-003, ARCH-004, ARCH-005, ARCH-006, ARCH-007
+ACTIVE_DECISIONS:       ARCH-001, ARCH-002, ARCH-003, ARCH-004, ARCH-005, ARCH-006, ARCH-007, ARCH-008
 RESOLVED_OWNER_DECISIONS: F9-D01=A, F9-D02=B, F9-D03=B, F9-D04=B, F9-D05=A (2026-09-20);
                         DEC-11=HYB-FINAL-v4 (2026-09-26, OWNER_CHOSEN, IMPL_AUTHORIZED,
                         WORKING_TREE_EXECUTED, CONFORMANCE_PASS, CHECKPOINTED_cd0511c);
@@ -134,16 +164,34 @@ RESOLVED_OWNER_DECISIONS: F9-D01=A, F9-D02=B, F9-D03=B, F9-D04=B, F9-D05=A (2026
                         location: docs/00_SYSTEM/AUTHORITY_KIND.md);
                         DEC-01=E SPLIT+DEFER (2026-09-27, OWNER_CHOSEN,
                         IMPL_AUTHORIZED=YES, WORKING_TREE_EXECUTED,
-                        CONFORMANCE_PENDING (V-CATALOG-1..12), CHECKPOINT_PENDING;
+                        CHECKPOINTED_e529359 (2026-09-27);
                         contract: DECISION_REGISTRY.md ARCH-007;
                         sub-decisions: E1 type-taxonomy DEFERRED (dec01.T1..T6),
                         E2 gate-mapping RETIRED (RESOLVED_BY hooks+rules),
                         E3 auth_holder-mapping RETIRED (RESOLVED_BY ARCH-006),
                         E4 precedent-index RETIRED (RESOLVED_BY DECISION_REGISTRY+
-                        DECISION_HISTORY+git);
-                        gate document: docs/00_SYSTEM/DEC-01_D-CATALOG_DECISION_GATE.md
-                        (Stratum-C untracked, no comiteado por este trabajo))
-LAST_GIT_CHECKPOINT:    473759c
+                        DECISION_HISTORY+git));
+                        DEC-02=R1+K-A+MINIMUM (2026-09-28, OWNER_CHOSEN,
+                        IMPL_AUTHORIZED=YES, WORKING_TREE_EXECUTED,
+                        CONFORMANCE_PENDING (V-DELEG-1..V-DELEG-10),
+                        CHECKPOINT_PENDING;
+                        contract: DECISION_REGISTRY.md ARCH-008;
+                        learning: docs/00_SYSTEM/DECISION_HISTORY.md DEC-02;
+                        evidence: DECISION_REGISTRY.md ARCH-008 EVIDENCIA
+                        section (docs-only bookkeeping pattern per ARCH-004;
+                        same as ARCH-005/006/007: no EV-NNN individual);
+                        semantic target = ACTOR;
+                        minimum schema = {delegator, delegatee_ref, scope};
+                        deferred fields = {actor_kind, activation, revocation,
+                        provenance-as-field};
+                        V=DEFER, Q=DEFER, P=DEFER;
+                        EXP-DEC02-SEM=SKIP;
+                        CAPABILITY=SPECULATIVE (NOT PRESENT, NOT REFUTED);
+                        RUNTIME AUTHORIZATION=NONE;
+                        reopening triggers arch08.T1..T6 combine ANY;
+                        analytical chain: docs/00_SYSTEM/DEC_02_*.md (six Stratum-C
+                        artifacts, 5,309 lines, untracked, non-canonical))
+LAST_GIT_CHECKPOINT:    e529359
 LAST_MOVEMENT:          MOVEMENT 008 (2026-09-23) — HRQS Implementation + PAC Corpus Completion + CCP Handoff;
                         HRQS checklist added to handbook §12 (PAC-EF-02 FP class documented);
                         PAC corpus complete: 23 policies (21 enforced + 2 proposed/READY-02);

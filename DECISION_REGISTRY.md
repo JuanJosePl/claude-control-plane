@@ -268,3 +268,168 @@
   entry + PROJECT_STATE update). Conformance V-CATALOG-1..12 PENDING para
   verificación in-session post-persist. Checkpoint autorización SEPARATED (per
   patrón ARCH-006).
+
+## ARCH-008 — DEC-02 D-DELEG (R1 + K-A + MINIMUM)
+
+- TIPO: GOVERNANCE
+- ESTADO: OWNER_CHOSEN (2026-09-28);
+  IMPLEMENTATION_AUTHORIZED: YES (2026-09-28);
+  IMPLEMENTATION: EXECUTED (2026-09-28);
+  IMPLEMENTATION_LOCATION: docs-only bookkeeping (this ARCH-008 entry +
+  docs/00_SYSTEM/DECISION_HISTORY.md · DEC-02 entry + PROJECT_STATE.md;
+  per ARCH-004: docs-only bookkeeping no requiere EV-NNN individual);
+  CONFORMANCE_VERIFICATION: PENDING (V-DELEG-1..V-DELEG-10);
+  CHECKPOINT: PENDING (Owner authorization requerida)
+- FECHA: 2026-09-28
+- OWNER_CHOICE: R1 (docs-only representation) + K-A (ACTOR-ARTIFACT / MODEL-A) +
+  MINIMUM SCHEMA (3 semantically required fields) + V=DEFER + Q=DEFER + P=DEFER +
+  EXP-DEC02-SEM=SKIP.
+- OWNER_JUSTIFICATION (faithfully preserved from the DEC-02 Owner Choice
+  Execution prompt): Make the implicit delegation pattern explicit as a
+  docs-only governance convention; the semantic target/delegatee is an ACTOR;
+  the semantic minimum for the current decision is `{delegator,
+  delegatee_ref, scope}`; the repository reference is the addressing
+  mechanism, not the semantic target; `actor_kind`, `activation`,
+  `revocation`, `provenance` are schema-level fields deferred to a later
+  decision unless a canonical requirement forces them; V/Q/P are explicitly
+  deferred (do not silently choose values); EXP-DEC02-SEM (shadow experiment)
+  is skipped because the semantic uncertainty was sufficiently reduced by
+  the six-artifact analytical chain (target semantics audit, reconciliation,
+  ground-truth audit, Owner Choice Package, Super Owner Decision Analysis,
+  Final Decision Integrity).
+- DECISION: Materializar la delegación como objeto de gobernanza documental
+  (`convención` authority per ARCH-006 VOCAB-A) con target semántico
+  `ACTOR`. Un delegatee es un actor `agente` (agente file bajo
+  `.claude/agents/*.md`) o `humana` (Owner, u otra persona con AUTHORITY_KIND
+  `humana`); harness-primitive residuals se representan como `UNKNOWN`
+  explícito. Skills, workflows y action-types NO son target types; aparecen
+  únicamente como contenido de `scope`. La referencia canónica al artefacto
+  es un mecanismo de direccionamiento (ruta o identificador), no la
+  identidad semántica.
+- SEMANTIC MINIMUM SCHEMA (canonical for this decision):
+  `{ delegator, delegatee_ref, scope }`. Cada entrada de delegación registra
+  como mínimo estos tres campos. Provenance del entry lives in `git` +
+  documento que la contiene (metadata del artefacto, no campo intrínseco de
+  MODEL-A). Los campos `actor_kind`, `activation`, `revocation`,
+  `provenance-como-campo` son schema-level / DEFERABLE y no forman parte del
+  contrato semántico de esta decisión.
+- ALCANCE: docs-only. Sin creación de artefactos runtime, sin nuevos hooks,
+  sin modificación de `.claude/*`, sin cambios a `AUTHORITY_KIND.md` (VOCAB-A
+  cerrado se preserva). Sin creación forzada de una tabla `DELEGATION_
+  REGISTRY.md` en este gate; entradas concretas se autorizan en decisiones
+  posteriores.
+- NO-GOALS (explicit not-chosen items per prompt §2):
+  CAPABILITY / HYBRID target model;
+  `compound` target type;
+  `stable_role` label;
+  `authorized_invoker` field;
+  full MODEL-A schema (7 campos) como contrato semántico obligatorio;
+  runtime enforcement / mechanical authorization;
+  modificación de AUTHORITY_KIND / VOCAB-A;
+  ACTION_TYPE como delegation target;
+  skill-as-target semantics;
+  harness-primitive representado como `type: agent`;
+  V/Q/P silent-default assignment;
+  ejecución automática de EXP-DEC02-SEM;
+  apertura de DEC-07 por este acto.
+- RELACIÓN CON OTRAS DECISIONES:
+  - **DEC-07 (D-VERIFICADOR)**: SOFT / INFORMING para F2/F3 (ARCH-008
+    provee un anclaje de gobernanza para el LLM verifier si DEC-07 F2/F3
+    se abre; ninguna dependencia HARD).
+  - **ARCH-006 (DEC-AUTH-BOUNDARY)**: consumidor. Los entries de
+    delegación citan clases `agente` y `humana` de VOCAB-A; no modifican
+    ni extienden el vocabulario. Trigger T3 de ARCH-006 §5.6 no se
+    activa (K-A no requiere referencias canónicas adicionales a
+    AUTHORITY-KIND más allá de las cuatro clases atestadas).
+  - **ARCH-005 (DEC-11 DEFERRAL_POLICY)**: precedente procedimental para
+    los triggers YAML del review-trigger set (arch08.T1..T6, combine ANY).
+  - **ARCH-007 (DEC-01 D-CATALOG)**: sub-decisión E1 continúa DEFERRED;
+    trigger `dec01.T2` (DEC-02 requiere `change_type` como key) NO se
+    activa porque ARCH-008 elige K-A (ACTOR-ARTIFACT), no K-D
+    (ACTION_TYPE). E1 permanece en su estado deferred.
+  - **ARCH-004**: docs-only bookkeeping; ARCH-008 no es CONTRACTUAL TASK;
+    no requiere EV-NNN individual (mismo patrón que ARCH-005/006/007;
+    evidencia agregada vive en la sección EVIDENCIA de este ADR y en
+    docs/00_SYSTEM/DECISION_HISTORY.md · DEC-02).
+  - **DEC-04 / DEC-05 / DEC-08 / DEC-12 / DEC-STREAM-CONSUMER / DEC-REVIEWER-
+    VERDICT**: ortogonales. ARCH-008 no altera su estado.
+- REVIEW TRIGGER (arch08, observable, combine: ANY — canonical per
+  DEFERRAL_POLICY.md §7 schema):
+  - `arch08.T1` EVENT: incidente material atribuido a delegación implícita
+    registrado en `INCIDENT_REGISTRY.md` (falla de gobernanza de la
+    convención R1 o del baseline K3-D-OWNER-DEFAULT).
+  - `arch08.T2` EVENT: DEC-07 F2/F3 se abre y requiere un anclaje de
+    autorización a un delegatee que MODEL-A no puede expresar con
+    `{delegator, delegatee_ref, scope}` (forzaría revisitar `actor_kind`,
+    `activation` o `revocation` como campos).
+  - `arch08.T3` EVENT: Owner declara escalamiento a S2/S3 (≥2 humanos
+    activos) con requerimiento de delegaciones documentadas per role.
+  - `arch08.T4` EVENT: un caso real de delegación surge cuyo target no es
+    naturalmente un actor y no se puede modelar como scope-of-actor con
+    honestidad (falsaría el hallazgo derivado "target = actor").
+  - `arch08.T5` EVENT: una entrada de delegación necesita autorización
+    per-skill materialmente distinta del scope-prose actual (activaría
+    considerar K-A → K-B migración).
+  - `arch08.T6` EVENT: cualquiera de los CAPABILITY re-entry triggers
+    T-CAP-1..T-CAP-5 documentados en `DEC_02_SUPER_OWNER_DECISION_
+    ANALYSIS.md §18` se dispara (T-CAP-1 stable-role churn observable,
+    T-CAP-2 bulk-edit sobre ≥3 entries, T-CAP-3 DEC-07 requiere identidad
+    implementación-independiente irreducible, T-CAP-4 artefacto canónico
+    referencia "capability" first-class, T-CAP-5 PRIM excavation
+    independiente identifica CAPABILITY como primitiva latente).
+- CAPABILITY BOUNDARY (per prompt §13): CAPABILITY permanece DEFERRED.
+  Clasificación epistémica: `NOT PRESENT como primitiva de primer orden en
+  el corpus CCP`; `NOT REFUTED` (la ausencia no es falsificación);
+  `SPECULATIVE`. Reopening solo bajo `arch08.T6` (uno o más T-CAP-* fires).
+- K BOUNDARY (per prompt §14): K-B / K-C / K-D no seleccionados. Registro
+  histórico preservado en la cadena analítica; no se elimina alternativa
+  del decision history.
+- V/Q/P BOUNDARY (per prompt §15): DEFERRED. No se elige valor silencioso.
+  Gates futuros para V, Q, P permanecen posibles.
+- RUNTIME BOUNDARY (per prompt §11, mandatory): R1 es `convención /
+  documentation`. R1 NO autoriza runtime enforcement. S1 (runtime
+  authorization) y S5 (runtime permission enforcement) permanecen fuera
+  de esta decisión. Sin hooks nuevos, sin runtime checks, sin tool
+  interception, sin autorización automática, sin enforcement mecánico
+  nuevo.
+- REVERSIBILIDAD: ALTA. `git revert` del commit de canonicalización
+  restaura el estado pre-DEC-02. Sin side effects runtime. Reset path:
+  DEC-02 vuelve a `OPEN` con Owner Choice pendiente.
+- LOCK-IN: BAJO. Docs-only; sin dependencias runtime; sin materialización
+  filesystem beyond este ADR + tres bookkeeping updates; sin mapping
+  piece-authority (ARCH-006 §6 preservado); sin runtime.
+- EVIDENCIA:
+  - `docs/00_SYSTEM/DEC_02_TARGET_SEMANTICS_AUDIT.md` (2026-09-28, 1445
+    líneas): auditoría inicial; introduce H3-SPLIT; establece CAPABILITY
+    NOT PRESENT.
+  - `docs/00_SYSTEM/DEC_02_TARGET_SEMANTICS_RECONCILIATION.md` (987
+    líneas): meta-auditoría; corrige H3-SPLIT (remueve `compound`,
+    `stable_role`, `authorized_invoker` como PROPOSED); introduce
+    MODEL-A / K-A.
+  - `docs/00_SYSTEM/DEC_02_DELEGATION_GROUND_TRUTH_AUDIT.md` (786 líneas):
+    operational definition D-1..D-4; verifica el 5-of-11 real-delegations
+    / default-covered decomposition.
+  - `docs/00_SYSTEM/DEC_02_OWNER_CHOICE_PACKAGE.md` (573 líneas): superficie
+    dimensional R × K × V × Q × P; §17 sequencing.
+  - `docs/00_SYSTEM/DEC_02_SUPER_OWNER_DECISION_ANALYSIS.md` (1028 líneas):
+    frontier {R0-D0, R1+K-A}; sensibilidad; regret; triggers CAPABILITY
+    §18 (T-CAP-1..T-CAP-5).
+  - `docs/00_SYSTEM/DEC_02_FINAL_DECISION_INTEGRITY.md` (490 líneas):
+    integridad final; separa semantic minimum (3 campos) de schema
+    breadth; surface hidden decisions.
+  - `docs/00_SYSTEM/DEC-02_D-DELEG_DECISION_GATE_REVISED.md` (gate
+    canónico): seis sentidos S1..S6; R × K × V × Q × P.
+  - `docs/00_SYSTEM/AUTHORITY_KIND.md` (ARCH-006): VOCAB-A clases
+    `agente` y `humana` como authority-holders consumidos.
+  - `docs/00_SYSTEM/PIECE_AND_IDEA_PUZZLE_AUDIT.md`: PRIM-1..PRIM-7 sin
+    CAPABILITY entre primitivas identificadas.
+- IMPLEMENTATION AUTHORIZATION GATE: GRANTED (2026-09-28, Owner). Owner
+  Choice aplicada exactamente. Implementation ejecutada como docs-only
+  bookkeeping (esta ARCH-008 entry + DECISION_HISTORY DEC-02 entry +
+  PROJECT_STATE update). Conformance V-DELEG-1..V-DELEG-10
+  PENDING para verificación in-session post-persist. Checkpoint
+  autorización SEPARATED (per patrón ARCH-006 / ARCH-007).
+- DEC-02 STATUS (post-canonicalización): CLOSED / APPROVED con Owner
+  Choice R1 + K-A + MINIMUM. Gate `DEC-02_D-DELEG_OPENED.md`
+  transiciona conceptualmente de `OPEN` a `CLOSED` mediante este ADR;
+  el archivo del gate se preserva como historical evidence.
