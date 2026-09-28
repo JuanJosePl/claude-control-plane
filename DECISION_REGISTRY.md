@@ -278,8 +278,8 @@
   IMPLEMENTATION_LOCATION: docs-only bookkeeping (this ARCH-008 entry +
   docs/00_SYSTEM/DECISION_HISTORY.md · DEC-02 entry + PROJECT_STATE.md;
   per ARCH-004: docs-only bookkeeping no requiere EV-NNN individual);
-  CONFORMANCE_VERIFICATION: PENDING (V-DELEG-1..V-DELEG-10);
-  CHECKPOINT: PENDING (Owner authorization requerida)
+  CONFORMANCE_VERIFICATION: PASS (2026-09-28 · maintenance.sh 12/12);
+  CHECKPOINT: DONE (5dfd65a, 2026-09-28); CHECKPOINTED
 - FECHA: 2026-09-28
 - OWNER_CHOICE: R1 (docs-only representation) + K-A (ACTOR-ARTIFACT / MODEL-A) +
   MINIMUM SCHEMA (3 semantically required fields) + V=DEFER + Q=DEFER + P=DEFER +

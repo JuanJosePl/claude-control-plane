@@ -5,7 +5,7 @@
 CURRENT_PHASE:          8
 PHASE_STATUS:           COMPLETE
 PHASE_STARTED:          2026-09-19
-CURRENT_OBJECTIVE:      F8 cerrada, F9 investigada (`F9 NOT JUSTIFIED`) y F9 owner decision gate CERRADO (F9-D01=A, F9-D02=B, F9-D03=B, F9-D04=B, F9-D05=A). DEC-11/ARCH-005 CHECKPOINTED (cd0511c). DEC-AUTH-BOUNDARY/ARCH-006 CHECKPOINTED (473759c, 2026-09-27). DEC-01/ARCH-007 CHECKPOINTED (e529359, 2026-09-27); E1 (type-taxonomy) DEFERRED con dec01.T1..T6; E2/E3/E4 RETIRED. DEC-02/ARCH-008 OWNER_CHOSEN=R1+K-A+MINIMUM (2026-09-28), IMPL_AUTHORIZED=YES, IMPLEMENTATION EXECUTED como docs-only bookkeeping (DECISION_REGISTRY.md ARCH-008 + docs/00_SYSTEM/DECISION_HISTORY.md DEC-02 + PROJECT_STATE.md; per ARCH-004 mismo patrón que ARCH-005/006/007: no requiere EV-NNN individual); target semántico = ACTOR; minimum schema = {delegator, delegatee_ref, scope}; V/Q/P DEFERRED; EXP-DEC02-SEM SKIP; CAPABILITY SPECULATIVE / DEFERRED; RUNTIME AUTHORIZATION NONE; reopening triggers arch08.T1..T6 (combine ANY); CONFORMANCE_PENDING (V-DELEG-1..V-DELEG-10); CHECKPOINT_PENDING; analytical support chain (Stratum-C) en docs/00_SYSTEM/DEC_02_{TARGET_SEMANTICS_AUDIT, TARGET_SEMANTICS_RECONCILIATION, DELEGATION_GROUND_TRUTH_AUDIT, OWNER_CHOICE_PACKAGE, SUPER_OWNER_DECISION_ANALYSIS, FINAL_DECISION_INTEGRITY}.md (5,309 líneas, untracked, no canonical).
+CURRENT_OBJECTIVE:      F8 cerrada, F9 investigada (`F9 NOT JUSTIFIED`) y F9 owner decision gate CERRADO (F9-D01=A, F9-D02=B, F9-D03=B, F9-D04=B, F9-D05=A). DEC-11/ARCH-005 CHECKPOINTED (cd0511c). DEC-AUTH-BOUNDARY/ARCH-006 CHECKPOINTED (473759c, 2026-09-27). DEC-01/ARCH-007 CHECKPOINTED (e529359, 2026-09-27); E1 (type-taxonomy) DEFERRED con dec01.T1..T6; E2/E3/E4 RETIRED. DEC-02/ARCH-008 OWNER_CHOSEN=R1+K-A+MINIMUM (2026-09-28), IMPL_AUTHORIZED=YES, IMPLEMENTATION EXECUTED como docs-only bookkeeping (DECISION_REGISTRY.md ARCH-008 + docs/00_SYSTEM/DECISION_HISTORY.md DEC-02 + PROJECT_STATE.md; per ARCH-004 mismo patrón que ARCH-005/006/007: no requiere EV-NNN individual); target semántico = ACTOR; minimum schema = {delegator, delegatee_ref, scope}; V/Q/P DEFERRED; EXP-DEC02-SEM SKIP; CAPABILITY SPECULATIVE / DEFERRED; RUNTIME AUTHORIZATION NONE; reopening triggers arch08.T1..T6 (combine ANY); CONFORMANCE_PASS (maintenance.sh 12/12, 2026-09-28); CHECKPOINTED (5dfd65a, 2026-09-28); analytical support chain (Stratum-C) en docs/00_SYSTEM/DEC_02_{TARGET_SEMANTICS_AUDIT, TARGET_SEMANTICS_RECONCILIATION, DELEGATION_GROUND_TRUTH_AUDIT, OWNER_CHOICE_PACKAGE, SUPER_OWNER_DECISION_ANALYSIS, FINAL_DECISION_INTEGRITY}.md (5,309 líneas, untracked, no canonical).
 LAST_COMPLETED_PHASE:   8 (2026-09-19)
 BLOCKERS:               NONE (no technical blockers)
 OWNER_GATES:            READY-01 (AC-02 classification), READY-02 (hook patterns),
@@ -173,8 +173,8 @@ RESOLVED_OWNER_DECISIONS: F9-D01=A, F9-D02=B, F9-D03=B, F9-D04=B, F9-D05=A (2026
                         DECISION_HISTORY+git));
                         DEC-02=R1+K-A+MINIMUM (2026-09-28, OWNER_CHOSEN,
                         IMPL_AUTHORIZED=YES, WORKING_TREE_EXECUTED,
-                        CONFORMANCE_PENDING (V-DELEG-1..V-DELEG-10),
-                        CHECKPOINT_PENDING;
+                        CONFORMANCE_PASS (maintenance.sh 12/12),
+                        CHECKPOINTED_5dfd65a (2026-09-28);
                         contract: DECISION_REGISTRY.md ARCH-008;
                         learning: docs/00_SYSTEM/DECISION_HISTORY.md DEC-02;
                         evidence: DECISION_REGISTRY.md ARCH-008 EVIDENCIA
@@ -191,7 +191,7 @@ RESOLVED_OWNER_DECISIONS: F9-D01=A, F9-D02=B, F9-D03=B, F9-D04=B, F9-D05=A (2026
                         reopening triggers arch08.T1..T6 combine ANY;
                         analytical chain: docs/00_SYSTEM/DEC_02_*.md (six Stratum-C
                         artifacts, 5,309 lines, untracked, non-canonical))
-LAST_GIT_CHECKPOINT:    e529359
+LAST_GIT_CHECKPOINT:    5dfd65a
 LAST_MOVEMENT:          MOVEMENT 008 (2026-09-23) — HRQS Implementation + PAC Corpus Completion + CCP Handoff;
                         HRQS checklist added to handbook §12 (PAC-EF-02 FP class documented);
                         PAC corpus complete: 23 policies (21 enforced + 2 proposed/READY-02);
