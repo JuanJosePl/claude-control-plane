@@ -444,7 +444,7 @@
   docs/00_SYSTEM/DECISION_HISTORY.md · DEC-08 entry + PROJECT_STATE.md;
   per ARCH-004: docs-only bookkeeping no requiere EV-NNN individual);
   CONFORMANCE_VERIFICATION: PASS (2026-09-28 · maintenance.sh 12/12);
-  CHECKPOINT: PENDING (updated post-§3I sync commit)
+  CHECKPOINT: DONE (bf2d22a, 2026-09-28); CHECKPOINTED
 - FECHA: 2026-09-28
 - OWNER_CHOICE: B · REFORMULATE
 - OWNER_JUSTIFICATION (fielmente preservada from Move 3 invocation

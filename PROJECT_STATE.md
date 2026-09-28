@@ -193,8 +193,8 @@ RESOLVED_OWNER_DECISIONS: F9-D01=A, F9-D02=B, F9-D03=B, F9-D04=B, F9-D05=A (2026
                         artifacts, 5,309 lines, untracked, non-canonical));
                         DEC-08=B REFORMULATE (2026-09-28, OWNER_CHOSEN,
                         IMPL_AUTHORIZED=YES, WORKING_TREE_EXECUTED,
-                        CONFORMANCE_PENDING (updated post-maintenance.sh),
-                        CHECKPOINT_PENDING (updated post-§3I sync commit);
+                        CONFORMANCE_PASS (maintenance.sh 12/12, 2026-09-28),
+                        CHECKPOINTED_bf2d22a (2026-09-28);
                         contract: DECISION_REGISTRY.md ARCH-009;
                         learning: docs/00_SYSTEM/DECISION_HISTORY.md DEC-08;
                         evidence: DECISION_REGISTRY.md ARCH-009 EVIDENCIA
@@ -216,7 +216,7 @@ RESOLVED_OWNER_DECISIONS: F9-D01=A, F9-D02=B, F9-D03=B, F9-D04=B, F9-D05=A (2026
                         to the problem, not a reactivation of DEC-08);
                         DEC-07 / DEC-STREAM-CONSUMER / DEC-REVIEWER-VERDICT /
                         F9-D01 unchanged)
-LAST_GIT_CHECKPOINT:    5dfd65a
+LAST_GIT_CHECKPOINT:    bf2d22a
 LAST_MOVEMENT:          MOVEMENT 008 (2026-09-23) — HRQS Implementation + PAC Corpus Completion + CCP Handoff;
                         HRQS checklist added to handbook §12 (PAC-EF-02 FP class documented);
                         PAC corpus complete: 23 policies (21 enforced + 2 proposed/READY-02);
