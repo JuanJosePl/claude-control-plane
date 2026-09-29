@@ -350,3 +350,146 @@ Format per entry:
                     with first authored delegation entry, first trigger
                     firing, or DEC-07 F2/F3 opening — whichever comes
                     first).
+
+---
+
+## DECISION LEARNING — DEC-08
+
+- DATE            : 2026-09-28
+- CHOICE          : B · REFORMULATE — DEC-08 D-INSTR as an isolated
+                    schema-completion decision is closed; canonical
+                    invariant recorded: STALL_POLICY_LOG is an
+                    event/observation record and must not be used as
+                    the authoritative source of an independent
+                    judgment about the correctness of the policy
+                    decision it records. No STALL schema change; no
+                    runtime authorization; no reopening triggers
+                    (`arch09.T*`).
+- CONTRACT        : DECISION_REGISTRY.md · ARCH-009
+- EXPECTED        : Docs-only bookkeeping that records the
+                    event/judgment boundary as an architectural
+                    invariant (governance `convención` per ARCH-006
+                    VOCAB-A). Preserves the analytical gain from Move 1
+                    Kernel §2.3 (fact/judgment separation) and Move 2
+                    firewall §6.2.1 (three distinct semantic ownership
+                    classes for verdict / had_alternative / session_id)
+                    without acquiring schema, code, or runtime lock-in.
+                    Future verdict / verifier architecture is delegated
+                    to the decision that owns the concrete need
+                    (DEC-07 D-VERIFICADOR, DEC-REVIEWER-VERDICT, or a
+                    new DEC-N). Reversibility HIGH via a new ADR.
+- UNKNOWN AT TIME : (a) Whether any of DEC-07 / DEC-STREAM-CONSUMER /
+                    DEC-REVIEWER-VERDICT will open in the 6–12-month
+                    horizon and inherit the "verdict outside emitter"
+                    invariant materially; (b) Whether the producer
+                    availability of a Claude session id at hook event
+                    time (session_id classification MODERATE in Kernel
+                    §11 §6.2.1) will be verified by a future check —
+                    the result does not change ARCH-009 but tightens
+                    the correlation-metadata band; (c) Whether the
+                    absence of `arch09.T*` reopening triggers will
+                    prove sufficient — a concrete future need may
+                    require opening a new DEC-N whose problem framing
+                    is fully distinct from DEC-08's original schema-
+                    completion framing; (d) Whether STALL_POLICY_LOG
+                    volume growth will remain harness-noise-dominated
+                    (81.5% at Move 1 preflight, 22/27 events one
+                    signature) or whether material policy events at
+                    volume will emerge and pressure the invariant.
+- TRIGGER SET     : NONE. Owner Choice B closes DEC-08; it does not
+                    defer. Future needs are resolved by the decision
+                    appropriate to the problem, not by a scheduled
+                    reactivation of DEC-08 D-INSTR. This absence is
+                    intentional and explicit per Move 3 §5.3 / §12
+                    ("B closes, does not defer, no arch09.T*").
+- IMPLEMENTATION  : 2026-09-28 — docs-only bookkeeping executed.
+                    Modificaciones:
+                    DECISION_REGISTRY.md (append ARCH-009 entry),
+                    docs/00_SYSTEM/DECISION_HISTORY.md (this entry),
+                    PROJECT_STATE.md (CURRENT_OBJECTIVE +
+                    RESOLVED_OWNER_DECISIONS append + ACTIVE_DECISIONS
+                    updated with ARCH-009 appended, no deferral-triggers
+                    block added since Owner Choice B closes DEC-08).
+                    Per ARCH-004 (same pattern as ARCH-005/006/007/008):
+                    docs-only bookkeeping no requiere EV-NNN individual;
+                    aggregated evidence lives in DECISION_REGISTRY.md
+                    ARCH-009 EVIDENCIA section and in this learning
+                    entry. Conformance verification via
+                    `evals/maintenance.sh` external evaluator (RSI
+                    safety canon: evaluator outside the optimization
+                    loop; unmodifiable). Checkpoint autorización
+                    SEPARATED (per patrón ARCH-006/007/008).
+- IMPLEMENTATION_LOCATION : DECISION_REGISTRY.md (ARCH-009) +
+                    docs/00_SYSTEM/DECISION_HISTORY.md (this entry) +
+                    PROJECT_STATE.md (docs-only bookkeeping)
+- IN-FLIGHT LESSON: (three-move campaign delivered) DEC-08 was
+                    delivered through the CCP three-move campaign
+                    (Move 1 Discover-Compress-Architect, Move 2
+                    Gate-Choose, Move 3 Canonicalize-Close). The Kernel
+                    (Stratum-C, 40 KB) served as persistent state
+                    across moves; each move produced exactly one
+                    output (Kernel body, §11 appendix, canonical
+                    ADR + history + state), with zero sibling
+                    analytical files. The pattern held: architecture
+                    constrained options in Move 1; firewall promoted
+                    Option C (RETIRE) as first-class in Move 2 through
+                    the debt-criterion test; Owner selected B in Move 3.
+                    Lesson: separating meta-gate (Move 1 §1B) from
+                    firewall (Move 2 §6.2) reduced pressure to force a
+                    verdict too early; each pass had a bounded
+                    responsibility.
+- IN-FLIGHT LESSON: (fact/judgment separation preserved without
+                    over-commitment) The Kernel's architectural finding
+                    that verdict is a judgment field belonging outside
+                    the emitter was preserved as an invariant WITHOUT
+                    naming DEC-07 as the definitive owner. Move 3 spec
+                    §5.3 (over-canonicalization forbidden) and §3G
+                    Test B (premature DEC-07 assignment) prevented the
+                    common failure mode of "we know where it goes, so
+                    let's just write it". ARCH-009 records the boundary
+                    (event ≠ independent judgment) without committing
+                    to which future decision owns the verdict layer.
+                    Lesson: reformulating a decision means capturing
+                    the architectural insight while leaving the
+                    downstream decisions their own scope; premature
+                    assignment would have created HARD coupling
+                    disguised as helpful clarification.
+- IN-FLIGHT LESSON: (three distinct semantic classes disambiguated)
+                    Move 1 Kernel §2.2 lumped verdict / had_alternative /
+                    session_id as "NOWHERE observed". Move 2 firewall
+                    §6.2.1 (CoVe factored per concept) disambiguated
+                    them into three semantically distinct ownership
+                    classes: verdict = verifier-owned (HIGH band),
+                    had_alternative = retrospective-derivation (HIGH
+                    band), session_id = correlation-metadata (MODERATE
+                    band with producer availability UNVERIFIED). This
+                    refinement was material: it prevented Option B from
+                    forcing a single semantic class onto three distinct
+                    concepts, and it made the ARCH-009 SEMANTIC_
+                    CLASSIFICATION field an honest record of what is
+                    and is not known. Lesson: schema fields that appear
+                    schema-adjacent are not necessarily semantically
+                    co-owned; CoVe factored per concept catches
+                    conflation that a single-pass audit misses.
+- IN-FLIGHT LESSON: (Owner Choice B chosen over A and C by architectural
+                    insight preservation) Move 2 dominance recheck
+                    §6.2.6 established that A / B / C are three
+                    architectural branches with no pairwise dominance —
+                    A wins trigger automation, B wins insight preservation,
+                    C wins admin cost avoidance. The Owner's selection
+                    of B trades LOW-MODERATE semantic lock-in (the
+                    "verdict outside emitter" invariant) for HIGH
+                    preservation of the analytical insight. This is a
+                    substantive commitment, not a default. Lesson: when
+                    Move 2 surfaces multiple non-dominating branches,
+                    the Owner Choice communicates the priority ordering
+                    (insight > admin cost > trigger automation, in this
+                    case) that the analytical firewall alone cannot
+                    infer.
+- LESSON          : no long-term lesson yet (empirical validation
+                    begins with the first future decision that
+                    inherits or overrides the "verdict outside
+                    emitter" invariant — DEC-07 F2/F3, DEC-REVIEWER-
+                    VERDICT, or an unrelated decision; or with an
+                    incident that materially tests the boundary
+                    statement).

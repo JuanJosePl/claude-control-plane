@@ -5,7 +5,7 @@
 CURRENT_PHASE:          8
 PHASE_STATUS:           COMPLETE
 PHASE_STARTED:          2026-09-19
-CURRENT_OBJECTIVE:      F8 cerrada, F9 investigada (`F9 NOT JUSTIFIED`) y F9 owner decision gate CERRADO (F9-D01=A, F9-D02=B, F9-D03=B, F9-D04=B, F9-D05=A). DEC-11/ARCH-005 CHECKPOINTED (cd0511c). DEC-AUTH-BOUNDARY/ARCH-006 CHECKPOINTED (473759c, 2026-09-27). DEC-01/ARCH-007 CHECKPOINTED (e529359, 2026-09-27); E1 (type-taxonomy) DEFERRED con dec01.T1..T6; E2/E3/E4 RETIRED. DEC-02/ARCH-008 OWNER_CHOSEN=R1+K-A+MINIMUM (2026-09-28), IMPL_AUTHORIZED=YES, IMPLEMENTATION EXECUTED como docs-only bookkeeping (DECISION_REGISTRY.md ARCH-008 + docs/00_SYSTEM/DECISION_HISTORY.md DEC-02 + PROJECT_STATE.md; per ARCH-004 mismo patrón que ARCH-005/006/007: no requiere EV-NNN individual); target semántico = ACTOR; minimum schema = {delegator, delegatee_ref, scope}; V/Q/P DEFERRED; EXP-DEC02-SEM SKIP; CAPABILITY SPECULATIVE / DEFERRED; RUNTIME AUTHORIZATION NONE; reopening triggers arch08.T1..T6 (combine ANY); CONFORMANCE_PASS (maintenance.sh 12/12, 2026-09-28); CHECKPOINTED (5dfd65a, 2026-09-28); analytical support chain (Stratum-C) en docs/00_SYSTEM/DEC_02_{TARGET_SEMANTICS_AUDIT, TARGET_SEMANTICS_RECONCILIATION, DELEGATION_GROUND_TRUTH_AUDIT, OWNER_CHOICE_PACKAGE, SUPER_OWNER_DECISION_ANALYSIS, FINAL_DECISION_INTEGRITY}.md (5,309 líneas, untracked, no canonical).
+CURRENT_OBJECTIVE:      F8 cerrada, F9 investigada (`F9 NOT JUSTIFIED`) y F9 owner decision gate CERRADO (F9-D01=A, F9-D02=B, F9-D03=B, F9-D04=B, F9-D05=A). DEC-11/ARCH-005 CHECKPOINTED (cd0511c). DEC-AUTH-BOUNDARY/ARCH-006 CHECKPOINTED (473759c, 2026-09-27). DEC-01/ARCH-007 CHECKPOINTED (e529359, 2026-09-27); E1 (type-taxonomy) DEFERRED con dec01.T1..T6; E2/E3/E4 RETIRED. DEC-02/ARCH-008 OWNER_CHOSEN=R1+K-A+MINIMUM (2026-09-28), IMPLEMENTATION EXECUTED como docs-only bookkeeping; CONFORMANCE_PASS (maintenance.sh 12/12, 2026-09-28); CHECKPOINTED (5dfd65a, 2026-09-28). DEC-08/ARCH-009 OWNER_CHOSEN=B REFORMULATE (2026-09-28), IMPL_AUTHORIZED=YES, IMPLEMENTATION EXECUTED como docs-only bookkeeping (DECISION_REGISTRY.md ARCH-009 + docs/00_SYSTEM/DECISION_HISTORY.md DEC-08 + PROJECT_STATE.md; per ARCH-004 mismo patrón que ARCH-005/006/007/008: no requiere EV-NNN individual); DECISION: STALL_POLICY_LOG es evento/observación y no fuente autoritativa de juicio independiente sobre su propia decisión de política; SEMANTIC_CLASSIFICATION: verdict=verifier-owned (HIGH), had_alternative=retrospective-derivation (HIGH), session_id=correlation-metadata (MODERATE, producer availability UNVERIFIED); STALL SCHEMA CHANGE=NO; RUNTIME AUTHORIZATION=NONE; REOPENING TRIGGERS=NONE (B closes, does not defer; future concrete needs open the decision appropriate to the problem, not a reactivation of DEC-08); DEC-07/DEC-STREAM-CONSUMER/DEC-REVIEWER-VERDICT/F9-D01 unchanged; CONFORMANCE_PASS (maintenance.sh 12/12, 2026-09-28); CHECKPOINTED (bf2d22a, 2026-09-28); Kernel analítico (Stratum-C) en docs/00_SYSTEM/DEC_08_DECISION_KERNEL.md (Move 1 a3db337 + Move 2 §11 54f943b, canonical committed); analytical support chain (DEC-02 Stratum-C) en docs/00_SYSTEM/DEC_02_{TARGET_SEMANTICS_AUDIT, TARGET_SEMANTICS_RECONCILIATION, DELEGATION_GROUND_TRUTH_AUDIT, OWNER_CHOICE_PACKAGE, SUPER_OWNER_DECISION_ANALYSIS, FINAL_DECISION_INTEGRITY}.md (5,309 líneas, untracked, no canonical).
 LAST_COMPLETED_PHASE:   8 (2026-09-19)
 BLOCKERS:               NONE (no technical blockers)
 OWNER_GATES:            READY-01 (AC-02 classification), READY-02 (hook patterns),
@@ -154,7 +154,7 @@ sub-items:
         predicate: "Cualquiera de los CAPABILITY re-entry thresholds T-CAP-1..T-CAP-5 se dispara: (T-CAP-1) ≥2 entries comparten stable-role a través de implementation churn con costo observable; (T-CAP-2) bulk-edit sobre ≥3 entries por implementation replacement; (T-CAP-3) DEC-07/DEC-REVIEWER-VERDICT requiere identidad implementación-independiente irreducible por scope prose; (T-CAP-4) artefacto canónico CCP comienza a referir 'capability' first-class; (T-CAP-5) PRIM excavation independiente identifica CAPABILITY como primitiva latente."
         provenance: "DECISION_REGISTRY.md · ARCH-008 REVIEW TRIGGER · arch08.T6; docs/00_SYSTEM/DEC_02_SUPER_OWNER_DECISION_ANALYSIS.md §18 CAPABILITY REENTRY THRESHOLD T-CAP-1..T-CAP-5"
 -->
-ACTIVE_DECISIONS:       ARCH-001, ARCH-002, ARCH-003, ARCH-004, ARCH-005, ARCH-006, ARCH-007, ARCH-008
+ACTIVE_DECISIONS:       ARCH-001, ARCH-002, ARCH-003, ARCH-004, ARCH-005, ARCH-006, ARCH-007, ARCH-008, ARCH-009
 RESOLVED_OWNER_DECISIONS: F9-D01=A, F9-D02=B, F9-D03=B, F9-D04=B, F9-D05=A (2026-09-20);
                         DEC-11=HYB-FINAL-v4 (2026-09-26, OWNER_CHOSEN, IMPL_AUTHORIZED,
                         WORKING_TREE_EXECUTED, CONFORMANCE_PASS, CHECKPOINTED_cd0511c);
@@ -190,8 +190,33 @@ RESOLVED_OWNER_DECISIONS: F9-D01=A, F9-D02=B, F9-D03=B, F9-D04=B, F9-D05=A (2026
                         RUNTIME AUTHORIZATION=NONE;
                         reopening triggers arch08.T1..T6 combine ANY;
                         analytical chain: docs/00_SYSTEM/DEC_02_*.md (six Stratum-C
-                        artifacts, 5,309 lines, untracked, non-canonical))
-LAST_GIT_CHECKPOINT:    5dfd65a
+                        artifacts, 5,309 lines, untracked, non-canonical));
+                        DEC-08=B REFORMULATE (2026-09-28, OWNER_CHOSEN,
+                        IMPL_AUTHORIZED=YES, WORKING_TREE_EXECUTED,
+                        CONFORMANCE_PASS (maintenance.sh 12/12, 2026-09-28),
+                        CHECKPOINTED_bf2d22a (2026-09-28);
+                        contract: DECISION_REGISTRY.md ARCH-009;
+                        learning: docs/00_SYSTEM/DECISION_HISTORY.md DEC-08;
+                        evidence: DECISION_REGISTRY.md ARCH-009 EVIDENCIA
+                        section + Kernel docs/00_SYSTEM/DEC_08_DECISION_KERNEL.md
+                        §0..§11 (Move 1 a3db337 + Move 2 §11 54f943b);
+                        docs-only bookkeeping pattern per ARCH-004 (same as
+                        ARCH-005/006/007/008: no EV-NNN individual);
+                        DECISION: STALL_POLICY_LOG es evento/observación y
+                        no fuente autoritativa de juicio independiente sobre
+                        su propia decisión de política;
+                        SEMANTIC_CLASSIFICATION: verdict=verifier-owned (HIGH),
+                        had_alternative=retrospective-derivation (HIGH),
+                        session_id=correlation-metadata (MODERATE, producer
+                        availability UNVERIFIED);
+                        STALL SCHEMA CHANGE=NO;
+                        RUNTIME AUTHORIZATION=NONE;
+                        REOPENING TRIGGERS=NONE (B closes, does not defer;
+                        future concrete needs open the decision appropriate
+                        to the problem, not a reactivation of DEC-08);
+                        DEC-07 / DEC-STREAM-CONSUMER / DEC-REVIEWER-VERDICT /
+                        F9-D01 unchanged)
+LAST_GIT_CHECKPOINT:    bf2d22a
 LAST_MOVEMENT:          MOVEMENT 008 (2026-09-23) — HRQS Implementation + PAC Corpus Completion + CCP Handoff;
                         HRQS checklist added to handbook §12 (PAC-EF-02 FP class documented);
                         PAC corpus complete: 23 policies (21 enforced + 2 proposed/READY-02);

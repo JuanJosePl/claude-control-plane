@@ -504,3 +504,207 @@ UNCERTAINTY_MARK: claim="81.5% harness noise" band=HIGH source=[VERIFIED:jq uniq
 ---
 
 **END OF DEC-08 DECISION KERNEL (Move 1 complete).**
+
+---
+
+## §11. OWNER CHOICE — MOVE 2 (appended 2026-09-28)
+
+> Numbering note: Move 2 spec (`CCP_DEC-08_MOVE2_MASTER_v2.md §6.4`) requires this appendix as "§9".
+> Move 1 Kernel already used §9 (Testing Protocol Assertions) and §10 (Structured markers), so
+> renumbering would violate Move 2 §5.2 ("no modification of §0–§7 [and by extension existing
+> content]"). Appended as §11 to preserve the intent (one appended section; no new file; no
+> canonical modification). Internal subsections mirror the spec's §9.0–§9.9.
+
+### 11.0 Baseline Delta (from Phase 2A)
+
+- `KERNEL_ANALYSIS_HEAD` = `2f55412` (per Kernel §0)
+- `KERNEL_COMMIT_HEAD` = `a3db337`
+- `CURRENT_HEAD` = `a3db337`
+- Documented state change since Kernel §0 was written: Kernel §0 declared "untracked/staged";
+  Kernel is now COMMITTED via `a3db337`. Historical §0 preserved verbatim. No other canonical
+  state changed since Kernel §0 timestamp.
+
+### 11.1 Firewall Verdict Summary (from §6.2)
+
+- **INV-1 subordinate emission**: STANDS ([VERIFIED] stall-record.sh:2).
+- **INV-2 append-only JSONL**: STANDS ([VERIFIED] stall-record.sh:47).
+- **INV-3 schema_version required**: MODIFIED → §6.2.4 classifies as BOTH contract (HIGH) +
+  architectural conditional on schema change (MODERATE).
+- **`verdict` = judgment field**: STANDS + REFINED → §6.2.1 verifier-owned (HIGH).
+- **`had_alternative` = NOWHERE (§2.2)**: MODIFIED → §6.2.1 retrospective-derivation (HIGH),
+  materially different class from `verdict`.
+- **`session_id` = NOWHERE (§2.2)**: MODIFIED → §6.2.1 correlation-metadata (MODERATE);
+  producer availability at event-time UNVERIFIED.
+- **No canonical consumer of disputed field VALUES**: STANDS ([VERIFIED] §6.2.2). Refined:
+  `r2-instrumentation.sh` asserts `had_alternative == null` as invariant, not as value consumption.
+- **"81.5% harness noise"**: MODIFIED → §6.2.3 "repeated signature; semantically unresolved;
+  consistent with test/fixture-pattern hypothesis" (HIGH for repetition; MODERATE for attribution).
+- **F9-D01=A blocks G2**: STANDS ([VERIFIED] PROJECT_STATE.md:8).
+- **INCIDENT_REGISTRY empty for STALL**: STANDS ([VERIFIED] §1B.3 VQ5a).
+- **Options G1/G2/G3 eliminated**: STANDS.
+- **Option A (G-DEFER)**: STANDS but no longer dominates alternatives (§6.2.6: neither dominance).
+- **Option B (G4-REFORMULATE)**: STANDS.
+- **Option C (RETIRE) PROMOTED to first-class architectural branch** (§6.2.5: SURVIVES debt-criterion test).
+- **Triggers**: T1/T3/T4/T5 OPERATIONAL; T2 DRAFT (undefined N,P).
+- **Coupling DEC-08 ↔ DEC-STREAM-CONSUMER**: MUTUAL-INFO-ONLY (§6.2.8).
+
+Summary: 10 STANDS · 4 MODIFIED · 0 WITHDRAWN · 1 OPTION PROMOTED.
+
+### 11.2 Architectural Thesis (from Phase 2C)
+
+- **TRUE PROBLEM**: DEC-08 was framed as "STALL schema completion" but firewall shows (a) no
+  canonical consumer would use the disputed VALUES, (b) `verdict` / `had_alternative` / `session_id`
+  belong to three semantically distinct ownership classes (verifier-owned / retrospective-derivation
+  / correlation-metadata), and (c) preserving DEC-08 as a named open decision has ongoing
+  administrative cost (5 triggers, undefined N/P) whose only unique preservation is automatic
+  trigger evaluation via DEFERRAL_INVENTORY. The real unresolved property is whether CCP records
+  now an architectural commitment about verdict ownership.
+- **TRUE DECISION**: Whether CCP records now an architectural commitment about verdict ownership
+  — keep the question open with catalogued triggers (DEFER), commit "verdict lives outside the
+  emitter" as an invariant the future verifier decision will inherit (REFORMULATE), or close
+  DEC-08 without a successor (RETIRE).
+- **TRUE NON-DECISION**: CCP does not decide here (a) any change to `stall-record.sh` or
+  `STALL_POLICY_LOG.jsonl` schema, (b) DEC-STREAM-CONSUMER consumer architecture, (c) DEC-07
+  D-VERIFICADOR verifier design, (d) N/P thresholds of any deferred trigger, (e) whether F9-D01=A
+  should be reopened, (f) any runtime authorization.
+
+### 11.3 What Has Already Been Determined ([VERIFIED] / HIGH-band, cited)
+
+- STALL log has 27 events at HEAD; 22/27 share signature `(F1-foundation-2026-09-16, contract_hash_required)`
+  → [VERIFIED §0].
+- `stall-record.sh:46` hardcodes `had_alternative:null`; empty `session_id` → null → [VERIFIED §0].
+- `query-log.sh` reads `source_hook`, `policy_category`, `action_hash`, `timestamp` only;
+  `r2-instrumentation.sh` asserts `had_alternative == null` as invariant, not as value consumption
+  → [VERIFIED §1B.3 VQ1a, §6.2.2].
+- F9-D01=A is CLOSED (=A means "keep implementation closed") → [VERIFIED PROJECT_STATE:8].
+- `INCIDENT_REGISTRY.md` does not exist canonically or contains no STALL-attributed incidents
+  → [VERIFIED §1B.3 VQ5a].
+- ARCH-005/006/007/008 CHECKPOINTED; no drift; DEC-08 has no ARCH-N assigned → [VERIFIED §2A].
+- G2 (modify `stall-record.sh`) crosses F9-D01=A gate → [VERIFIED PROJECT_STATE + §1B].
+- `verdict` semantic ownership = **verifier-owned** → [HIGH §6.2.1].
+- `had_alternative` semantic ownership = **retrospective-derivation** → [HIGH §6.2.1].
+- `session_id` semantic ownership = **correlation-metadata** → [MODERATE §6.2.1] (producer
+  event-time availability UNVERIFIED).
+
+### 11.4 What Is NOT Being Decided (explicit)
+
+- Any change to STALL schema or `stall-record.sh` — deferred to whatever downstream decision
+  authorizes runtime.
+- Consumer architecture for extended fields — owned by DEC-STREAM-CONSUMER.
+- Verifier design — owned by DEC-07 D-VERIFICADOR or DEC-REVIEWER-VERDICT.
+- N / P trigger thresholds — DEFERRED; not required to close DEC-08 here.
+- F9-D01=A reopening — has its own trigger `f9.d01.T1` outside this decision.
+- Any runtime authorization — NONE requested.
+
+### 11.5 Surviving Options (3 — no symmetry padding)
+
+**OPTION A · DEFER**
+
+  - MEANING:                   DEC-08 stays a valid unresolved decision; parked with observable
+                               triggers in DEFERRAL_INVENTORY.
+  - ARCHITECTURAL_CONSEQUENCE: No commitment made about verdict ownership; the fact/judgment
+                               finding from Kernel §2.3 stays analytical (Stratum-C).
+  - PRESERVES:                 Automatic trigger evaluation via catalog; historical continuity
+                               of DEC-08 name and framing.
+  - COMMITS:                   Maintenance of 4 OPERATIONAL + 1 DRAFT triggers; PROJECT_STATE
+                               DEFERRED bookkeeping.
+  - DEFERS:                    Verdict-ownership commitment; N/P threshold definition; all
+                               schema changes.
+  - REVERSIBILITY:             HIGH — Owner reopens DEC-08 whenever a trigger fires.
+  - LOCK-IN:                   NONE architectural; LOW admin lock-in (5 triggers to steward).
+  - DEPENDENCIES:              NONE (INDEPENDENT of DEC-STREAM-CONSUMER, DEC-07,
+                               DEC-REVIEWER-VERDICT).
+  - FALSIFIER:                 A trigger fires but the DEFER→live conversion fails to yield a
+                               coherent option surface (would mean the trigger was mis-drafted).
+  - CONFIDENCE:                HIGH — minimum irreversible move; 4/5 triggers pass integrity.
+
+**OPTION B · REFORMULATE**
+
+  - MEANING:                   Close DEC-08 as an isolated schema decision; record the
+                               architectural finding "verdict lives outside the emitter"
+                               (fact/judgment separation) as a canonical invariant in
+                               DECISION_HISTORY DEC-08 entry; verdict semantics inherit to the
+                               future verifier decision (DEC-07 or DEC-REVIEWER-VERDICT).
+  - ARCHITECTURAL_CONSEQUENCE: Fact/judgment separation becomes a canonical architectural
+                               principle recorded in DECISION_HISTORY.
+  - PRESERVES:                 Architectural insight for future verifier decision; no orphaned
+                               learning.
+  - COMMITS:                   Semantic principle "emitter does NOT own verdict"; future
+                               verifier decisions inherit this constraint.
+  - DEFERS:                    Which verifier decision inherits (DEC-07 vs
+                               DEC-REVIEWER-VERDICT); any schema change; the `had_alternative`
+                               and `session_id` semantic ownership questions (documented as
+                               separate open concerns).
+  - REVERSIBILITY:             HIGH technical; MODERATE semantic (once recorded, reversing
+                               requires explicit override).
+  - LOCK-IN:                   LOW — one semantic invariant recorded; no code, no schema, no
+                               runtime.
+  - DEPENDENCIES:              MENTIONS DEC-07 / DEC-REVIEWER-VERDICT as inheritors; not
+                               blocking.
+  - FALSIFIER:                 A use case emerges where emitter-side verdict is architecturally
+                               correct (self-evident classification with no external verifier).
+  - CONFIDENCE:                MODERATE-HIGH — argument sound (§2.3, §6.2.1) but records an
+                               invariant the Owner may prefer to keep implicit.
+
+**OPTION C · RETIRE**
+
+  - MEANING:                   Close DEC-08 as a named decision with no successor. If a schema
+                               question resurfaces later, a fresh decision handles it in the
+                               context that raises it.
+  - ARCHITECTURAL_CONSEQUENCE: No architectural commitment recorded; the Kernel's analytical
+                               findings remain in Stratum-C.
+  - PRESERVES:                 Minimum administrative surface (no triggers, no ongoing
+                               bookkeeping); freedom to open any future schema decision without
+                               inheriting DEC-08 framing.
+  - COMMITS:                   Nothing beyond "DEC-08 as posed is closed".
+  - DEFERS:                    Everything DEC-08 would have addressed (schema, consumer,
+                               verifier) is deferred without a catalogued reopen path.
+  - REVERSIBILITY:             HIGH — Owner opens a fresh decision anytime.
+  - LOCK-IN:                   NONE.
+  - DEPENDENCIES:              NONE.
+  - FALSIFIER:                 A concrete need arises where the historical "we considered
+                               schema completion" record would materially aid the new decision.
+  - CONFIDENCE:                MODERATE — the debt-criterion test in §6.2.5 supports RETIRE,
+                               but it costs the automatic trigger evaluation A preserves.
+
+### 11.6 Options Removed at Move 2
+
+- **G1 (do nothing)** — removed at Move 1 §3 (dominated by A on trigger explicitness). Firewall
+  confirms.
+- **G2 (modify `stall-record.sh` schema)** — removed at Move 1 §3 (crosses active F9-D01=A gate;
+  violates fact/judgment separation §2.3; no consumer). Firewall confirms.
+- **G3 (shadow runtime)** — removed at Move 1 §3 (shadow captures the same repeated signature;
+  no consumer justifies MEDIUM cost). Firewall confirms.
+- No option removed for cosmetic reason.
+
+### 11.7 Critical Uncertainty
+
+- `session_id` classification is MODERATE (not HIGH) because producer availability at event-time
+  is UNVERIFIED. If a future check proves the hook payload carries a Claude session id, the
+  "producer lacks knowledge" line in §6.2.2 for session_id weakens marginally. This does NOT
+  change the A/B/C surface (all three options are stable to that fact). Owner Choice can proceed
+  without resolving it.
+
+### 11.8 OWNER QUESTION
+
+> Which architectural commitment, if any, should CCP make now regarding verdict ownership in the
+> STALL policy log — keep the question open with catalogued triggers (**A · DEFER**), record
+> "verdict lives outside the emitter" as an invariant for the future verifier decision
+> (**B · REFORMULATE**), or close DEC-08 with no successor (**C · RETIRE**)?
+
+### 11.9 Move 2 Attestation
+
+- ANALYTICAL_ARTIFACTS_CREATED : 0 (only Kernel appendix §11 added; no new file)
+- CANONICAL_FILES_MODIFIED     : 0
+- RUNTIME_AUTHORIZATION        : NONE
+- KERNEL_FILE_MODIFIED         : YES (only §11 appended; §0–§10 preserved verbatim)
+- PROMPT_INJECTION_ANOMALIES   : NONE (Kernel prose is analyst-authored; no external content
+                                 read during Move 2 firewall except registry sanity)
+- ARCH-N ASSIGNED TO DEC-08    : NO
+- EV-NNN ADDED                 : NO
+- COMMIT MADE DURING MOVE 2    : NO (per Move 2 spec §5.7; Owner-authorized commit will follow
+                                 Move 3, not Move 2)
+
+---
+
+**END OF DEC-08 DECISION KERNEL §11 — MOVE 2 APPENDIX (Owner Choice card ready).**

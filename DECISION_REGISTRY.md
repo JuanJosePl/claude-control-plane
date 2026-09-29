@@ -433,3 +433,163 @@
   Choice R1 + K-A + MINIMUM. Gate `DEC-02_D-DELEG_OPENED.md`
   transiciona conceptualmente de `OPEN` a `CLOSED` mediante este ADR;
   el archivo del gate se preserva como historical evidence.
+
+## ARCH-009 — DEC-08 D-INSTR (B · REFORMULATE)
+
+- TIPO: GOVERNANCE
+- ESTADO: OWNER_CHOSEN (2026-09-28);
+  IMPLEMENTATION_AUTHORIZED: YES (2026-09-28);
+  IMPLEMENTATION: EXECUTED (2026-09-28);
+  IMPLEMENTATION_LOCATION: docs-only bookkeeping (this ARCH-009 entry +
+  docs/00_SYSTEM/DECISION_HISTORY.md · DEC-08 entry + PROJECT_STATE.md;
+  per ARCH-004: docs-only bookkeeping no requiere EV-NNN individual);
+  CONFORMANCE_VERIFICATION: PASS (2026-09-28 · maintenance.sh 12/12);
+  CHECKPOINT: DONE (bf2d22a, 2026-09-28); CHECKPOINTED
+- FECHA: 2026-09-28
+- OWNER_CHOICE: B · REFORMULATE
+- OWNER_JUSTIFICATION (fielmente preservada from Move 3 invocation
+  prompt `CCP_DEC-08_MOVE3_MASTER_v2.md §1`): "OWNER_CHOICE: B ·
+  REFORMULATE (authoritative; see §1)". Owner Choice B selecciona la
+  rama arquitectónica que cierra DEC-08 como decisión aislada de
+  extensión de schema y registra la invariante "STALL_POLICY_LOG es un
+  registro de evento/observación y no debe usarse como fuente
+  autoritativa de un juicio independiente sobre la corrección de la
+  decisión de política que registra". Los conceptos `verdict`,
+  `had_alternative` y `session_id`, cuya semántica fue disambiguada en
+  Kernel §11 firewall §6.2.1, permanecen sin materialización runtime;
+  su representación futura queda a cargo de la decisión apropiada
+  (verifier layer / stream consumer / nueva DEC-N) cuando exista
+  necesidad concreta. La reformulación preserva la ganancia analítica
+  (event ≠ juicio independiente) sin adquirir lock-in de schema, código
+  o runtime.
+- DECISION: STALL_POLICY_LOG es un registro de evento/observación y no
+  debe usarse como la fuente autoritativa de un juicio independiente
+  sobre la corrección de la decisión de política que registra. La
+  frontera entre el evento emitido por el hook (`stall-record.sh`) y
+  cualquier juicio posterior sobre esa clasificación (correcto /
+  incorrecto / alternativa preferible / verificación) se preserva como
+  invariante arquitectónica de gobernanza (`convención` per ARCH-006
+  VOCAB-A). La decisión NO materializa el layer de verificador ni
+  autoriza cambios de schema; se limita a registrar que la separación
+  hecho/juicio aplica a este stream.
+- SEMANTIC_CLASSIFICATION (canonical outcome of Kernel §11 firewall
+  §6.2.1; explicit novel field justified by disambiguation requirement):
+  - `verdict`: juicio independiente (verifier-owned). NO presente en el
+    schema actual de STALL_POLICY_LOG. NO se añade ahora. Representación
+    futura DEFERRED a la decisión de verifier (DEC-07 D-VERIFICADOR,
+    DEC-REVIEWER-VERDICT, o una nueva DEC-N cuando exista necesidad).
+  - `had_alternative`: derivación retrospectiva (retrospective-derivation).
+    Actualmente `null` hardcoded per `stall-record.sh:46`. NO se cambia
+    el schema. Semántica futura DEFERRED.
+  - `session_id`: metadatos de correlación (correlation-metadata).
+    Actualmente `null` por conversión `""` → `null`. Disponibilidad de
+    producer at event-time UNVERIFIED. NO se cambia el schema. Semántica
+    futura DEFERRED.
+  Los tres conceptos son semánticamente DISTINTOS; ARCH-009 NO los
+  colapsa en una clase única.
+- DEFERRED_ITEMS (explicit novel field justified by non-decision
+  discipline): representación de `verdict`; schema de `verdict`;
+  productor de `verdict`; identidad / mecanismo / ciclo de vida /
+  almacenamiento del verifier layer; workflow de review; outcome de
+  DEC-07 D-VERIFICADOR; DEC-REVIEWER-VERDICT; diseño de DEC-STREAM-
+  CONSUMER; implementación de correlación por sesión; implementación
+  de `had_alternative`; cualquier extensión al schema de STALL; cualquier
+  cambio de comportamiento runtime; definición de umbrales `N`/`P` para
+  triggers hipotéticos (los triggers de reapertura no se crean bajo B).
+- ALCANCE: docs-only. Sin creación de artefactos runtime, sin nuevos
+  hooks, sin modificación de `.claude/*`, sin cambios a `stall-record.sh`
+  ni a ningún consumer (`query-log.sh`, `evals/r2/r2-instrumentation.sh`),
+  sin cambios a `STALL_POLICY_LOG.jsonl` schema, sin creación de un
+  registro `STALL_VERDICT_LOG.jsonl` (queda como opción arquitectónica
+  para una decisión futura). Preserva la frontera evento / juicio
+  independiente. No re-abre F9-D01. No abre DEC-07, DEC-STREAM-CONSUMER,
+  ni DEC-REVIEWER-VERDICT.
+- NO-GOALS (explicit not-chosen items):
+  canonicalización de "verdict pertenece a DEC-07" o análogos;
+  canonicalización de "el schema de STALL debe extenderse";
+  canonicalización de cualquier arquitectura de verifier;
+  autorización de cambio runtime en `stall-record.sh` o hooks callers;
+  implementación de `verdict`, `session_id` real, o `had_alternative` real;
+  reapertura de F9-D01;
+  modificación de DEC-STREAM-CONSUMER, DEC-07, o DEC-REVIEWER-VERDICT;
+  creación de triggers de reapertura `arch09.T*` para DEC-08 (Owner
+  Choice B cierra; no defiere — futuras necesidades las abre la decisión
+  apropiada al problema concreto, no una reactivación automática de
+  DEC-08).
+- RELACIÓN CON OTRAS DECISIONES:
+  - **DEC-07 (D-VERIFICADOR)**: unchanged. La arquitectura futura del
+    verifier / judgment layer permanece completamente fuera del alcance
+    de DEC-08. ARCH-009 no compromete a DEC-07 con ninguna forma
+    específica; si DEC-07 F2/F3 se abre en el futuro, hereda la
+    invariante "verdict vive fuera del emitter" como restricción
+    arquitectónica, pero NO como precondición HARD.
+  - **DEC-STREAM-CONSUMER**: unchanged. No es requerida para esta
+    reformulación (coupling MUTUAL-INFO-ONLY per Kernel §11 §6.2.8).
+    Si se abre, decide su propia arquitectura de consumer sin heredar
+    schema de DEC-08.
+  - **DEC-REVIEWER-VERDICT**: unchanged. Sibling decision ortogonal.
+    Si se abre, es un candidato natural para propietaria de la
+    representación de `verdict`, pero ARCH-009 no lo pre-comete.
+  - **F9-D01**: unchanged (=A, CLOSED). ARCH-009 preserva la clausura
+    del gate; ningún trigger `f9.d01.T*` se activa por esta decisión.
+  - **ARCH-008 (DEC-02 D-DELEG)**: unchanged. ARCH-009 no altera ni
+    cita el schema de delegación.
+  - **ARCH-007 (DEC-01 D-CATALOG)**: unchanged. Sub-decisión E1
+    (type-taxonomy) permanece DEFERRED; ninguno de sus triggers
+    `dec01.T*` se activa por ARCH-009.
+  - **ARCH-006 (DEC-AUTH-BOUNDARY)**: consumidor. ARCH-009 declara
+    la reformulación como authority `convención` per VOCAB-A. No
+    modifica ni extiende el vocabulario. Trigger T3 no se activa.
+  - **ARCH-005 (DEC-11 DEFERRAL_POLICY)**: precedente procedimental
+    NO aplicado a esta decisión — Owner Choice B es cierre, no
+    diferimiento; no se registran bloques YAML `arch09.T*`.
+  - **ARCH-004**: docs-only bookkeeping; ARCH-009 no es CONTRACTUAL
+    TASK; no requiere EV-NNN individual (mismo patrón que
+    ARCH-005/006/007/008).
+  - **DEC-04 / DEC-05 / DEC-12**: ortogonales. ARCH-009 no altera su
+    estado.
+- REVIEW TRIGGER: **NONE** (per Owner Choice B). DEC-08 no se
+  auto-reactiva. Cualquier necesidad futura concreta se abre como
+  la decisión apropiada al problema — DEC-07 D-VERIFICADOR (si emerge
+  necesidad de verifier layer), DEC-STREAM-CONSUMER (si emerge
+  necesidad de consumer canónico), o una nueva DEC-N (si emerge una
+  necesidad no cubierta por las decisiones existentes). Esta ausencia
+  de triggers `arch09.T*` es intencional y ha sido explicitada en
+  Move 3 §5.3 / §12 como el patrón correcto bajo la Owner Choice B.
+- REVERSIBILIDAD: ALTA. La reformulación es un statement documental
+  reversible mediante una nueva ADR que altere la invariante. No hay
+  implementación que desarmar. `git revert` del commit de canonicalización
+  restaura el estado pre-ARCH-009 sin side effects runtime.
+- LOCK-IN: BAJO. Sólo se registra una frontera semántica
+  (evento ≠ juicio independiente). Sin schema, sin código, sin runtime,
+  sin dependencias hard. La invariante es una restricción arquitectónica
+  reversible.
+- EVIDENCIA:
+  - `docs/00_SYSTEM/DEC_08_DECISION_KERNEL.md` §0..§10 (Move 1 Kernel,
+    Stratum-C non-canonical; provenance: HEAD `2f55412` at analysis;
+    committed at `a3db337`): preflight, meta-gate CoVe, architectural
+    excavation, option surface with G1/G2/G3 elimination and G-DEFER /
+    G4-REFORMULATE promotion.
+  - `docs/00_SYSTEM/DEC_08_DECISION_KERNEL.md` §11 (Move 2 appendix,
+    committed at `54f943b`): decision integrity firewall §6.2.1–§6.2.9,
+    architectural thesis rewrite (TRUE PROBLEM / TRUE DECISION / TRUE
+    NON-DECISION), Owner Choice card A/B/C surface with 10-field option
+    contracts, Move 2 attestation.
+  - `CCP_DEC-08_MASTER_PROMPT_v3.md` (Move 1 invocation).
+  - `CCP_DEC-08_MOVE2_MASTER_v2.md` (Move 2 invocation).
+  - `CCP_DEC-08_MOVE3_MASTER_v2.md` (Move 3 invocation; §1 records
+    Owner Choice B authoritatively).
+  - Per ARCH-004 (mismo patrón que ARCH-005/006/007/008): docs-only
+    bookkeeping no requiere EV-NNN individual.
+- IMPLEMENTATION AUTHORIZATION: GRANTED (2026-09-28, Owner Choice B via
+  Move 3 invocation prompt §1). Implementation ejecutada como docs-only
+  bookkeeping (this ARCH-009 entry + DECISION_HISTORY.md DEC-08 entry +
+  PROJECT_STATE.md updates). Sin ningún cambio runtime, sin modificación
+  a `stall-record.sh` ni a consumers, sin nuevos hooks, sin cambios a
+  `.claude/*`, sin cambios a `evals/*` (excepto ejecutar `maintenance.sh`
+  como validador externo por RSI safety canon).
+- DEC-08 STATUS (post-canonicalización): REFORMULATED / CLOSED con
+  Owner Choice B. DEC-08 D-INSTR como decisión aislada de schema
+  completion se cierra mediante ARCH-009. Ninguna decisión sucesora
+  se abre por este acto; futuras necesidades se resolverán por la
+  decisión apropiada al problema concreto.
